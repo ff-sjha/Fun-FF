@@ -5,6 +5,16 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171218182920_added_entity_Season.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171218183905_added_entity_Player.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171218184447_added_entity_Franchise.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171218185221_added_entity_Tournament.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171218190035_added_entity_Match.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20171218182920_added_entity_constraints_Season.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171218185221_added_entity_constraints_Tournament.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171218190035_added_entity_constraints_Match.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171218183905_added_entity_constraints_Player.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171218184447_added_entity_constraints_Franchise.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

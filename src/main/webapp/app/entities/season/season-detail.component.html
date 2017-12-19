@@ -1,0 +1,42 @@
+
+<div *ngIf="season">
+    <h2><span jhiTranslate="fafiApp.season.detail.title">Season</span> {{season.id}}</h2>
+    <hr>
+    <fafi-alert-error></fafi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="fafiApp.season.name">Name</span></dt>
+        <dd>
+            <span>{{season.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.season.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{season.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.season.endDate">End Date</span></dt>
+        <dd>
+            <span>{{season.endDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.season.active">Active</span></dt>
+        <dd>
+            <span>{{season.active}}</span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.season.winner">Winner</span></dt>
+        <dd>
+            <span>{{season.winner}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'season/'+ season.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "tournament",
+            "otherEntityName": "tournament",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "startDateTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "endDateTime",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20171218190035",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "fafi_match",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

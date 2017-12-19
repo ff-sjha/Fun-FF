@@ -42,6 +42,15 @@ public class CacheConfiguration {
             cm.createCache(com.firstfuel.fafi.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.firstfuel.fafi.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.firstfuel.fafi.domain.SocialUserConnection.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firstfuel.fafi.domain.Season.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firstfuel.fafi.domain.Season.class.getName() + ".tournaments", jcacheConfiguration);
+            cm.createCache(com.firstfuel.fafi.domain.Player.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firstfuel.fafi.domain.Franchise.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firstfuel.fafi.domain.Franchise.class.getName() + ".players", jcacheConfiguration);
+            cm.createCache(com.firstfuel.fafi.domain.Tournament.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firstfuel.fafi.domain.Tournament.class.getName() + ".matches", jcacheConfiguration);
+            cm.createCache(com.firstfuel.fafi.domain.Match.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firstfuel.fafi.domain.Season.class.getName() + ".franchises", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

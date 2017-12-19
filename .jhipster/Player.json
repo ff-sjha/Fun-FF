@@ -1,0 +1,39 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "franchise",
+            "otherEntityName": "franchise",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "basePrice",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "bidPrice",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "optedGames",
+            "fieldType": "Games",
+            "fieldValues": "Football,Chess,Badminton,Ludo,Table Tennis,Box Cricket"
+        }
+    ],
+    "changelogDate": "20171218183905",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "player",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

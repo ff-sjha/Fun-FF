@@ -1,0 +1,13 @@
+{
+    "fafiApp": {
+        "Games" : {
+            "null": "",
+            "Football": "Football",
+            "Chess": "Chess",
+            "Badminton": "Badminton",
+            "Ludo": "Ludo",
+            "TableTennis": "TableTennis",
+            "BoxCricket": "BoxCricket"
+        }
+    }
+}

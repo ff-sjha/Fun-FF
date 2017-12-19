@@ -1,0 +1,42 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "tournament",
+            "otherEntityName": "tournament",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "season"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "winner",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171218182920",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "season",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

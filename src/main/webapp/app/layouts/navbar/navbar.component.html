@@ -4,8 +4,9 @@
             <i class="fa fa-bars"></i>
         </a>
         <a class="navbar-brand logo float-left" routerLink="/" (click)="collapseNavbar()">
-            <span class="logo-img"></span>
-            <span jhiTranslate="global.title" class="navbar-title">FAFI</span> <span class="navbar-version">{{version}}</span>
+            <!--<span class="logo-img"></span>
+            <span jhiTranslate="global.title" class="navbar-title">FAFI</span> <span class="navbar-version">{{version}}</span>-->
+            <span><h1><span style="color:green">FF</span>-Sports Council</h1></span>
         </a>
     </div>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
@@ -16,6 +17,20 @@
                         <i class="fa fa-home" aria-hidden="true"></i>
                         <span jhiTranslate="global.menu.home">Home</span>
                     </span>
+                </a>
+            </li>
+            
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="about-us" (click)="collapseNavbar()">
+                    <i class="fa fa-hand-spock-o" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.about-us">About us</span>
+                </a>
+            </li>
+            
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="contact-us" (click)="collapseNavbar()">
+                    <i class="fa fa-hand-spock-o" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.contact-us">Contact us</span>
                 </a>
             </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
@@ -29,6 +44,36 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li>
+                        <a class="dropdown-item" routerLink="season" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.season">Season</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="player" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.player">Player</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="franchise" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.franchise">Franchise</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="tournament" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.tournament">Tournament</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="match" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.match">Match</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

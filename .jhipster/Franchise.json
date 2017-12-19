@@ -1,0 +1,38 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "players",
+            "otherEntityName": "player",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "franchise"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "logoPath",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "owner",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "iconPlayer",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171218184447",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "franchise",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}
