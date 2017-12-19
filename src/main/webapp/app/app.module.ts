@@ -15,6 +15,7 @@ import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
 import { FafiAppAboutUsModule } from './about-us/about-us.module';
 import { FafiAppContactUsModule } from './contact-us/contact-us.module';
+import { FafiAppPointsTableModule } from './points-table/points-table.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 
 import {
@@ -39,6 +40,7 @@ import {
         FafiEntityModule,
         FafiAppAboutUsModule,
         FafiAppContactUsModule,
+        FafiAppPointsTableModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

@@ -12,7 +12,8 @@ import org.mapstruct.*;
 public interface PlayerMapper extends EntityMapper<PlayerDTO, Player> {
 
     @Mapping(source = "franchise.id", target = "franchiseId")
-    PlayerDTO toDto(Player player); 
+    @Mapping(source = "franchise.name", target = "franchiseName")
+    PlayerDTO toDto(Player player);
 
     @Mapping(source = "franchiseId", target = "franchise")
     Player toEntity(PlayerDTO playerDTO);

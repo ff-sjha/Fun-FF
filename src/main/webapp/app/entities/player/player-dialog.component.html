@@ -49,7 +49,7 @@
             <label class="form-control-label" jhiTranslate="fafiApp.player.franchise" for="field_franchise">Franchise</label>
             <select class="form-control" id="field_franchise" name="franchise" [(ngModel)]="player.franchiseId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="franchiseOption.id" *ngFor="let franchiseOption of franchises; trackBy: trackFranchiseById">{{franchiseOption.id}}</option>
+                <option [ngValue]="franchiseOption.id" *ngFor="let franchiseOption of franchises; trackBy: trackFranchiseById">{{franchiseOption.name}}</option>
             </select>
         </div>
     </div>

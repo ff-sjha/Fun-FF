@@ -24,3 +24,12 @@ only screen and (                min-resolution: 2dppx) {
         background-size: contain;
     }
 }
+
+.container h2 {
+    margin: 0;
+    font-family: 'Audiowide', cursive;
+    padding: 0;
+    color: #efb92a;
+    font-size: 2.8em;
+    text-align: center;
+}

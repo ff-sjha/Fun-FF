@@ -26,6 +26,8 @@ public class PlayerDTO implements Serializable {
 
     private Long franchiseId;
 
+    private String franchiseName;
+
     public Long getId() {
         return id;
     }
@@ -72,6 +74,14 @@ public class PlayerDTO implements Serializable {
 
     public void setFranchiseId(Long franchiseId) {
         this.franchiseId = franchiseId;
+    }
+
+    public String getFranchiseName() {
+        return franchiseName;
+    }
+
+    public void setFranchiseName( String franchiseName ) {
+        this.franchiseName = franchiseName;
     }
 
     @Override

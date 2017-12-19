@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="container">
+            <div class="about-para">
+                <h1 class="text-capitalize text-center" jhiTranslate="points-table.title">Title</h1>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><span jhiTranslate="home.pointsTable.rank">Rank</span></th>
+                        <th><span jhiTranslate="home.pointsTable.franchiseName">Franchise</span></th>
+                        <th><span jhiTranslate="home.pointsTable.matches">Matches Played</span></th>
+                        <th><span jhiTranslate="home.pointsTable.points">Points</span></th>
+                        <th><span jhiTranslate="home.pointsTable.form">Form</span></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let franchise of franchises">
+                        <td><a [routerLink]="['../franchise', franchise.id ]">{{franchise.id}}</a></td>
+                        <td>{{franchise.name}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
