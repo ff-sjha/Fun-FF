@@ -22,10 +22,11 @@
 
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="points-table" (click)="collapseNavbar()">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.points-table">Points table</span>
                 </a>
             </li>
+
             <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="games-menu">
                     <span>
@@ -75,21 +76,7 @@
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="about-us" (click)="collapseNavbar()">
-                    <i class="fa fa-university" aria-hidden="true"></i>
-                    <span jhiTranslate="global.menu.about-us">About us</span>
-                </a>
-            </li>
 
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="contact-us" (click)="collapseNavbar()">
-                    <i class="fa fa-comments" aria-hidden="true"></i>
-                    <span jhiTranslate="global.menu.contact-us">Contact us</span>
-                </a>
-            </li>
-
-            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *fafiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
@@ -130,9 +117,16 @@
                             <span jhiTranslate="global.menu.entities.match">Match</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="tie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.tie">Tie</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
+
             <li *fafiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
@@ -192,6 +186,22 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="about-us" (click)="collapseNavbar()">
+                    <i class="fa fa-university" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.about-us">About us</span>
+                </a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="contact-us" (click)="collapseNavbar()">
+                    <i class="fa fa-comments" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.contact-us">Contact us</span>
+                </a>
+            </li>
+
+            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li ngbDropdown class="nav-item dropdown pointer" *ngIf="languages">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown" *ngIf="languages.length > 1">
                     <span>
