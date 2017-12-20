@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Franchise } from '../entities/franchise';
 
 @Component({
   selector: 'fafi-points-table',
@@ -9,10 +10,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PointsTableComponent implements OnInit {
 
-  message: string;
+    franchises: Franchise[];
 
   constructor() {
-    this.message = '';
   }
 
   ngOnInit() {
