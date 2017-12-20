@@ -5,11 +5,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Ng2Webstorage } from 'ngx-webstorage';
 
 import { FafiSharedModule, UserRouteAccessService } from './shared';
-import { FafiAppRoutingModule} from './app-routing.module';
+import { FafiAppRoutingModule } from './app-routing.module';
 import { FafiHomeModule } from './home/home.module';
 import { FafiAdminModule } from './admin/admin.module';
 import { FafiAccountModule } from './account/account.module';
 import { FafiEntityModule } from './entities/entity.module';
+import { FafiGameModule } from './games/game.module';
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
@@ -41,6 +42,7 @@ import {
         FafiAppAboutUsModule,
         FafiAppContactUsModule,
         FafiAppPointsTableModule,
+        FafiGameModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
