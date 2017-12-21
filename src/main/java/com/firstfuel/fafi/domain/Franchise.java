@@ -39,6 +39,9 @@ public class Franchise implements Serializable {
     @Column(name = "icon_player")
     private String iconPlayer;
 
+    @ManyToOne
+    private Season season;
+
     @OneToMany(mappedBy = "franchise")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -103,6 +106,19 @@ public class Franchise implements Serializable {
 
     public void setIconPlayer(String iconPlayer) {
         this.iconPlayer = iconPlayer;
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public Franchise season(Season season) {
+        this.season = season;
+        return this;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
     }
 
     public Set<Player> getPlayers() {

@@ -46,6 +46,11 @@ public class Season implements Serializable {
     @OneToMany(mappedBy = "season")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Franchise> franchises = new HashSet<>();
+
+    @OneToMany(mappedBy = "season")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Tournament> tournaments = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -120,6 +125,31 @@ public class Season implements Serializable {
 
     public void setWinner(String winner) {
         this.winner = winner;
+    }
+
+    public Set<Franchise> getFranchises() {
+        return franchises;
+    }
+
+    public Season franchises(Set<Franchise> franchises) {
+        this.franchises = franchises;
+        return this;
+    }
+
+    public Season addFranchise(Franchise franchise) {
+        this.franchises.add(franchise);
+        franchise.setSeason(this);
+        return this;
+    }
+
+    public Season removeFranchise(Franchise franchise) {
+        this.franchises.remove(franchise);
+        franchise.setSeason(null);
+        return this;
+    }
+
+    public void setFranchises(Set<Franchise> franchises) {
+        this.franchises = franchises;
     }
 
     public Set<Tournament> getTournaments() {

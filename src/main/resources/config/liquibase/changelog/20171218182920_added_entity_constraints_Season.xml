@@ -6,13 +6,4 @@
     <!--
         Added the constraints for entity Season.
     -->
-    <changeSet id="20171218182920-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="franchise_id"
-                                 baseTableName="season"
-                                 constraintName="fk_season_franchise_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="franchise"/>
-
-    </changeSet>
 </databaseChangeLog>

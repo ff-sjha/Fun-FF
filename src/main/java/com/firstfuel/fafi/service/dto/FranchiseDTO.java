@@ -23,6 +23,10 @@ public class FranchiseDTO implements Serializable {
 
     private String iconPlayer;
 
+    private Long seasonId;
+
+    private String seasonName;
+
     public Long getId() {
         return id;
     }
@@ -61,6 +65,22 @@ public class FranchiseDTO implements Serializable {
 
     public void setIconPlayer(String iconPlayer) {
         this.iconPlayer = iconPlayer;
+    }
+
+    public Long getSeasonId() {
+        return seasonId;
+    }
+
+    public void setSeasonId( Long seasonId ) {
+        this.seasonId = seasonId;
+    }
+
+    public String getSeasonName() {
+        return seasonName;
+    }
+
+    public void setSeasonName( String seasonName ) {
+        this.seasonName = seasonName;
     }
 
     @Override

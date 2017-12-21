@@ -24,6 +24,8 @@
                 "franchise": "Franchise",
                 "tournament": "Tournament",
                 "match": "Match",
+                "tieTeam": "Tie Team",
+                "tieMatch": "Tie Match",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

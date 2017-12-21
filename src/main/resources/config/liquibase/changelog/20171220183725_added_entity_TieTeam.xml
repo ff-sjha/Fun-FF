@@ -15,36 +15,20 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity Franchise.
+        Added the entity TieTeam.
     -->
-    <changeSet id="20171218184447-1" author="jhipster">
-        <createTable tableName="franchise">
+    <changeSet id="20171220183725-1" author="jhipster">
+        <createTable tableName="tie_team">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="logo_path" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="owner" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="icon_player" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="season_id" type="bigint">
+            <column name="points" type="double">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "tiePlayers",
+            "otherEntityName": "player",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "tieTeam"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "points",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171220183725",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "tie_team",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

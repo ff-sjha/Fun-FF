@@ -8,11 +8,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Franchise and its DTO FranchiseDTO.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {SeasonMapper.class})
 public interface FranchiseMapper extends EntityMapper<FranchiseDTO, Franchise> {
 
-    
+    @Mapping(source = "season.id", target = "seasonId")
+    @Mapping(source = "season.name", target = "seasonName")
+    FranchiseDTO toDto(Franchise franchise);
 
+    @Mapping(source = "seasonId", target = "season")
     @Mapping(target = "players", ignore = true)
     Franchise toEntity(FranchiseDTO franchiseDTO);
 

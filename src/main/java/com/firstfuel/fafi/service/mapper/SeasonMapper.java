@@ -11,9 +11,10 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {})
 public interface SeasonMapper extends EntityMapper<SeasonDTO, Season> {
 
-    
+
 
     @Mapping(target = "tournaments", ignore = true)
+    @Mapping(target = "franchises", ignore = true)
     Season toEntity(SeasonDTO seasonDTO);
 
     default Season fromId(Long id) {
