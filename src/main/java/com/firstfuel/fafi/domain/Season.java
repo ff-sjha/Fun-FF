@@ -40,18 +40,14 @@ public class Season implements Serializable {
     @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "winner")
-    private String winner;
-
-    @OneToMany(mappedBy = "season")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Franchise> franchises = new HashSet<>();
-
     @OneToMany(mappedBy = "season")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Tournament> tournaments = new HashSet<>();
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Franchise winner;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -114,44 +110,6 @@ public class Season implements Serializable {
         this.active = active;
     }
 
-    public String getWinner() {
-        return winner;
-    }
-
-    public Season winner(String winner) {
-        this.winner = winner;
-        return this;
-    }
-
-    public void setWinner(String winner) {
-        this.winner = winner;
-    }
-
-    public Set<Franchise> getFranchises() {
-        return franchises;
-    }
-
-    public Season franchises(Set<Franchise> franchises) {
-        this.franchises = franchises;
-        return this;
-    }
-
-    public Season addFranchise(Franchise franchise) {
-        this.franchises.add(franchise);
-        franchise.setSeason(this);
-        return this;
-    }
-
-    public Season removeFranchise(Franchise franchise) {
-        this.franchises.remove(franchise);
-        franchise.setSeason(null);
-        return this;
-    }
-
-    public void setFranchises(Set<Franchise> franchises) {
-        this.franchises = franchises;
-    }
-
     public Set<Tournament> getTournaments() {
         return tournaments;
     }
@@ -175,6 +133,19 @@ public class Season implements Serializable {
 
     public void setTournaments(Set<Tournament> tournaments) {
         this.tournaments = tournaments;
+    }
+
+    public Franchise getWinner() {
+        return winner;
+    }
+
+    public Season winner(Franchise franchise) {
+        this.winner = franchise;
+        return this;
+    }
+
+    public void setWinner(Franchise franchise) {
+        this.winner = franchise;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -206,7 +177,6 @@ public class Season implements Serializable {
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
             ", active='" + isActive() + "'" +
-            ", winner='" + getWinner() + "'" +
             "}";
     }
 }

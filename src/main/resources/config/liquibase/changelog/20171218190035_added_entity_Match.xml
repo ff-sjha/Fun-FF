@@ -33,7 +33,13 @@
             <column name="tournament_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-
+            <column name="franchise1_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>            <column name="franchise2_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>            <column name="winner_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="fafi_match" columnName="start_date_time" columnDataType="datetime"/>

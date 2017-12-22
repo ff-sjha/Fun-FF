@@ -33,19 +33,21 @@ public class Franchise implements Serializable {
     @Column(name = "logo_path")
     private String logoPath;
 
-    @Column(name = "owner")
-    private String owner;
-
-    @Column(name = "icon_player")
-    private String iconPlayer;
-
-    @ManyToOne
-    private Season season;
-
     @OneToMany(mappedBy = "franchise")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Player> players = new HashSet<>();
+
+    @ManyToOne
+    private Season season;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Player owner;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Player iconPlayer;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -82,45 +84,6 @@ public class Franchise implements Serializable {
         this.logoPath = logoPath;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public Franchise owner(String owner) {
-        this.owner = owner;
-        return this;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getIconPlayer() {
-        return iconPlayer;
-    }
-
-    public Franchise iconPlayer(String iconPlayer) {
-        this.iconPlayer = iconPlayer;
-        return this;
-    }
-
-    public void setIconPlayer(String iconPlayer) {
-        this.iconPlayer = iconPlayer;
-    }
-
-    public Season getSeason() {
-        return season;
-    }
-
-    public Franchise season(Season season) {
-        this.season = season;
-        return this;
-    }
-
-    public void setSeason(Season season) {
-        this.season = season;
-    }
-
     public Set<Player> getPlayers() {
         return players;
     }
@@ -144,6 +107,45 @@ public class Franchise implements Serializable {
 
     public void setPlayers(Set<Player> players) {
         this.players = players;
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public Franchise season(Season season) {
+        this.season = season;
+        return this;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public Franchise owner(Player player) {
+        this.owner = player;
+        return this;
+    }
+
+    public void setOwner(Player player) {
+        this.owner = player;
+    }
+
+    public Player getIconPlayer() {
+        return iconPlayer;
+    }
+
+    public Franchise iconPlayer(Player player) {
+        this.iconPlayer = player;
+        return this;
+    }
+
+    public void setIconPlayer(Player player) {
+        this.iconPlayer = player;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -173,8 +175,6 @@ public class Franchise implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", logoPath='" + getLogoPath() + "'" +
-            ", owner='" + getOwner() + "'" +
-            ", iconPlayer='" + getIconPlayer() + "'" +
             "}";
     }
 }

@@ -32,11 +32,13 @@ public class FranchiseCriteria implements Serializable {
 
     private StringFilter logoPath;
 
-    private StringFilter owner;
-
-    private StringFilter iconPlayer;
-
     private LongFilter playersId;
+
+    private LongFilter seasonId;
+
+    private LongFilter ownerId;
+
+    private LongFilter iconPlayerId;
 
     public FranchiseCriteria() {
     }
@@ -65,22 +67,6 @@ public class FranchiseCriteria implements Serializable {
         this.logoPath = logoPath;
     }
 
-    public StringFilter getOwner() {
-        return owner;
-    }
-
-    public void setOwner(StringFilter owner) {
-        this.owner = owner;
-    }
-
-    public StringFilter getIconPlayer() {
-        return iconPlayer;
-    }
-
-    public void setIconPlayer(StringFilter iconPlayer) {
-        this.iconPlayer = iconPlayer;
-    }
-
     public LongFilter getPlayersId() {
         return playersId;
     }
@@ -89,15 +75,40 @@ public class FranchiseCriteria implements Serializable {
         this.playersId = playersId;
     }
 
+    public LongFilter getSeasonId() {
+        return seasonId;
+    }
+
+    public void setSeasonId(LongFilter seasonId) {
+        this.seasonId = seasonId;
+    }
+
+    public LongFilter getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(LongFilter ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public LongFilter getIconPlayerId() {
+        return iconPlayerId;
+    }
+
+    public void setIconPlayerId(LongFilter iconPlayerId) {
+        this.iconPlayerId = iconPlayerId;
+    }
+
     @Override
     public String toString() {
         return "FranchiseCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (logoPath != null ? "logoPath=" + logoPath + ", " : "") +
-                (owner != null ? "owner=" + owner + ", " : "") +
-                (iconPlayer != null ? "iconPlayer=" + iconPlayer + ", " : "") +
                 (playersId != null ? "playersId=" + playersId + ", " : "") +
+                (seasonId != null ? "seasonId=" + seasonId + ", " : "") +
+                (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
+                (iconPlayerId != null ? "iconPlayerId=" + iconPlayerId + ", " : "") +
             "}";
     }
 

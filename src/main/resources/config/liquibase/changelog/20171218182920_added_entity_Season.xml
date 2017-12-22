@@ -37,11 +37,9 @@
             <column name="active" type="bit">
                 <constraints nullable="true" />
             </column>
-
-            <column name="winner" type="varchar(255)">
-                <constraints nullable="true" />
+            <column name="winner_id" type="bigint">
+                <constraints unique="true" nullable="true" />
             </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

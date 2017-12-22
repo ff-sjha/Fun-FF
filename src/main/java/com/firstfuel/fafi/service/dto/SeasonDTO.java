@@ -24,7 +24,9 @@ public class SeasonDTO implements Serializable {
 
     private Boolean active;
 
-    private String winner;
+    private Long winnerId;
+
+    private String winnerName;
 
     public Long getId() {
         return id;
@@ -66,12 +68,20 @@ public class SeasonDTO implements Serializable {
         this.active = active;
     }
 
-    public String getWinner() {
-        return winner;
+    public Long getWinnerId() {
+        return winnerId;
     }
 
-    public void setWinner(String winner) {
-        this.winner = winner;
+    public void setWinnerId(Long franchiseId) {
+        this.winnerId = franchiseId;
+    }
+
+    public String getWinnerName() {
+        return winnerName;
+    }
+
+    public void setWinnerName( String winnerName ) {
+        this.winnerName = winnerName;
     }
 
     @Override
@@ -103,7 +113,6 @@ public class SeasonDTO implements Serializable {
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
             ", active='" + isActive() + "'" +
-            ", winner='" + getWinner() + "'" +
             "}";
     }
 }

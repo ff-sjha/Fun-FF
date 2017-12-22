@@ -34,6 +34,12 @@ public class MatchCriteria implements Serializable {
 
     private LongFilter tournamentId;
 
+    private LongFilter franchise1Id;
+
+    private LongFilter franchise2Id;
+
+    private LongFilter winnerId;
+
     public MatchCriteria() {
     }
 
@@ -69,6 +75,30 @@ public class MatchCriteria implements Serializable {
         this.tournamentId = tournamentId;
     }
 
+    public LongFilter getFranchise1Id() {
+        return franchise1Id;
+    }
+
+    public void setFranchise1Id(LongFilter franchise1Id) {
+        this.franchise1Id = franchise1Id;
+    }
+
+    public LongFilter getFranchise2Id() {
+        return franchise2Id;
+    }
+
+    public void setFranchise2Id(LongFilter franchise2Id) {
+        this.franchise2Id = franchise2Id;
+    }
+
+    public LongFilter getWinnerId() {
+        return winnerId;
+    }
+
+    public void setWinnerId(LongFilter winnerId) {
+        this.winnerId = winnerId;
+    }
+
     @Override
     public String toString() {
         return "MatchCriteria{" +
@@ -76,6 +106,9 @@ public class MatchCriteria implements Serializable {
                 (startDateTime != null ? "startDateTime=" + startDateTime + ", " : "") +
                 (endDateTime != null ? "endDateTime=" + endDateTime + ", " : "") +
                 (tournamentId != null ? "tournamentId=" + tournamentId + ", " : "") +
+                (franchise1Id != null ? "franchise1Id=" + franchise1Id + ", " : "") +
+                (franchise2Id != null ? "franchise2Id=" + franchise2Id + ", " : "") +
+                (winnerId != null ? "winnerId=" + winnerId + ", " : "") +
             "}";
     }
 

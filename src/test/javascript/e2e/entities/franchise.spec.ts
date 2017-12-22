@@ -35,10 +35,9 @@ describe('Franchise e2e test', () => {
         expect(franchiseDialogPage.getNameInput()).toMatch('name');
         franchiseDialogPage.setLogoPathInput('logoPath');
         expect(franchiseDialogPage.getLogoPathInput()).toMatch('logoPath');
-        franchiseDialogPage.setOwnerInput('owner');
-        expect(franchiseDialogPage.getOwnerInput()).toMatch('owner');
-        franchiseDialogPage.setIconPlayerInput('iconPlayer');
-        expect(franchiseDialogPage.getIconPlayerInput()).toMatch('iconPlayer');
+        franchiseDialogPage.seasonSelectLastOption();
+        franchiseDialogPage.ownerSelectLastOption();
+        franchiseDialogPage.iconPlayerSelectLastOption();
         franchiseDialogPage.save();
         expect(franchiseDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -67,8 +66,9 @@ export class FranchiseDialogPage {
     closeButton = element(by.css('button.close'));
     nameInput = element(by.css('input#field_name'));
     logoPathInput = element(by.css('input#field_logoPath'));
-    ownerInput = element(by.css('input#field_owner'));
-    iconPlayerInput = element(by.css('input#field_iconPlayer'));
+    seasonSelect = element(by.css('select#field_season'));
+    ownerSelect = element(by.css('select#field_owner'));
+    iconPlayerSelect = element(by.css('select#field_iconPlayer'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -90,20 +90,52 @@ export class FranchiseDialogPage {
         return this.logoPathInput.getAttribute('value');
     }
 
-    setOwnerInput = function(owner) {
-        this.ownerInput.sendKeys(owner);
+    seasonSelectLastOption = function() {
+        this.seasonSelect.all(by.tagName('option')).last().click();
     }
 
-    getOwnerInput = function() {
-        return this.ownerInput.getAttribute('value');
+    seasonSelectOption = function(option) {
+        this.seasonSelect.sendKeys(option);
     }
 
-    setIconPlayerInput = function(iconPlayer) {
-        this.iconPlayerInput.sendKeys(iconPlayer);
+    getSeasonSelect = function() {
+        return this.seasonSelect;
     }
 
-    getIconPlayerInput = function() {
-        return this.iconPlayerInput.getAttribute('value');
+    getSeasonSelectedOption = function() {
+        return this.seasonSelect.element(by.css('option:checked')).getText();
+    }
+
+    ownerSelectLastOption = function() {
+        this.ownerSelect.all(by.tagName('option')).last().click();
+    }
+
+    ownerSelectOption = function(option) {
+        this.ownerSelect.sendKeys(option);
+    }
+
+    getOwnerSelect = function() {
+        return this.ownerSelect;
+    }
+
+    getOwnerSelectedOption = function() {
+        return this.ownerSelect.element(by.css('option:checked')).getText();
+    }
+
+    iconPlayerSelectLastOption = function() {
+        this.iconPlayerSelect.all(by.tagName('option')).last().click();
+    }
+
+    iconPlayerSelectOption = function(option) {
+        this.iconPlayerSelect.sendKeys(option);
+    }
+
+    getIconPlayerSelect = function() {
+        return this.iconPlayerSelect;
+    }
+
+    getIconPlayerSelectedOption = function() {
+        return this.iconPlayerSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

@@ -17,9 +17,10 @@
             },
             "name": "Name",
             "logoPath": "Logo Path",
+            "players": "Players",
+            "season": "Season",
             "owner": "Owner",
-            "iconPlayer": "Icon Player",
-            "players": "Players"
+            "iconPlayer": "Icon Player"
         }
     }
 }

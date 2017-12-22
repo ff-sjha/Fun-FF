@@ -88,6 +88,15 @@ public class MatchQueryService extends QueryService<Match> {
             if (criteria.getTournamentId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getTournamentId(), Match_.tournament, Tournament_.id));
             }
+            if (criteria.getFranchise1Id() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getFranchise1Id(), Match_.franchise1, Franchise_.id));
+            }
+            if (criteria.getFranchise2Id() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getFranchise2Id(), Match_.franchise2, Franchise_.id));
+            }
+            if (criteria.getWinnerId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getWinnerId(), Match_.winner, Franchise_.id));
+            }
         }
         return specification;
     }

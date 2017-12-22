@@ -8,15 +8,18 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Tournament and its DTO TournamentDTO.
  */
-@Mapper(componentModel = "spring", uses = {SeasonMapper.class})
+@Mapper(componentModel = "spring", uses = {SeasonMapper.class, FranchiseMapper.class})
 public interface TournamentMapper extends EntityMapper<TournamentDTO, Tournament> {
 
     @Mapping(source = "season.id", target = "seasonId")
     @Mapping(source = "season.name", target = "seasonName")
-    TournamentDTO toDto(Tournament tournament); 
+    @Mapping(source = "winner.id", target = "winnerId")
+    @Mapping(source = "winner.name", target = "winnerName")
+    TournamentDTO toDto(Tournament tournament);
 
     @Mapping(source = "seasonId", target = "season")
     @Mapping(target = "matches", ignore = true)
+    @Mapping(source = "winnerId", target = "winner")
     Tournament toEntity(TournamentDTO tournamentDTO);
 
     default Tournament fromId(Long id) {

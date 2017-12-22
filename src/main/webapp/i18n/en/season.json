@@ -19,8 +19,8 @@
             "startDate": "Start Date",
             "endDate": "End Date",
             "active": "Active",
-            "winner": "Winner",
-            "tournament": "Tournament"
+            "tournament": "Tournament",
+            "winner": "Winner"
         }
     }
 }

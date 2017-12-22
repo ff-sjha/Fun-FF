@@ -8,6 +8,8 @@ import { FafiTestModule } from '../../../test.module';
 import { FranchiseDialogComponent } from '../../../../../../main/webapp/app/entities/franchise/franchise-dialog.component';
 import { FranchiseService } from '../../../../../../main/webapp/app/entities/franchise/franchise.service';
 import { Franchise } from '../../../../../../main/webapp/app/entities/franchise/franchise.model';
+import { PlayerService } from '../../../../../../main/webapp/app/entities/player';
+import { SeasonService } from '../../../../../../main/webapp/app/entities/season';
 
 describe('Component Tests', () => {
 
@@ -23,6 +25,8 @@ describe('Component Tests', () => {
                 imports: [FafiTestModule],
                 declarations: [FranchiseDialogComponent],
                 providers: [
+                    PlayerService,
+                    SeasonService,
                     FranchiseService
                 ]
             })

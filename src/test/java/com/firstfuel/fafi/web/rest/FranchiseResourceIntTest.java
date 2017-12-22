@@ -4,6 +4,9 @@ import com.firstfuel.fafi.FafiApp;
 
 import com.firstfuel.fafi.domain.Franchise;
 import com.firstfuel.fafi.domain.Player;
+import com.firstfuel.fafi.domain.Season;
+import com.firstfuel.fafi.domain.Player;
+import com.firstfuel.fafi.domain.Player;
 import com.firstfuel.fafi.repository.FranchiseRepository;
 import com.firstfuel.fafi.service.FranchiseService;
 import com.firstfuel.fafi.service.dto.FranchiseDTO;
@@ -49,12 +52,6 @@ public class FranchiseResourceIntTest {
 
     private static final String DEFAULT_LOGO_PATH = "AAAAAAAAAA";
     private static final String UPDATED_LOGO_PATH = "BBBBBBBBBB";
-
-    private static final String DEFAULT_OWNER = "AAAAAAAAAA";
-    private static final String UPDATED_OWNER = "BBBBBBBBBB";
-
-    private static final String DEFAULT_ICON_PLAYER = "AAAAAAAAAA";
-    private static final String UPDATED_ICON_PLAYER = "BBBBBBBBBB";
 
     @Autowired
     private FranchiseRepository franchiseRepository;
@@ -104,9 +101,7 @@ public class FranchiseResourceIntTest {
     public static Franchise createEntity(EntityManager em) {
         Franchise franchise = new Franchise()
             .name(DEFAULT_NAME)
-            .logoPath(DEFAULT_LOGO_PATH)
-            .owner(DEFAULT_OWNER)
-            .iconPlayer(DEFAULT_ICON_PLAYER);
+            .logoPath(DEFAULT_LOGO_PATH);
         return franchise;
     }
 
@@ -133,8 +128,6 @@ public class FranchiseResourceIntTest {
         Franchise testFranchise = franchiseList.get(franchiseList.size() - 1);
         assertThat(testFranchise.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testFranchise.getLogoPath()).isEqualTo(DEFAULT_LOGO_PATH);
-        assertThat(testFranchise.getOwner()).isEqualTo(DEFAULT_OWNER);
-        assertThat(testFranchise.getIconPlayer()).isEqualTo(DEFAULT_ICON_PLAYER);
     }
 
     @Test
@@ -188,9 +181,7 @@ public class FranchiseResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(franchise.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].logoPath").value(hasItem(DEFAULT_LOGO_PATH.toString())))
-            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.toString())))
-            .andExpect(jsonPath("$.[*].iconPlayer").value(hasItem(DEFAULT_ICON_PLAYER.toString())));
+            .andExpect(jsonPath("$.[*].logoPath").value(hasItem(DEFAULT_LOGO_PATH.toString())));
     }
 
     @Test
@@ -205,9 +196,7 @@ public class FranchiseResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(franchise.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.logoPath").value(DEFAULT_LOGO_PATH.toString()))
-            .andExpect(jsonPath("$.owner").value(DEFAULT_OWNER.toString()))
-            .andExpect(jsonPath("$.iconPlayer").value(DEFAULT_ICON_PLAYER.toString()));
+            .andExpect(jsonPath("$.logoPath").value(DEFAULT_LOGO_PATH.toString()));
     }
 
     @Test
@@ -290,84 +279,6 @@ public class FranchiseResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllFranchisesByOwnerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        franchiseRepository.saveAndFlush(franchise);
-
-        // Get all the franchiseList where owner equals to DEFAULT_OWNER
-        defaultFranchiseShouldBeFound("owner.equals=" + DEFAULT_OWNER);
-
-        // Get all the franchiseList where owner equals to UPDATED_OWNER
-        defaultFranchiseShouldNotBeFound("owner.equals=" + UPDATED_OWNER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllFranchisesByOwnerIsInShouldWork() throws Exception {
-        // Initialize the database
-        franchiseRepository.saveAndFlush(franchise);
-
-        // Get all the franchiseList where owner in DEFAULT_OWNER or UPDATED_OWNER
-        defaultFranchiseShouldBeFound("owner.in=" + DEFAULT_OWNER + "," + UPDATED_OWNER);
-
-        // Get all the franchiseList where owner equals to UPDATED_OWNER
-        defaultFranchiseShouldNotBeFound("owner.in=" + UPDATED_OWNER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllFranchisesByOwnerIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        franchiseRepository.saveAndFlush(franchise);
-
-        // Get all the franchiseList where owner is not null
-        defaultFranchiseShouldBeFound("owner.specified=true");
-
-        // Get all the franchiseList where owner is null
-        defaultFranchiseShouldNotBeFound("owner.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllFranchisesByIconPlayerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        franchiseRepository.saveAndFlush(franchise);
-
-        // Get all the franchiseList where iconPlayer equals to DEFAULT_ICON_PLAYER
-        defaultFranchiseShouldBeFound("iconPlayer.equals=" + DEFAULT_ICON_PLAYER);
-
-        // Get all the franchiseList where iconPlayer equals to UPDATED_ICON_PLAYER
-        defaultFranchiseShouldNotBeFound("iconPlayer.equals=" + UPDATED_ICON_PLAYER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllFranchisesByIconPlayerIsInShouldWork() throws Exception {
-        // Initialize the database
-        franchiseRepository.saveAndFlush(franchise);
-
-        // Get all the franchiseList where iconPlayer in DEFAULT_ICON_PLAYER or UPDATED_ICON_PLAYER
-        defaultFranchiseShouldBeFound("iconPlayer.in=" + DEFAULT_ICON_PLAYER + "," + UPDATED_ICON_PLAYER);
-
-        // Get all the franchiseList where iconPlayer equals to UPDATED_ICON_PLAYER
-        defaultFranchiseShouldNotBeFound("iconPlayer.in=" + UPDATED_ICON_PLAYER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllFranchisesByIconPlayerIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        franchiseRepository.saveAndFlush(franchise);
-
-        // Get all the franchiseList where iconPlayer is not null
-        defaultFranchiseShouldBeFound("iconPlayer.specified=true");
-
-        // Get all the franchiseList where iconPlayer is null
-        defaultFranchiseShouldNotBeFound("iconPlayer.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllFranchisesByPlayersIsEqualToSomething() throws Exception {
         // Initialize the database
         Player players = PlayerResourceIntTest.createEntity(em);
@@ -384,6 +295,63 @@ public class FranchiseResourceIntTest {
         defaultFranchiseShouldNotBeFound("playersId.equals=" + (playersId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllFranchisesBySeasonIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Season season = SeasonResourceIntTest.createEntity(em);
+        em.persist(season);
+        em.flush();
+        franchise.setSeason(season);
+        franchiseRepository.saveAndFlush(franchise);
+        Long seasonId = season.getId();
+
+        // Get all the franchiseList where season equals to seasonId
+        defaultFranchiseShouldBeFound("seasonId.equals=" + seasonId);
+
+        // Get all the franchiseList where season equals to seasonId + 1
+        defaultFranchiseShouldNotBeFound("seasonId.equals=" + (seasonId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllFranchisesByOwnerIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Player owner = PlayerResourceIntTest.createEntity(em);
+        em.persist(owner);
+        em.flush();
+        franchise.setOwner(owner);
+        franchiseRepository.saveAndFlush(franchise);
+        Long ownerId = owner.getId();
+
+        // Get all the franchiseList where owner equals to ownerId
+        defaultFranchiseShouldBeFound("ownerId.equals=" + ownerId);
+
+        // Get all the franchiseList where owner equals to ownerId + 1
+        defaultFranchiseShouldNotBeFound("ownerId.equals=" + (ownerId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllFranchisesByIconPlayerIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Player iconPlayer = PlayerResourceIntTest.createEntity(em);
+        em.persist(iconPlayer);
+        em.flush();
+        franchise.setIconPlayer(iconPlayer);
+        franchiseRepository.saveAndFlush(franchise);
+        Long iconPlayerId = iconPlayer.getId();
+
+        // Get all the franchiseList where iconPlayer equals to iconPlayerId
+        defaultFranchiseShouldBeFound("iconPlayerId.equals=" + iconPlayerId);
+
+        // Get all the franchiseList where iconPlayer equals to iconPlayerId + 1
+        defaultFranchiseShouldNotBeFound("iconPlayerId.equals=" + (iconPlayerId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -393,9 +361,7 @@ public class FranchiseResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(franchise.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].logoPath").value(hasItem(DEFAULT_LOGO_PATH.toString())))
-            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.toString())))
-            .andExpect(jsonPath("$.[*].iconPlayer").value(hasItem(DEFAULT_ICON_PLAYER.toString())));
+            .andExpect(jsonPath("$.[*].logoPath").value(hasItem(DEFAULT_LOGO_PATH.toString())));
     }
 
     /**
@@ -431,9 +397,7 @@ public class FranchiseResourceIntTest {
         em.detach(updatedFranchise);
         updatedFranchise
             .name(UPDATED_NAME)
-            .logoPath(UPDATED_LOGO_PATH)
-            .owner(UPDATED_OWNER)
-            .iconPlayer(UPDATED_ICON_PLAYER);
+            .logoPath(UPDATED_LOGO_PATH);
         FranchiseDTO franchiseDTO = franchiseMapper.toDto(updatedFranchise);
 
         restFranchiseMockMvc.perform(put("/api/franchises")
@@ -447,8 +411,6 @@ public class FranchiseResourceIntTest {
         Franchise testFranchise = franchiseList.get(franchiseList.size() - 1);
         assertThat(testFranchise.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testFranchise.getLogoPath()).isEqualTo(UPDATED_LOGO_PATH);
-        assertThat(testFranchise.getOwner()).isEqualTo(UPDATED_OWNER);
-        assertThat(testFranchise.getIconPlayer()).isEqualTo(UPDATED_ICON_PLAYER);
     }
 
     @Test

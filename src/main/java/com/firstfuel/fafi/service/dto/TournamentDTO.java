@@ -22,11 +22,13 @@ public class TournamentDTO implements Serializable {
 
     private LocalDate endDate;
 
-    private String winner;
-
     private Long seasonId;
 
     private String seasonName;
+
+    private Long winnerId;
+
+    private String winnerName;
 
     public Long getId() {
         return id;
@@ -60,14 +62,6 @@ public class TournamentDTO implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getWinner() {
-        return winner;
-    }
-
-    public void setWinner(String winner) {
-        this.winner = winner;
-    }
-
     public Long getSeasonId() {
         return seasonId;
     }
@@ -82,6 +76,22 @@ public class TournamentDTO implements Serializable {
 
     public void setSeasonName(String seasonName) {
         this.seasonName = seasonName;
+    }
+
+    public Long getWinnerId() {
+        return winnerId;
+    }
+
+    public void setWinnerId(Long franchiseId) {
+        this.winnerId = franchiseId;
+    }
+
+    public String getWinnerName() {
+        return winnerName;
+    }
+
+    public void setWinnerName( String winnerName ) {
+        this.winnerName = winnerName;
     }
 
     @Override
@@ -112,7 +122,6 @@ public class TournamentDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
-            ", winner='" + getWinner() + "'" +
             "}";
     }
 }

@@ -22,7 +22,9 @@
         </dd>
         <dt><span jhiTranslate="fafiApp.season.winner">Winner</span></dt>
         <dd>
-            <span>{{season.winner}}</span>
+            <div *ngIf="season.winnerId">
+                <a [routerLink]="['/franchise', season.winnerId]">{{season.winnerName}}</a>
+            </div>
         </dd>
     </dl>
 

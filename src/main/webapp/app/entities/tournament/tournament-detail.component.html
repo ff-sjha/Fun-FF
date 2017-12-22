@@ -16,14 +16,16 @@
         <dd>
             <span>{{tournament.endDate | date:'mediumDate'}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.tournament.winner">Winner</span></dt>
-        <dd>
-            <span>{{tournament.winner}}</span>
-        </dd>
         <dt><span jhiTranslate="fafiApp.tournament.season">Season</span></dt>
         <dd>
             <div *ngIf="tournament.seasonId">
                 <a [routerLink]="['/season', tournament.seasonId]">{{tournament.seasonName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.tournament.winner">Winner</span></dt>
+        <dd>
+            <div *ngIf="tournament.winnerId">
+                <a [routerLink]="['/franchise', tournament.winnerId]">{{tournament.winnerName}}</a>
             </div>
         </dd>
     </dl>

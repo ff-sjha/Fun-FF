@@ -10,6 +10,7 @@ import { Tournament } from './tournament.model';
 import { TournamentPopupService } from './tournament-popup.service';
 import { TournamentService } from './tournament.service';
 import { Season, SeasonService } from '../season';
+import { Franchise, FranchiseService } from '../franchise';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -22,6 +23,8 @@ export class TournamentDialogComponent implements OnInit {
     isSaving: boolean;
 
     seasons: Season[];
+
+    winners: Franchise[];
     startDateDp: any;
     endDateDp: any;
 
@@ -30,6 +33,7 @@ export class TournamentDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private tournamentService: TournamentService,
         private seasonService: SeasonService,
+        private franchiseService: FranchiseService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -38,6 +42,19 @@ export class TournamentDialogComponent implements OnInit {
         this.isSaving = false;
         this.seasonService.query()
             .subscribe((res: ResponseWrapper) => { this.seasons = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.franchiseService
+            .query({filter: 'tournament-is-null'})
+            .subscribe((res: ResponseWrapper) => {
+                if (!this.tournament.winnerId) {
+                    this.winners = res.json;
+                } else {
+                    this.franchiseService
+                        .find(this.tournament.winnerId)
+                        .subscribe((subRes: Franchise) => {
+                            this.winners = [subRes].concat(res.json);
+                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
+                }
+            }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -75,6 +92,10 @@ export class TournamentDialogComponent implements OnInit {
     }
 
     trackSeasonById(index: number, item: Season) {
+        return item.id;
+    }
+
+    trackFranchiseById(index: number, item: Franchise) {
         return item.id;
     }
 }

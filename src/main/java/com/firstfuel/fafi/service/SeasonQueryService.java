@@ -90,11 +90,11 @@ public class SeasonQueryService extends QueryService<Season> {
             if (criteria.getActive() != null) {
                 specification = specification.and(buildSpecification(criteria.getActive(), Season_.active));
             }
-            if (criteria.getWinner() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getWinner(), Season_.winner));
-            }
             if (criteria.getTournamentId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getTournamentId(), Season_.tournaments, Tournament_.id));
+            }
+            if (criteria.getWinnerId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getWinnerId(), Season_.winner, Franchise_.id));
             }
         }
         return specification;

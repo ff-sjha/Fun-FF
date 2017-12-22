@@ -16,15 +16,17 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="points"><span jhiTranslate="fafiApp.tieTeam.points">Points</span> <span class="fa fa-sort"></span></th>
-            <th></th>
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="points"><span jhiTranslate="fafiApp.tieTeam.points">Points</span> <span class="fa fa-sort"></span></th>
+                <th><span jhiTranslate="fafiApp.tieTeam.tiePlayers">Tie Players</span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let tieTeam of tieTeams ;trackBy: trackId">
                 <td><a [routerLink]="['../tie-team', tieTeam.id ]">{{tieTeam.id}}</a></td>
                 <td>{{tieTeam.points}}</td>
+                <td><table><tbody><tr *ngFor="let player of tieTeam.tiePlayers"><td>{{player.name}}}</td></tr></tbody></table></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

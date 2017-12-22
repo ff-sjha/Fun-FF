@@ -46,8 +46,7 @@ describe('Season e2e test', () => {
                 expect(seasonDialogPage.getActiveInput().isSelected()).toBeTruthy();
             }
         });
-        seasonDialogPage.setWinnerInput('winner');
-        expect(seasonDialogPage.getWinnerInput()).toMatch('winner');
+        seasonDialogPage.winnerSelectLastOption();
         seasonDialogPage.save();
         expect(seasonDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -78,7 +77,7 @@ export class SeasonDialogPage {
     startDateInput = element(by.css('input#field_startDate'));
     endDateInput = element(by.css('input#field_endDate'));
     activeInput = element(by.css('input#field_active'));
-    winnerInput = element(by.css('input#field_winner'));
+    winnerSelect = element(by.css('select#field_winner'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -111,12 +110,20 @@ export class SeasonDialogPage {
     getActiveInput = function() {
         return this.activeInput;
     }
-    setWinnerInput = function(winner) {
-        this.winnerInput.sendKeys(winner);
+    winnerSelectLastOption = function() {
+        this.winnerSelect.all(by.tagName('option')).last().click();
     }
 
-    getWinnerInput = function() {
-        return this.winnerInput.getAttribute('value');
+    winnerSelectOption = function(option) {
+        this.winnerSelect.sendKeys(option);
+    }
+
+    getWinnerSelect = function() {
+        return this.winnerSelect;
+    }
+
+    getWinnerSelectedOption = function() {
+        return this.winnerSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

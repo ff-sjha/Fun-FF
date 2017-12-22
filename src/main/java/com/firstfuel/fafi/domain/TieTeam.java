@@ -28,7 +28,7 @@ public class TieTeam implements Serializable {
     @Column(name = "points")
     private Double points;
 
-    @OneToMany
+    @OneToMany(mappedBy = "tieTeam")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Player> tiePlayers = new HashSet<>();

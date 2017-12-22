@@ -84,14 +84,17 @@ public class FranchiseQueryService extends QueryService<Franchise> {
             if (criteria.getLogoPath() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLogoPath(), Franchise_.logoPath));
             }
-            if (criteria.getOwner() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getOwner(), Franchise_.owner));
-            }
-            if (criteria.getIconPlayer() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getIconPlayer(), Franchise_.iconPlayer));
-            }
             if (criteria.getPlayersId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getPlayersId(), Franchise_.players, Player_.id));
+            }
+            if (criteria.getSeasonId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getSeasonId(), Franchise_.season, Season_.id));
+            }
+            if (criteria.getOwnerId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getOwnerId(), Franchise_.owner, Player_.id));
+            }
+            if (criteria.getIconPlayerId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getIconPlayerId(), Franchise_.iconPlayer, Player_.id));
             }
         }
         return specification;

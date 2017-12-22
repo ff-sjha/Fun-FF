@@ -4,11 +4,14 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 
 import { TieTeam } from './tie-team.model';
 import { TieTeamPopupService } from './tie-team-popup.service';
 import { TieTeamService } from './tie-team.service';
+import { Player, PlayerService } from '../player';
+import { ITEMS_PER_PAGE, ResponseWrapper} from '../../shared';
+import {Franchise, FranchiseService} from '../franchise';
 
 @Component({
     selector: 'fafi-tie-team-dialog',
@@ -18,16 +21,41 @@ export class TieTeamDialogComponent implements OnInit {
 
     tieTeam: TieTeam;
     isSaving: boolean;
+    availablePlayers: Player[] = [];
+    selAvailList: Player[] = [];
+    selSelectList: Player[] = [];
+    franchises: Franchise[] = [];
+    franchiseId: number;
 
     constructor(
         public activeModal: NgbActiveModal,
         private tieTeamService: TieTeamService,
+        private playerService: PlayerService,
+        private franchiseService: FranchiseService,
+        private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.franchiseService.query()
+            .subscribe((res: ResponseWrapper) => {
+                this.franchises = res.json;
+            }, (res: ResponseWrapper) => this.onError(res.json));
+        /*this.playerService
+            .query()
+            .subscribe((res: ResponseWrapper) => {
+                this.availablePlayers = res.json;
+            }, (res: ResponseWrapper) => this.onError(res.json));*/
+        this.playerService.query({
+            page: -1,
+            size: ITEMS_PER_PAGE,
+            sort: ['id,asc']}).subscribe(
+            (res: ResponseWrapper) => this.availablePlayers = res.json,
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+        this.tieTeam.tiePlayers = [];
     }
 
     clear() {
@@ -45,6 +73,14 @@ export class TieTeamDialogComponent implements OnInit {
         }
     }
 
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackPlayerById(index: number, item: Player) {
+        return item.id;
+    }
+
     private subscribeToSaveResponse(result: Observable<TieTeam>) {
         result.subscribe((res: TieTeam) =>
             this.onSaveSuccess(res), (res: Response) => this.onSaveError());
@@ -58,6 +94,31 @@ export class TieTeamDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    btnRight() {
+        this.selAvailList.forEach((value) => {
+            this.tieTeam.tiePlayers.push(value);
+            this.availablePlayers.splice(this.availablePlayers.indexOf(value, 0), 1);
+        });
+        this.selAvailList = [];
+    };
+
+    btnLeft() {
+        this.selSelectList.forEach((value) => {
+            this.availablePlayers.push(value);
+            this.tieTeam.tiePlayers.splice(this.tieTeam.tiePlayers.indexOf(value, 0), 1);
+        });
+        this.selSelectList = [];
+    };
+
+    loadFranchisePlayers() {
+        console.log('franchiseId.equals=' + this.franchiseId);
+        this.playerService
+            .query({filter: 'franchiseId.equals=' + this.franchiseId})
+            .subscribe((res: ResponseWrapper) => {
+                this.availablePlayers = res.json;
+            }, (res: ResponseWrapper) => this.onError(res.json));
     }
 }
 

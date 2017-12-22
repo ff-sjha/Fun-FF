@@ -8,6 +8,7 @@ import { FafiTestModule } from '../../../test.module';
 import { SeasonDialogComponent } from '../../../../../../main/webapp/app/entities/season/season-dialog.component';
 import { SeasonService } from '../../../../../../main/webapp/app/entities/season/season.service';
 import { Season } from '../../../../../../main/webapp/app/entities/season/season.model';
+import { FranchiseService } from '../../../../../../main/webapp/app/entities/franchise';
 
 describe('Component Tests', () => {
 
@@ -23,6 +24,7 @@ describe('Component Tests', () => {
                 imports: [FafiTestModule],
                 declarations: [SeasonDialogComponent],
                 providers: [
+                    FranchiseService,
                     SeasonService
                 ]
             })

@@ -10,6 +10,7 @@ import { Match } from './match.model';
 import { MatchPopupService } from './match-popup.service';
 import { MatchService } from './match.service';
 import { Tournament, TournamentService } from '../tournament';
+import { Franchise, FranchiseService } from '../franchise';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -23,11 +24,18 @@ export class MatchDialogComponent implements OnInit {
 
     tournaments: Tournament[];
 
+    franchise1s: Franchise[];
+
+    franchise2s: Franchise[];
+
+    winners: Franchise[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private matchService: MatchService,
         private tournamentService: TournamentService,
+        private franchiseService: FranchiseService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -36,6 +44,45 @@ export class MatchDialogComponent implements OnInit {
         this.isSaving = false;
         this.tournamentService.query()
             .subscribe((res: ResponseWrapper) => { this.tournaments = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.franchiseService
+            .query({filter: 'match-is-null'})
+            .subscribe((res: ResponseWrapper) => {
+                if (!this.match.franchise1Id) {
+                    this.franchise1s = res.json;
+                } else {
+                    this.franchiseService
+                        .find(this.match.franchise1Id)
+                        .subscribe((subRes: Franchise) => {
+                            this.franchise1s = [subRes].concat(res.json);
+                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
+                }
+            }, (res: ResponseWrapper) => this.onError(res.json));
+        this.franchiseService
+            .query({filter: 'match-is-null'})
+            .subscribe((res: ResponseWrapper) => {
+                if (!this.match.franchise2Id) {
+                    this.franchise2s = res.json;
+                } else {
+                    this.franchiseService
+                        .find(this.match.franchise2Id)
+                        .subscribe((subRes: Franchise) => {
+                            this.franchise2s = [subRes].concat(res.json);
+                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
+                }
+            }, (res: ResponseWrapper) => this.onError(res.json));
+        this.franchiseService
+            .query({filter: 'match-is-null'})
+            .subscribe((res: ResponseWrapper) => {
+                if (!this.match.winnerId) {
+                    this.winners = res.json;
+                } else {
+                    this.franchiseService
+                        .find(this.match.winnerId)
+                        .subscribe((subRes: Franchise) => {
+                            this.winners = [subRes].concat(res.json);
+                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
+                }
+            }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -73,6 +120,10 @@ export class MatchDialogComponent implements OnInit {
     }
 
     trackTournamentById(index: number, item: Tournament) {
+        return item.id;
+    }
+
+    trackFranchiseById(index: number, item: Franchise) {
         return item.id;
     }
 }

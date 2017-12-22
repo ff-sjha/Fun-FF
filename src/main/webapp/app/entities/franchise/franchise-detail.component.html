@@ -12,13 +12,23 @@
         <dd>
             <span>{{franchise.logoPath}}</span>
         </dd>
+        <dt><span jhiTranslate="fafiApp.franchise.season">Season</span></dt>
+        <dd>
+            <div *ngIf="franchise.seasonId">
+                <a [routerLink]="['/season', franchise.seasonId]">{{franchise.seasonId}}</a>
+            </div>
+        </dd>
         <dt><span jhiTranslate="fafiApp.franchise.owner">Owner</span></dt>
         <dd>
-            <span>{{franchise.owner}}</span>
+            <div *ngIf="franchise.ownerId">
+                <a [routerLink]="['/player', franchise.ownerId]">{{franchise.ownerId}}</a>
+            </div>
         </dd>
         <dt><span jhiTranslate="fafiApp.franchise.iconPlayer">Icon Player</span></dt>
         <dd>
-            <span>{{franchise.iconPlayer}}</span>
+            <div *ngIf="franchise.iconPlayerId">
+                <a [routerLink]="['/player', franchise.iconPlayerId]">{{franchise.iconPlayerId}}</a>
+            </div>
         </dd>
     </dl>
 

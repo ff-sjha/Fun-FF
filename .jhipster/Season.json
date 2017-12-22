@@ -6,6 +6,14 @@
             "otherEntityName": "tournament",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "season"
+        },
+        {
+            "relationshipName": "winner",
+            "otherEntityName": "franchise",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "season"
         }
     ],
     "fields": [
@@ -27,10 +35,6 @@
         {
             "fieldName": "active",
             "fieldType": "Boolean"
-        },
-        {
-            "fieldName": "winner",
-            "fieldType": "String"
         }
     ],
     "changelogDate": "20171218182920",

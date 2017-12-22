@@ -32,6 +32,18 @@ public class Match implements Serializable {
     @ManyToOne
     private Tournament tournament;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Franchise franchise1;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Franchise franchise2;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Franchise winner;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -78,6 +90,45 @@ public class Match implements Serializable {
 
     public void setTournament(Tournament tournament) {
         this.tournament = tournament;
+    }
+
+    public Franchise getFranchise1() {
+        return franchise1;
+    }
+
+    public Match franchise1(Franchise franchise) {
+        this.franchise1 = franchise;
+        return this;
+    }
+
+    public void setFranchise1(Franchise franchise) {
+        this.franchise1 = franchise;
+    }
+
+    public Franchise getFranchise2() {
+        return franchise2;
+    }
+
+    public Match franchise2(Franchise franchise) {
+        this.franchise2 = franchise;
+        return this;
+    }
+
+    public void setFranchise2(Franchise franchise) {
+        this.franchise2 = franchise;
+    }
+
+    public Franchise getWinner() {
+        return winner;
+    }
+
+    public Match winner(Franchise franchise) {
+        this.winner = franchise;
+        return this;
+    }
+
+    public void setWinner(Franchise franchise) {
+        this.winner = franchise;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -15,7 +15,25 @@
         <dt><span jhiTranslate="fafiApp.match.tournament">Tournament</span></dt>
         <dd>
             <div *ngIf="match.tournamentId">
-                <a [routerLink]="['/tournament', match.tournamentId]">{{match.tournamentId}}</a>
+                <a [routerLink]="['/tournament', match.tournamentId]">{{match.tournamentName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.match.franchise1">Franchise 1</span></dt>
+        <dd>
+            <div *ngIf="match.franchise1Id">
+                <a [routerLink]="['/franchise', match.franchise1Id]">{{match.franchise1Name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.match.franchise2">Franchise 2</span></dt>
+        <dd>
+            <div *ngIf="match.franchise2Id">
+                <a [routerLink]="['/franchise', match.franchise2Id]">{{match.franchise2Name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.match.winner">Winner</span></dt>
+        <dd>
+            <div *ngIf="match.winnerId">
+                <a [routerLink]="['/franchise', match.winnerId]">{{match.winnerName}}</a>
             </div>
         </dd>
     </dl>

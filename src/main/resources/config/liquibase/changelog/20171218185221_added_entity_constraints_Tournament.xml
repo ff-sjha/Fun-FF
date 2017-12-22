@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="season"/>
 
+        <addForeignKeyConstraint baseColumnNames="winner_id"
+                                 baseTableName="tournament"
+                                 constraintName="fk_tournament_winner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="franchise"/>
+
     </changeSet>
 </databaseChangeLog>

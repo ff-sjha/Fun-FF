@@ -12,6 +12,14 @@
             "otherEntityName": "match",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "tournament"
+        },
+        {
+            "relationshipName": "winner",
+            "otherEntityName": "franchise",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tournament"
         }
     ],
     "fields": [
@@ -29,10 +37,6 @@
         {
             "fieldName": "endDate",
             "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "winner",
-            "fieldType": "String"
         }
     ],
     "changelogDate": "20171218185221",

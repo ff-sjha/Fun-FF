@@ -87,14 +87,14 @@ public class TournamentQueryService extends QueryService<Tournament> {
             if (criteria.getEndDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEndDate(), Tournament_.endDate));
             }
-            if (criteria.getWinner() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getWinner(), Tournament_.winner));
-            }
             if (criteria.getSeasonId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getSeasonId(), Tournament_.season, Season_.id));
             }
             if (criteria.getMatchesId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getMatchesId(), Tournament_.matches, Match_.id));
+            }
+            if (criteria.getWinnerId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getWinnerId(), Tournament_.winner, Franchise_.id));
             }
         }
         return specification;

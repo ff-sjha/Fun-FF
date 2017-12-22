@@ -37,9 +37,6 @@ public class Tournament implements Serializable {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @Column(name = "winner")
-    private String winner;
-
     @ManyToOne
     private Season season;
 
@@ -47,6 +44,10 @@ public class Tournament implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Match> matches = new HashSet<>();
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Franchise winner;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -96,19 +97,6 @@ public class Tournament implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getWinner() {
-        return winner;
-    }
-
-    public Tournament winner(String winner) {
-        this.winner = winner;
-        return this;
-    }
-
-    public void setWinner(String winner) {
-        this.winner = winner;
-    }
-
     public Season getSeason() {
         return season;
     }
@@ -146,6 +134,19 @@ public class Tournament implements Serializable {
     public void setMatches(Set<Match> matches) {
         this.matches = matches;
     }
+
+    public Franchise getWinner() {
+        return winner;
+    }
+
+    public Tournament winner(Franchise franchise) {
+        this.winner = franchise;
+        return this;
+    }
+
+    public void setWinner(Franchise franchise) {
+        this.winner = franchise;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -175,7 +176,6 @@ public class Tournament implements Serializable {
             ", name='" + getName() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
-            ", winner='" + getWinner() + "'" +
             "}";
     }
 }

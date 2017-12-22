@@ -19,13 +19,11 @@ public class FranchiseDTO implements Serializable {
 
     private String logoPath;
 
-    private String owner;
-
-    private String iconPlayer;
-
     private Long seasonId;
 
-    private String seasonName;
+    private Long ownerId;
+
+    private Long iconPlayerId;
 
     public Long getId() {
         return id;
@@ -51,36 +49,28 @@ public class FranchiseDTO implements Serializable {
         this.logoPath = logoPath;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getIconPlayer() {
-        return iconPlayer;
-    }
-
-    public void setIconPlayer(String iconPlayer) {
-        this.iconPlayer = iconPlayer;
-    }
-
     public Long getSeasonId() {
         return seasonId;
     }
 
-    public void setSeasonId( Long seasonId ) {
+    public void setSeasonId(Long seasonId) {
         this.seasonId = seasonId;
     }
 
-    public String getSeasonName() {
-        return seasonName;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public void setSeasonName( String seasonName ) {
-        this.seasonName = seasonName;
+    public void setOwnerId(Long playerId) {
+        this.ownerId = playerId;
+    }
+
+    public Long getIconPlayerId() {
+        return iconPlayerId;
+    }
+
+    public void setIconPlayerId(Long playerId) {
+        this.iconPlayerId = playerId;
     }
 
     @Override
@@ -110,8 +100,6 @@ public class FranchiseDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", logoPath='" + getLogoPath() + "'" +
-            ", owner='" + getOwner() + "'" +
-            ", iconPlayer='" + getIconPlayer() + "'" +
             "}";
     }
 }

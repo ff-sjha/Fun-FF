@@ -36,6 +36,9 @@ describe('Match e2e test', () => {
         matchDialogPage.setEndDateTimeInput(12310020012301);
         expect(matchDialogPage.getEndDateTimeInput()).toMatch('2001-12-31T02:30');
         matchDialogPage.tournamentSelectLastOption();
+        matchDialogPage.franchise1SelectLastOption();
+        matchDialogPage.franchise2SelectLastOption();
+        matchDialogPage.winnerSelectLastOption();
         matchDialogPage.save();
         expect(matchDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -65,6 +68,9 @@ export class MatchDialogPage {
     startDateTimeInput = element(by.css('input#field_startDateTime'));
     endDateTimeInput = element(by.css('input#field_endDateTime'));
     tournamentSelect = element(by.css('select#field_tournament'));
+    franchise1Select = element(by.css('select#field_franchise1'));
+    franchise2Select = element(by.css('select#field_franchise2'));
+    winnerSelect = element(by.css('select#field_winner'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -100,6 +106,54 @@ export class MatchDialogPage {
 
     getTournamentSelectedOption = function() {
         return this.tournamentSelect.element(by.css('option:checked')).getText();
+    }
+
+    franchise1SelectLastOption = function() {
+        this.franchise1Select.all(by.tagName('option')).last().click();
+    }
+
+    franchise1SelectOption = function(option) {
+        this.franchise1Select.sendKeys(option);
+    }
+
+    getFranchise1Select = function() {
+        return this.franchise1Select;
+    }
+
+    getFranchise1SelectedOption = function() {
+        return this.franchise1Select.element(by.css('option:checked')).getText();
+    }
+
+    franchise2SelectLastOption = function() {
+        this.franchise2Select.all(by.tagName('option')).last().click();
+    }
+
+    franchise2SelectOption = function(option) {
+        this.franchise2Select.sendKeys(option);
+    }
+
+    getFranchise2Select = function() {
+        return this.franchise2Select;
+    }
+
+    getFranchise2SelectedOption = function() {
+        return this.franchise2Select.element(by.css('option:checked')).getText();
+    }
+
+    winnerSelectLastOption = function() {
+        this.winnerSelect.all(by.tagName('option')).last().click();
+    }
+
+    winnerSelectOption = function(option) {
+        this.winnerSelect.sendKeys(option);
+    }
+
+    getWinnerSelect = function() {
+        return this.winnerSelect;
+    }
+
+    getWinnerSelectedOption = function() {
+        return this.winnerSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

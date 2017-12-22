@@ -14,5 +14,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="season"/>
 
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="franchise"
+                                 constraintName="fk_franchise_owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="player"/>
+
+        <addForeignKeyConstraint baseColumnNames="icon_player_id"
+                                 baseTableName="franchise"
+                                 constraintName="fk_franchise_icon_player_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="player"/>
+
     </changeSet>
 </databaseChangeLog>

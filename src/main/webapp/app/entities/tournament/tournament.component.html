@@ -20,8 +20,8 @@
             <th jhiSortBy="name"><span jhiTranslate="fafiApp.tournament.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="startDate"><span jhiTranslate="fafiApp.tournament.startDate">Start Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="endDate"><span jhiTranslate="fafiApp.tournament.endDate">End Date</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="winner"><span jhiTranslate="fafiApp.tournament.winner">Winner</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="seasonName"><span jhiTranslate="fafiApp.tournament.season">Season</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="winnerId"><span jhiTranslate="fafiApp.tournament.winner">Winner</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,10 +31,14 @@
                 <td>{{tournament.name}}</td>
                 <td>{{tournament.startDate | date:'mediumDate'}}</td>
                 <td>{{tournament.endDate | date:'mediumDate'}}</td>
-                <td>{{tournament.winner}}</td>
                 <td>
                     <div *ngIf="tournament.seasonId">
                         <a [routerLink]="['../season', tournament.seasonId  ]" >{{tournament.seasonName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tournament.winnerId">
+                        <a [routerLink]="['../franchise', tournament.winnerId  ]" >{{tournament.winnerName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -8,6 +8,10 @@
         <dd>
             <span>{{tieTeam.points}}</span>
         </dd>
+        <dt><span jhiTranslate="fafiApp.tieTeam.tiePlayers">Tie Players</span></dt>
+        <dd>
+            <span *ngFor="let player of tieTeam.tiePlayers">{{player.name}}</span>
+        </dd>
     </dl>
 
     <button type="submit"

@@ -6,6 +6,28 @@
             "otherEntityName": "player",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "franchise"
+        },
+        {
+            "relationshipName": "season",
+            "otherEntityName": "season",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "owner",
+            "otherEntityName": "player",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "franchise"
+        },
+        {
+            "relationshipName": "iconPlayer",
+            "otherEntityName": "player",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "franchise"
         }
     ],
     "fields": [
@@ -18,14 +40,6 @@
         },
         {
             "fieldName": "logoPath",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "owner",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "iconPlayer",
             "fieldType": "String"
         }
     ],

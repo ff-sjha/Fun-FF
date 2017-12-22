@@ -4,11 +4,13 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Season } from './season.model';
 import { SeasonPopupService } from './season-popup.service';
 import { SeasonService } from './season.service';
+import { Franchise, FranchiseService } from '../franchise';
+import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'fafi-season-dialog',
@@ -18,18 +20,35 @@ export class SeasonDialogComponent implements OnInit {
 
     season: Season;
     isSaving: boolean;
+
+    winners: Franchise[];
     startDateDp: any;
     endDateDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,
+        private jhiAlertService: JhiAlertService,
         private seasonService: SeasonService,
+        private franchiseService: FranchiseService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.franchiseService
+            .query({filter: 'season-is-null'})
+            .subscribe((res: ResponseWrapper) => {
+                if (!this.season.winnerId) {
+                    this.winners = res.json;
+                } else {
+                    this.franchiseService
+                        .find(this.season.winnerId)
+                        .subscribe((subRes: Franchise) => {
+                            this.winners = [subRes].concat(res.json);
+                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
+                }
+            }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -60,6 +79,14 @@ export class SeasonDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackFranchiseById(index: number, item: Franchise) {
+        return item.id;
     }
 }
 

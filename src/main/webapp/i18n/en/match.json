@@ -17,7 +17,10 @@
             },
             "startDateTime": "Start Date Time",
             "endDateTime": "End Date Time",
-            "tournament": "Tournament"
+            "tournament": "Tournament",
+            "franchise1": "Franchise 1",
+            "franchise2": "Franchise 2",
+            "winner": "Winner"
         }
     }
 }

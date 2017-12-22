@@ -56,7 +56,7 @@
                 <div class="carousel-caption">
                     <h3>LUDO - Dice Rules</h3>
                     <p>The game of sweet revenge!</p>
-                    <a class="morebtn" href="ludo.html">LEARN MORE</a>
+                    <a class="morebtn" routerLink="ludo">LEARN MORE</a>
                 </div>
             </ng-template>
             <ng-template ngbSlide>
@@ -64,7 +64,7 @@
                 <div class="carousel-caption">
                     <h3>FOOTBALL</h3>
                     <p>Prepare for Combat</p>
-                    <a class="morebtn" href="#">LEARN MORE</a>
+                    <a class="morebtn" routerLink="football">LEARN MORE</a>
                 </div>
             </ng-template>
             <ng-template ngbSlide>
@@ -72,7 +72,7 @@
                 <div class="carousel-caption">
                     <h3>BADMINTON</h3>
                     <p>Smash like a champion!</p>
-                    <a class="morebtn" href="#">LEARN MORE</a>
+                    <a class="morebtn" routerLink="badminton">LEARN MORE</a>
                 </div>
             </ng-template>
 
@@ -81,7 +81,7 @@
     </div>
     <div class="clear-fix"></div>
 </div>
-<div class="row"><p><br></p></div>
+<!--<div class="row"><p><br></p></div>
 <div class="row">
     <div class="container">
         <h2>
@@ -103,17 +103,17 @@
                 <tr *ngFor="let franchise of franchises">
                     <td><a [routerLink]="['../franchise', franchise.id ]">{{franchise.id}}</a></td>
                     <td>{{franchise.name}}</td>
-                    <!--<td>{{season.startDate | date:'mediumDate'}}</td>
+                    &lt;!&ndash;<td>{{season.startDate | date:'mediumDate'}}</td>
                     <td>{{season.endDate | date:'mediumDate'}}</td>
                     <td>{{season.active}}</td>
-                    <td>{{season.winner}}</td>-->
+                    <td>{{season.winner}}</td>&ndash;&gt;
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="clear-fix"></div>
-</div>
+</div>-->
 <!--<div class="row"><p><br></p></div>-->
 <div class="row">
     <div class="container">

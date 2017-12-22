@@ -7,8 +7,9 @@ export class Season implements BaseEntity {
         public startDate?: any,
         public endDate?: any,
         public active?: boolean,
-        public winner?: string,
         public tournaments?: BaseEntity[],
+        public winnerId?: number,
+        public winnerName?: string,
     ) {
         this.active = false;
     }

@@ -9,6 +9,7 @@ import { MatchDialogComponent } from '../../../../../../main/webapp/app/entities
 import { MatchService } from '../../../../../../main/webapp/app/entities/match/match.service';
 import { Match } from '../../../../../../main/webapp/app/entities/match/match.model';
 import { TournamentService } from '../../../../../../main/webapp/app/entities/tournament';
+import { FranchiseService } from '../../../../../../main/webapp/app/entities/franchise';
 
 describe('Component Tests', () => {
 
@@ -25,6 +26,7 @@ describe('Component Tests', () => {
                 declarations: [MatchDialogComponent],
                 providers: [
                     TournamentService,
+                    FranchiseService,
                     MatchService
                 ]
             })

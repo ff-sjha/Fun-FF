@@ -34,11 +34,11 @@ public class TournamentCriteria implements Serializable {
 
     private LocalDateFilter endDate;
 
-    private StringFilter winner;
-
     private LongFilter seasonId;
 
     private LongFilter matchesId;
+
+    private LongFilter winnerId;
 
     public TournamentCriteria() {
     }
@@ -75,14 +75,6 @@ public class TournamentCriteria implements Serializable {
         this.endDate = endDate;
     }
 
-    public StringFilter getWinner() {
-        return winner;
-    }
-
-    public void setWinner(StringFilter winner) {
-        this.winner = winner;
-    }
-
     public LongFilter getSeasonId() {
         return seasonId;
     }
@@ -99,6 +91,14 @@ public class TournamentCriteria implements Serializable {
         this.matchesId = matchesId;
     }
 
+    public LongFilter getWinnerId() {
+        return winnerId;
+    }
+
+    public void setWinnerId(LongFilter winnerId) {
+        this.winnerId = winnerId;
+    }
+
     @Override
     public String toString() {
         return "TournamentCriteria{" +
@@ -106,9 +106,9 @@ public class TournamentCriteria implements Serializable {
                 (name != null ? "name=" + name + ", " : "") +
                 (startDate != null ? "startDate=" + startDate + ", " : "") +
                 (endDate != null ? "endDate=" + endDate + ", " : "") +
-                (winner != null ? "winner=" + winner + ", " : "") +
                 (seasonId != null ? "seasonId=" + seasonId + ", " : "") +
                 (matchesId != null ? "matchesId=" + matchesId + ", " : "") +
+                (winnerId != null ? "winnerId=" + winnerId + ", " : "") +
             "}";
     }
 

@@ -18,9 +18,9 @@
             "name": "Name",
             "startDate": "Start Date",
             "endDate": "End Date",
-            "winner": "Winner",
             "season": "Season",
-            "matches": "Matches"
+            "matches": "Matches",
+            "winner": "Winner"
         }
     }
 }

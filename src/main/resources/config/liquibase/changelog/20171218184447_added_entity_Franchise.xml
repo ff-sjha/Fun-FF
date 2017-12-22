@@ -30,21 +30,17 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="owner" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="icon_player" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="season_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-
+            <column name="owner_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>            <column name="icon_player_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

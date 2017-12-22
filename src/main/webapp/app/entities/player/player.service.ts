@@ -38,6 +38,7 @@ export class PlayerService {
 
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
+        console.log(options);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
     }

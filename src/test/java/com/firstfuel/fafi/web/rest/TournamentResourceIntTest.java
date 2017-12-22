@@ -5,6 +5,7 @@ import com.firstfuel.fafi.FafiApp;
 import com.firstfuel.fafi.domain.Tournament;
 import com.firstfuel.fafi.domain.Season;
 import com.firstfuel.fafi.domain.Match;
+import com.firstfuel.fafi.domain.Franchise;
 import com.firstfuel.fafi.repository.TournamentRepository;
 import com.firstfuel.fafi.service.TournamentService;
 import com.firstfuel.fafi.service.dto.TournamentDTO;
@@ -56,9 +57,6 @@ public class TournamentResourceIntTest {
     private static final LocalDate DEFAULT_END_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_WINNER = "AAAAAAAAAA";
-    private static final String UPDATED_WINNER = "BBBBBBBBBB";
-
     @Autowired
     private TournamentRepository tournamentRepository;
 
@@ -108,8 +106,7 @@ public class TournamentResourceIntTest {
         Tournament tournament = new Tournament()
             .name(DEFAULT_NAME)
             .startDate(DEFAULT_START_DATE)
-            .endDate(DEFAULT_END_DATE)
-            .winner(DEFAULT_WINNER);
+            .endDate(DEFAULT_END_DATE);
         return tournament;
     }
 
@@ -137,7 +134,6 @@ public class TournamentResourceIntTest {
         assertThat(testTournament.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTournament.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testTournament.getEndDate()).isEqualTo(DEFAULT_END_DATE);
-        assertThat(testTournament.getWinner()).isEqualTo(DEFAULT_WINNER);
     }
 
     @Test
@@ -192,8 +188,7 @@ public class TournamentResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(tournament.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].winner").value(hasItem(DEFAULT_WINNER.toString())));
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())));
     }
 
     @Test
@@ -209,8 +204,7 @@ public class TournamentResourceIntTest {
             .andExpect(jsonPath("$.id").value(tournament.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
-            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
-            .andExpect(jsonPath("$.winner").value(DEFAULT_WINNER.toString()));
+            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()));
     }
 
     @Test
@@ -386,45 +380,6 @@ public class TournamentResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllTournamentsByWinnerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        tournamentRepository.saveAndFlush(tournament);
-
-        // Get all the tournamentList where winner equals to DEFAULT_WINNER
-        defaultTournamentShouldBeFound("winner.equals=" + DEFAULT_WINNER);
-
-        // Get all the tournamentList where winner equals to UPDATED_WINNER
-        defaultTournamentShouldNotBeFound("winner.equals=" + UPDATED_WINNER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTournamentsByWinnerIsInShouldWork() throws Exception {
-        // Initialize the database
-        tournamentRepository.saveAndFlush(tournament);
-
-        // Get all the tournamentList where winner in DEFAULT_WINNER or UPDATED_WINNER
-        defaultTournamentShouldBeFound("winner.in=" + DEFAULT_WINNER + "," + UPDATED_WINNER);
-
-        // Get all the tournamentList where winner equals to UPDATED_WINNER
-        defaultTournamentShouldNotBeFound("winner.in=" + UPDATED_WINNER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTournamentsByWinnerIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        tournamentRepository.saveAndFlush(tournament);
-
-        // Get all the tournamentList where winner is not null
-        defaultTournamentShouldBeFound("winner.specified=true");
-
-        // Get all the tournamentList where winner is null
-        defaultTournamentShouldNotBeFound("winner.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllTournamentsBySeasonIsEqualToSomething() throws Exception {
         // Initialize the database
         Season season = SeasonResourceIntTest.createEntity(em);
@@ -460,6 +415,25 @@ public class TournamentResourceIntTest {
         defaultTournamentShouldNotBeFound("matchesId.equals=" + (matchesId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByWinnerIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Franchise winner = FranchiseResourceIntTest.createEntity(em);
+        em.persist(winner);
+        em.flush();
+        tournament.setWinner(winner);
+        tournamentRepository.saveAndFlush(tournament);
+        Long winnerId = winner.getId();
+
+        // Get all the tournamentList where winner equals to winnerId
+        defaultTournamentShouldBeFound("winnerId.equals=" + winnerId);
+
+        // Get all the tournamentList where winner equals to winnerId + 1
+        defaultTournamentShouldNotBeFound("winnerId.equals=" + (winnerId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -470,8 +444,7 @@ public class TournamentResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(tournament.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].winner").value(hasItem(DEFAULT_WINNER.toString())));
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())));
     }
 
     /**
@@ -508,8 +481,7 @@ public class TournamentResourceIntTest {
         updatedTournament
             .name(UPDATED_NAME)
             .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE)
-            .winner(UPDATED_WINNER);
+            .endDate(UPDATED_END_DATE);
         TournamentDTO tournamentDTO = tournamentMapper.toDto(updatedTournament);
 
         restTournamentMockMvc.perform(put("/api/tournaments")
@@ -524,7 +496,6 @@ public class TournamentResourceIntTest {
         assertThat(testTournament.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTournament.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testTournament.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testTournament.getWinner()).isEqualTo(UPDATED_WINNER);
     }
 
     @Test

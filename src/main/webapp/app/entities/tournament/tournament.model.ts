@@ -6,9 +6,11 @@ export class Tournament implements BaseEntity {
         public name?: string,
         public startDate?: any,
         public endDate?: any,
-        public winner?: string,
         public seasonId?: number,
+        public seasonName?: string,
         public matches?: BaseEntity[],
+        public winnerId?: number,
+        public winnerName?: string,
     ) {
     }
 }

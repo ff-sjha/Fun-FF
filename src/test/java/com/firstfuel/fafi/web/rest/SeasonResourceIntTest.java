@@ -4,6 +4,7 @@ import com.firstfuel.fafi.FafiApp;
 
 import com.firstfuel.fafi.domain.Season;
 import com.firstfuel.fafi.domain.Tournament;
+import com.firstfuel.fafi.domain.Franchise;
 import com.firstfuel.fafi.repository.SeasonRepository;
 import com.firstfuel.fafi.service.SeasonService;
 import com.firstfuel.fafi.service.dto.SeasonDTO;
@@ -58,9 +59,6 @@ public class SeasonResourceIntTest {
     private static final Boolean DEFAULT_ACTIVE = false;
     private static final Boolean UPDATED_ACTIVE = true;
 
-    private static final String DEFAULT_WINNER = "AAAAAAAAAA";
-    private static final String UPDATED_WINNER = "BBBBBBBBBB";
-
     @Autowired
     private SeasonRepository seasonRepository;
 
@@ -111,8 +109,7 @@ public class SeasonResourceIntTest {
             .name(DEFAULT_NAME)
             .startDate(DEFAULT_START_DATE)
             .endDate(DEFAULT_END_DATE)
-            .active(DEFAULT_ACTIVE)
-            .winner(DEFAULT_WINNER);
+            .active(DEFAULT_ACTIVE);
         return season;
     }
 
@@ -141,7 +138,6 @@ public class SeasonResourceIntTest {
         assertThat(testSeason.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testSeason.getEndDate()).isEqualTo(DEFAULT_END_DATE);
         assertThat(testSeason.isActive()).isEqualTo(DEFAULT_ACTIVE);
-        assertThat(testSeason.getWinner()).isEqualTo(DEFAULT_WINNER);
     }
 
     @Test
@@ -197,8 +193,7 @@ public class SeasonResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
-            .andExpect(jsonPath("$.[*].winner").value(hasItem(DEFAULT_WINNER.toString())));
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
 
     @Test
@@ -215,8 +210,7 @@ public class SeasonResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
-            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()))
-            .andExpect(jsonPath("$.winner").value(DEFAULT_WINNER.toString()));
+            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()));
     }
 
     @Test
@@ -431,45 +425,6 @@ public class SeasonResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllSeasonsByWinnerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        seasonRepository.saveAndFlush(season);
-
-        // Get all the seasonList where winner equals to DEFAULT_WINNER
-        defaultSeasonShouldBeFound("winner.equals=" + DEFAULT_WINNER);
-
-        // Get all the seasonList where winner equals to UPDATED_WINNER
-        defaultSeasonShouldNotBeFound("winner.equals=" + UPDATED_WINNER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllSeasonsByWinnerIsInShouldWork() throws Exception {
-        // Initialize the database
-        seasonRepository.saveAndFlush(season);
-
-        // Get all the seasonList where winner in DEFAULT_WINNER or UPDATED_WINNER
-        defaultSeasonShouldBeFound("winner.in=" + DEFAULT_WINNER + "," + UPDATED_WINNER);
-
-        // Get all the seasonList where winner equals to UPDATED_WINNER
-        defaultSeasonShouldNotBeFound("winner.in=" + UPDATED_WINNER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllSeasonsByWinnerIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        seasonRepository.saveAndFlush(season);
-
-        // Get all the seasonList where winner is not null
-        defaultSeasonShouldBeFound("winner.specified=true");
-
-        // Get all the seasonList where winner is null
-        defaultSeasonShouldNotBeFound("winner.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllSeasonsByTournamentIsEqualToSomething() throws Exception {
         // Initialize the database
         Tournament tournament = TournamentResourceIntTest.createEntity(em);
@@ -486,6 +441,25 @@ public class SeasonResourceIntTest {
         defaultSeasonShouldNotBeFound("tournamentId.equals=" + (tournamentId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllSeasonsByWinnerIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Franchise winner = FranchiseResourceIntTest.createEntity(em);
+        em.persist(winner);
+        em.flush();
+        season.setWinner(winner);
+        seasonRepository.saveAndFlush(season);
+        Long winnerId = winner.getId();
+
+        // Get all the seasonList where winner equals to winnerId
+        defaultSeasonShouldBeFound("winnerId.equals=" + winnerId);
+
+        // Get all the seasonList where winner equals to winnerId + 1
+        defaultSeasonShouldNotBeFound("winnerId.equals=" + (winnerId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -497,8 +471,7 @@ public class SeasonResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
-            .andExpect(jsonPath("$.[*].winner").value(hasItem(DEFAULT_WINNER.toString())));
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
 
     /**
@@ -536,8 +509,7 @@ public class SeasonResourceIntTest {
             .name(UPDATED_NAME)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .active(UPDATED_ACTIVE)
-            .winner(UPDATED_WINNER);
+            .active(UPDATED_ACTIVE);
         SeasonDTO seasonDTO = seasonMapper.toDto(updatedSeason);
 
         restSeasonMockMvc.perform(put("/api/seasons")
@@ -553,7 +525,6 @@ public class SeasonResourceIntTest {
         assertThat(testSeason.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testSeason.getEndDate()).isEqualTo(UPDATED_END_DATE);
         assertThat(testSeason.isActive()).isEqualTo(UPDATED_ACTIVE);
-        assertThat(testSeason.getWinner()).isEqualTo(UPDATED_WINNER);
     }
 
     @Test

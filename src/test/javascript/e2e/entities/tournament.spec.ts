@@ -37,9 +37,8 @@ describe('Tournament e2e test', () => {
         expect(tournamentDialogPage.getStartDateInput()).toMatch('2000-12-31');
         tournamentDialogPage.setEndDateInput('2000-12-31');
         expect(tournamentDialogPage.getEndDateInput()).toMatch('2000-12-31');
-        tournamentDialogPage.setWinnerInput('winner');
-        expect(tournamentDialogPage.getWinnerInput()).toMatch('winner');
         tournamentDialogPage.seasonSelectLastOption();
+        tournamentDialogPage.winnerSelectLastOption();
         tournamentDialogPage.save();
         expect(tournamentDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -69,8 +68,8 @@ export class TournamentDialogPage {
     nameInput = element(by.css('input#field_name'));
     startDateInput = element(by.css('input#field_startDate'));
     endDateInput = element(by.css('input#field_endDate'));
-    winnerInput = element(by.css('input#field_winner'));
     seasonSelect = element(by.css('select#field_season'));
+    winnerSelect = element(by.css('select#field_winner'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -100,14 +99,6 @@ export class TournamentDialogPage {
         return this.endDateInput.getAttribute('value');
     }
 
-    setWinnerInput = function(winner) {
-        this.winnerInput.sendKeys(winner);
-    }
-
-    getWinnerInput = function() {
-        return this.winnerInput.getAttribute('value');
-    }
-
     seasonSelectLastOption = function() {
         this.seasonSelect.all(by.tagName('option')).last().click();
     }
@@ -122,6 +113,22 @@ export class TournamentDialogPage {
 
     getSeasonSelectedOption = function() {
         return this.seasonSelect.element(by.css('option:checked')).getText();
+    }
+
+    winnerSelectLastOption = function() {
+        this.winnerSelect.all(by.tagName('option')).last().click();
+    }
+
+    winnerSelectOption = function(option) {
+        this.winnerSelect.sendKeys(option);
+    }
+
+    getWinnerSelect = function() {
+        return this.winnerSelect;
+    }
+
+    getWinnerSelectedOption = function() {
+        return this.winnerSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

@@ -4,6 +4,9 @@ import com.firstfuel.fafi.FafiApp;
 
 import com.firstfuel.fafi.domain.Match;
 import com.firstfuel.fafi.domain.Tournament;
+import com.firstfuel.fafi.domain.Franchise;
+import com.firstfuel.fafi.domain.Franchise;
+import com.firstfuel.fafi.domain.Franchise;
 import com.firstfuel.fafi.repository.MatchRepository;
 import com.firstfuel.fafi.service.MatchService;
 import com.firstfuel.fafi.service.dto.MatchDTO;
@@ -330,6 +333,63 @@ public class MatchResourceIntTest {
 
         // Get all the matchList where tournament equals to tournamentId + 1
         defaultMatchShouldNotBeFound("tournamentId.equals=" + (tournamentId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllMatchesByFranchise1IsEqualToSomething() throws Exception {
+        // Initialize the database
+        Franchise franchise1 = FranchiseResourceIntTest.createEntity(em);
+        em.persist(franchise1);
+        em.flush();
+        match.setFranchise1(franchise1);
+        matchRepository.saveAndFlush(match);
+        Long franchise1Id = franchise1.getId();
+
+        // Get all the matchList where franchise1 equals to franchise1Id
+        defaultMatchShouldBeFound("franchise1Id.equals=" + franchise1Id);
+
+        // Get all the matchList where franchise1 equals to franchise1Id + 1
+        defaultMatchShouldNotBeFound("franchise1Id.equals=" + (franchise1Id + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllMatchesByFranchise2IsEqualToSomething() throws Exception {
+        // Initialize the database
+        Franchise franchise2 = FranchiseResourceIntTest.createEntity(em);
+        em.persist(franchise2);
+        em.flush();
+        match.setFranchise2(franchise2);
+        matchRepository.saveAndFlush(match);
+        Long franchise2Id = franchise2.getId();
+
+        // Get all the matchList where franchise2 equals to franchise2Id
+        defaultMatchShouldBeFound("franchise2Id.equals=" + franchise2Id);
+
+        // Get all the matchList where franchise2 equals to franchise2Id + 1
+        defaultMatchShouldNotBeFound("franchise2Id.equals=" + (franchise2Id + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllMatchesByWinnerIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Franchise winner = FranchiseResourceIntTest.createEntity(em);
+        em.persist(winner);
+        em.flush();
+        match.setWinner(winner);
+        matchRepository.saveAndFlush(match);
+        Long winnerId = winner.getId();
+
+        // Get all the matchList where winner equals to winnerId
+        defaultMatchShouldBeFound("winnerId.equals=" + winnerId);
+
+        // Get all the matchList where winner equals to winnerId + 1
+        defaultMatchShouldNotBeFound("winnerId.equals=" + (winnerId + 1));
     }
 
     /**
