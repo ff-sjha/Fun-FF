@@ -15,6 +15,8 @@ public class TieTeamDTO implements Serializable {
 
     private Double points;
 
+    private String name;
+
     private Set<PlayerDTO> tiePlayers = new HashSet<>();
 
     private Long franchiseId;
@@ -35,6 +37,14 @@ public class TieTeamDTO implements Serializable {
 
     public void setPoints(Double points) {
         this.points = points;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<PlayerDTO> getTiePlayers() {
@@ -87,6 +97,7 @@ public class TieTeamDTO implements Serializable {
         return "TieTeamDTO{" +
             "id=" + getId() +
             ", points=" + getPoints() +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

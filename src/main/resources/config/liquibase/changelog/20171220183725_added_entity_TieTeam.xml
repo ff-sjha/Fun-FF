@@ -26,6 +26,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="franchise_id" type="bigint">
                 <constraints nullable="true" />
             </column>

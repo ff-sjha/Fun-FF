@@ -48,6 +48,9 @@ public class TieTeamResourceIntTest {
     private static final Double DEFAULT_POINTS = 1D;
     private static final Double UPDATED_POINTS = 2D;
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     @Autowired
     private TieTeamRepository tieTeamRepository;
 
@@ -95,7 +98,8 @@ public class TieTeamResourceIntTest {
      */
     public static TieTeam createEntity(EntityManager em) {
         TieTeam tieTeam = new TieTeam()
-            .points(DEFAULT_POINTS);
+            .points(DEFAULT_POINTS)
+            .name(DEFAULT_NAME);
         return tieTeam;
     }
 
@@ -121,6 +125,7 @@ public class TieTeamResourceIntTest {
         assertThat(tieTeamList).hasSize(databaseSizeBeforeCreate + 1);
         TieTeam testTieTeam = tieTeamList.get(tieTeamList.size() - 1);
         assertThat(testTieTeam.getPoints()).isEqualTo(DEFAULT_POINTS);
+        assertThat(testTieTeam.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -154,7 +159,8 @@ public class TieTeamResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tieTeam.getId().intValue())))
-            .andExpect(jsonPath("$.[*].points").value(hasItem(DEFAULT_POINTS.doubleValue())));
+            .andExpect(jsonPath("$.[*].points").value(hasItem(DEFAULT_POINTS.doubleValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
 
     @Test
@@ -168,7 +174,8 @@ public class TieTeamResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(tieTeam.getId().intValue()))
-            .andExpect(jsonPath("$.points").value(DEFAULT_POINTS.doubleValue()));
+            .andExpect(jsonPath("$.points").value(DEFAULT_POINTS.doubleValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
 
     @Test
@@ -208,6 +215,45 @@ public class TieTeamResourceIntTest {
 
         // Get all the tieTeamList where points is null
         defaultTieTeamShouldNotBeFound("points.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllTieTeamsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tieTeamRepository.saveAndFlush(tieTeam);
+
+        // Get all the tieTeamList where name equals to DEFAULT_NAME
+        defaultTieTeamShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the tieTeamList where name equals to UPDATED_NAME
+        defaultTieTeamShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTieTeamsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        tieTeamRepository.saveAndFlush(tieTeam);
+
+        // Get all the tieTeamList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultTieTeamShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the tieTeamList where name equals to UPDATED_NAME
+        defaultTieTeamShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTieTeamsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tieTeamRepository.saveAndFlush(tieTeam);
+
+        // Get all the tieTeamList where name is not null
+        defaultTieTeamShouldBeFound("name.specified=true");
+
+        // Get all the tieTeamList where name is null
+        defaultTieTeamShouldNotBeFound("name.specified=false");
     }
 
     @Test
@@ -255,7 +301,8 @@ public class TieTeamResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tieTeam.getId().intValue())))
-            .andExpect(jsonPath("$.[*].points").value(hasItem(DEFAULT_POINTS.doubleValue())));
+            .andExpect(jsonPath("$.[*].points").value(hasItem(DEFAULT_POINTS.doubleValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
 
     /**
@@ -290,7 +337,8 @@ public class TieTeamResourceIntTest {
         // Disconnect from session so that the updates on updatedTieTeam are not directly saved in db
         em.detach(updatedTieTeam);
         updatedTieTeam
-            .points(UPDATED_POINTS);
+            .points(UPDATED_POINTS)
+            .name(UPDATED_NAME);
         TieTeamDTO tieTeamDTO = tieTeamMapper.toDto(updatedTieTeam);
 
         restTieTeamMockMvc.perform(put("/api/tie-teams")
@@ -303,6 +351,7 @@ public class TieTeamResourceIntTest {
         assertThat(tieTeamList).hasSize(databaseSizeBeforeUpdate);
         TieTeam testTieTeam = tieTeamList.get(tieTeamList.size() - 1);
         assertThat(testTieTeam.getPoints()).isEqualTo(UPDATED_POINTS);
+        assertThat(testTieTeam.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

@@ -81,6 +81,9 @@ public class TieTeamQueryService extends QueryService<TieTeam> {
             if (criteria.getPoints() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPoints(), TieTeam_.points));
             }
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), TieTeam_.name));
+            }
             if (criteria.getTiePlayersId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getTiePlayersId(), TieTeam_.tiePlayers, Player_.id));
             }

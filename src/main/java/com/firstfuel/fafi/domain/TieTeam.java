@@ -27,6 +27,9 @@ public class TieTeam implements Serializable {
     @Column(name = "points")
     private Double points;
 
+    @Column(name = "name")
+    private String name;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "tie_team_tie_players",
@@ -57,6 +60,19 @@ public class TieTeam implements Serializable {
 
     public void setPoints(Double points) {
         this.points = points;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public TieTeam name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<Player> getTiePlayers() {
@@ -123,6 +139,7 @@ public class TieTeam implements Serializable {
         return "TieTeam{" +
             "id=" + getId() +
             ", points=" + getPoints() +
+            ", name='" + getName() + "'" +
             "}";
     }
 }
