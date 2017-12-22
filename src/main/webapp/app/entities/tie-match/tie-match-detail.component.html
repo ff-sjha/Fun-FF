@@ -13,13 +13,19 @@
         <dt><span jhiTranslate="fafiApp.tieMatch.team1">Team 1</span></dt>
         <dd>
             <div *ngIf="tieMatch.team1Id">
-                <a [routerLink]="['/tie-team', tieMatch.team1Id]">{{tieMatch.team1Id}}</a>
+                <a [routerLink]="['/tie-team', tieMatch.team1Id]">{{tieMatch.team1Name}}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="fafiApp.tieMatch.team2">Team 2</span></dt>
         <dd>
             <div *ngIf="tieMatch.team2Id">
-                <a [routerLink]="['/tie-team', tieMatch.team2Id]">{{tieMatch.team2Id}}</a>
+                <a [routerLink]="['/tie-team', tieMatch.team2Id]">{{tieMatch.team2Name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.tieMatch.winner">Winner</span></dt>
+        <dd>
+            <div *ngIf="tieMatch.winnerId">
+                <a [routerLink]="['/tie-team', tieMatch.winnerId]">{{tieMatch.winnerName}}</a>
             </div>
         </dd>
     </dl>

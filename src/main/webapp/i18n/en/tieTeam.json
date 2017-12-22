@@ -16,7 +16,8 @@
                 "title": "Tie Team"
             },
             "points": "Points",
-            "tiePlayers": "Tie Players"
+            "tiePlayers": "Tie Players",
+            "franchise": "Franchise"
         }
     }
 }

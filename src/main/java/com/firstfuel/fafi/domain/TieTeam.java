@@ -1,6 +1,5 @@
 package com.firstfuel.fafi.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -28,10 +27,15 @@ public class TieTeam implements Serializable {
     @Column(name = "points")
     private Double points;
 
-    @OneToMany(mappedBy = "tieTeam")
-    @JsonIgnore
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "tie_team_tie_players",
+               joinColumns = @JoinColumn(name="tie_teams_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="tie_players_id", referencedColumnName="id"))
     private Set<Player> tiePlayers = new HashSet<>();
+
+    @ManyToOne
+    private Franchise franchise;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -66,18 +70,31 @@ public class TieTeam implements Serializable {
 
     public TieTeam addTiePlayers(Player player) {
         this.tiePlayers.add(player);
-        //player.setTieTeam(this);
+        //player.getTieTeams().add(this);
         return this;
     }
 
     public TieTeam removeTiePlayers(Player player) {
         this.tiePlayers.remove(player);
-        //player.setTieTeam(null);
+        //player.getTieTeams().remove(this);
         return this;
     }
 
     public void setTiePlayers(Set<Player> players) {
         this.tiePlayers = players;
+    }
+
+    public Franchise getFranchise() {
+        return franchise;
+    }
+
+    public TieTeam franchise(Franchise franchise) {
+        this.franchise = franchise;
+        return this;
+    }
+
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

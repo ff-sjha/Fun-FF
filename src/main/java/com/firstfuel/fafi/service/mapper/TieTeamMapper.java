@@ -8,12 +8,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity TieTeam and its DTO TieTeamDTO.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {PlayerMapper.class, FranchiseMapper.class})
 public interface TieTeamMapper extends EntityMapper<TieTeamDTO, TieTeam> {
 
-    
+    @Mapping(source = "franchise.id", target = "franchiseId")
+    @Mapping(source = "franchise.name", target = "franchiseName")
+    TieTeamDTO toDto(TieTeam tieTeam);
 
-    @Mapping(target = "tiePlayers", ignore = true)
+    @Mapping(source = "franchiseId", target = "franchise")
     TieTeam toEntity(TieTeamDTO tieTeamDTO);
 
     default TieTeam fromId(Long id) {

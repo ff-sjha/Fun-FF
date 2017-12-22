@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity TieTeam.
+    -->
+    <changeSet id="20171220183725-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="tie_teams_id"
+                                 baseTableName="tie_team_tie_players"
+                                 constraintName="fk_tie_team_tie_players_tie_teams_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tie_team"/>
+        <addForeignKeyConstraint baseColumnNames="tie_players_id"
+                                 baseTableName="tie_team_tie_players"
+                                 constraintName="fk_tie_team_tie_players_tie_players_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="player"/>
+        
+        <addForeignKeyConstraint baseColumnNames="franchise_id"
+                                 baseTableName="tie_team"
+                                 constraintName="fk_tie_team_franchise_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="franchise"/>
+
+    </changeSet>
+</databaseChangeLog>

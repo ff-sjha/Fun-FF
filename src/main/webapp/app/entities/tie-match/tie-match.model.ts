@@ -7,6 +7,9 @@ export class TieMatch implements BaseEntity {
         public team1Id?: number,
         public team2Id?: number,
         public winnerId?: number,
+        public team1Name?: string,
+        public team2Name?: string,
+        public winnerName?: string,
     ) {
     }
 }

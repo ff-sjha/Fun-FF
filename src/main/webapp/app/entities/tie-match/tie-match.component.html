@@ -16,10 +16,11 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="matchId"><span jhiTranslate="fafiApp.tieMatch.match">Match</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="team1Id"><span jhiTranslate="fafiApp.tieMatch.team1">Team 1</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="team2Id"><span jhiTranslate="fafiApp.tieMatch.team2">Team 2</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="matchId"><span jhiTranslate="fafiApp.tieMatch.match">Match</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="team1Id"><span jhiTranslate="fafiApp.tieMatch.team1">Team 1</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="team2Id"><span jhiTranslate="fafiApp.tieMatch.team2">Team 2</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="winnerId"><span jhiTranslate="fafiApp.tieMatch.winner">Winner</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -33,12 +34,17 @@
                 </td>
                 <td>
                     <div *ngIf="tieMatch.team1Id">
-                        <a [routerLink]="['../tie-team', tieMatch.team1Id  ]" >{{tieMatch.team1Id}}</a>
+                        <a [routerLink]="['../tie-team', tieMatch.team1Id  ]" >{{tieMatch.team1Name}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="tieMatch.team2Id">
-                        <a [routerLink]="['../tie-team', tieMatch.team2Id  ]" >{{tieMatch.team2Id}}</a>
+                        <a [routerLink]="['../tie-team', tieMatch.team2Id  ]" >{{tieMatch.team2Name}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tieMatch.winnerId">
+                        <a [routerLink]="['../tie-team', tieMatch.winnerId  ]" >{{tieMatch.winnerName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

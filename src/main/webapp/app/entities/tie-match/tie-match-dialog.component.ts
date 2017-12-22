@@ -30,6 +30,8 @@ export class TieMatchDialogComponent implements OnInit {
 
     tieteams: TieTeam[];
 
+    winners: TieTeam[] = [];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
@@ -72,6 +74,14 @@ export class TieMatchDialogComponent implements OnInit {
             }, (res: ResponseWrapper) => this.onError(res.json));
         this.tieTeamService.query()
             .subscribe((res: ResponseWrapper) => { this.tieteams = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.addTieTeamToWinners(this.tieMatch.team1Id);
+        this.addTieTeamToWinners(this.tieMatch.team2Id);
+    }
+
+    addTieTeamToWinners(id: number)  {
+        if (id !== undefined) {
+            return this.tieTeamService.find(id).subscribe((tieTeam) => this.winners.push(tieTeam));
+        }
     }
 
     clear() {

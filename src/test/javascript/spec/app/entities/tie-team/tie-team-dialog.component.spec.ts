@@ -8,6 +8,8 @@ import { FafiTestModule } from '../../../test.module';
 import { TieTeamDialogComponent } from '../../../../../../main/webapp/app/entities/tie-team/tie-team-dialog.component';
 import { TieTeamService } from '../../../../../../main/webapp/app/entities/tie-team/tie-team.service';
 import { TieTeam } from '../../../../../../main/webapp/app/entities/tie-team/tie-team.model';
+import { PlayerService } from '../../../../../../main/webapp/app/entities/player';
+import { FranchiseService } from '../../../../../../main/webapp/app/entities/franchise';
 
 describe('Component Tests', () => {
 
@@ -23,6 +25,8 @@ describe('Component Tests', () => {
                 imports: [FafiTestModule],
                 declarations: [TieTeamDialogComponent],
                 providers: [
+                    PlayerService,
+                    FranchiseService,
                     TieTeamService
                 ]
             })

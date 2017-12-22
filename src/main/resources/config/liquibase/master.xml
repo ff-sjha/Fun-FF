@@ -19,5 +19,6 @@
     <include file="config/liquibase/changelog/20171218183905_added_entity_constraints_Player.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171218184447_added_entity_constraints_Franchise.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171220185648_added_entity_constraints_TieMatch.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171220183725_added_entity_constraints_TieTeam.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

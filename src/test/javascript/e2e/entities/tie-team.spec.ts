@@ -33,6 +33,8 @@ describe('TieTeam e2e test', () => {
         tieTeamComponentsPage.clickOnCreateButton();
         tieTeamDialogPage.setPointsInput('5');
         expect(tieTeamDialogPage.getPointsInput()).toMatch('5');
+        // tieTeamDialogPage.tiePlayersSelectLastOption();
+        tieTeamDialogPage.franchiseSelectLastOption();
         tieTeamDialogPage.save();
         expect(tieTeamDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -60,6 +62,8 @@ export class TieTeamDialogPage {
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
     pointsInput = element(by.css('input#field_points'));
+    tiePlayersSelect = element(by.css('select#field_tiePlayers'));
+    franchiseSelect = element(by.css('select#field_franchise'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -71,6 +75,38 @@ export class TieTeamDialogPage {
 
     getPointsInput = function() {
         return this.pointsInput.getAttribute('value');
+    }
+
+    tiePlayersSelectLastOption = function() {
+        this.tiePlayersSelect.all(by.tagName('option')).last().click();
+    }
+
+    tiePlayersSelectOption = function(option) {
+        this.tiePlayersSelect.sendKeys(option);
+    }
+
+    getTiePlayersSelect = function() {
+        return this.tiePlayersSelect;
+    }
+
+    getTiePlayersSelectedOption = function() {
+        return this.tiePlayersSelect.element(by.css('option:checked')).getText();
+    }
+
+    franchiseSelectLastOption = function() {
+        this.franchiseSelect.all(by.tagName('option')).last().click();
+    }
+
+    franchiseSelectOption = function(option) {
+        this.franchiseSelect.sendKeys(option);
+    }
+
+    getFranchiseSelect = function() {
+        return this.franchiseSelect;
+    }
+
+    getFranchiseSelectedOption = function() {
+        return this.franchiseSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

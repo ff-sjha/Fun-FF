@@ -4,6 +4,7 @@ import com.firstfuel.fafi.FafiApp;
 
 import com.firstfuel.fafi.domain.TieTeam;
 import com.firstfuel.fafi.domain.Player;
+import com.firstfuel.fafi.domain.Franchise;
 import com.firstfuel.fafi.repository.TieTeamRepository;
 import com.firstfuel.fafi.service.TieTeamService;
 import com.firstfuel.fafi.service.dto.TieTeamDTO;
@@ -225,6 +226,25 @@ public class TieTeamResourceIntTest {
 
         // Get all the tieTeamList where tiePlayers equals to tiePlayersId + 1
         defaultTieTeamShouldNotBeFound("tiePlayersId.equals=" + (tiePlayersId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTieTeamsByFranchiseIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Franchise franchise = FranchiseResourceIntTest.createEntity(em);
+        em.persist(franchise);
+        em.flush();
+        tieTeam.setFranchise(franchise);
+        tieTeamRepository.saveAndFlush(tieTeam);
+        Long franchiseId = franchise.getId();
+
+        // Get all the tieTeamList where franchise equals to franchiseId
+        defaultTieTeamShouldBeFound("franchiseId.equals=" + franchiseId);
+
+        // Get all the tieTeamList where franchise equals to franchiseId + 1
+        defaultTieTeamShouldNotBeFound("franchiseId.equals=" + (franchiseId + 1));
     }
 
     /**

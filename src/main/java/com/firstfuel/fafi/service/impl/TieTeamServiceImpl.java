@@ -69,7 +69,7 @@ public class TieTeamServiceImpl implements TieTeamService{
     @Transactional(readOnly = true)
     public TieTeamDTO findOne(Long id) {
         log.debug("Request to get TieTeam : {}", id);
-        TieTeam tieTeam = tieTeamRepository.findOne(id);
+        TieTeam tieTeam = tieTeamRepository.findOneWithEagerRelationships(id);
         return tieTeamMapper.toDto(tieTeam);
     }
 

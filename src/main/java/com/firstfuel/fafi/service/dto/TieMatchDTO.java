@@ -19,6 +19,14 @@ public class TieMatchDTO implements Serializable {
 
     private Long team2Id;
 
+    private Long winnerId;
+
+    private String team1Name;
+
+    private String team2Name;
+
+    private String winnerName;
+
     public Long getId() {
         return id;
     }
@@ -49,6 +57,38 @@ public class TieMatchDTO implements Serializable {
 
     public void setTeam2Id(Long tieTeamId) {
         this.team2Id = tieTeamId;
+    }
+
+    public Long getWinnerId() {
+        return winnerId;
+    }
+
+    public void setWinnerId( Long winnerId ) {
+        this.winnerId = winnerId;
+    }
+
+    public String getTeam1Name() {
+        return team1Name;
+    }
+
+    public void setTeam1Name( String team1Name ) {
+        this.team1Name = team1Name;
+    }
+
+    public String getTeam2Name() {
+        return team2Name;
+    }
+
+    public void setTeam2Name( String team2Name ) {
+        this.team2Name = team2Name;
+    }
+
+    public String getWinnerName() {
+        return winnerName;
+    }
+
+    public void setWinnerName( String winnerName ) {
+        this.winnerName = winnerName;
     }
 
     @Override

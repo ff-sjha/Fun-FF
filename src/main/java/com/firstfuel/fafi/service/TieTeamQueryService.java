@@ -84,6 +84,9 @@ public class TieTeamQueryService extends QueryService<TieTeam> {
             if (criteria.getTiePlayersId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getTiePlayersId(), TieTeam_.tiePlayers, Player_.id));
             }
+            if (criteria.getFranchiseId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getFranchiseId(), TieTeam_.franchise, Franchise_.id));
+            }
         }
         return specification;
     }

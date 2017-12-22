@@ -32,6 +32,8 @@ public class TieTeamCriteria implements Serializable {
 
     private LongFilter tiePlayersId;
 
+    private LongFilter franchiseId;
+
     public TieTeamCriteria() {
     }
 
@@ -59,12 +61,21 @@ public class TieTeamCriteria implements Serializable {
         this.tiePlayersId = tiePlayersId;
     }
 
+    public LongFilter getFranchiseId() {
+        return franchiseId;
+    }
+
+    public void setFranchiseId(LongFilter franchiseId) {
+        this.franchiseId = franchiseId;
+    }
+
     @Override
     public String toString() {
         return "TieTeamCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (points != null ? "points=" + points + ", " : "") +
                 (tiePlayersId != null ? "tiePlayersId=" + tiePlayersId + ", " : "") +
+                (franchiseId != null ? "franchiseId=" + franchiseId + ", " : "") +
             "}";
     }
 

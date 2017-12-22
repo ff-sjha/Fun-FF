@@ -4,8 +4,16 @@
         {
             "relationshipName": "tiePlayers",
             "otherEntityName": "player",
-            "relationshipType": "one-to-many",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "id",
+            "ownerSide": true,
             "otherEntityRelationshipName": "tieTeam"
+        },
+        {
+            "relationshipName": "franchise",
+            "otherEntityName": "franchise",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
