@@ -536,7 +536,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 /*--- Responsive Tabs ---*/
 /******** SAP ************/
 .statistics {
-    background: #ffffff;
+    background: black;
     min-height: 400px;
     width: 100%;
     margin: 0% auto 6% auto;
@@ -586,7 +586,6 @@ ul.resp-tabs-list li {
     -ms-transition: all 0.3s ease-out;
     -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
-    text-transform: uppercase;
 }
 
 .resp-tab-item:hover {
@@ -740,56 +739,15 @@ ul.tab_list li a:hover {
     overflow: hidden;
 }
 
-.wmuSlider .wmuSliderWrapper article img {
-    /*--max-width: 100%;
+.wmuSlider h4{
+    color: darkgoldenrod;
+}
+
+.wmuSlider .wmuSliderWrapper img {
+    --max-width: 100%;
     width: auto;
     height: auto;
-    display:block;--*/
-}
-
-/* Default Skin */
-.wmuSliderPagination {
-    z-index: 2;
-    position: absolute;
-    right: 48%;
-    bottom: 0;
-}
-
-.wmuSliderWrapper {
-    background: #021A3A;
-    padding: 2em 0em 6em;
-    height: 430px;
-}
-
-ul.wmuSliderPagination {
-    padding: 0;
-}
-
-.wmuSliderPagination li {
-    float: left;
-    margin: 0 8px 0 0;
-    list-style-type: none;
-}
-
-.wmuSliderPagination a {
-    display: block;
-    text-indent: -9999px;
-    width: 15px;
-    height: 15px;
-    background: #cccccc;
-    border-radius: 50% !important;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -o-border-radius: 3px;
-}
-
-.wmuSliderPagination a.wmuActive {
-    background: #333333;
-}
-
-.wmuSlider.example1 {
-    margin-bottom: 2em;
-    height: 350px !important;
+    display:block;
 }
 
 /* Default Skin */
@@ -803,22 +761,6 @@ ul.grid-1 {
 li.grid-1_right {
     margin: 0;
     padding: 0;
-}
-
-li.grid-1_right h4 {
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
-    font-size: 1.6em;
-    text-transform: capitalize;
-    color: #edb82a;
-}
-
-li.grid-1_right p {
-    font-family: 'Lato', sans-serif;
-    font-weight: 100;
-    font-size: 1.2em;
-    text-transform: capitalize;
-    color: #edb82a;
 }
 
 .cog {
@@ -2430,17 +2372,18 @@ li.grid-1_right p {
     }
 }
 
-.tab-1.msg .img-team-owner {
+.img-team-owner {
     width: 150px;
     height: 150px;
     display: inline;
     border: 2px solid #FFF;
 }
 
-.tab-1.msg .img-team-logo {
+.img-team-logo {
     width: 150px;
     height: 100px;
     display: inline;
+    border: 2px solid #FFF;
 }
 
 .about-ff-council .about-para p {
