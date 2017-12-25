@@ -9,6 +9,9 @@ export class Franchise implements BaseEntity {
         public seasonId?: number,
         public ownerId?: number,
         public iconPlayerId?: number,
+        public seasonName?: string,
+        public ownerName?: string,
+        public iconPlayerName?: string,
     ) {
     }
 }

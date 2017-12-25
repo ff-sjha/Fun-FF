@@ -32,17 +32,17 @@
                 <td>{{franchise.logoPath}}</td>
                 <td>
                     <div *ngIf="franchise.seasonId">
-                        <a [routerLink]="['../season', franchise.seasonId  ]" >{{franchise.seasonId}}</a>
+                        <a [routerLink]="['../season', franchise.seasonId  ]" >{{franchise.seasonName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="franchise.ownerId">
-                        <a [routerLink]="['../player', franchise.ownerId  ]" >{{franchise.ownerId}}</a>
+                        <a [routerLink]="['../player', franchise.ownerId  ]" >{{franchise.ownerName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="franchise.iconPlayerId">
-                        <a [routerLink]="['../player', franchise.iconPlayerId  ]" >{{franchise.iconPlayerId}}</a>
+                        <a [routerLink]="['../player', franchise.iconPlayerId  ]" >{{franchise.iconPlayerName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

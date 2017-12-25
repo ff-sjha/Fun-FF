@@ -41,44 +41,37 @@
     <div class="clear-fix"></div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="franchises">
     <div class="container">
         <h2>
             <span jhiTranslate="home.teams.title">Teams</span>
         </h2>
         <hr>
-        <div class="table-responsive" *ngIf="franchises">
-            <table class="table table-striped">
-                <tbody>
-                <tr class="cen">
-                    <td *ngFor="let franchise of franchises">
-                        <div style="border-right: 1px dashed #FFF;">
-                            <h4>{{franchise.name}}</h4><h5>{{franchise.owner}}</h5>
-                            <img [(src)]=franchise.logoPath alt="" class="img-responsive img-team-logo"/>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="row cen">
+            <div class="col-md-3 flt" style="border-right: 1px dashed #FFF" *ngFor="let franchise of franchises">
+                <h4>{{franchise.name}}</h4><h5>{{franchise.owner}}</h5>
+                <img [(src)]=franchise.logoPath alt="" class="img-responsive img-team-logo"/>
+            </div>
         </div>
+
         <div class="row cen">
             <div class="col-md-3 flt">
-                <h4>Lai Bhaari Gladiators</h4>
+                <!--<h4>Lai Bhaari Gladiators</h4>-->
                 <img src="../../content/images/team_logo/LaiBhaariGladiators.png" alt="" class="img-responsive img-team-logo"/>
                 <hr>
             </div>
             <div class="col-md-3 flt">
-                <h4>Invincibles</h4>
+                <!--<h4>Invincibles</h4>-->
                 <img src="../../content/images/team_logo/invincible_logo.png" alt="" class="img-responsive img-team-logo"/>
                 <hr>
             </div>
             <div class="col-md-3 flt">
-                <h4>Targaryens</h4>
+                <!--<h4>Targaryens</h4>-->
                 <img src="../../content/images/team_logo/targaryens.jpg" alt="" class="img-responsive img-team-logo"/>
                 <hr>
             </div>
             <div class="col-md-3 flt">
-                <h4>Innocent Killers</h4>
+                <!--<h4>Innocent Killers</h4>-->
                 <img src="../../content/images/team_logo/Sneha_Avinash Team logo.png" alt="" class="img-responsive img-team-logo"/>
                 <hr>
             </div>
