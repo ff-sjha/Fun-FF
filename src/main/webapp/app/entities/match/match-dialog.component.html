@@ -29,7 +29,7 @@
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.match.tournament" for="field_tournament">Tournament</label>
-            <select class="form-control" id="field_tournament" name="tournament" [(ngModel)]="match.tournamentId" >
+            <select class="form-control" id="field_tournament" name="tournament" [(ngModel)]="match.tournamentId" required>
                 <option [ngValue]="null"></option>
                 <option [ngValue]="tournamentOption.id" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.name}}</option>
             </select>

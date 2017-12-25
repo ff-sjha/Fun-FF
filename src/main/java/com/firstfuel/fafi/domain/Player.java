@@ -8,6 +8,7 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 import com.firstfuel.fafi.domain.enumeration.Games;
 
@@ -35,9 +36,10 @@ public class Player implements Serializable {
     @Column(name = "bid_price")
     private Double bidPrice;
 
+    @ElementCollection
     @Enumerated(EnumType.STRING)
     @Column(name = "opted_games")
-    private Games optedGames;
+    private Set<Games> optedGames;
 
     @ManyToOne
     private Franchise franchise;
@@ -90,16 +92,16 @@ public class Player implements Serializable {
         this.bidPrice = bidPrice;
     }
 
-    public Games getOptedGames() {
+    public Set<Games> getOptedGames() {
         return optedGames;
     }
 
-    public Player optedGames(Games optedGames) {
+    public Player optedGames(Set<Games> optedGames) {
         this.optedGames = optedGames;
         return this;
     }
 
-    public void setOptedGames(Games optedGames) {
+    public void setOptedGames(Set<Games> optedGames) {
         this.optedGames = optedGames;
     }
 

@@ -15,8 +15,9 @@ export class Player implements BaseEntity {
         public name?: string,
         public basePrice?: number,
         public bidPrice?: number,
-        public optedGames?: Games,
+        public optedGames?: Games[],
         public franchiseId?: number,
+        public franchiseName?: string,
     ) {
     }
 }

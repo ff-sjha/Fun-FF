@@ -88,9 +88,9 @@ public class PlayerQueryService extends QueryService<Player> {
             if (criteria.getBidPrice() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getBidPrice(), Player_.bidPrice));
             }
-            if (criteria.getOptedGames() != null) {
+            /*if (criteria.getOptedGames() != null) {
                 specification = specification.and(buildSpecification(criteria.getOptedGames(), Player_.optedGames));
-            }
+            }*/
             if (criteria.getFranchiseId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getFranchiseId(), Player_.franchise, Franchise_.id));
             }

@@ -6,12 +6,14 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
 import com.firstfuel.fafi.domain.enumeration.Games;
 
 /**
  * A DTO for the Player entity.
  */
-public class PlayerDTO implements Serializable {
+public class PlayerDTO
+    implements Serializable {
 
     private Long id;
 
@@ -22,7 +24,7 @@ public class PlayerDTO implements Serializable {
 
     private Double bidPrice;
 
-    private Games optedGames;
+    private Set<Games> optedGames;
 
     private Long franchiseId;
 
@@ -32,7 +34,7 @@ public class PlayerDTO implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId( Long id ) {
         this.id = id;
     }
 
@@ -40,7 +42,7 @@ public class PlayerDTO implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName( String name ) {
         this.name = name;
     }
 
@@ -48,7 +50,7 @@ public class PlayerDTO implements Serializable {
         return basePrice;
     }
 
-    public void setBasePrice(Double basePrice) {
+    public void setBasePrice( Double basePrice ) {
         this.basePrice = basePrice;
     }
 
@@ -56,15 +58,15 @@ public class PlayerDTO implements Serializable {
         return bidPrice;
     }
 
-    public void setBidPrice(Double bidPrice) {
+    public void setBidPrice( Double bidPrice ) {
         this.bidPrice = bidPrice;
     }
 
-    public Games getOptedGames() {
+    public Set<Games> getOptedGames() {
         return optedGames;
     }
 
-    public void setOptedGames(Games optedGames) {
+    public void setOptedGames( Set<Games> optedGames ) {
         this.optedGames = optedGames;
     }
 
@@ -72,7 +74,7 @@ public class PlayerDTO implements Serializable {
         return franchiseId;
     }
 
-    public void setFranchiseId(Long franchiseId) {
+    public void setFranchiseId( Long franchiseId ) {
         this.franchiseId = franchiseId;
     }
 
@@ -85,34 +87,29 @@ public class PlayerDTO implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals( Object o ) {
+        if ( this == o ) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if ( o == null || getClass() != o.getClass() ) {
             return false;
         }
 
-        PlayerDTO playerDTO = (PlayerDTO) o;
-        if(playerDTO.getId() == null || getId() == null) {
+        PlayerDTO playerDTO = (PlayerDTO)o;
+        if ( playerDTO.getId() == null || getId() == null ) {
             return false;
         }
-        return Objects.equals(getId(), playerDTO.getId());
+        return Objects.equals( getId(), playerDTO.getId() );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return Objects.hashCode( getId() );
     }
 
     @Override
     public String toString() {
-        return "PlayerDTO{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", basePrice=" + getBasePrice() +
-            ", bidPrice=" + getBidPrice() +
-            ", optedGames='" + getOptedGames() + "'" +
-            "}";
+        return "PlayerDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", basePrice=" + getBasePrice() + ", bidPrice=" + getBidPrice() + ", optedGames='" + getOptedGames()
+            + "'" + "}";
     }
 }

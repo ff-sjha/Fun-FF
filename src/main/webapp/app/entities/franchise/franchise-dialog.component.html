@@ -31,7 +31,7 @@
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.franchise.season" for="field_season">Season</label>
-            <select class="form-control" id="field_season" name="season" [(ngModel)]="franchise.seasonId" >
+            <select class="form-control" id="field_season" name="season" [(ngModel)]="franchise.seasonId" required>
                 <option [ngValue]="null"></option>
                 <option *ngFor="let seasonOption of seasons; trackBy: trackSeasonById" [ngValue]="seasonOption.id">{{seasonOption.name}}</option>
             </select>

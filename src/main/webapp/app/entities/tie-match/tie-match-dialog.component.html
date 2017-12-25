@@ -15,7 +15,7 @@
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.tieMatch.match" for="field_match">Match</label>
-            <select class="form-control" id="field_match" name="match" [(ngModel)]="tieMatch.matchId" >
+            <select class="form-control" id="field_match" name="match" [(ngModel)]="tieMatch.matchId" required>
                 <option [ngValue]="null"></option>
                 <option [ngValue]="matchOption.id" *ngFor="let matchOption of matches; trackBy: trackMatchById">{{matchOption.id}}</option>
             </select>

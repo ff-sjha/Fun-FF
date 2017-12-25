@@ -18,12 +18,14 @@
         </dd>
         <dt><span jhiTranslate="fafiApp.player.optedGames">Opted Games</span></dt>
         <dd>
-            <span jhiTranslate="{{'fafiApp.Games.' + player.optedGames}}">{{player.optedGames}}</span>
+            <div *ngFor="let game of player.optedGames">
+                <span  jhiTranslate="{{'fafiApp.Games.' + game}}">{{game}}</span>
+            </div>
         </dd>
         <dt><span jhiTranslate="fafiApp.player.franchise">Franchise</span></dt>
         <dd>
             <div *ngIf="player.franchiseId">
-                <a [routerLink]="['/franchise', player.franchiseId]">{{player.franchiseId}}</a>
+                <a [routerLink]="['/franchise', player.franchiseId]">{{player.franchiseName}}</a>
             </div>
         </dd>
     </dl>

@@ -21,4 +21,5 @@
     <include file="config/liquibase/changelog/20171220185648_added_entity_constraints_TieMatch.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171220183725_added_entity_constraints_TieTeam.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/fafi_modify_entities.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

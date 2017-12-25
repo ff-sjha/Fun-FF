@@ -35,7 +35,7 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.player.optedGames" for="field_optedGames">Opted Games</label>
-            <select class="form-control" name="optedGames" [(ngModel)]="player.optedGames" id="field_optedGames" >
+            <select multiple class="form-control" name="optedGames" [(ngModel)]="player.optedGames" id="field_optedGames" >
                 <option value="Football">{{'fafiApp.Games.Football' | translate}}</option>
                 <option value="Chess">{{'fafiApp.Games.Chess' | translate}}</option>
                 <option value="Badminton">{{'fafiApp.Games.Badminton' | translate}}</option>
@@ -47,7 +47,7 @@
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.player.franchise" for="field_franchise">Franchise</label>
-            <select class="form-control" id="field_franchise" name="franchise" [(ngModel)]="player.franchiseId" >
+            <select class="form-control" id="field_franchise" name="franchise" [(ngModel)]="player.franchiseId" required>
                 <option [ngValue]="null"></option>
                 <option [ngValue]="franchiseOption.id" *ngFor="let franchiseOption of franchises; trackBy: trackFranchiseById">{{franchiseOption.name}}</option>
             </select>

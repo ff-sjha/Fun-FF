@@ -31,7 +31,11 @@
                 <td>{{player.name}}</td>
                 <td>{{player.basePrice}}</td>
                 <td>{{player.bidPrice}}</td>
-                <td jhiTranslate="{{'fafiApp.Games.' + player.optedGames}}">{{player.optedGames}}</td>
+                <td>
+                    <div *ngFor="let game of player.optedGames">
+                        <span  jhiTranslate="{{'fafiApp.Games.' + game}}">{{game}}</span>
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="player.franchiseId">
                         <a [routerLink]="['../franchise', player.franchiseId  ]" >{{player.franchiseName}}</a>
