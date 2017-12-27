@@ -35,6 +35,10 @@ public class Player implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @NotNull
+    @Column(name = "active", nullable = false)
+    private Boolean active;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -82,6 +86,19 @@ public class Player implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Boolean isActive() {
+        return active;
+    }
+
+    public Player active(Boolean active) {
+        this.active = active;
+        return this;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -111,6 +128,7 @@ public class Player implements Serializable {
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", email='" + getEmail() + "'" +
+            ", active='" + isActive() + "'" +
             "}";
     }
 }

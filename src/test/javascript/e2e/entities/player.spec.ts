@@ -37,6 +37,15 @@ describe('Player e2e test', () => {
         expect(playerDialogPage.getLastNameInput()).toMatch('lastName');
         playerDialogPage.setEmailInput('email');
         expect(playerDialogPage.getEmailInput()).toMatch('email');
+        playerDialogPage.getActiveInput().isSelected().then((selected) => {
+            if (selected) {
+                playerDialogPage.getActiveInput().click();
+                expect(playerDialogPage.getActiveInput().isSelected()).toBeFalsy();
+            } else {
+                playerDialogPage.getActiveInput().click();
+                expect(playerDialogPage.getActiveInput().isSelected()).toBeTruthy();
+            }
+        });
         playerDialogPage.save();
         expect(playerDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -66,6 +75,7 @@ export class PlayerDialogPage {
     firstNameInput = element(by.css('input#field_firstName'));
     lastNameInput = element(by.css('input#field_lastName'));
     emailInput = element(by.css('input#field_email'));
+    activeInput = element(by.css('input#field_active'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -95,6 +105,9 @@ export class PlayerDialogPage {
         return this.emailInput.getAttribute('value');
     }
 
+    getActiveInput = function() {
+        return this.activeInput;
+    }
     save() {
         this.saveButton.click();
     }

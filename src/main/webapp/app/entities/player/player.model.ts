@@ -6,6 +6,8 @@ export class Player implements BaseEntity {
         public firstName?: string,
         public lastName?: string,
         public email?: string,
+        public active?: boolean,
     ) {
+        this.active = false;
     }
 }

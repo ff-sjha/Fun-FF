@@ -21,6 +21,9 @@ public class PlayerDTO implements Serializable {
     @NotNull
     private String email;
 
+    @NotNull
+    private Boolean active;
+
     public Long getId() {
         return id;
     }
@@ -53,6 +56,14 @@ public class PlayerDTO implements Serializable {
         this.email = email;
     }
 
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -81,6 +92,7 @@ public class PlayerDTO implements Serializable {
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", email='" + getEmail() + "'" +
+            ", active='" + isActive() + "'" +
             "}";
     }
 }

@@ -52,6 +52,9 @@ public class PlayerResourceIntTest {
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_ACTIVE = false;
+    private static final Boolean UPDATED_ACTIVE = true;
+
     @Autowired
     private PlayerRepository playerRepository;
 
@@ -101,7 +104,8 @@ public class PlayerResourceIntTest {
         Player player = new Player()
             .firstName(DEFAULT_FIRST_NAME)
             .lastName(DEFAULT_LAST_NAME)
-            .email(DEFAULT_EMAIL);
+            .email(DEFAULT_EMAIL)
+            .active(DEFAULT_ACTIVE);
         return player;
     }
 
@@ -129,6 +133,7 @@ public class PlayerResourceIntTest {
         assertThat(testPlayer.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testPlayer.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
         assertThat(testPlayer.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testPlayer.isActive()).isEqualTo(DEFAULT_ACTIVE);
     }
 
     @Test
@@ -210,6 +215,25 @@ public class PlayerResourceIntTest {
 
     @Test
     @Transactional
+    public void checkActiveIsRequired() throws Exception {
+        int databaseSizeBeforeTest = playerRepository.findAll().size();
+        // set the field null
+        player.setActive(null);
+
+        // Create the Player, which fails.
+        PlayerDTO playerDTO = playerMapper.toDto(player);
+
+        restPlayerMockMvc.perform(post("/api/players")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(playerDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Player> playerList = playerRepository.findAll();
+        assertThat(playerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPlayers() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
@@ -221,7 +245,8 @@ public class PlayerResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(player.getId().intValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
 
     @Test
@@ -237,7 +262,8 @@ public class PlayerResourceIntTest {
             .andExpect(jsonPath("$.id").value(player.getId().intValue()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()));
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
+            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()));
     }
 
     @Test
@@ -356,6 +382,45 @@ public class PlayerResourceIntTest {
         // Get all the playerList where email is null
         defaultPlayerShouldNotBeFound("email.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllPlayersByActiveIsEqualToSomething() throws Exception {
+        // Initialize the database
+        playerRepository.saveAndFlush(player);
+
+        // Get all the playerList where active equals to DEFAULT_ACTIVE
+        defaultPlayerShouldBeFound("active.equals=" + DEFAULT_ACTIVE);
+
+        // Get all the playerList where active equals to UPDATED_ACTIVE
+        defaultPlayerShouldNotBeFound("active.equals=" + UPDATED_ACTIVE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPlayersByActiveIsInShouldWork() throws Exception {
+        // Initialize the database
+        playerRepository.saveAndFlush(player);
+
+        // Get all the playerList where active in DEFAULT_ACTIVE or UPDATED_ACTIVE
+        defaultPlayerShouldBeFound("active.in=" + DEFAULT_ACTIVE + "," + UPDATED_ACTIVE);
+
+        // Get all the playerList where active equals to UPDATED_ACTIVE
+        defaultPlayerShouldNotBeFound("active.in=" + UPDATED_ACTIVE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPlayersByActiveIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        playerRepository.saveAndFlush(player);
+
+        // Get all the playerList where active is not null
+        defaultPlayerShouldBeFound("active.specified=true");
+
+        // Get all the playerList where active is null
+        defaultPlayerShouldNotBeFound("active.specified=false");
+    }
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -366,7 +431,8 @@ public class PlayerResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(player.getId().intValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
 
     /**
@@ -403,7 +469,8 @@ public class PlayerResourceIntTest {
         updatedPlayer
             .firstName(UPDATED_FIRST_NAME)
             .lastName(UPDATED_LAST_NAME)
-            .email(UPDATED_EMAIL);
+            .email(UPDATED_EMAIL)
+            .active(UPDATED_ACTIVE);
         PlayerDTO playerDTO = playerMapper.toDto(updatedPlayer);
 
         restPlayerMockMvc.perform(put("/api/players")
@@ -418,6 +485,7 @@ public class PlayerResourceIntTest {
         assertThat(testPlayer.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testPlayer.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testPlayer.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testPlayer.isActive()).isEqualTo(UPDATED_ACTIVE);
     }
 
     @Test

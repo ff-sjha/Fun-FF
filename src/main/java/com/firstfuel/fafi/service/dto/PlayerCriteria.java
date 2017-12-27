@@ -34,6 +34,8 @@ public class PlayerCriteria implements Serializable {
 
     private StringFilter email;
 
+    private BooleanFilter active;
+
     public PlayerCriteria() {
     }
 
@@ -69,6 +71,14 @@ public class PlayerCriteria implements Serializable {
         this.email = email;
     }
 
+    public BooleanFilter getActive() {
+        return active;
+    }
+
+    public void setActive(BooleanFilter active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "PlayerCriteria{" +
@@ -76,6 +86,7 @@ public class PlayerCriteria implements Serializable {
                 (firstName != null ? "firstName=" + firstName + ", " : "") +
                 (lastName != null ? "lastName=" + lastName + ", " : "") +
                 (email != null ? "email=" + email + ", " : "") +
+                (active != null ? "active=" + active + ", " : "") +
             "}";
     }
 

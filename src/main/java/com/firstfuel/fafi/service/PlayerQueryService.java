@@ -87,6 +87,9 @@ public class PlayerQueryService extends QueryService<Player> {
             if (criteria.getEmail() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getEmail(), Player_.email));
             }
+            if (criteria.getActive() != null) {
+                specification = specification.and(buildSpecification(criteria.getActive(), Player_.active));
+            }
         }
         return specification;
     }
