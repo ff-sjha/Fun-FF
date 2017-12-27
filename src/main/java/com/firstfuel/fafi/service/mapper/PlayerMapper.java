@@ -8,15 +8,12 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Player and its DTO PlayerDTO.
  */
-@Mapper(componentModel = "spring", uses = {FranchiseMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface PlayerMapper extends EntityMapper<PlayerDTO, Player> {
 
-    @Mapping(source = "franchise.id", target = "franchiseId")
-    @Mapping(source = "franchise.name", target = "franchiseName")
-    PlayerDTO toDto(Player player);
+    
 
-    @Mapping(source = "franchiseId", target = "franchise")
-    Player toEntity(PlayerDTO playerDTO);
+    
 
     default Player fromId(Long id) {
         if (id == null) {

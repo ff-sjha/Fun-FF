@@ -4,13 +4,11 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 
 import { Player } from './player.model';
 import { PlayerPopupService } from './player-popup.service';
 import { PlayerService } from './player.service';
-import { Franchise, FranchiseService } from '../franchise';
-import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'fafi-player-dialog',
@@ -21,21 +19,15 @@ export class PlayerDialogComponent implements OnInit {
     player: Player;
     isSaving: boolean;
 
-    franchises: Franchise[];
-
     constructor(
         public activeModal: NgbActiveModal,
-        private jhiAlertService: JhiAlertService,
         private playerService: PlayerService,
-        private franchiseService: FranchiseService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.franchiseService.query()
-            .subscribe((res: ResponseWrapper) => { this.franchises = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -66,14 +58,6 @@ export class PlayerDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
-    }
-
-    private onError(error: any) {
-        this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackFranchiseById(index: number, item: Franchise) {
-        return item.id;
     }
 }
 

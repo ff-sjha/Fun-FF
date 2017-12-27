@@ -3,7 +3,6 @@ package com.firstfuel.fafi.web.rest;
 import com.firstfuel.fafi.FafiApp;
 
 import com.firstfuel.fafi.domain.Player;
-import com.firstfuel.fafi.domain.Franchise;
 import com.firstfuel.fafi.repository.PlayerRepository;
 import com.firstfuel.fafi.service.PlayerService;
 import com.firstfuel.fafi.service.dto.PlayerDTO;
@@ -35,7 +34,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.firstfuel.fafi.domain.enumeration.Games;
 /**
  * Test class for the PlayerResource REST controller.
  *
@@ -45,17 +43,14 @@ import com.firstfuel.fafi.domain.enumeration.Games;
 @SpringBootTest(classes = FafiApp.class)
 public class PlayerResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_FIRST_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_FIRST_NAME = "BBBBBBBBBB";
 
-    private static final Double DEFAULT_BASE_PRICE = 1D;
-    private static final Double UPDATED_BASE_PRICE = 2D;
+    private static final String DEFAULT_LAST_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_NAME = "BBBBBBBBBB";
 
-    private static final Double DEFAULT_BID_PRICE = 1D;
-    private static final Double UPDATED_BID_PRICE = 2D;
-
-    private static final Games DEFAULT_OPTED_GAMES = Games.Football;
-    private static final Games UPDATED_OPTED_GAMES = Games.Chess;
+    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
     @Autowired
     private PlayerRepository playerRepository;
@@ -104,10 +99,9 @@ public class PlayerResourceIntTest {
      */
     public static Player createEntity(EntityManager em) {
         Player player = new Player()
-            .name(DEFAULT_NAME)
-            .basePrice(DEFAULT_BASE_PRICE)
-            .bidPrice(DEFAULT_BID_PRICE)
-            .optedGames(DEFAULT_OPTED_GAMES);
+            .firstName(DEFAULT_FIRST_NAME)
+            .lastName(DEFAULT_LAST_NAME)
+            .email(DEFAULT_EMAIL);
         return player;
     }
 
@@ -132,10 +126,9 @@ public class PlayerResourceIntTest {
         List<Player> playerList = playerRepository.findAll();
         assertThat(playerList).hasSize(databaseSizeBeforeCreate + 1);
         Player testPlayer = playerList.get(playerList.size() - 1);
-        assertThat(testPlayer.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testPlayer.getBasePrice()).isEqualTo(DEFAULT_BASE_PRICE);
-        assertThat(testPlayer.getBidPrice()).isEqualTo(DEFAULT_BID_PRICE);
-        assertThat(testPlayer.getOptedGames()).isEqualTo(DEFAULT_OPTED_GAMES);
+        assertThat(testPlayer.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
+        assertThat(testPlayer.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
+        assertThat(testPlayer.getEmail()).isEqualTo(DEFAULT_EMAIL);
     }
 
     @Test
@@ -160,10 +153,48 @@ public class PlayerResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
+    public void checkFirstNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = playerRepository.findAll().size();
         // set the field null
-        player.setName(null);
+        player.setFirstName(null);
+
+        // Create the Player, which fails.
+        PlayerDTO playerDTO = playerMapper.toDto(player);
+
+        restPlayerMockMvc.perform(post("/api/players")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(playerDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Player> playerList = playerRepository.findAll();
+        assertThat(playerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLastNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = playerRepository.findAll().size();
+        // set the field null
+        player.setLastName(null);
+
+        // Create the Player, which fails.
+        PlayerDTO playerDTO = playerMapper.toDto(player);
+
+        restPlayerMockMvc.perform(post("/api/players")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(playerDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Player> playerList = playerRepository.findAll();
+        assertThat(playerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkEmailIsRequired() throws Exception {
+        int databaseSizeBeforeTest = playerRepository.findAll().size();
+        // set the field null
+        player.setEmail(null);
 
         // Create the Player, which fails.
         PlayerDTO playerDTO = playerMapper.toDto(player);
@@ -188,10 +219,9 @@ public class PlayerResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(player.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].basePrice").value(hasItem(DEFAULT_BASE_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].bidPrice").value(hasItem(DEFAULT_BID_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].optedGames").value(hasItem(DEFAULT_OPTED_GAMES.toString())));
+            .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
+            .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
     }
 
     @Test
@@ -205,186 +235,127 @@ public class PlayerResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(player.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.basePrice").value(DEFAULT_BASE_PRICE.doubleValue()))
-            .andExpect(jsonPath("$.bidPrice").value(DEFAULT_BID_PRICE.doubleValue()))
-            .andExpect(jsonPath("$.optedGames").value(DEFAULT_OPTED_GAMES.toString()));
+            .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
+            .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()));
     }
 
     @Test
     @Transactional
-    public void getAllPlayersByNameIsEqualToSomething() throws Exception {
+    public void getAllPlayersByFirstNameIsEqualToSomething() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
 
-        // Get all the playerList where name equals to DEFAULT_NAME
-        defaultPlayerShouldBeFound("name.equals=" + DEFAULT_NAME);
+        // Get all the playerList where firstName equals to DEFAULT_FIRST_NAME
+        defaultPlayerShouldBeFound("firstName.equals=" + DEFAULT_FIRST_NAME);
 
-        // Get all the playerList where name equals to UPDATED_NAME
-        defaultPlayerShouldNotBeFound("name.equals=" + UPDATED_NAME);
+        // Get all the playerList where firstName equals to UPDATED_FIRST_NAME
+        defaultPlayerShouldNotBeFound("firstName.equals=" + UPDATED_FIRST_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPlayersByNameIsInShouldWork() throws Exception {
+    public void getAllPlayersByFirstNameIsInShouldWork() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
 
-        // Get all the playerList where name in DEFAULT_NAME or UPDATED_NAME
-        defaultPlayerShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+        // Get all the playerList where firstName in DEFAULT_FIRST_NAME or UPDATED_FIRST_NAME
+        defaultPlayerShouldBeFound("firstName.in=" + DEFAULT_FIRST_NAME + "," + UPDATED_FIRST_NAME);
 
-        // Get all the playerList where name equals to UPDATED_NAME
-        defaultPlayerShouldNotBeFound("name.in=" + UPDATED_NAME);
+        // Get all the playerList where firstName equals to UPDATED_FIRST_NAME
+        defaultPlayerShouldNotBeFound("firstName.in=" + UPDATED_FIRST_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPlayersByNameIsNullOrNotNull() throws Exception {
+    public void getAllPlayersByFirstNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
 
-        // Get all the playerList where name is not null
-        defaultPlayerShouldBeFound("name.specified=true");
+        // Get all the playerList where firstName is not null
+        defaultPlayerShouldBeFound("firstName.specified=true");
 
-        // Get all the playerList where name is null
-        defaultPlayerShouldNotBeFound("name.specified=false");
+        // Get all the playerList where firstName is null
+        defaultPlayerShouldNotBeFound("firstName.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllPlayersByBasePriceIsEqualToSomething() throws Exception {
+    public void getAllPlayersByLastNameIsEqualToSomething() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
 
-        // Get all the playerList where basePrice equals to DEFAULT_BASE_PRICE
-        defaultPlayerShouldBeFound("basePrice.equals=" + DEFAULT_BASE_PRICE);
+        // Get all the playerList where lastName equals to DEFAULT_LAST_NAME
+        defaultPlayerShouldBeFound("lastName.equals=" + DEFAULT_LAST_NAME);
 
-        // Get all the playerList where basePrice equals to UPDATED_BASE_PRICE
-        defaultPlayerShouldNotBeFound("basePrice.equals=" + UPDATED_BASE_PRICE);
+        // Get all the playerList where lastName equals to UPDATED_LAST_NAME
+        defaultPlayerShouldNotBeFound("lastName.equals=" + UPDATED_LAST_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPlayersByBasePriceIsInShouldWork() throws Exception {
+    public void getAllPlayersByLastNameIsInShouldWork() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
 
-        // Get all the playerList where basePrice in DEFAULT_BASE_PRICE or UPDATED_BASE_PRICE
-        defaultPlayerShouldBeFound("basePrice.in=" + DEFAULT_BASE_PRICE + "," + UPDATED_BASE_PRICE);
+        // Get all the playerList where lastName in DEFAULT_LAST_NAME or UPDATED_LAST_NAME
+        defaultPlayerShouldBeFound("lastName.in=" + DEFAULT_LAST_NAME + "," + UPDATED_LAST_NAME);
 
-        // Get all the playerList where basePrice equals to UPDATED_BASE_PRICE
-        defaultPlayerShouldNotBeFound("basePrice.in=" + UPDATED_BASE_PRICE);
+        // Get all the playerList where lastName equals to UPDATED_LAST_NAME
+        defaultPlayerShouldNotBeFound("lastName.in=" + UPDATED_LAST_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPlayersByBasePriceIsNullOrNotNull() throws Exception {
+    public void getAllPlayersByLastNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
 
-        // Get all the playerList where basePrice is not null
-        defaultPlayerShouldBeFound("basePrice.specified=true");
+        // Get all the playerList where lastName is not null
+        defaultPlayerShouldBeFound("lastName.specified=true");
 
-        // Get all the playerList where basePrice is null
-        defaultPlayerShouldNotBeFound("basePrice.specified=false");
+        // Get all the playerList where lastName is null
+        defaultPlayerShouldNotBeFound("lastName.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllPlayersByBidPriceIsEqualToSomething() throws Exception {
+    public void getAllPlayersByEmailIsEqualToSomething() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
 
-        // Get all the playerList where bidPrice equals to DEFAULT_BID_PRICE
-        defaultPlayerShouldBeFound("bidPrice.equals=" + DEFAULT_BID_PRICE);
+        // Get all the playerList where email equals to DEFAULT_EMAIL
+        defaultPlayerShouldBeFound("email.equals=" + DEFAULT_EMAIL);
 
-        // Get all the playerList where bidPrice equals to UPDATED_BID_PRICE
-        defaultPlayerShouldNotBeFound("bidPrice.equals=" + UPDATED_BID_PRICE);
+        // Get all the playerList where email equals to UPDATED_EMAIL
+        defaultPlayerShouldNotBeFound("email.equals=" + UPDATED_EMAIL);
     }
 
     @Test
     @Transactional
-    public void getAllPlayersByBidPriceIsInShouldWork() throws Exception {
+    public void getAllPlayersByEmailIsInShouldWork() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
 
-        // Get all the playerList where bidPrice in DEFAULT_BID_PRICE or UPDATED_BID_PRICE
-        defaultPlayerShouldBeFound("bidPrice.in=" + DEFAULT_BID_PRICE + "," + UPDATED_BID_PRICE);
+        // Get all the playerList where email in DEFAULT_EMAIL or UPDATED_EMAIL
+        defaultPlayerShouldBeFound("email.in=" + DEFAULT_EMAIL + "," + UPDATED_EMAIL);
 
-        // Get all the playerList where bidPrice equals to UPDATED_BID_PRICE
-        defaultPlayerShouldNotBeFound("bidPrice.in=" + UPDATED_BID_PRICE);
+        // Get all the playerList where email equals to UPDATED_EMAIL
+        defaultPlayerShouldNotBeFound("email.in=" + UPDATED_EMAIL);
     }
 
     @Test
     @Transactional
-    public void getAllPlayersByBidPriceIsNullOrNotNull() throws Exception {
+    public void getAllPlayersByEmailIsNullOrNotNull() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
 
-        // Get all the playerList where bidPrice is not null
-        defaultPlayerShouldBeFound("bidPrice.specified=true");
+        // Get all the playerList where email is not null
+        defaultPlayerShouldBeFound("email.specified=true");
 
-        // Get all the playerList where bidPrice is null
-        defaultPlayerShouldNotBeFound("bidPrice.specified=false");
+        // Get all the playerList where email is null
+        defaultPlayerShouldNotBeFound("email.specified=false");
     }
-
-    @Test
-    @Transactional
-    public void getAllPlayersByOptedGamesIsEqualToSomething() throws Exception {
-        // Initialize the database
-        playerRepository.saveAndFlush(player);
-
-        // Get all the playerList where optedGames equals to DEFAULT_OPTED_GAMES
-        defaultPlayerShouldBeFound("optedGames.equals=" + DEFAULT_OPTED_GAMES);
-
-        // Get all the playerList where optedGames equals to UPDATED_OPTED_GAMES
-        defaultPlayerShouldNotBeFound("optedGames.equals=" + UPDATED_OPTED_GAMES);
-    }
-
-    @Test
-    @Transactional
-    public void getAllPlayersByOptedGamesIsInShouldWork() throws Exception {
-        // Initialize the database
-        playerRepository.saveAndFlush(player);
-
-        // Get all the playerList where optedGames in DEFAULT_OPTED_GAMES or UPDATED_OPTED_GAMES
-        defaultPlayerShouldBeFound("optedGames.in=" + DEFAULT_OPTED_GAMES + "," + UPDATED_OPTED_GAMES);
-
-        // Get all the playerList where optedGames equals to UPDATED_OPTED_GAMES
-        defaultPlayerShouldNotBeFound("optedGames.in=" + UPDATED_OPTED_GAMES);
-    }
-
-    @Test
-    @Transactional
-    public void getAllPlayersByOptedGamesIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        playerRepository.saveAndFlush(player);
-
-        // Get all the playerList where optedGames is not null
-        defaultPlayerShouldBeFound("optedGames.specified=true");
-
-        // Get all the playerList where optedGames is null
-        defaultPlayerShouldNotBeFound("optedGames.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllPlayersByFranchiseIsEqualToSomething() throws Exception {
-        // Initialize the database
-        Franchise franchise = FranchiseResourceIntTest.createEntity(em);
-        em.persist(franchise);
-        em.flush();
-        player.setFranchise(franchise);
-        playerRepository.saveAndFlush(player);
-        Long franchiseId = franchise.getId();
-
-        // Get all the playerList where franchise equals to franchiseId
-        defaultPlayerShouldBeFound("franchiseId.equals=" + franchiseId);
-
-        // Get all the playerList where franchise equals to franchiseId + 1
-        defaultPlayerShouldNotBeFound("franchiseId.equals=" + (franchiseId + 1));
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -393,10 +364,9 @@ public class PlayerResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(player.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].basePrice").value(hasItem(DEFAULT_BASE_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].bidPrice").value(hasItem(DEFAULT_BID_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].optedGames").value(hasItem(DEFAULT_OPTED_GAMES.toString())));
+            .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
+            .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
     }
 
     /**
@@ -431,10 +401,9 @@ public class PlayerResourceIntTest {
         // Disconnect from session so that the updates on updatedPlayer are not directly saved in db
         em.detach(updatedPlayer);
         updatedPlayer
-            .name(UPDATED_NAME)
-            .basePrice(UPDATED_BASE_PRICE)
-            .bidPrice(UPDATED_BID_PRICE)
-            .optedGames(UPDATED_OPTED_GAMES);
+            .firstName(UPDATED_FIRST_NAME)
+            .lastName(UPDATED_LAST_NAME)
+            .email(UPDATED_EMAIL);
         PlayerDTO playerDTO = playerMapper.toDto(updatedPlayer);
 
         restPlayerMockMvc.perform(put("/api/players")
@@ -446,10 +415,9 @@ public class PlayerResourceIntTest {
         List<Player> playerList = playerRepository.findAll();
         assertThat(playerList).hasSize(databaseSizeBeforeUpdate);
         Player testPlayer = playerList.get(playerList.size() - 1);
-        assertThat(testPlayer.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testPlayer.getBasePrice()).isEqualTo(UPDATED_BASE_PRICE);
-        assertThat(testPlayer.getBidPrice()).isEqualTo(UPDATED_BID_PRICE);
-        assertThat(testPlayer.getOptedGames()).isEqualTo(UPDATED_OPTED_GAMES);
+        assertThat(testPlayer.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
+        assertThat(testPlayer.getLastName()).isEqualTo(UPDATED_LAST_NAME);
+        assertThat(testPlayer.getEmail()).isEqualTo(UPDATED_EMAIL);
     }
 
     @Test

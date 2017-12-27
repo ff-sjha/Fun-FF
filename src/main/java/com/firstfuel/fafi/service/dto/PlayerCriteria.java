@@ -1,7 +1,6 @@
 package com.firstfuel.fafi.service.dto;
 
 import java.io.Serializable;
-import com.firstfuel.fafi.domain.enumeration.Games;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -24,26 +23,16 @@ import io.github.jhipster.service.filter.StringFilter;
  * fix type specific filters.
  */
 public class PlayerCriteria implements Serializable {
-    /**
-     * Class for filtering Games
-     */
-    public static class GamesFilter extends Filter<Games> {
-    }
-
     private static final long serialVersionUID = 1L;
 
 
     private LongFilter id;
 
-    private StringFilter name;
+    private StringFilter firstName;
 
-    private DoubleFilter basePrice;
+    private StringFilter lastName;
 
-    private DoubleFilter bidPrice;
-
-    private GamesFilter optedGames;
-
-    private LongFilter franchiseId;
+    private StringFilter email;
 
     public PlayerCriteria() {
     }
@@ -56,55 +45,37 @@ public class PlayerCriteria implements Serializable {
         this.id = id;
     }
 
-    public StringFilter getName() {
-        return name;
+    public StringFilter getFirstName() {
+        return firstName;
     }
 
-    public void setName(StringFilter name) {
-        this.name = name;
+    public void setFirstName(StringFilter firstName) {
+        this.firstName = firstName;
     }
 
-    public DoubleFilter getBasePrice() {
-        return basePrice;
+    public StringFilter getLastName() {
+        return lastName;
     }
 
-    public void setBasePrice(DoubleFilter basePrice) {
-        this.basePrice = basePrice;
+    public void setLastName(StringFilter lastName) {
+        this.lastName = lastName;
     }
 
-    public DoubleFilter getBidPrice() {
-        return bidPrice;
+    public StringFilter getEmail() {
+        return email;
     }
 
-    public void setBidPrice(DoubleFilter bidPrice) {
-        this.bidPrice = bidPrice;
-    }
-
-    public GamesFilter getOptedGames() {
-        return optedGames;
-    }
-
-    public void setOptedGames(GamesFilter optedGames) {
-        this.optedGames = optedGames;
-    }
-
-    public LongFilter getFranchiseId() {
-        return franchiseId;
-    }
-
-    public void setFranchiseId(LongFilter franchiseId) {
-        this.franchiseId = franchiseId;
+    public void setEmail(StringFilter email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
         return "PlayerCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (name != null ? "name=" + name + ", " : "") +
-                (basePrice != null ? "basePrice=" + basePrice + ", " : "") +
-                (bidPrice != null ? "bidPrice=" + bidPrice + ", " : "") +
-                (optedGames != null ? "optedGames=" + optedGames + ", " : "") +
-                (franchiseId != null ? "franchiseId=" + franchiseId + ", " : "") +
+                (firstName != null ? "firstName=" + firstName + ", " : "") +
+                (lastName != null ? "lastName=" + lastName + ", " : "") +
+                (email != null ? "email=" + email + ", " : "") +
             "}";
     }
 

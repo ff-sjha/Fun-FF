@@ -3,8 +3,6 @@ package com.firstfuel.fafi.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -19,17 +17,8 @@ public class FranchiseDTO implements Serializable {
 
     private String logoPath;
 
-    private Long seasonId;
-
-    private Long ownerId;
-
-    private Long iconPlayerId;
-
-    private String seasonName;
-
-    private String ownerName;
-
-    private String iconPlayerName;
+    @NotNull
+    private Boolean active;
 
     public Long getId() {
         return id;
@@ -55,52 +44,12 @@ public class FranchiseDTO implements Serializable {
         this.logoPath = logoPath;
     }
 
-    public Long getSeasonId() {
-        return seasonId;
+    public Boolean isActive() {
+        return active;
     }
 
-    public void setSeasonId(Long seasonId) {
-        this.seasonId = seasonId;
-    }
-
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long playerId) {
-        this.ownerId = playerId;
-    }
-
-    public Long getIconPlayerId() {
-        return iconPlayerId;
-    }
-
-    public void setIconPlayerId(Long playerId) {
-        this.iconPlayerId = playerId;
-    }
-
-    public String getSeasonName() {
-        return seasonName;
-    }
-
-    public void setSeasonName( String seasonName ) {
-        this.seasonName = seasonName;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName( String ownerName ) {
-        this.ownerName = ownerName;
-    }
-
-    public String getIconPlayerName() {
-        return iconPlayerName;
-    }
-
-    public void setIconPlayerName( String iconPlayerName ) {
-        this.iconPlayerName = iconPlayerName;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @Override
@@ -130,6 +79,7 @@ public class FranchiseDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", logoPath='" + getLogoPath() + "'" +
+            ", active='" + isActive() + "'" +
             "}";
     }
 }

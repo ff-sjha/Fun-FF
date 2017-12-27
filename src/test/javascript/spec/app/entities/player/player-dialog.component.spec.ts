@@ -8,7 +8,6 @@ import { FafiTestModule } from '../../../test.module';
 import { PlayerDialogComponent } from '../../../../../../main/webapp/app/entities/player/player-dialog.component';
 import { PlayerService } from '../../../../../../main/webapp/app/entities/player/player.service';
 import { Player } from '../../../../../../main/webapp/app/entities/player/player.model';
-import { FranchiseService } from '../../../../../../main/webapp/app/entities/franchise';
 
 describe('Component Tests', () => {
 
@@ -24,7 +23,6 @@ describe('Component Tests', () => {
                 imports: [FafiTestModule],
                 declarations: [PlayerDialogComponent],
                 providers: [
-                    FranchiseService,
                     PlayerService
                 ]
             })

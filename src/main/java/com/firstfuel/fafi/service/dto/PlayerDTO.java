@@ -3,113 +3,84 @@ package com.firstfuel.fafi.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import com.firstfuel.fafi.domain.enumeration.Games;
 
 /**
  * A DTO for the Player entity.
  */
-public class PlayerDTO
-    implements Serializable {
+public class PlayerDTO implements Serializable {
 
     private Long id;
 
     @NotNull
-    private String name;
+    private String firstName;
 
-    private Double basePrice;
+    @NotNull
+    private String lastName;
 
-    private Double bidPrice;
-
-    private Set<Games> optedGames;
-
-    private Long franchiseId;
-
-    private String franchiseName;
+    @NotNull
+    private String email;
 
     public Long getId() {
         return id;
     }
 
-    public void setId( Long id ) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName( String name ) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Double getBasePrice() {
-        return basePrice;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setBasePrice( Double basePrice ) {
-        this.basePrice = basePrice;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Double getBidPrice() {
-        return bidPrice;
+    public String getEmail() {
+        return email;
     }
 
-    public void setBidPrice( Double bidPrice ) {
-        this.bidPrice = bidPrice;
-    }
-
-    public Set<Games> getOptedGames() {
-        return optedGames;
-    }
-
-    public void setOptedGames( Set<Games> optedGames ) {
-        this.optedGames = optedGames;
-    }
-
-    public Long getFranchiseId() {
-        return franchiseId;
-    }
-
-    public void setFranchiseId( Long franchiseId ) {
-        this.franchiseId = franchiseId;
-    }
-
-    public String getFranchiseName() {
-        return franchiseName;
-    }
-
-    public void setFranchiseName( String franchiseName ) {
-        this.franchiseName = franchiseName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
-    public boolean equals( Object o ) {
-        if ( this == o ) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if ( o == null || getClass() != o.getClass() ) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        PlayerDTO playerDTO = (PlayerDTO)o;
-        if ( playerDTO.getId() == null || getId() == null ) {
+        PlayerDTO playerDTO = (PlayerDTO) o;
+        if(playerDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals( getId(), playerDTO.getId() );
+        return Objects.equals(getId(), playerDTO.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode( getId() );
+        return Objects.hashCode(getId());
     }
 
     @Override
     public String toString() {
-        return "PlayerDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", basePrice=" + getBasePrice() + ", bidPrice=" + getBidPrice() + ", optedGames='" + getOptedGames()
-            + "'" + "}";
+        return "PlayerDTO{" +
+            "id=" + getId() +
+            ", firstName='" + getFirstName() + "'" +
+            ", lastName='" + getLastName() + "'" +
+            ", email='" + getEmail() + "'" +
+            "}";
     }
 }

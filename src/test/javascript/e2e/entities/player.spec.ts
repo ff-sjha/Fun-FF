@@ -31,14 +31,12 @@ describe('Player e2e test', () => {
 
     it('should create and save Players', () => {
         playerComponentsPage.clickOnCreateButton();
-        playerDialogPage.setNameInput('name');
-        expect(playerDialogPage.getNameInput()).toMatch('name');
-        playerDialogPage.setBasePriceInput('5');
-        expect(playerDialogPage.getBasePriceInput()).toMatch('5');
-        playerDialogPage.setBidPriceInput('5');
-        expect(playerDialogPage.getBidPriceInput()).toMatch('5');
-        playerDialogPage.optedGamesSelectLastOption();
-        playerDialogPage.franchiseSelectLastOption();
+        playerDialogPage.setFirstNameInput('firstName');
+        expect(playerDialogPage.getFirstNameInput()).toMatch('firstName');
+        playerDialogPage.setLastNameInput('lastName');
+        expect(playerDialogPage.getLastNameInput()).toMatch('lastName');
+        playerDialogPage.setEmailInput('email');
+        expect(playerDialogPage.getEmailInput()).toMatch('email');
         playerDialogPage.save();
         expect(playerDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -65,65 +63,36 @@ export class PlayerDialogPage {
     modalTitle = element(by.css('h4#myPlayerLabel'));
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
-    nameInput = element(by.css('input#field_name'));
-    basePriceInput = element(by.css('input#field_basePrice'));
-    bidPriceInput = element(by.css('input#field_bidPrice'));
-    optedGamesSelect = element(by.css('select#field_optedGames'));
-    franchiseSelect = element(by.css('select#field_franchise'));
+    firstNameInput = element(by.css('input#field_firstName'));
+    lastNameInput = element(by.css('input#field_lastName'));
+    emailInput = element(by.css('input#field_email'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
 
-    setNameInput = function(name) {
-        this.nameInput.sendKeys(name);
+    setFirstNameInput = function(firstName) {
+        this.firstNameInput.sendKeys(firstName);
     }
 
-    getNameInput = function() {
-        return this.nameInput.getAttribute('value');
+    getFirstNameInput = function() {
+        return this.firstNameInput.getAttribute('value');
     }
 
-    setBasePriceInput = function(basePrice) {
-        this.basePriceInput.sendKeys(basePrice);
+    setLastNameInput = function(lastName) {
+        this.lastNameInput.sendKeys(lastName);
     }
 
-    getBasePriceInput = function() {
-        return this.basePriceInput.getAttribute('value');
+    getLastNameInput = function() {
+        return this.lastNameInput.getAttribute('value');
     }
 
-    setBidPriceInput = function(bidPrice) {
-        this.bidPriceInput.sendKeys(bidPrice);
+    setEmailInput = function(email) {
+        this.emailInput.sendKeys(email);
     }
 
-    getBidPriceInput = function() {
-        return this.bidPriceInput.getAttribute('value');
-    }
-
-    setOptedGamesSelect = function(optedGames) {
-        this.optedGamesSelect.sendKeys(optedGames);
-    }
-
-    getOptedGamesSelect = function() {
-        return this.optedGamesSelect.element(by.css('option:checked')).getText();
-    }
-
-    optedGamesSelectLastOption = function() {
-        this.optedGamesSelect.all(by.tagName('option')).last().click();
-    }
-    franchiseSelectLastOption = function() {
-        this.franchiseSelect.all(by.tagName('option')).last().click();
-    }
-
-    franchiseSelectOption = function(option) {
-        this.franchiseSelect.sendKeys(option);
-    }
-
-    getFranchiseSelect = function() {
-        return this.franchiseSelect;
-    }
-
-    getFranchiseSelectedOption = function() {
-        return this.franchiseSelect.element(by.css('option:checked')).getText();
+    getEmailInput = function() {
+        return this.emailInput.getAttribute('value');
     }
 
     save() {

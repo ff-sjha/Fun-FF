@@ -1,35 +1,6 @@
 {
     "fluentMethods": true,
-    "relationships": [
-        {
-            "relationshipName": "players",
-            "otherEntityName": "player",
-            "relationshipType": "one-to-many",
-            "otherEntityRelationshipName": "franchise"
-        },
-        {
-            "relationshipName": "season",
-            "otherEntityName": "season",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipName": "owner",
-            "otherEntityName": "player",
-            "relationshipType": "one-to-one",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "franchise"
-        },
-        {
-            "relationshipName": "iconPlayer",
-            "otherEntityName": "player",
-            "relationshipType": "one-to-one",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "franchise"
-        }
-    ],
+    "relationships": [],
     "fields": [
         {
             "fieldName": "name",
@@ -41,6 +12,13 @@
         {
             "fieldName": "logoPath",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20171218184447",

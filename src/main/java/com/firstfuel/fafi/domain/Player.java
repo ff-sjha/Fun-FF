@@ -8,9 +8,6 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.Set;
-
-import com.firstfuel.fafi.domain.enumeration.Games;
 
 /**
  * A Player.
@@ -27,22 +24,16 @@ public class Player implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(name = "base_price")
-    private Double basePrice;
+    @NotNull
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
-    @Column(name = "bid_price")
-    private Double bidPrice;
-
-    @ElementCollection
-    @Enumerated(EnumType.STRING)
-    @Column(name = "opted_games")
-    private Set<Games> optedGames;
-
-    @ManyToOne
-    private Franchise franchise;
+    @NotNull
+    @Column(name = "email", nullable = false)
+    private String email;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -53,69 +44,43 @@ public class Player implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public Player name(String name) {
-        this.name = name;
+    public Player firstName(String firstName) {
+        this.firstName = firstName;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Double getBasePrice() {
-        return basePrice;
+    public String getLastName() {
+        return lastName;
     }
 
-    public Player basePrice(Double basePrice) {
-        this.basePrice = basePrice;
+    public Player lastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 
-    public void setBasePrice(Double basePrice) {
-        this.basePrice = basePrice;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Double getBidPrice() {
-        return bidPrice;
+    public String getEmail() {
+        return email;
     }
 
-    public Player bidPrice(Double bidPrice) {
-        this.bidPrice = bidPrice;
+    public Player email(String email) {
+        this.email = email;
         return this;
     }
 
-    public void setBidPrice(Double bidPrice) {
-        this.bidPrice = bidPrice;
-    }
-
-    public Set<Games> getOptedGames() {
-        return optedGames;
-    }
-
-    public Player optedGames(Set<Games> optedGames) {
-        this.optedGames = optedGames;
-        return this;
-    }
-
-    public void setOptedGames(Set<Games> optedGames) {
-        this.optedGames = optedGames;
-    }
-
-    public Franchise getFranchise() {
-        return franchise;
-    }
-
-    public Player franchise(Franchise franchise) {
-        this.franchise = franchise;
-        return this;
-    }
-
-    public void setFranchise(Franchise franchise) {
-        this.franchise = franchise;
+    public void setEmail(String email) {
+        this.email = email;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -143,10 +108,9 @@ public class Player implements Serializable {
     public String toString() {
         return "Player{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", basePrice=" + getBasePrice() +
-            ", bidPrice=" + getBidPrice() +
-            ", optedGames='" + getOptedGames() + "'" +
+            ", firstName='" + getFirstName() + "'" +
+            ", lastName='" + getLastName() + "'" +
+            ", email='" + getEmail() + "'" +
             "}";
     }
 }

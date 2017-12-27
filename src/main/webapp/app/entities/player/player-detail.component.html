@@ -4,29 +4,17 @@
     <hr>
     <fafi-alert-error></fafi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="fafiApp.player.name">Name</span></dt>
+        <dt><span jhiTranslate="fafiApp.player.firstName">First Name</span></dt>
         <dd>
-            <span>{{player.name}}</span>
+            <span>{{player.firstName}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.player.basePrice">Base Price</span></dt>
+        <dt><span jhiTranslate="fafiApp.player.lastName">Last Name</span></dt>
         <dd>
-            <span>{{player.basePrice}}</span>
+            <span>{{player.lastName}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.player.bidPrice">Bid Price</span></dt>
+        <dt><span jhiTranslate="fafiApp.player.email">Email</span></dt>
         <dd>
-            <span>{{player.bidPrice}}</span>
-        </dd>
-        <dt><span jhiTranslate="fafiApp.player.optedGames">Opted Games</span></dt>
-        <dd>
-            <div *ngFor="let game of player.optedGames">
-                <span  jhiTranslate="{{'fafiApp.Games.' + game}}">{{game}}</span>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="fafiApp.player.franchise">Franchise</span></dt>
-        <dd>
-            <div *ngIf="player.franchiseId">
-                <a [routerLink]="['/franchise', player.franchiseId]">{{player.franchiseName}}</a>
-            </div>
+            <span>{{player.email}}</span>
         </dd>
     </dl>
 

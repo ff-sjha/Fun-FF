@@ -32,13 +32,7 @@ public class FranchiseCriteria implements Serializable {
 
     private StringFilter logoPath;
 
-    private LongFilter playersId;
-
-    private LongFilter seasonId;
-
-    private LongFilter ownerId;
-
-    private LongFilter iconPlayerId;
+    private BooleanFilter active;
 
     public FranchiseCriteria() {
     }
@@ -67,36 +61,12 @@ public class FranchiseCriteria implements Serializable {
         this.logoPath = logoPath;
     }
 
-    public LongFilter getPlayersId() {
-        return playersId;
+    public BooleanFilter getActive() {
+        return active;
     }
 
-    public void setPlayersId(LongFilter playersId) {
-        this.playersId = playersId;
-    }
-
-    public LongFilter getSeasonId() {
-        return seasonId;
-    }
-
-    public void setSeasonId(LongFilter seasonId) {
-        this.seasonId = seasonId;
-    }
-
-    public LongFilter getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(LongFilter ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public LongFilter getIconPlayerId() {
-        return iconPlayerId;
-    }
-
-    public void setIconPlayerId(LongFilter iconPlayerId) {
-        this.iconPlayerId = iconPlayerId;
+    public void setActive(BooleanFilter active) {
+        this.active = active;
     }
 
     @Override
@@ -105,10 +75,7 @@ public class FranchiseCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (logoPath != null ? "logoPath=" + logoPath + ", " : "") +
-                (playersId != null ? "playersId=" + playersId + ", " : "") +
-                (seasonId != null ? "seasonId=" + seasonId + ", " : "") +
-                (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
-                (iconPlayerId != null ? "iconPlayerId=" + iconPlayerId + ", " : "") +
+                (active != null ? "active=" + active + ", " : "") +
             "}";
     }
 

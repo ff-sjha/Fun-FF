@@ -20,7 +20,6 @@ import com.firstfuel.fafi.service.dto.PlayerCriteria;
 
 import com.firstfuel.fafi.service.dto.PlayerDTO;
 import com.firstfuel.fafi.service.mapper.PlayerMapper;
-import com.firstfuel.fafi.domain.enumeration.Games;
 
 /**
  * Service for executing complex queries for Player entities in the database.
@@ -79,20 +78,14 @@ public class PlayerQueryService extends QueryService<Player> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Player_.id));
             }
-            if (criteria.getName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getName(), Player_.name));
+            if (criteria.getFirstName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getFirstName(), Player_.firstName));
             }
-            if (criteria.getBasePrice() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getBasePrice(), Player_.basePrice));
+            if (criteria.getLastName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastName(), Player_.lastName));
             }
-            if (criteria.getBidPrice() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getBidPrice(), Player_.bidPrice));
-            }
-            /*if (criteria.getOptedGames() != null) {
-                specification = specification.and(buildSpecification(criteria.getOptedGames(), Player_.optedGames));
-            }*/
-            if (criteria.getFranchiseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getFranchiseId(), Player_.franchise, Franchise_.id));
+            if (criteria.getEmail() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getEmail(), Player_.email));
             }
         }
         return specification;

@@ -1,33 +1,27 @@
 {
     "fluentMethods": true,
-    "relationships": [
-        {
-            "relationshipName": "franchise",
-            "otherEntityName": "franchise",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
-    ],
+    "relationships": [],
     "fields": [
         {
-            "fieldName": "name",
+            "fieldName": "firstName",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
-            "fieldName": "basePrice",
-            "fieldType": "Double"
+            "fieldName": "lastName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
-            "fieldName": "bidPrice",
-            "fieldType": "Double"
-        },
-        {
-            "fieldName": "optedGames",
-            "fieldType": "Games",
-            "fieldValues": "Football,Chess,Badminton,Ludo,Table Tennis,Box Cricket"
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20171218183905",

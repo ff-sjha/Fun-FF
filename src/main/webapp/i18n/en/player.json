@@ -15,11 +15,9 @@
             "detail": {
                 "title": "Player"
             },
-            "name": "Name",
-            "basePrice": "Base Price",
-            "bidPrice": "Bid Price",
-            "optedGames": "Opted Games",
-            "franchise": "Franchise"
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email"
         }
     }
 }

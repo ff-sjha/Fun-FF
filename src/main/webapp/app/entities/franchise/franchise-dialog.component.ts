@@ -4,14 +4,11 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 
 import { Franchise } from './franchise.model';
 import { FranchisePopupService } from './franchise-popup.service';
 import { FranchiseService } from './franchise.service';
-import { Player, PlayerService } from '../player';
-import { Season, SeasonService } from '../season';
-import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'fafi-franchise-dialog',
@@ -22,52 +19,15 @@ export class FranchiseDialogComponent implements OnInit {
     franchise: Franchise;
     isSaving: boolean;
 
-    seasons: Season[];
-
-    owners: Player[];
-
-    iconplayers: Player[];
-
     constructor(
         public activeModal: NgbActiveModal,
-        private jhiAlertService: JhiAlertService,
         private franchiseService: FranchiseService,
-        private playerService: PlayerService,
-        private seasonService: SeasonService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.seasonService.query()
-            .subscribe((res: ResponseWrapper) => { this.seasons = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.playerService
-            .query({filter: 'franchise-is-null'})
-            .subscribe((res: ResponseWrapper) => {
-                if (!this.franchise.ownerId) {
-                    this.owners = res.json;
-                } else {
-                    this.playerService
-                        .find(this.franchise.ownerId)
-                        .subscribe((subRes: Player) => {
-                            this.owners = [subRes].concat(res.json);
-                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
-                }
-            }, (res: ResponseWrapper) => this.onError(res.json));
-        this.playerService
-            .query({filter: 'franchise-is-null'})
-            .subscribe((res: ResponseWrapper) => {
-                if (!this.franchise.iconPlayerId) {
-                    this.iconplayers = res.json;
-                } else {
-                    this.playerService
-                        .find(this.franchise.iconPlayerId)
-                        .subscribe((subRes: Player) => {
-                            this.iconplayers = [subRes].concat(res.json);
-                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
-                }
-            }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -98,18 +58,6 @@ export class FranchiseDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
-    }
-
-    private onError(error: any) {
-        this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackSeasonById(index: number, item: Season) {
-        return item.id;
-    }
-
-    trackPlayerById(index: number, item: Player) {
-        return item.id;
     }
 }
 

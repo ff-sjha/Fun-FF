@@ -17,30 +17,18 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="name"><span jhiTranslate="fafiApp.player.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="basePrice"><span jhiTranslate="fafiApp.player.basePrice">Base Price</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="bidPrice"><span jhiTranslate="fafiApp.player.bidPrice">Bid Price</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="optedGames"><span jhiTranslate="fafiApp.player.optedGames">Opted Games</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="franchiseName"><span jhiTranslate="fafiApp.player.franchise">Franchise</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="firstName"><span jhiTranslate="fafiApp.player.firstName">First Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastName"><span jhiTranslate="fafiApp.player.lastName">Last Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="email"><span jhiTranslate="fafiApp.player.email">Email</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let player of players ;trackBy: trackId">
                 <td><a [routerLink]="['../player', player.id ]">{{player.id}}</a></td>
-                <td>{{player.name}}</td>
-                <td>{{player.basePrice}}</td>
-                <td>{{player.bidPrice}}</td>
-                <td>
-                    <div *ngFor="let game of player.optedGames">
-                        <span  jhiTranslate="{{'fafiApp.Games.' + game}}">{{game}}</span>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="player.franchiseId">
-                        <a [routerLink]="['../franchise', player.franchiseId  ]" >{{player.franchiseName}}</a>
-                    </div>
-                </td>
+                <td>{{player.firstName}}</td>
+                <td>{{player.lastName}}</td>
+                <td>{{player.email}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

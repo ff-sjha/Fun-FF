@@ -3,10 +3,6 @@ package com.firstfuel.fafi.web.rest;
 import com.firstfuel.fafi.FafiApp;
 
 import com.firstfuel.fafi.domain.Franchise;
-import com.firstfuel.fafi.domain.Player;
-import com.firstfuel.fafi.domain.Season;
-import com.firstfuel.fafi.domain.Player;
-import com.firstfuel.fafi.domain.Player;
 import com.firstfuel.fafi.repository.FranchiseRepository;
 import com.firstfuel.fafi.service.FranchiseService;
 import com.firstfuel.fafi.service.dto.FranchiseDTO;
@@ -52,6 +48,9 @@ public class FranchiseResourceIntTest {
 
     private static final String DEFAULT_LOGO_PATH = "AAAAAAAAAA";
     private static final String UPDATED_LOGO_PATH = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_ACTIVE = false;
+    private static final Boolean UPDATED_ACTIVE = true;
 
     @Autowired
     private FranchiseRepository franchiseRepository;
@@ -101,7 +100,8 @@ public class FranchiseResourceIntTest {
     public static Franchise createEntity(EntityManager em) {
         Franchise franchise = new Franchise()
             .name(DEFAULT_NAME)
-            .logoPath(DEFAULT_LOGO_PATH);
+            .logoPath(DEFAULT_LOGO_PATH)
+            .active(DEFAULT_ACTIVE);
         return franchise;
     }
 
@@ -128,6 +128,7 @@ public class FranchiseResourceIntTest {
         Franchise testFranchise = franchiseList.get(franchiseList.size() - 1);
         assertThat(testFranchise.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testFranchise.getLogoPath()).isEqualTo(DEFAULT_LOGO_PATH);
+        assertThat(testFranchise.isActive()).isEqualTo(DEFAULT_ACTIVE);
     }
 
     @Test
@@ -171,6 +172,25 @@ public class FranchiseResourceIntTest {
 
     @Test
     @Transactional
+    public void checkActiveIsRequired() throws Exception {
+        int databaseSizeBeforeTest = franchiseRepository.findAll().size();
+        // set the field null
+        franchise.setActive(null);
+
+        // Create the Franchise, which fails.
+        FranchiseDTO franchiseDTO = franchiseMapper.toDto(franchise);
+
+        restFranchiseMockMvc.perform(post("/api/franchises")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(franchiseDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Franchise> franchiseList = franchiseRepository.findAll();
+        assertThat(franchiseList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFranchises() throws Exception {
         // Initialize the database
         franchiseRepository.saveAndFlush(franchise);
@@ -181,7 +201,8 @@ public class FranchiseResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(franchise.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].logoPath").value(hasItem(DEFAULT_LOGO_PATH.toString())));
+            .andExpect(jsonPath("$.[*].logoPath").value(hasItem(DEFAULT_LOGO_PATH.toString())))
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
 
     @Test
@@ -196,7 +217,8 @@ public class FranchiseResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(franchise.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.logoPath").value(DEFAULT_LOGO_PATH.toString()));
+            .andExpect(jsonPath("$.logoPath").value(DEFAULT_LOGO_PATH.toString()))
+            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()));
     }
 
     @Test
@@ -279,79 +301,42 @@ public class FranchiseResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllFranchisesByPlayersIsEqualToSomething() throws Exception {
+    public void getAllFranchisesByActiveIsEqualToSomething() throws Exception {
         // Initialize the database
-        Player players = PlayerResourceIntTest.createEntity(em);
-        em.persist(players);
-        em.flush();
-        franchise.addPlayers(players);
         franchiseRepository.saveAndFlush(franchise);
-        Long playersId = players.getId();
 
-        // Get all the franchiseList where players equals to playersId
-        defaultFranchiseShouldBeFound("playersId.equals=" + playersId);
+        // Get all the franchiseList where active equals to DEFAULT_ACTIVE
+        defaultFranchiseShouldBeFound("active.equals=" + DEFAULT_ACTIVE);
 
-        // Get all the franchiseList where players equals to playersId + 1
-        defaultFranchiseShouldNotBeFound("playersId.equals=" + (playersId + 1));
+        // Get all the franchiseList where active equals to UPDATED_ACTIVE
+        defaultFranchiseShouldNotBeFound("active.equals=" + UPDATED_ACTIVE);
     }
-
 
     @Test
     @Transactional
-    public void getAllFranchisesBySeasonIsEqualToSomething() throws Exception {
+    public void getAllFranchisesByActiveIsInShouldWork() throws Exception {
         // Initialize the database
-        Season season = SeasonResourceIntTest.createEntity(em);
-        em.persist(season);
-        em.flush();
-        franchise.setSeason(season);
         franchiseRepository.saveAndFlush(franchise);
-        Long seasonId = season.getId();
 
-        // Get all the franchiseList where season equals to seasonId
-        defaultFranchiseShouldBeFound("seasonId.equals=" + seasonId);
+        // Get all the franchiseList where active in DEFAULT_ACTIVE or UPDATED_ACTIVE
+        defaultFranchiseShouldBeFound("active.in=" + DEFAULT_ACTIVE + "," + UPDATED_ACTIVE);
 
-        // Get all the franchiseList where season equals to seasonId + 1
-        defaultFranchiseShouldNotBeFound("seasonId.equals=" + (seasonId + 1));
+        // Get all the franchiseList where active equals to UPDATED_ACTIVE
+        defaultFranchiseShouldNotBeFound("active.in=" + UPDATED_ACTIVE);
     }
-
 
     @Test
     @Transactional
-    public void getAllFranchisesByOwnerIsEqualToSomething() throws Exception {
+    public void getAllFranchisesByActiveIsNullOrNotNull() throws Exception {
         // Initialize the database
-        Player owner = PlayerResourceIntTest.createEntity(em);
-        em.persist(owner);
-        em.flush();
-        franchise.setOwner(owner);
         franchiseRepository.saveAndFlush(franchise);
-        Long ownerId = owner.getId();
 
-        // Get all the franchiseList where owner equals to ownerId
-        defaultFranchiseShouldBeFound("ownerId.equals=" + ownerId);
+        // Get all the franchiseList where active is not null
+        defaultFranchiseShouldBeFound("active.specified=true");
 
-        // Get all the franchiseList where owner equals to ownerId + 1
-        defaultFranchiseShouldNotBeFound("ownerId.equals=" + (ownerId + 1));
+        // Get all the franchiseList where active is null
+        defaultFranchiseShouldNotBeFound("active.specified=false");
     }
-
-
-    @Test
-    @Transactional
-    public void getAllFranchisesByIconPlayerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        Player iconPlayer = PlayerResourceIntTest.createEntity(em);
-        em.persist(iconPlayer);
-        em.flush();
-        franchise.setIconPlayer(iconPlayer);
-        franchiseRepository.saveAndFlush(franchise);
-        Long iconPlayerId = iconPlayer.getId();
-
-        // Get all the franchiseList where iconPlayer equals to iconPlayerId
-        defaultFranchiseShouldBeFound("iconPlayerId.equals=" + iconPlayerId);
-
-        // Get all the franchiseList where iconPlayer equals to iconPlayerId + 1
-        defaultFranchiseShouldNotBeFound("iconPlayerId.equals=" + (iconPlayerId + 1));
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -361,7 +346,8 @@ public class FranchiseResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(franchise.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].logoPath").value(hasItem(DEFAULT_LOGO_PATH.toString())));
+            .andExpect(jsonPath("$.[*].logoPath").value(hasItem(DEFAULT_LOGO_PATH.toString())))
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
 
     /**
@@ -397,7 +383,8 @@ public class FranchiseResourceIntTest {
         em.detach(updatedFranchise);
         updatedFranchise
             .name(UPDATED_NAME)
-            .logoPath(UPDATED_LOGO_PATH);
+            .logoPath(UPDATED_LOGO_PATH)
+            .active(UPDATED_ACTIVE);
         FranchiseDTO franchiseDTO = franchiseMapper.toDto(updatedFranchise);
 
         restFranchiseMockMvc.perform(put("/api/franchises")
@@ -411,6 +398,7 @@ public class FranchiseResourceIntTest {
         Franchise testFranchise = franchiseList.get(franchiseList.size() - 1);
         assertThat(testFranchise.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testFranchise.getLogoPath()).isEqualTo(UPDATED_LOGO_PATH);
+        assertThat(testFranchise.isActive()).isEqualTo(UPDATED_ACTIVE);
     }
 
     @Test
