@@ -4,10 +4,6 @@
     <hr>
     <fafi-alert-error></fafi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="fafiApp.tournament.name">Name</span></dt>
-        <dd>
-            <span>{{tournament.name}}</span>
-        </dd>
         <dt><span jhiTranslate="fafiApp.tournament.startDate">Start Date</span></dt>
         <dd>
             <span>{{tournament.startDate | date:'mediumDate'}}</span>
@@ -16,16 +12,26 @@
         <dd>
             <span>{{tournament.endDate | date:'mediumDate'}}</span>
         </dd>
+        <dt><span jhiTranslate="fafiApp.tournament.type">Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'fafiApp.Games.' + tournament.type}}">{{tournament.type}}</span>
+        </dd>
         <dt><span jhiTranslate="fafiApp.tournament.season">Season</span></dt>
         <dd>
             <div *ngIf="tournament.seasonId">
                 <a [routerLink]="['/season', tournament.seasonId]">{{tournament.seasonName}}</a>
             </div>
         </dd>
-        <dt><span jhiTranslate="fafiApp.tournament.winner">Winner</span></dt>
+        <dt><span jhiTranslate="fafiApp.tournament.winningFranchise">Winning Franchise</span></dt>
         <dd>
-            <div *ngIf="tournament.winnerId">
-                <a [routerLink]="['/franchise', tournament.winnerId]">{{tournament.winnerName}}</a>
+            <div *ngIf="tournament.winningFranchiseId">
+                <a [routerLink]="['/seasons-franchise', tournament.winningFranchiseId]">{{tournament.winningFranchiseFranchiseName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.tournament.playerOfTournament">Player Of Tournament</span></dt>
+        <dd>
+            <div *ngIf="tournament.playerOfTournamentId">
+                <a [routerLink]="['/seasons-franchise-player', tournament.playerOfTournamentId]">{{tournament.playerOfTournamentPlayerFirstName}}</a>
             </div>
         </dd>
     </dl>

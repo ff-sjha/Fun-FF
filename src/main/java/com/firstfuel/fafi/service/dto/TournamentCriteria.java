@@ -1,6 +1,7 @@
 package com.firstfuel.fafi.service.dto;
 
 import java.io.Serializable;
+import com.firstfuel.fafi.domain.enumeration.Games;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -23,22 +24,30 @@ import io.github.jhipster.service.filter.LocalDateFilter;
  * fix type specific filters.
  */
 public class TournamentCriteria implements Serializable {
+    /**
+     * Class for filtering Games
+     */
+    public static class GamesFilter extends Filter<Games> {
+    }
+
     private static final long serialVersionUID = 1L;
 
 
     private LongFilter id;
 
-    private StringFilter name;
-
     private LocalDateFilter startDate;
 
     private LocalDateFilter endDate;
+
+    private GamesFilter type;
 
     private LongFilter seasonId;
 
     private LongFilter matchesId;
 
-    private LongFilter winnerId;
+    private LongFilter winningFranchiseId;
+
+    private LongFilter playerOfTournamentId;
 
     public TournamentCriteria() {
     }
@@ -49,14 +58,6 @@ public class TournamentCriteria implements Serializable {
 
     public void setId(LongFilter id) {
         this.id = id;
-    }
-
-    public StringFilter getName() {
-        return name;
-    }
-
-    public void setName(StringFilter name) {
-        this.name = name;
     }
 
     public LocalDateFilter getStartDate() {
@@ -75,6 +76,14 @@ public class TournamentCriteria implements Serializable {
         this.endDate = endDate;
     }
 
+    public GamesFilter getType() {
+        return type;
+    }
+
+    public void setType(GamesFilter type) {
+        this.type = type;
+    }
+
     public LongFilter getSeasonId() {
         return seasonId;
     }
@@ -91,24 +100,33 @@ public class TournamentCriteria implements Serializable {
         this.matchesId = matchesId;
     }
 
-    public LongFilter getWinnerId() {
-        return winnerId;
+    public LongFilter getWinningFranchiseId() {
+        return winningFranchiseId;
     }
 
-    public void setWinnerId(LongFilter winnerId) {
-        this.winnerId = winnerId;
+    public void setWinningFranchiseId(LongFilter winningFranchiseId) {
+        this.winningFranchiseId = winningFranchiseId;
+    }
+
+    public LongFilter getPlayerOfTournamentId() {
+        return playerOfTournamentId;
+    }
+
+    public void setPlayerOfTournamentId(LongFilter playerOfTournamentId) {
+        this.playerOfTournamentId = playerOfTournamentId;
     }
 
     @Override
     public String toString() {
         return "TournamentCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (name != null ? "name=" + name + ", " : "") +
                 (startDate != null ? "startDate=" + startDate + ", " : "") +
                 (endDate != null ? "endDate=" + endDate + ", " : "") +
+                (type != null ? "type=" + type + ", " : "") +
                 (seasonId != null ? "seasonId=" + seasonId + ", " : "") +
                 (matchesId != null ? "matchesId=" + matchesId + ", " : "") +
-                (winnerId != null ? "winnerId=" + winnerId + ", " : "") +
+                (winningFranchiseId != null ? "winningFranchiseId=" + winningFranchiseId + ", " : "") +
+                (playerOfTournamentId != null ? "playerOfTournamentId=" + playerOfTournamentId + ", " : "") +
             "}";
     }
 

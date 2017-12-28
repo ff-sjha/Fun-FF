@@ -5,7 +5,8 @@ import com.firstfuel.fafi.FafiApp;
 import com.firstfuel.fafi.domain.Tournament;
 import com.firstfuel.fafi.domain.Season;
 import com.firstfuel.fafi.domain.Match;
-import com.firstfuel.fafi.domain.Franchise;
+import com.firstfuel.fafi.domain.SeasonsFranchise;
+import com.firstfuel.fafi.domain.SeasonsFranchisePlayer;
 import com.firstfuel.fafi.repository.TournamentRepository;
 import com.firstfuel.fafi.service.TournamentService;
 import com.firstfuel.fafi.service.dto.TournamentDTO;
@@ -39,6 +40,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.firstfuel.fafi.domain.enumeration.Games;
 /**
  * Test class for the TournamentResource REST controller.
  *
@@ -48,14 +50,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = FafiApp.class)
 public class TournamentResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final LocalDate DEFAULT_END_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Games DEFAULT_TYPE = Games.FOOTBALL;
+    private static final Games UPDATED_TYPE = Games.CHESS;
 
     @Autowired
     private TournamentRepository tournamentRepository;
@@ -104,9 +106,9 @@ public class TournamentResourceIntTest {
      */
     public static Tournament createEntity(EntityManager em) {
         Tournament tournament = new Tournament()
-            .name(DEFAULT_NAME)
             .startDate(DEFAULT_START_DATE)
-            .endDate(DEFAULT_END_DATE);
+            .endDate(DEFAULT_END_DATE)
+            .type(DEFAULT_TYPE);
         return tournament;
     }
 
@@ -131,9 +133,9 @@ public class TournamentResourceIntTest {
         List<Tournament> tournamentList = tournamentRepository.findAll();
         assertThat(tournamentList).hasSize(databaseSizeBeforeCreate + 1);
         Tournament testTournament = tournamentList.get(tournamentList.size() - 1);
-        assertThat(testTournament.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTournament.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testTournament.getEndDate()).isEqualTo(DEFAULT_END_DATE);
+        assertThat(testTournament.getType()).isEqualTo(DEFAULT_TYPE);
     }
 
     @Test
@@ -158,10 +160,10 @@ public class TournamentResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
+    public void checkTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = tournamentRepository.findAll().size();
         // set the field null
-        tournament.setName(null);
+        tournament.setType(null);
 
         // Create the Tournament, which fails.
         TournamentDTO tournamentDTO = tournamentMapper.toDto(tournament);
@@ -186,9 +188,9 @@ public class TournamentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tournament.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())));
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 
     @Test
@@ -202,48 +204,9 @@ public class TournamentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(tournament.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
-            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()));
-    }
-
-    @Test
-    @Transactional
-    public void getAllTournamentsByNameIsEqualToSomething() throws Exception {
-        // Initialize the database
-        tournamentRepository.saveAndFlush(tournament);
-
-        // Get all the tournamentList where name equals to DEFAULT_NAME
-        defaultTournamentShouldBeFound("name.equals=" + DEFAULT_NAME);
-
-        // Get all the tournamentList where name equals to UPDATED_NAME
-        defaultTournamentShouldNotBeFound("name.equals=" + UPDATED_NAME);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTournamentsByNameIsInShouldWork() throws Exception {
-        // Initialize the database
-        tournamentRepository.saveAndFlush(tournament);
-
-        // Get all the tournamentList where name in DEFAULT_NAME or UPDATED_NAME
-        defaultTournamentShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
-
-        // Get all the tournamentList where name equals to UPDATED_NAME
-        defaultTournamentShouldNotBeFound("name.in=" + UPDATED_NAME);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTournamentsByNameIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        tournamentRepository.saveAndFlush(tournament);
-
-        // Get all the tournamentList where name is not null
-        defaultTournamentShouldBeFound("name.specified=true");
-
-        // Get all the tournamentList where name is null
-        defaultTournamentShouldNotBeFound("name.specified=false");
+            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
     @Test
@@ -380,6 +343,45 @@ public class TournamentResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllTournamentsByTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where type equals to DEFAULT_TYPE
+        defaultTournamentShouldBeFound("type.equals=" + DEFAULT_TYPE);
+
+        // Get all the tournamentList where type equals to UPDATED_TYPE
+        defaultTournamentShouldNotBeFound("type.equals=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where type in DEFAULT_TYPE or UPDATED_TYPE
+        defaultTournamentShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
+
+        // Get all the tournamentList where type equals to UPDATED_TYPE
+        defaultTournamentShouldNotBeFound("type.in=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where type is not null
+        defaultTournamentShouldBeFound("type.specified=true");
+
+        // Get all the tournamentList where type is null
+        defaultTournamentShouldNotBeFound("type.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllTournamentsBySeasonIsEqualToSomething() throws Exception {
         // Initialize the database
         Season season = SeasonResourceIntTest.createEntity(em);
@@ -418,20 +420,39 @@ public class TournamentResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllTournamentsByWinnerIsEqualToSomething() throws Exception {
+    public void getAllTournamentsByWinningFranchiseIsEqualToSomething() throws Exception {
         // Initialize the database
-        Franchise winner = FranchiseResourceIntTest.createEntity(em);
-        em.persist(winner);
+        SeasonsFranchise winningFranchise = SeasonsFranchiseResourceIntTest.createEntity(em);
+        em.persist(winningFranchise);
         em.flush();
-        tournament.setWinner(winner);
+        tournament.setWinningFranchise(winningFranchise);
         tournamentRepository.saveAndFlush(tournament);
-        Long winnerId = winner.getId();
+        Long winningFranchiseId = winningFranchise.getId();
 
-        // Get all the tournamentList where winner equals to winnerId
-        defaultTournamentShouldBeFound("winnerId.equals=" + winnerId);
+        // Get all the tournamentList where winningFranchise equals to winningFranchiseId
+        defaultTournamentShouldBeFound("winningFranchiseId.equals=" + winningFranchiseId);
 
-        // Get all the tournamentList where winner equals to winnerId + 1
-        defaultTournamentShouldNotBeFound("winnerId.equals=" + (winnerId + 1));
+        // Get all the tournamentList where winningFranchise equals to winningFranchiseId + 1
+        defaultTournamentShouldNotBeFound("winningFranchiseId.equals=" + (winningFranchiseId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByPlayerOfTournamentIsEqualToSomething() throws Exception {
+        // Initialize the database
+        SeasonsFranchisePlayer playerOfTournament = SeasonsFranchisePlayerResourceIntTest.createEntity(em);
+        em.persist(playerOfTournament);
+        em.flush();
+        tournament.setPlayerOfTournament(playerOfTournament);
+        tournamentRepository.saveAndFlush(tournament);
+        Long playerOfTournamentId = playerOfTournament.getId();
+
+        // Get all the tournamentList where playerOfTournament equals to playerOfTournamentId
+        defaultTournamentShouldBeFound("playerOfTournamentId.equals=" + playerOfTournamentId);
+
+        // Get all the tournamentList where playerOfTournament equals to playerOfTournamentId + 1
+        defaultTournamentShouldNotBeFound("playerOfTournamentId.equals=" + (playerOfTournamentId + 1));
     }
 
     /**
@@ -442,9 +463,9 @@ public class TournamentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tournament.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())));
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 
     /**
@@ -479,9 +500,9 @@ public class TournamentResourceIntTest {
         // Disconnect from session so that the updates on updatedTournament are not directly saved in db
         em.detach(updatedTournament);
         updatedTournament
-            .name(UPDATED_NAME)
             .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE);
+            .endDate(UPDATED_END_DATE)
+            .type(UPDATED_TYPE);
         TournamentDTO tournamentDTO = tournamentMapper.toDto(updatedTournament);
 
         restTournamentMockMvc.perform(put("/api/tournaments")
@@ -493,9 +514,9 @@ public class TournamentResourceIntTest {
         List<Tournament> tournamentList = tournamentRepository.findAll();
         assertThat(tournamentList).hasSize(databaseSizeBeforeUpdate);
         Tournament testTournament = tournamentList.get(tournamentList.size() - 1);
-        assertThat(testTournament.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTournament.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testTournament.getEndDate()).isEqualTo(UPDATED_END_DATE);
+        assertThat(testTournament.getType()).isEqualTo(UPDATED_TYPE);
     }
 
     @Test

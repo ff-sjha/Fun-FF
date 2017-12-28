@@ -17,28 +17,34 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="name"><span jhiTranslate="fafiApp.tournament.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="startDate"><span jhiTranslate="fafiApp.tournament.startDate">Start Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="endDate"><span jhiTranslate="fafiApp.tournament.endDate">End Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="type"><span jhiTranslate="fafiApp.tournament.type">Type</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="seasonName"><span jhiTranslate="fafiApp.tournament.season">Season</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="winnerId"><span jhiTranslate="fafiApp.tournament.winner">Winner</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="winningFranchiseFranchiseName"><span jhiTranslate="fafiApp.tournament.winningFranchise">Winning Franchise</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="playerOfTournamentPlayerFirstName"><span jhiTranslate="fafiApp.tournament.playerOfTournament">Player Of Tournament</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let tournament of tournaments ;trackBy: trackId">
                 <td><a [routerLink]="['../tournament', tournament.id ]">{{tournament.id}}</a></td>
-                <td>{{tournament.name}}</td>
                 <td>{{tournament.startDate | date:'mediumDate'}}</td>
                 <td>{{tournament.endDate | date:'mediumDate'}}</td>
+                <td jhiTranslate="{{'fafiApp.Games.' + tournament.type}}">{{tournament.type}}</td>
                 <td>
                     <div *ngIf="tournament.seasonId">
                         <a [routerLink]="['../season', tournament.seasonId  ]" >{{tournament.seasonName}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="tournament.winnerId">
-                        <a [routerLink]="['../franchise', tournament.winnerId  ]" >{{tournament.winnerName}}</a>
+                    <div *ngIf="tournament.winningFranchiseId">
+                        <a [routerLink]="['../seasons-franchise', tournament.winningFranchiseId  ]" >{{tournament.winningFranchiseFranchiseName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tournament.playerOfTournamentId">
+                        <a [routerLink]="['../seasons-franchise-player', tournament.playerOfTournamentId  ]" >{{tournament.playerOfTournamentPlayerFirstName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

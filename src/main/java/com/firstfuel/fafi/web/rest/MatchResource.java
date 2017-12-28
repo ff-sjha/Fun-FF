@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -53,7 +54,7 @@ public class MatchResource {
      */
     @PostMapping("/matches")
     @Timed
-    public ResponseEntity<MatchDTO> createMatch(@RequestBody MatchDTO matchDTO) throws URISyntaxException {
+    public ResponseEntity<MatchDTO> createMatch(@Valid @RequestBody MatchDTO matchDTO) throws URISyntaxException {
         log.debug("REST request to save Match : {}", matchDTO);
         if (matchDTO.getId() != null) {
             throw new BadRequestAlertException("A new match cannot already have an ID", ENTITY_NAME, "idexists");
@@ -75,7 +76,7 @@ public class MatchResource {
      */
     @PutMapping("/matches")
     @Timed
-    public ResponseEntity<MatchDTO> updateMatch(@RequestBody MatchDTO matchDTO) throws URISyntaxException {
+    public ResponseEntity<MatchDTO> updateMatch(@Valid @RequestBody MatchDTO matchDTO) throws URISyntaxException {
         log.debug("REST request to update Match : {}", matchDTO);
         if (matchDTO.getId() == null) {
             return createMatch(matchDTO);

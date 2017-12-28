@@ -15,12 +15,13 @@
             "detail": {
                 "title": "Tournament"
             },
-            "name": "Name",
             "startDate": "Start Date",
             "endDate": "End Date",
+            "type": "Type",
             "season": "Season",
             "matches": "Matches",
-            "winner": "Winner"
+            "winningFranchise": "Winning Franchise",
+            "playerOfTournament": "Player Of Tournament"
         }
     }
 }

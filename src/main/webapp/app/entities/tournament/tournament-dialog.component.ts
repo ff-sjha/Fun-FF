@@ -10,7 +10,8 @@ import { Tournament } from './tournament.model';
 import { TournamentPopupService } from './tournament-popup.service';
 import { TournamentService } from './tournament.service';
 import { Season, SeasonService } from '../season';
-import { Franchise, FranchiseService } from '../franchise';
+import { SeasonsFranchise, SeasonsFranchiseService } from '../seasons-franchise';
+import { SeasonsFranchisePlayer, SeasonsFranchisePlayerService } from '../seasons-franchise-player';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -24,7 +25,9 @@ export class TournamentDialogComponent implements OnInit {
 
     seasons: Season[];
 
-    winners: Franchise[];
+    seasonsfranchises: SeasonsFranchise[];
+
+    seasonsfranchiseplayers: SeasonsFranchisePlayer[];
     startDateDp: any;
     endDateDp: any;
 
@@ -33,7 +36,8 @@ export class TournamentDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private tournamentService: TournamentService,
         private seasonService: SeasonService,
-        private franchiseService: FranchiseService,
+        private seasonsFranchiseService: SeasonsFranchiseService,
+        private seasonsFranchisePlayerService: SeasonsFranchisePlayerService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -42,19 +46,10 @@ export class TournamentDialogComponent implements OnInit {
         this.isSaving = false;
         this.seasonService.query()
             .subscribe((res: ResponseWrapper) => { this.seasons = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.franchiseService
-            .query({filter: 'tournament-is-null'})
-            .subscribe((res: ResponseWrapper) => {
-                if (!this.tournament.winnerId) {
-                    this.winners = res.json;
-                } else {
-                    this.franchiseService
-                        .find(this.tournament.winnerId)
-                        .subscribe((subRes: Franchise) => {
-                            this.winners = [subRes].concat(res.json);
-                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
-                }
-            }, (res: ResponseWrapper) => this.onError(res.json));
+        this.seasonsFranchiseService.query()
+            .subscribe((res: ResponseWrapper) => { this.seasonsfranchises = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.seasonsFranchisePlayerService.query()
+            .subscribe((res: ResponseWrapper) => { this.seasonsfranchiseplayers = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -95,7 +90,11 @@ export class TournamentDialogComponent implements OnInit {
         return item.id;
     }
 
-    trackFranchiseById(index: number, item: Franchise) {
+    trackSeasonsFranchiseById(index: number, item: SeasonsFranchise) {
+        return item.id;
+    }
+
+    trackSeasonsFranchisePlayerById(index: number, item: SeasonsFranchisePlayer) {
         return item.id;
     }
 }

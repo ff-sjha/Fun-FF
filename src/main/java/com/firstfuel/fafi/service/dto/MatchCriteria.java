@@ -32,13 +32,13 @@ public class MatchCriteria implements Serializable {
 
     private ZonedDateTimeFilter endDateTime;
 
+    private IntegerFilter matchNumber;
+
+    private IntegerFilter pointsEarnedByFranchise;
+
     private LongFilter tournamentId;
 
-    private LongFilter franchise1Id;
-
-    private LongFilter franchise2Id;
-
-    private LongFilter winnerId;
+    private LongFilter winningFranchiseId;
 
     public MatchCriteria() {
     }
@@ -67,6 +67,22 @@ public class MatchCriteria implements Serializable {
         this.endDateTime = endDateTime;
     }
 
+    public IntegerFilter getMatchNumber() {
+        return matchNumber;
+    }
+
+    public void setMatchNumber(IntegerFilter matchNumber) {
+        this.matchNumber = matchNumber;
+    }
+
+    public IntegerFilter getPointsEarnedByFranchise() {
+        return pointsEarnedByFranchise;
+    }
+
+    public void setPointsEarnedByFranchise(IntegerFilter pointsEarnedByFranchise) {
+        this.pointsEarnedByFranchise = pointsEarnedByFranchise;
+    }
+
     public LongFilter getTournamentId() {
         return tournamentId;
     }
@@ -75,28 +91,12 @@ public class MatchCriteria implements Serializable {
         this.tournamentId = tournamentId;
     }
 
-    public LongFilter getFranchise1Id() {
-        return franchise1Id;
+    public LongFilter getWinningFranchiseId() {
+        return winningFranchiseId;
     }
 
-    public void setFranchise1Id(LongFilter franchise1Id) {
-        this.franchise1Id = franchise1Id;
-    }
-
-    public LongFilter getFranchise2Id() {
-        return franchise2Id;
-    }
-
-    public void setFranchise2Id(LongFilter franchise2Id) {
-        this.franchise2Id = franchise2Id;
-    }
-
-    public LongFilter getWinnerId() {
-        return winnerId;
-    }
-
-    public void setWinnerId(LongFilter winnerId) {
-        this.winnerId = winnerId;
+    public void setWinningFranchiseId(LongFilter winningFranchiseId) {
+        this.winningFranchiseId = winningFranchiseId;
     }
 
     @Override
@@ -105,10 +105,10 @@ public class MatchCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (startDateTime != null ? "startDateTime=" + startDateTime + ", " : "") +
                 (endDateTime != null ? "endDateTime=" + endDateTime + ", " : "") +
+                (matchNumber != null ? "matchNumber=" + matchNumber + ", " : "") +
+                (pointsEarnedByFranchise != null ? "pointsEarnedByFranchise=" + pointsEarnedByFranchise + ", " : "") +
                 (tournamentId != null ? "tournamentId=" + tournamentId + ", " : "") +
-                (franchise1Id != null ? "franchise1Id=" + franchise1Id + ", " : "") +
-                (franchise2Id != null ? "franchise2Id=" + franchise2Id + ", " : "") +
-                (winnerId != null ? "winnerId=" + winnerId + ", " : "") +
+                (winningFranchiseId != null ? "winningFranchiseId=" + winningFranchiseId + ", " : "") +
             "}";
     }
 

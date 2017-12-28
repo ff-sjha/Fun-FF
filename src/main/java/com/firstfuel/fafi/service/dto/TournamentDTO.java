@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import com.firstfuel.fafi.domain.enumeration.Games;
 
 /**
  * A DTO for the Tournament entity.
@@ -15,20 +16,24 @@ public class TournamentDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
-    private String name;
-
     private LocalDate startDate;
 
     private LocalDate endDate;
+
+    @NotNull
+    private Games type;
 
     private Long seasonId;
 
     private String seasonName;
 
-    private Long winnerId;
+    private Long winningFranchiseId;
 
-    private String winnerName;
+    private String winningFranchiseFranchiseName;
+
+    private Long playerOfTournamentId;
+
+    private String playerOfTournamentPlayerFirstName;
 
     public Long getId() {
         return id;
@@ -36,14 +41,6 @@ public class TournamentDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public LocalDate getStartDate() {
@@ -62,6 +59,14 @@ public class TournamentDTO implements Serializable {
         this.endDate = endDate;
     }
 
+    public Games getType() {
+        return type;
+    }
+
+    public void setType(Games type) {
+        this.type = type;
+    }
+
     public Long getSeasonId() {
         return seasonId;
     }
@@ -78,20 +83,36 @@ public class TournamentDTO implements Serializable {
         this.seasonName = seasonName;
     }
 
-    public Long getWinnerId() {
-        return winnerId;
+    public Long getWinningFranchiseId() {
+        return winningFranchiseId;
     }
 
-    public void setWinnerId(Long franchiseId) {
-        this.winnerId = franchiseId;
+    public void setWinningFranchiseId(Long seasonsFranchiseId) {
+        this.winningFranchiseId = seasonsFranchiseId;
     }
 
-    public String getWinnerName() {
-        return winnerName;
+    public String getWinningFranchiseFranchiseName() {
+        return winningFranchiseFranchiseName;
     }
 
-    public void setWinnerName( String winnerName ) {
-        this.winnerName = winnerName;
+    public void setWinningFranchiseFranchiseName(String seasonsFranchiseFranchiseName) {
+        this.winningFranchiseFranchiseName = seasonsFranchiseFranchiseName;
+    }
+
+    public Long getPlayerOfTournamentId() {
+        return playerOfTournamentId;
+    }
+
+    public void setPlayerOfTournamentId(Long seasonsFranchisePlayerId) {
+        this.playerOfTournamentId = seasonsFranchisePlayerId;
+    }
+
+    public String getPlayerOfTournamentPlayerFirstName() {
+        return playerOfTournamentPlayerFirstName;
+    }
+
+    public void setPlayerOfTournamentPlayerFirstName(String seasonsFranchisePlayerPlayerFirstName) {
+        this.playerOfTournamentPlayerFirstName = seasonsFranchisePlayerPlayerFirstName;
     }
 
     @Override
@@ -119,9 +140,9 @@ public class TournamentDTO implements Serializable {
     public String toString() {
         return "TournamentDTO{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
+            ", type='" + getType() + "'" +
             "}";
     }
 }

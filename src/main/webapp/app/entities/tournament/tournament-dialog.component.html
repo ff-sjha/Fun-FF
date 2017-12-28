@@ -13,17 +13,6 @@
                    [(ngModel)]="tournament.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.tournament.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                [(ngModel)]="tournament.name" required/>
-            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.tournament.startDate" for="field_startDate">Start Date</label>
             <div class="input-group">
                 <input id="field_startDate" type="text" class="form-control" name="startDate" ngbDatepicker  #startDateDp="ngbDatepicker" [(ngModel)]="tournament.startDate"
@@ -43,19 +32,43 @@
                 </span>
             </div>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.tournament.type" for="field_type">Type</label>
+            <select class="form-control" name="type" [(ngModel)]="tournament.type" id="field_type"  required>
+                <option value="FOOTBALL">{{'fafiApp.Games.FOOTBALL' | translate}}</option>
+                <option value="CHESS">{{'fafiApp.Games.CHESS' | translate}}</option>
+                <option value="BADMINTON">{{'fafiApp.Games.BADMINTON' | translate}}</option>
+                <option value="LUDO">{{'fafiApp.Games.LUDO' | translate}}</option>
+                <option value="TABLE_TENNIS">{{'fafiApp.Games.TABLE_TENNIS' | translate}}</option>
+                <option value="BOX_CRICKET">{{'fafiApp.Games.BOX_CRICKET' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.type?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.tournament.season" for="field_season">Season</label>
-            <select class="form-control" id="field_season" name="season" [(ngModel)]="tournament.seasonId" required>
+            <select class="form-control" id="field_season" name="season" [(ngModel)]="tournament.seasonId" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="seasonOption.id" *ngFor="let seasonOption of seasons; trackBy: trackSeasonById">{{seasonOption.name}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.tournament.winner" for="field_winner">Winner</label>
-            <select class="form-control" id="field_winner" name="winner" [(ngModel)]="tournament.winnerId">
+            <label class="form-control-label" jhiTranslate="fafiApp.tournament.winningFranchise" for="field_winningFranchise">Winning Franchise</label>
+            <select class="form-control" id="field_winningFranchise" name="winningFranchise" [(ngModel)]="tournament.winningFranchiseId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="franchiseOption.id" *ngFor="let franchiseOption of winners; trackBy: trackFranchiseById">{{franchiseOption.name}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.tournament.playerOfTournament" for="field_playerOfTournament">Player Of Tournament</label>
+            <select class="form-control" id="field_playerOfTournament" name="playerOfTournament" [(ngModel)]="tournament.playerOfTournamentId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="seasonsFranchisePlayerOption.id" *ngFor="let seasonsFranchisePlayerOption of seasonsfranchiseplayers; trackBy: trackSeasonsFranchisePlayerById">{{seasonsFranchisePlayerOption.playerFirstName}}</option>
             </select>
         </div>
     </div>

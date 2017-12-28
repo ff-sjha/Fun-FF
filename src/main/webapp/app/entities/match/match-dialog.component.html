@@ -26,33 +26,43 @@
                 />
             </div>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.match.matchNumber" for="field_matchNumber">Match Number</label>
+            <input type="number" class="form-control" name="matchNumber" id="field_matchNumber"
+                [(ngModel)]="match.matchNumber" required min="1"/>
+            <div [hidden]="!(editForm.controls.matchNumber?.dirty && editForm.controls.matchNumber?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.matchNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.matchNumber?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
+                    This field should be at least 1.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.matchNumber?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.match.pointsEarnedByFranchise" for="field_pointsEarnedByFranchise">Points Earned By Franchise</label>
+            <input type="number" class="form-control" name="pointsEarnedByFranchise" id="field_pointsEarnedByFranchise"
+                [(ngModel)]="match.pointsEarnedByFranchise" />
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.match.tournament" for="field_tournament">Tournament</label>
-            <select class="form-control" id="field_tournament" name="tournament" [(ngModel)]="match.tournamentId" required>
+            <select class="form-control" id="field_tournament" name="tournament" [(ngModel)]="match.tournamentId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="tournamentOption.id" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.name}}</option>
+                <option [ngValue]="tournamentOption.id" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.id}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.franchise1" for="field_franchise1">Franchise 1</label>
-            <select class="form-control" id="field_franchise1" name="franchise1" [(ngModel)]="match.franchise1Id">
+            <label class="form-control-label" jhiTranslate="fafiApp.match.winningFranchise" for="field_winningFranchise">Winning Franchise</label>
+            <select class="form-control" id="field_winningFranchise" name="winningFranchise" [(ngModel)]="match.winningFranchiseId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="franchiseOption.id" *ngFor="let franchiseOption of franchise1s; trackBy: trackFranchiseById">{{franchiseOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.franchise2" for="field_franchise2">Franchise 2</label>
-            <select class="form-control" id="field_franchise2" name="franchise2" [(ngModel)]="match.franchise2Id">
-                <option [ngValue]="null"></option>
-                <option [ngValue]="franchiseOption.id" *ngFor="let franchiseOption of franchise2s; trackBy: trackFranchiseById">{{franchiseOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.winner" for="field_winner">Winner</label>
-            <select class="form-control" id="field_winner" name="winner" [(ngModel)]="match.winnerId">
-                <option [ngValue]="null"></option>
-                <option [ngValue]="franchiseOption.id" *ngFor="let franchiseOption of winners; trackBy: trackFranchiseById">{{franchiseOption.name}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
             </select>
         </div>
     </div>

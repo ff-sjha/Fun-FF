@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import com.firstfuel.fafi.domain.enumeration.Games;
+
 /**
  * A Tournament.
  */
@@ -27,15 +29,16 @@ public class Tournament implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
-
     @Column(name = "start_date")
     private LocalDate startDate;
 
     @Column(name = "end_date")
     private LocalDate endDate;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "fafi_type", nullable = false)
+    private Games type;
 
     @ManyToOne
     private Season season;
@@ -45,9 +48,11 @@ public class Tournament implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Match> matches = new HashSet<>();
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Franchise winner;
+    @ManyToOne
+    private SeasonsFranchise winningFranchise;
+
+    @ManyToOne
+    private SeasonsFranchisePlayer playerOfTournament;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -56,19 +61,6 @@ public class Tournament implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Tournament name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public LocalDate getStartDate() {
@@ -95,6 +87,19 @@ public class Tournament implements Serializable {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public Games getType() {
+        return type;
+    }
+
+    public Tournament type(Games type) {
+        this.type = type;
+        return this;
+    }
+
+    public void setType(Games type) {
+        this.type = type;
     }
 
     public Season getSeason() {
@@ -135,17 +140,30 @@ public class Tournament implements Serializable {
         this.matches = matches;
     }
 
-    public Franchise getWinner() {
-        return winner;
+    public SeasonsFranchise getWinningFranchise() {
+        return winningFranchise;
     }
 
-    public Tournament winner(Franchise franchise) {
-        this.winner = franchise;
+    public Tournament winningFranchise(SeasonsFranchise seasonsFranchise) {
+        this.winningFranchise = seasonsFranchise;
         return this;
     }
 
-    public void setWinner(Franchise franchise) {
-        this.winner = franchise;
+    public void setWinningFranchise(SeasonsFranchise seasonsFranchise) {
+        this.winningFranchise = seasonsFranchise;
+    }
+
+    public SeasonsFranchisePlayer getPlayerOfTournament() {
+        return playerOfTournament;
+    }
+
+    public Tournament playerOfTournament(SeasonsFranchisePlayer seasonsFranchisePlayer) {
+        this.playerOfTournament = seasonsFranchisePlayer;
+        return this;
+    }
+
+    public void setPlayerOfTournament(SeasonsFranchisePlayer seasonsFranchisePlayer) {
+        this.playerOfTournament = seasonsFranchisePlayer;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -173,9 +191,9 @@ public class Tournament implements Serializable {
     public String toString() {
         return "Tournament{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
+            ", type='" + getType() + "'" +
             "}";
     }
 }

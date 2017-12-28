@@ -31,14 +31,14 @@ describe('Tournament e2e test', () => {
 
     it('should create and save Tournaments', () => {
         tournamentComponentsPage.clickOnCreateButton();
-        tournamentDialogPage.setNameInput('name');
-        expect(tournamentDialogPage.getNameInput()).toMatch('name');
         tournamentDialogPage.setStartDateInput('2000-12-31');
         expect(tournamentDialogPage.getStartDateInput()).toMatch('2000-12-31');
         tournamentDialogPage.setEndDateInput('2000-12-31');
         expect(tournamentDialogPage.getEndDateInput()).toMatch('2000-12-31');
+        tournamentDialogPage.typeSelectLastOption();
         tournamentDialogPage.seasonSelectLastOption();
-        tournamentDialogPage.winnerSelectLastOption();
+        tournamentDialogPage.winningFranchiseSelectLastOption();
+        tournamentDialogPage.playerOfTournamentSelectLastOption();
         tournamentDialogPage.save();
         expect(tournamentDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -65,22 +65,15 @@ export class TournamentDialogPage {
     modalTitle = element(by.css('h4#myTournamentLabel'));
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
-    nameInput = element(by.css('input#field_name'));
     startDateInput = element(by.css('input#field_startDate'));
     endDateInput = element(by.css('input#field_endDate'));
+    typeSelect = element(by.css('select#field_type'));
     seasonSelect = element(by.css('select#field_season'));
-    winnerSelect = element(by.css('select#field_winner'));
+    winningFranchiseSelect = element(by.css('select#field_winningFranchise'));
+    playerOfTournamentSelect = element(by.css('select#field_playerOfTournament'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
-    }
-
-    setNameInput = function(name) {
-        this.nameInput.sendKeys(name);
-    }
-
-    getNameInput = function() {
-        return this.nameInput.getAttribute('value');
     }
 
     setStartDateInput = function(startDate) {
@@ -99,6 +92,17 @@ export class TournamentDialogPage {
         return this.endDateInput.getAttribute('value');
     }
 
+    setTypeSelect = function(type) {
+        this.typeSelect.sendKeys(type);
+    }
+
+    getTypeSelect = function() {
+        return this.typeSelect.element(by.css('option:checked')).getText();
+    }
+
+    typeSelectLastOption = function() {
+        this.typeSelect.all(by.tagName('option')).last().click();
+    }
     seasonSelectLastOption = function() {
         this.seasonSelect.all(by.tagName('option')).last().click();
     }
@@ -115,20 +119,36 @@ export class TournamentDialogPage {
         return this.seasonSelect.element(by.css('option:checked')).getText();
     }
 
-    winnerSelectLastOption = function() {
-        this.winnerSelect.all(by.tagName('option')).last().click();
+    winningFranchiseSelectLastOption = function() {
+        this.winningFranchiseSelect.all(by.tagName('option')).last().click();
     }
 
-    winnerSelectOption = function(option) {
-        this.winnerSelect.sendKeys(option);
+    winningFranchiseSelectOption = function(option) {
+        this.winningFranchiseSelect.sendKeys(option);
     }
 
-    getWinnerSelect = function() {
-        return this.winnerSelect;
+    getWinningFranchiseSelect = function() {
+        return this.winningFranchiseSelect;
     }
 
-    getWinnerSelectedOption = function() {
-        return this.winnerSelect.element(by.css('option:checked')).getText();
+    getWinningFranchiseSelectedOption = function() {
+        return this.winningFranchiseSelect.element(by.css('option:checked')).getText();
+    }
+
+    playerOfTournamentSelectLastOption = function() {
+        this.playerOfTournamentSelect.all(by.tagName('option')).last().click();
+    }
+
+    playerOfTournamentSelectOption = function(option) {
+        this.playerOfTournamentSelect.sendKeys(option);
+    }
+
+    getPlayerOfTournamentSelect = function() {
+        return this.playerOfTournamentSelect;
+    }
+
+    getPlayerOfTournamentSelectedOption = function() {
+        return this.playerOfTournamentSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

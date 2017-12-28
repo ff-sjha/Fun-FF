@@ -22,10 +22,6 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
             <column name="start_date" type="date">
                 <constraints nullable="true" />
             </column>
@@ -34,12 +30,22 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="fafi_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
             <column name="season_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="winner_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+
+            <column name="winning_franchise_id" type="bigint">
+                <constraints nullable="true" />
             </column>
+
+            <column name="player_of_tournament_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

@@ -35,10 +35,12 @@ describe('Match e2e test', () => {
         expect(matchDialogPage.getStartDateTimeInput()).toMatch('2001-12-31T02:30');
         matchDialogPage.setEndDateTimeInput(12310020012301);
         expect(matchDialogPage.getEndDateTimeInput()).toMatch('2001-12-31T02:30');
+        matchDialogPage.setMatchNumberInput('5');
+        expect(matchDialogPage.getMatchNumberInput()).toMatch('5');
+        matchDialogPage.setPointsEarnedByFranchiseInput('5');
+        expect(matchDialogPage.getPointsEarnedByFranchiseInput()).toMatch('5');
         matchDialogPage.tournamentSelectLastOption();
-        matchDialogPage.franchise1SelectLastOption();
-        matchDialogPage.franchise2SelectLastOption();
-        matchDialogPage.winnerSelectLastOption();
+        matchDialogPage.winningFranchiseSelectLastOption();
         matchDialogPage.save();
         expect(matchDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -67,10 +69,10 @@ export class MatchDialogPage {
     closeButton = element(by.css('button.close'));
     startDateTimeInput = element(by.css('input#field_startDateTime'));
     endDateTimeInput = element(by.css('input#field_endDateTime'));
+    matchNumberInput = element(by.css('input#field_matchNumber'));
+    pointsEarnedByFranchiseInput = element(by.css('input#field_pointsEarnedByFranchise'));
     tournamentSelect = element(by.css('select#field_tournament'));
-    franchise1Select = element(by.css('select#field_franchise1'));
-    franchise2Select = element(by.css('select#field_franchise2'));
-    winnerSelect = element(by.css('select#field_winner'));
+    winningFranchiseSelect = element(by.css('select#field_winningFranchise'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -92,6 +94,22 @@ export class MatchDialogPage {
         return this.endDateTimeInput.getAttribute('value');
     }
 
+    setMatchNumberInput = function(matchNumber) {
+        this.matchNumberInput.sendKeys(matchNumber);
+    }
+
+    getMatchNumberInput = function() {
+        return this.matchNumberInput.getAttribute('value');
+    }
+
+    setPointsEarnedByFranchiseInput = function(pointsEarnedByFranchise) {
+        this.pointsEarnedByFranchiseInput.sendKeys(pointsEarnedByFranchise);
+    }
+
+    getPointsEarnedByFranchiseInput = function() {
+        return this.pointsEarnedByFranchiseInput.getAttribute('value');
+    }
+
     tournamentSelectLastOption = function() {
         this.tournamentSelect.all(by.tagName('option')).last().click();
     }
@@ -108,52 +126,20 @@ export class MatchDialogPage {
         return this.tournamentSelect.element(by.css('option:checked')).getText();
     }
 
-    franchise1SelectLastOption = function() {
-        this.franchise1Select.all(by.tagName('option')).last().click();
+    winningFranchiseSelectLastOption = function() {
+        this.winningFranchiseSelect.all(by.tagName('option')).last().click();
     }
 
-    franchise1SelectOption = function(option) {
-        this.franchise1Select.sendKeys(option);
+    winningFranchiseSelectOption = function(option) {
+        this.winningFranchiseSelect.sendKeys(option);
     }
 
-    getFranchise1Select = function() {
-        return this.franchise1Select;
+    getWinningFranchiseSelect = function() {
+        return this.winningFranchiseSelect;
     }
 
-    getFranchise1SelectedOption = function() {
-        return this.franchise1Select.element(by.css('option:checked')).getText();
-    }
-
-    franchise2SelectLastOption = function() {
-        this.franchise2Select.all(by.tagName('option')).last().click();
-    }
-
-    franchise2SelectOption = function(option) {
-        this.franchise2Select.sendKeys(option);
-    }
-
-    getFranchise2Select = function() {
-        return this.franchise2Select;
-    }
-
-    getFranchise2SelectedOption = function() {
-        return this.franchise2Select.element(by.css('option:checked')).getText();
-    }
-
-    winnerSelectLastOption = function() {
-        this.winnerSelect.all(by.tagName('option')).last().click();
-    }
-
-    winnerSelectOption = function(option) {
-        this.winnerSelect.sendKeys(option);
-    }
-
-    getWinnerSelect = function() {
-        return this.winnerSelect;
-    }
-
-    getWinnerSelectedOption = function() {
-        return this.winnerSelect.element(by.css('option:checked')).getText();
+    getWinningFranchiseSelectedOption = function() {
+        return this.winningFranchiseSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

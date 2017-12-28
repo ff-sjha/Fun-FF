@@ -2,12 +2,12 @@
     "fafiApp": {
         "Games" : {
             "null": "",
-            "Football": "Football",
-            "Chess": "Chess",
-            "Badminton": "Badminton",
-            "Ludo": "Ludo",
-            "TableTennis": "TableTennis",
-            "BoxCricket": "BoxCricket"
+            "FOOTBALL": "FOOTBALL",
+            "CHESS": "CHESS",
+            "BADMINTON": "BADMINTON",
+            "LUDO": "LUDO",
+            "TABLE_TENNIS": "TABLE_TENNIS",
+            "BOX_CRICKET": "BOX_CRICKET"
         }
     }
 }

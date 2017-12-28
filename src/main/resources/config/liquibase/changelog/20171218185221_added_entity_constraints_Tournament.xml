@@ -14,11 +14,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="season"/>
 
-        <addForeignKeyConstraint baseColumnNames="winner_id"
+        <addForeignKeyConstraint baseColumnNames="winning_franchise_id"
                                  baseTableName="tournament"
-                                 constraintName="fk_tournament_winner_id"
+                                 constraintName="fk_tournament_winning_franchise_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="franchise"/>
+                                 referencedTableName="seasons_franchise"/>
+
+        <addForeignKeyConstraint baseColumnNames="player_of_tournament_id"
+                                 baseTableName="tournament"
+                                 constraintName="fk_tournament_player_of_tournament_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seasons_franchise_player"/>
 
     </changeSet>
 </databaseChangeLog>

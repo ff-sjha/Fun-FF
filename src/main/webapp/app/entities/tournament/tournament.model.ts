@@ -1,16 +1,24 @@
 import { BaseEntity } from './../../shared';
 
+export const enum Games {
+    'FOOTBALL',
+    ' CHESS',
+    ' BADMINTON',
+    ' LUDO',
+    ' TABLE_TENNIS',
+    ' BOX_CRICKET'
+}
+
 export class Tournament implements BaseEntity {
     constructor(
         public id?: number,
-        public name?: string,
         public startDate?: any,
         public endDate?: any,
+        public type?: Games,
         public seasonId?: number,
-        public seasonName?: string,
         public matches?: BaseEntity[],
-        public winnerId?: number,
-        public winnerName?: string,
+        public winningFranchiseId?: number,
+        public playerOfTournamentId?: number,
     ) {
     }
 }

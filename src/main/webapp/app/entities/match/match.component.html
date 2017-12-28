@@ -19,10 +19,10 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="startDateTime"><span jhiTranslate="fafiApp.match.startDateTime">Start Date Time</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="endDateTime"><span jhiTranslate="fafiApp.match.endDateTime">End Date Time</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="matchNumber"><span jhiTranslate="fafiApp.match.matchNumber">Match Number</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="pointsEarnedByFranchise"><span jhiTranslate="fafiApp.match.pointsEarnedByFranchise">Points Earned By Franchise</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="tournamentId"><span jhiTranslate="fafiApp.match.tournament">Tournament</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="franchise1Id"><span jhiTranslate="fafiApp.match.franchise1">Franchise 1</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="franchise2Id"><span jhiTranslate="fafiApp.match.franchise2">Franchise 2</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="winnerId"><span jhiTranslate="fafiApp.match.winner">Winner</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="winningFranchiseFranchiseName"><span jhiTranslate="fafiApp.match.winningFranchise">Winning Franchise</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,24 +31,16 @@
                 <td><a [routerLink]="['../match', match.id ]">{{match.id}}</a></td>
                 <td>{{match.startDateTime | date:'medium'}}</td>
                 <td>{{match.endDateTime | date:'medium'}}</td>
+                <td>{{match.matchNumber}}</td>
+                <td>{{match.pointsEarnedByFranchise}}</td>
                 <td>
                     <div *ngIf="match.tournamentId">
-                        <a [routerLink]="['../tournament', match.tournamentId  ]" >{{match.tournamentName}}</a>
+                        <a [routerLink]="['../tournament', match.tournamentId  ]" >{{match.tournamentId}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="match.franchise1Id">
-                        <a [routerLink]="['../franchise', match.franchise1Id  ]" >{{match.franchise1Name}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="match.franchise2Id">
-                        <a [routerLink]="['../franchise', match.franchise2Id  ]" >{{match.franchise2Name}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="match.winnerId">
-                        <a [routerLink]="['../franchise', match.winnerId  ]" >{{match.winnerName}}</a>
+                    <div *ngIf="match.winningFranchiseId">
+                        <a [routerLink]="['../seasons-franchise', match.winningFranchiseId  ]" >{{match.winningFranchiseFranchiseName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

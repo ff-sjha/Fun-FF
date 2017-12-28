@@ -8,28 +8,10 @@
             "otherEntityField": "id"
         },
         {
-            "relationshipName": "franchise1",
-            "otherEntityName": "franchise",
-            "relationshipType": "one-to-one",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "match"
-        },
-        {
-            "relationshipName": "franchise2",
-            "otherEntityName": "franchise",
-            "relationshipType": "one-to-one",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "match"
-        },
-        {
-            "relationshipName": "winner",
-            "otherEntityName": "franchise",
-            "relationshipType": "one-to-one",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "match"
+            "relationshipName": "winningFranchise",
+            "otherEntityName": "seasonsFranchise",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "franchiseName"
         }
     ],
     "fields": [
@@ -40,6 +22,19 @@
         {
             "fieldName": "endDateTime",
             "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "matchNumber",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": "1"
+        },
+        {
+            "fieldName": "pointsEarnedByFranchise",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20171218190035",

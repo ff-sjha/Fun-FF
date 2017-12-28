@@ -4,9 +4,7 @@ import com.firstfuel.fafi.FafiApp;
 
 import com.firstfuel.fafi.domain.Match;
 import com.firstfuel.fafi.domain.Tournament;
-import com.firstfuel.fafi.domain.Franchise;
-import com.firstfuel.fafi.domain.Franchise;
-import com.firstfuel.fafi.domain.Franchise;
+import com.firstfuel.fafi.domain.SeasonsFranchise;
 import com.firstfuel.fafi.repository.MatchRepository;
 import com.firstfuel.fafi.service.MatchService;
 import com.firstfuel.fafi.service.dto.MatchDTO;
@@ -58,6 +56,12 @@ public class MatchResourceIntTest {
     private static final ZonedDateTime DEFAULT_END_DATE_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_END_DATE_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
+    private static final Integer DEFAULT_MATCH_NUMBER = 1;
+    private static final Integer UPDATED_MATCH_NUMBER = 2;
+
+    private static final Integer DEFAULT_POINTS_EARNED_BY_FRANCHISE = 1;
+    private static final Integer UPDATED_POINTS_EARNED_BY_FRANCHISE = 2;
+
     @Autowired
     private MatchRepository matchRepository;
 
@@ -106,7 +110,9 @@ public class MatchResourceIntTest {
     public static Match createEntity(EntityManager em) {
         Match match = new Match()
             .startDateTime(DEFAULT_START_DATE_TIME)
-            .endDateTime(DEFAULT_END_DATE_TIME);
+            .endDateTime(DEFAULT_END_DATE_TIME)
+            .matchNumber(DEFAULT_MATCH_NUMBER)
+            .pointsEarnedByFranchise(DEFAULT_POINTS_EARNED_BY_FRANCHISE);
         return match;
     }
 
@@ -133,6 +139,8 @@ public class MatchResourceIntTest {
         Match testMatch = matchList.get(matchList.size() - 1);
         assertThat(testMatch.getStartDateTime()).isEqualTo(DEFAULT_START_DATE_TIME);
         assertThat(testMatch.getEndDateTime()).isEqualTo(DEFAULT_END_DATE_TIME);
+        assertThat(testMatch.getMatchNumber()).isEqualTo(DEFAULT_MATCH_NUMBER);
+        assertThat(testMatch.getPointsEarnedByFranchise()).isEqualTo(DEFAULT_POINTS_EARNED_BY_FRANCHISE);
     }
 
     @Test
@@ -157,6 +165,25 @@ public class MatchResourceIntTest {
 
     @Test
     @Transactional
+    public void checkMatchNumberIsRequired() throws Exception {
+        int databaseSizeBeforeTest = matchRepository.findAll().size();
+        // set the field null
+        match.setMatchNumber(null);
+
+        // Create the Match, which fails.
+        MatchDTO matchDTO = matchMapper.toDto(match);
+
+        restMatchMockMvc.perform(post("/api/matches")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(matchDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Match> matchList = matchRepository.findAll();
+        assertThat(matchList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllMatches() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
@@ -167,7 +194,9 @@ public class MatchResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(match.getId().intValue())))
             .andExpect(jsonPath("$.[*].startDateTime").value(hasItem(sameInstant(DEFAULT_START_DATE_TIME))))
-            .andExpect(jsonPath("$.[*].endDateTime").value(hasItem(sameInstant(DEFAULT_END_DATE_TIME))));
+            .andExpect(jsonPath("$.[*].endDateTime").value(hasItem(sameInstant(DEFAULT_END_DATE_TIME))))
+            .andExpect(jsonPath("$.[*].matchNumber").value(hasItem(DEFAULT_MATCH_NUMBER)))
+            .andExpect(jsonPath("$.[*].pointsEarnedByFranchise").value(hasItem(DEFAULT_POINTS_EARNED_BY_FRANCHISE)));
     }
 
     @Test
@@ -182,7 +211,9 @@ public class MatchResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(match.getId().intValue()))
             .andExpect(jsonPath("$.startDateTime").value(sameInstant(DEFAULT_START_DATE_TIME)))
-            .andExpect(jsonPath("$.endDateTime").value(sameInstant(DEFAULT_END_DATE_TIME)));
+            .andExpect(jsonPath("$.endDateTime").value(sameInstant(DEFAULT_END_DATE_TIME)))
+            .andExpect(jsonPath("$.matchNumber").value(DEFAULT_MATCH_NUMBER))
+            .andExpect(jsonPath("$.pointsEarnedByFranchise").value(DEFAULT_POINTS_EARNED_BY_FRANCHISE));
     }
 
     @Test
@@ -319,6 +350,138 @@ public class MatchResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllMatchesByMatchNumberIsEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where matchNumber equals to DEFAULT_MATCH_NUMBER
+        defaultMatchShouldBeFound("matchNumber.equals=" + DEFAULT_MATCH_NUMBER);
+
+        // Get all the matchList where matchNumber equals to UPDATED_MATCH_NUMBER
+        defaultMatchShouldNotBeFound("matchNumber.equals=" + UPDATED_MATCH_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByMatchNumberIsInShouldWork() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where matchNumber in DEFAULT_MATCH_NUMBER or UPDATED_MATCH_NUMBER
+        defaultMatchShouldBeFound("matchNumber.in=" + DEFAULT_MATCH_NUMBER + "," + UPDATED_MATCH_NUMBER);
+
+        // Get all the matchList where matchNumber equals to UPDATED_MATCH_NUMBER
+        defaultMatchShouldNotBeFound("matchNumber.in=" + UPDATED_MATCH_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByMatchNumberIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where matchNumber is not null
+        defaultMatchShouldBeFound("matchNumber.specified=true");
+
+        // Get all the matchList where matchNumber is null
+        defaultMatchShouldNotBeFound("matchNumber.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByMatchNumberIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where matchNumber greater than or equals to DEFAULT_MATCH_NUMBER
+        defaultMatchShouldBeFound("matchNumber.greaterOrEqualThan=" + DEFAULT_MATCH_NUMBER);
+
+        // Get all the matchList where matchNumber greater than or equals to UPDATED_MATCH_NUMBER
+        defaultMatchShouldNotBeFound("matchNumber.greaterOrEqualThan=" + UPDATED_MATCH_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByMatchNumberIsLessThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where matchNumber less than or equals to DEFAULT_MATCH_NUMBER
+        defaultMatchShouldNotBeFound("matchNumber.lessThan=" + DEFAULT_MATCH_NUMBER);
+
+        // Get all the matchList where matchNumber less than or equals to UPDATED_MATCH_NUMBER
+        defaultMatchShouldBeFound("matchNumber.lessThan=" + UPDATED_MATCH_NUMBER);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllMatchesByPointsEarnedByFranchiseIsEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where pointsEarnedByFranchise equals to DEFAULT_POINTS_EARNED_BY_FRANCHISE
+        defaultMatchShouldBeFound("pointsEarnedByFranchise.equals=" + DEFAULT_POINTS_EARNED_BY_FRANCHISE);
+
+        // Get all the matchList where pointsEarnedByFranchise equals to UPDATED_POINTS_EARNED_BY_FRANCHISE
+        defaultMatchShouldNotBeFound("pointsEarnedByFranchise.equals=" + UPDATED_POINTS_EARNED_BY_FRANCHISE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByPointsEarnedByFranchiseIsInShouldWork() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where pointsEarnedByFranchise in DEFAULT_POINTS_EARNED_BY_FRANCHISE or UPDATED_POINTS_EARNED_BY_FRANCHISE
+        defaultMatchShouldBeFound("pointsEarnedByFranchise.in=" + DEFAULT_POINTS_EARNED_BY_FRANCHISE + "," + UPDATED_POINTS_EARNED_BY_FRANCHISE);
+
+        // Get all the matchList where pointsEarnedByFranchise equals to UPDATED_POINTS_EARNED_BY_FRANCHISE
+        defaultMatchShouldNotBeFound("pointsEarnedByFranchise.in=" + UPDATED_POINTS_EARNED_BY_FRANCHISE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByPointsEarnedByFranchiseIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where pointsEarnedByFranchise is not null
+        defaultMatchShouldBeFound("pointsEarnedByFranchise.specified=true");
+
+        // Get all the matchList where pointsEarnedByFranchise is null
+        defaultMatchShouldNotBeFound("pointsEarnedByFranchise.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByPointsEarnedByFranchiseIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where pointsEarnedByFranchise greater than or equals to DEFAULT_POINTS_EARNED_BY_FRANCHISE
+        defaultMatchShouldBeFound("pointsEarnedByFranchise.greaterOrEqualThan=" + DEFAULT_POINTS_EARNED_BY_FRANCHISE);
+
+        // Get all the matchList where pointsEarnedByFranchise greater than or equals to UPDATED_POINTS_EARNED_BY_FRANCHISE
+        defaultMatchShouldNotBeFound("pointsEarnedByFranchise.greaterOrEqualThan=" + UPDATED_POINTS_EARNED_BY_FRANCHISE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByPointsEarnedByFranchiseIsLessThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where pointsEarnedByFranchise less than or equals to DEFAULT_POINTS_EARNED_BY_FRANCHISE
+        defaultMatchShouldNotBeFound("pointsEarnedByFranchise.lessThan=" + DEFAULT_POINTS_EARNED_BY_FRANCHISE);
+
+        // Get all the matchList where pointsEarnedByFranchise less than or equals to UPDATED_POINTS_EARNED_BY_FRANCHISE
+        defaultMatchShouldBeFound("pointsEarnedByFranchise.lessThan=" + UPDATED_POINTS_EARNED_BY_FRANCHISE);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllMatchesByTournamentIsEqualToSomething() throws Exception {
         // Initialize the database
         Tournament tournament = TournamentResourceIntTest.createEntity(em);
@@ -338,58 +501,20 @@ public class MatchResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllMatchesByFranchise1IsEqualToSomething() throws Exception {
+    public void getAllMatchesByWinningFranchiseIsEqualToSomething() throws Exception {
         // Initialize the database
-        Franchise franchise1 = FranchiseResourceIntTest.createEntity(em);
-        em.persist(franchise1);
+        SeasonsFranchise winningFranchise = SeasonsFranchiseResourceIntTest.createEntity(em);
+        em.persist(winningFranchise);
         em.flush();
-        match.setFranchise1(franchise1);
+        match.setWinningFranchise(winningFranchise);
         matchRepository.saveAndFlush(match);
-        Long franchise1Id = franchise1.getId();
+        Long winningFranchiseId = winningFranchise.getId();
 
-        // Get all the matchList where franchise1 equals to franchise1Id
-        defaultMatchShouldBeFound("franchise1Id.equals=" + franchise1Id);
+        // Get all the matchList where winningFranchise equals to winningFranchiseId
+        defaultMatchShouldBeFound("winningFranchiseId.equals=" + winningFranchiseId);
 
-        // Get all the matchList where franchise1 equals to franchise1Id + 1
-        defaultMatchShouldNotBeFound("franchise1Id.equals=" + (franchise1Id + 1));
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllMatchesByFranchise2IsEqualToSomething() throws Exception {
-        // Initialize the database
-        Franchise franchise2 = FranchiseResourceIntTest.createEntity(em);
-        em.persist(franchise2);
-        em.flush();
-        match.setFranchise2(franchise2);
-        matchRepository.saveAndFlush(match);
-        Long franchise2Id = franchise2.getId();
-
-        // Get all the matchList where franchise2 equals to franchise2Id
-        defaultMatchShouldBeFound("franchise2Id.equals=" + franchise2Id);
-
-        // Get all the matchList where franchise2 equals to franchise2Id + 1
-        defaultMatchShouldNotBeFound("franchise2Id.equals=" + (franchise2Id + 1));
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllMatchesByWinnerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        Franchise winner = FranchiseResourceIntTest.createEntity(em);
-        em.persist(winner);
-        em.flush();
-        match.setWinner(winner);
-        matchRepository.saveAndFlush(match);
-        Long winnerId = winner.getId();
-
-        // Get all the matchList where winner equals to winnerId
-        defaultMatchShouldBeFound("winnerId.equals=" + winnerId);
-
-        // Get all the matchList where winner equals to winnerId + 1
-        defaultMatchShouldNotBeFound("winnerId.equals=" + (winnerId + 1));
+        // Get all the matchList where winningFranchise equals to winningFranchiseId + 1
+        defaultMatchShouldNotBeFound("winningFranchiseId.equals=" + (winningFranchiseId + 1));
     }
 
     /**
@@ -401,7 +526,9 @@ public class MatchResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(match.getId().intValue())))
             .andExpect(jsonPath("$.[*].startDateTime").value(hasItem(sameInstant(DEFAULT_START_DATE_TIME))))
-            .andExpect(jsonPath("$.[*].endDateTime").value(hasItem(sameInstant(DEFAULT_END_DATE_TIME))));
+            .andExpect(jsonPath("$.[*].endDateTime").value(hasItem(sameInstant(DEFAULT_END_DATE_TIME))))
+            .andExpect(jsonPath("$.[*].matchNumber").value(hasItem(DEFAULT_MATCH_NUMBER)))
+            .andExpect(jsonPath("$.[*].pointsEarnedByFranchise").value(hasItem(DEFAULT_POINTS_EARNED_BY_FRANCHISE)));
     }
 
     /**
@@ -437,7 +564,9 @@ public class MatchResourceIntTest {
         em.detach(updatedMatch);
         updatedMatch
             .startDateTime(UPDATED_START_DATE_TIME)
-            .endDateTime(UPDATED_END_DATE_TIME);
+            .endDateTime(UPDATED_END_DATE_TIME)
+            .matchNumber(UPDATED_MATCH_NUMBER)
+            .pointsEarnedByFranchise(UPDATED_POINTS_EARNED_BY_FRANCHISE);
         MatchDTO matchDTO = matchMapper.toDto(updatedMatch);
 
         restMatchMockMvc.perform(put("/api/matches")
@@ -451,6 +580,8 @@ public class MatchResourceIntTest {
         Match testMatch = matchList.get(matchList.size() - 1);
         assertThat(testMatch.getStartDateTime()).isEqualTo(UPDATED_START_DATE_TIME);
         assertThat(testMatch.getEndDateTime()).isEqualTo(UPDATED_END_DATE_TIME);
+        assertThat(testMatch.getMatchNumber()).isEqualTo(UPDATED_MATCH_NUMBER);
+        assertThat(testMatch.getPointsEarnedByFranchise()).isEqualTo(UPDATED_POINTS_EARNED_BY_FRANCHISE);
     }
 
     @Test

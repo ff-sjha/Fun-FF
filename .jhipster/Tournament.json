@@ -14,22 +14,19 @@
             "otherEntityRelationshipName": "tournament"
         },
         {
-            "relationshipName": "winner",
-            "otherEntityName": "franchise",
-            "relationshipType": "one-to-one",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "tournament"
+            "relationshipName": "winningFranchise",
+            "otherEntityName": "seasonsFranchise",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "franchiseName"
+        },
+        {
+            "relationshipName": "playerOfTournament",
+            "otherEntityName": "seasonsFranchisePlayer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "playerFirstName"
         }
     ],
     "fields": [
-        {
-            "fieldName": "name",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
         {
             "fieldName": "startDate",
             "fieldType": "LocalDate"
@@ -37,6 +34,14 @@
         {
             "fieldName": "endDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "Games",
+            "fieldValues": "FOOTBALL, CHESS, BADMINTON, LUDO, TABLE_TENNIS, BOX_CRICKET",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20171218185221",

@@ -20,6 +20,7 @@ import com.firstfuel.fafi.service.dto.TournamentCriteria;
 
 import com.firstfuel.fafi.service.dto.TournamentDTO;
 import com.firstfuel.fafi.service.mapper.TournamentMapper;
+import com.firstfuel.fafi.domain.enumeration.Games;
 
 /**
  * Service for executing complex queries for Tournament entities in the database.
@@ -78,14 +79,14 @@ public class TournamentQueryService extends QueryService<Tournament> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Tournament_.id));
             }
-            if (criteria.getName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getName(), Tournament_.name));
-            }
             if (criteria.getStartDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStartDate(), Tournament_.startDate));
             }
             if (criteria.getEndDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEndDate(), Tournament_.endDate));
+            }
+            if (criteria.getType() != null) {
+                specification = specification.and(buildSpecification(criteria.getType(), Tournament_.type));
             }
             if (criteria.getSeasonId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getSeasonId(), Tournament_.season, Season_.id));
@@ -93,8 +94,11 @@ public class TournamentQueryService extends QueryService<Tournament> {
             if (criteria.getMatchesId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getMatchesId(), Tournament_.matches, Match_.id));
             }
-            if (criteria.getWinnerId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getWinnerId(), Tournament_.winner, Franchise_.id));
+            if (criteria.getWinningFranchiseId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getWinningFranchiseId(), Tournament_.winningFranchise, SeasonsFranchise_.id));
+            }
+            if (criteria.getPlayerOfTournamentId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getPlayerOfTournamentId(), Tournament_.playerOfTournament, SeasonsFranchisePlayer_.id));
             }
         }
         return specification;

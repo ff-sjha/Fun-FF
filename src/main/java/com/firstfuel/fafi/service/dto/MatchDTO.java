@@ -2,6 +2,7 @@ package com.firstfuel.fafi.service.dto;
 
 
 import java.time.ZonedDateTime;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,21 +19,17 @@ public class MatchDTO implements Serializable {
 
     private ZonedDateTime endDateTime;
 
+    @NotNull
+    @Min(value = 1)
+    private Integer matchNumber;
+
+    private Integer pointsEarnedByFranchise;
+
     private Long tournamentId;
 
-    private Long franchise1Id;
+    private Long winningFranchiseId;
 
-    private Long franchise2Id;
-
-    private Long winnerId;
-
-    private String tournamentName;
-
-    private String franchise1Name;
-
-    private String franchise2Name;
-
-    private String winnerName;
+    private String winningFranchiseFranchiseName;
 
     public Long getId() {
         return id;
@@ -58,6 +55,22 @@ public class MatchDTO implements Serializable {
         this.endDateTime = endDateTime;
     }
 
+    public Integer getMatchNumber() {
+        return matchNumber;
+    }
+
+    public void setMatchNumber(Integer matchNumber) {
+        this.matchNumber = matchNumber;
+    }
+
+    public Integer getPointsEarnedByFranchise() {
+        return pointsEarnedByFranchise;
+    }
+
+    public void setPointsEarnedByFranchise(Integer pointsEarnedByFranchise) {
+        this.pointsEarnedByFranchise = pointsEarnedByFranchise;
+    }
+
     public Long getTournamentId() {
         return tournamentId;
     }
@@ -66,60 +79,20 @@ public class MatchDTO implements Serializable {
         this.tournamentId = tournamentId;
     }
 
-    public Long getFranchise1Id() {
-        return franchise1Id;
+    public Long getWinningFranchiseId() {
+        return winningFranchiseId;
     }
 
-    public void setFranchise1Id(Long franchiseId) {
-        this.franchise1Id = franchiseId;
+    public void setWinningFranchiseId(Long seasonsFranchiseId) {
+        this.winningFranchiseId = seasonsFranchiseId;
     }
 
-    public Long getFranchise2Id() {
-        return franchise2Id;
+    public String getWinningFranchiseFranchiseName() {
+        return winningFranchiseFranchiseName;
     }
 
-    public void setFranchise2Id(Long franchiseId) {
-        this.franchise2Id = franchiseId;
-    }
-
-    public Long getWinnerId() {
-        return winnerId;
-    }
-
-    public void setWinnerId(Long franchiseId) {
-        this.winnerId = franchiseId;
-    }
-
-    public String getTournamentName() {
-        return tournamentName;
-    }
-
-    public void setTournamentName( String tournamentName ) {
-        this.tournamentName = tournamentName;
-    }
-
-    public String getFranchise1Name() {
-        return franchise1Name;
-    }
-
-    public void setFranchise1Name( String franchise1Name ) {
-        this.franchise1Name = franchise1Name;
-    }
-
-    public String getFranchise2Name() {
-        return franchise2Name;
-    }
-
-    public void setFranchise2Name( String franchise2Name ) {
-        this.franchise2Name = franchise2Name;
-    }
-
-    public String getWinnerName() {
-        return winnerName;
-    }
-
-    public void setWinnerName( String winnerName ) {
-        this.winnerName = winnerName;
+    public void setWinningFranchiseFranchiseName(String seasonsFranchiseFranchiseName) {
+        this.winningFranchiseFranchiseName = seasonsFranchiseFranchiseName;
     }
 
     @Override
@@ -149,6 +122,8 @@ public class MatchDTO implements Serializable {
             "id=" + getId() +
             ", startDateTime='" + getStartDateTime() + "'" +
             ", endDateTime='" + getEndDateTime() + "'" +
+            ", matchNumber=" + getMatchNumber() +
+            ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() +
             "}";
     }
 }

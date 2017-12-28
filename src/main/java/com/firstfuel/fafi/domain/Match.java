@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -29,20 +30,19 @@ public class Match implements Serializable {
     @Column(name = "end_date_time")
     private ZonedDateTime endDateTime;
 
+    @NotNull
+    @Min(value = 1)
+    @Column(name = "match_number", nullable = false)
+    private Integer matchNumber;
+
+    @Column(name = "points_earned_by_franchise")
+    private Integer pointsEarnedByFranchise;
+
     @ManyToOne
     private Tournament tournament;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Franchise franchise1;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Franchise franchise2;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Franchise winner;
+    @ManyToOne
+    private SeasonsFranchise winningFranchise;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -79,6 +79,32 @@ public class Match implements Serializable {
         this.endDateTime = endDateTime;
     }
 
+    public Integer getMatchNumber() {
+        return matchNumber;
+    }
+
+    public Match matchNumber(Integer matchNumber) {
+        this.matchNumber = matchNumber;
+        return this;
+    }
+
+    public void setMatchNumber(Integer matchNumber) {
+        this.matchNumber = matchNumber;
+    }
+
+    public Integer getPointsEarnedByFranchise() {
+        return pointsEarnedByFranchise;
+    }
+
+    public Match pointsEarnedByFranchise(Integer pointsEarnedByFranchise) {
+        this.pointsEarnedByFranchise = pointsEarnedByFranchise;
+        return this;
+    }
+
+    public void setPointsEarnedByFranchise(Integer pointsEarnedByFranchise) {
+        this.pointsEarnedByFranchise = pointsEarnedByFranchise;
+    }
+
     public Tournament getTournament() {
         return tournament;
     }
@@ -92,43 +118,17 @@ public class Match implements Serializable {
         this.tournament = tournament;
     }
 
-    public Franchise getFranchise1() {
-        return franchise1;
+    public SeasonsFranchise getWinningFranchise() {
+        return winningFranchise;
     }
 
-    public Match franchise1(Franchise franchise) {
-        this.franchise1 = franchise;
+    public Match winningFranchise(SeasonsFranchise seasonsFranchise) {
+        this.winningFranchise = seasonsFranchise;
         return this;
     }
 
-    public void setFranchise1(Franchise franchise) {
-        this.franchise1 = franchise;
-    }
-
-    public Franchise getFranchise2() {
-        return franchise2;
-    }
-
-    public Match franchise2(Franchise franchise) {
-        this.franchise2 = franchise;
-        return this;
-    }
-
-    public void setFranchise2(Franchise franchise) {
-        this.franchise2 = franchise;
-    }
-
-    public Franchise getWinner() {
-        return winner;
-    }
-
-    public Match winner(Franchise franchise) {
-        this.winner = franchise;
-        return this;
-    }
-
-    public void setWinner(Franchise franchise) {
-        this.winner = franchise;
+    public void setWinningFranchise(SeasonsFranchise seasonsFranchise) {
+        this.winningFranchise = seasonsFranchise;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -158,6 +158,8 @@ public class Match implements Serializable {
             "id=" + getId() +
             ", startDateTime='" + getStartDateTime() + "'" +
             ", endDateTime='" + getEndDateTime() + "'" +
+            ", matchNumber=" + getMatchNumber() +
+            ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() +
             "}";
     }
 }

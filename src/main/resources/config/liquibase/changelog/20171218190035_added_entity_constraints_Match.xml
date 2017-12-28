@@ -14,23 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="tournament"/>
 
-        <addForeignKeyConstraint baseColumnNames="franchise1_id"
+        <addForeignKeyConstraint baseColumnNames="winning_franchise_id"
                                  baseTableName="fafi_match"
-                                 constraintName="fk_match_franchise1_id"
+                                 constraintName="fk_match_winning_franchise_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="franchise"/>
-
-        <addForeignKeyConstraint baseColumnNames="franchise2_id"
-                                 baseTableName="fafi_match"
-                                 constraintName="fk_match_franchise2_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="franchise"/>
-
-        <addForeignKeyConstraint baseColumnNames="winner_id"
-                                 baseTableName="fafi_match"
-                                 constraintName="fk_match_winner_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="franchise"/>
+                                 referencedTableName="seasons_franchise"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -8,23 +8,16 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Match and its DTO MatchDTO.
  */
-@Mapper(componentModel = "spring", uses = {TournamentMapper.class, FranchiseMapper.class})
+@Mapper(componentModel = "spring", uses = {TournamentMapper.class, SeasonsFranchiseMapper.class})
 public interface MatchMapper extends EntityMapper<MatchDTO, Match> {
 
     @Mapping(source = "tournament.id", target = "tournamentId")
-    @Mapping(source = "franchise1.id", target = "franchise1Id")
-    @Mapping(source = "franchise2.id", target = "franchise2Id")
-    @Mapping(source = "winner.id", target = "winnerId")
-    @Mapping(source = "tournament.name", target = "tournamentName")
-    @Mapping(source = "franchise1.name", target = "franchise1Name")
-    @Mapping(source = "franchise2.name", target = "franchise2Name")
-    @Mapping(source = "winner.name", target = "winnerName")
-    MatchDTO toDto(Match match);
+    @Mapping(source = "winningFranchise.id", target = "winningFranchiseId")
+    @Mapping(source = "winningFranchise.franchise.name", target = "winningFranchiseFranchiseName")
+    MatchDTO toDto(Match match); 
 
     @Mapping(source = "tournamentId", target = "tournament")
-    @Mapping(source = "franchise1Id", target = "franchise1")
-    @Mapping(source = "franchise2Id", target = "franchise2")
-    @Mapping(source = "winnerId", target = "winner")
+    @Mapping(source = "winningFranchiseId", target = "winningFranchise")
     Match toEntity(MatchDTO matchDTO);
 
     default Match fromId(Long id) {
