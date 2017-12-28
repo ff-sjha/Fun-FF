@@ -1,0 +1,23 @@
+{
+    "fafiApp": {
+        "seasonsFranchisePlayer" : {
+            "home": {
+                "title": "Seasons Franchise Players",
+                "createLabel": "Create a new Seasons Franchise Player",
+                "createOrEditLabel": "Create or edit a Seasons Franchise Player"
+            },
+            "created": "A new Seasons Franchise Player is created with identifier {{ param }}",
+            "updated": "A Seasons Franchise Player is updated with identifier {{ param }}",
+            "deleted": "A Seasons Franchise Player is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Seasons Franchise Player {{ id }}?"
+            },
+            "detail": {
+                "title": "Seasons Franchise Player"
+            },
+            "bidPrice": "Bid Price",
+            "seasonsFranchise": "Seasons Franchise",
+            "player": "Player"
+        }
+    }
+}

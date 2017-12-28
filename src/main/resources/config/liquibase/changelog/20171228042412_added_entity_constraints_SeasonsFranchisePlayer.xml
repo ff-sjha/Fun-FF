@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity SeasonsFranchisePlayer.
+    -->
+    <changeSet id="20171228042412-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="seasons_franchise_id"
+                                 baseTableName="seasons_franchise_player"
+                                 constraintName="fk_seasons_franchise_player_seasons_franchise_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seasons_franchise"/>
+
+        <addForeignKeyConstraint baseColumnNames="player_id"
+                                 baseTableName="seasons_franchise_player"
+                                 constraintName="fk_seasons_franchise_player_player_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="player"/>
+
+    </changeSet>
+</databaseChangeLog>

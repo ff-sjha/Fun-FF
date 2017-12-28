@@ -112,6 +112,12 @@
                         </a>
                     </li>
                     <li>
+                        <a class="dropdown-item" routerLink="seasons-franchise-player" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-cogs" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.seasonsFranchisePlayer">Seasons Franchise Player</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item" routerLink="tournament" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-cogs" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.tournament">Tournament</span>

@@ -16,6 +16,8 @@ public class SeasonsFranchiseDTO implements Serializable {
 
     private Long seasonId;
 
+    private String displayName;
+    
     private String seasonName;
 
     private Long franchiseId;
@@ -102,7 +104,15 @@ public class SeasonsFranchiseDTO implements Serializable {
         this.iconPlayerFirstName = playerFirstName;
     }
 
-    @Override
+    public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

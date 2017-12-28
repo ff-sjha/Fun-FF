@@ -13,6 +13,7 @@
     <include file="config/liquibase/changelog/20171220183725_added_entity_TieTeam.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171220185648_added_entity_TieMatch.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171227095626_added_entity_SeasonsFranchise.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171228042412_added_entity_SeasonsFranchisePlayer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20171218182920_added_entity_constraints_Season.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171218185221_added_entity_constraints_Tournament.xml" relativeToChangelogFile="false"/>
@@ -20,6 +21,7 @@
     <include file="config/liquibase/changelog/20171220185648_added_entity_constraints_TieMatch.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171220183725_added_entity_constraints_TieTeam.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171227095626_added_entity_constraints_SeasonsFranchise.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171228042412_added_entity_constraints_SeasonsFranchisePlayer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <include file="config/liquibase/changelog/fafi_modify_entities.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
