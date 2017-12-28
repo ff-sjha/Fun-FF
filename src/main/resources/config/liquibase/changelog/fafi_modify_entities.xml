@@ -36,4 +36,8 @@
 		<addUniqueConstraint columnNames="season_id, icon_player_id"
 			tableName="seasons_franchise" constraintName="uk_seasons_franchise_icon_player_id" />
 	</changeSet>
+	<changeSet id="20171228084801-2" author="Ameeth Paatil">
+		<addUniqueConstraint columnNames="first_name, last_name"
+			tableName="player" constraintName="uk_player_name" />
+	</changeSet>
 </databaseChangeLog>
