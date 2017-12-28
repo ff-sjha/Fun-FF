@@ -1,104 +1,120 @@
 package com.firstfuel.fafi.service.dto;
 
-
-import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * A DTO for the SeasonsFranchisePlayer entity.
  */
 public class SeasonsFranchisePlayerDTO implements Serializable {
 
-    private Long id;
+	private Long id;
 
-    @NotNull
-    private Double bidPrice;
+	@NotNull
+	private Double bidPrice;
 
-    private Long seasonsFranchiseId;
+	private Long seasonsFranchiseId;
 
-    private String seasonsFranchiseName;
+	private String seasonsFranchiseFranchiseName;
+	
+	private String seasonsFranchiseSeasonName;
 
-    private Long playerId;
+	private Long playerId;
 
-    private String playerFirstName;
+	private String playerFirstName;
 
-    public Long getId() {
-        return id;
-    }
+	private String playerLastName;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Double getBidPrice() {
-        return bidPrice;
-    }
-
-    public void setBidPrice(Double bidPrice) {
-        this.bidPrice = bidPrice;
-    }
-
-    public Long getSeasonsFranchiseId() {
-        return seasonsFranchiseId;
-    }
-
-    public void setSeasonsFranchiseId(Long seasonsFranchiseId) {
-        this.seasonsFranchiseId = seasonsFranchiseId;
-    }
-
-    public String getSeasonsFranchiseName() {
-		return seasonsFranchiseName;
+	public Long getId() {
+		return id;
 	}
 
-	public void setSeasonsFranchiseName(String seasonsFranchiseName) {
-		this.seasonsFranchiseName = seasonsFranchiseName;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Double getBidPrice() {
+		return bidPrice;
+	}
+
+	public void setBidPrice(Double bidPrice) {
+		this.bidPrice = bidPrice;
+	}
+
+	public Long getSeasonsFranchiseId() {
+		return seasonsFranchiseId;
+	}
+
+	public void setSeasonsFranchiseId(Long seasonsFranchiseId) {
+		this.seasonsFranchiseId = seasonsFranchiseId;
+	}
+
+
+	public String getSeasonsFranchiseFranchiseName() {
+		return seasonsFranchiseFranchiseName;
+	}
+
+	public void setSeasonsFranchiseFranchiseName(String seasonsFranchiseFranchiseName) {
+		this.seasonsFranchiseFranchiseName = seasonsFranchiseFranchiseName;
+	}
+
+	public String getSeasonsFranchiseSeasonName() {
+		return seasonsFranchiseSeasonName;
+	}
+
+	public void setSeasonsFranchiseSeasonName(String seasonsFranchiseSeasonName) {
+		this.seasonsFranchiseSeasonName = seasonsFranchiseSeasonName;
 	}
 
 	public Long getPlayerId() {
-        return playerId;
-    }
+		return playerId;
+	}
 
-    public void setPlayerId(Long playerId) {
-        this.playerId = playerId;
-    }
+	public void setPlayerId(Long playerId) {
+		this.playerId = playerId;
+	}
 
-    public String getPlayerFirstName() {
-        return playerFirstName;
-    }
+	public String getPlayerFirstName() {
+		return playerFirstName;
+	}
 
-    public void setPlayerFirstName(String playerFirstName) {
-        this.playerFirstName = playerFirstName;
-    }
+	public void setPlayerFirstName(String playerFirstName) {
+		this.playerFirstName = playerFirstName;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+	public String getPlayerLastName() {
+		return playerLastName;
+	}
 
-        SeasonsFranchisePlayerDTO seasonsFranchisePlayerDTO = (SeasonsFranchisePlayerDTO) o;
-        if(seasonsFranchisePlayerDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), seasonsFranchisePlayerDTO.getId());
-    }
+	public void setPlayerLastName(String playerLastName) {
+		this.playerLastName = playerLastName;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-    @Override
-    public String toString() {
-        return "SeasonsFranchisePlayerDTO{" +
-            "id=" + getId() +
-            ", bidPrice=" + getBidPrice() +
-            "}";
-    }
+		SeasonsFranchisePlayerDTO seasonsFranchisePlayerDTO = (SeasonsFranchisePlayerDTO) o;
+		if (seasonsFranchisePlayerDTO.getId() == null || getId() == null) {
+			return false;
+		}
+		return Objects.equals(getId(), seasonsFranchisePlayerDTO.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(getId());
+	}
+
+	@Override
+	public String toString() {
+		return "SeasonsFranchisePlayerDTO{" + "id=" + getId() + ", bidPrice=" + getBidPrice() + "}";
+	}
 }

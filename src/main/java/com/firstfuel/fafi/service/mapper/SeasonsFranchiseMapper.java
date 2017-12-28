@@ -19,7 +19,6 @@ public interface SeasonsFranchiseMapper extends EntityMapper<SeasonsFranchiseDTO
 	@Mapping(source = "owner.firstName", target = "ownerFirstName")
 	@Mapping(source = "iconPlayer.id", target = "iconPlayerId")
 	@Mapping(source = "iconPlayer.firstName", target = "iconPlayerFirstName")
-	@Mapping(target = "displayName", expression = "java(seasonsFranchise.getSeason().getName())")
 	SeasonsFranchiseDTO toDto(SeasonsFranchise seasonsFranchise);
 
 	@Mapping(source = "seasonId", target = "season")

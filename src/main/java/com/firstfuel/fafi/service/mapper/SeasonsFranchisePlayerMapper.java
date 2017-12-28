@@ -14,9 +14,11 @@ import com.firstfuel.fafi.service.dto.SeasonsFranchisePlayerDTO;
 public interface SeasonsFranchisePlayerMapper extends EntityMapper<SeasonsFranchisePlayerDTO, SeasonsFranchisePlayer> {
 
 	@Mapping(source = "seasonsFranchise.id", target = "seasonsFranchiseId")
-	@Mapping(source = "seasonsFranchise.season.name", target = "seasonsFranchiseName")
+	@Mapping(source = "seasonsFranchise.season.name", target = "seasonsFranchiseSeasonName")
+	@Mapping(source = "seasonsFranchise.franchise.name", target = "seasonsFranchiseFranchiseName")
 	@Mapping(source = "player.id", target = "playerId")
 	@Mapping(source = "player.firstName", target = "playerFirstName")
+	@Mapping(source = "player.lastName", target = "playerLastName")
 	SeasonsFranchisePlayerDTO toDto(SeasonsFranchisePlayer seasonsFranchisePlayer);
 
 	@Mapping(source = "seasonsFranchiseId", target = "seasonsFranchise")
