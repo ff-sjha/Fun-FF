@@ -1,0 +1,48 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "season",
+            "otherEntityName": "season",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "franchise",
+            "otherEntityName": "franchise",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "owner",
+            "otherEntityName": "player",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "iconPlayer",
+            "otherEntityName": "player",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "firstName"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20171227095626",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "seasons_franchise",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

@@ -1,0 +1,46 @@
+
+<div *ngIf="seasonsFranchise">
+    <h2><span jhiTranslate="fafiApp.seasonsFranchise.detail.title">Seasons Franchise</span> {{seasonsFranchise.id}}</h2>
+    <hr>
+    <fafi-alert-error></fafi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="fafiApp.seasonsFranchise.season">Season</span></dt>
+        <dd>
+            <div *ngIf="seasonsFranchise.seasonId">
+                <a [routerLink]="['/season', seasonsFranchise.seasonId]">{{seasonsFranchise.seasonName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.seasonsFranchise.franchise">Franchise</span></dt>
+        <dd>
+            <div *ngIf="seasonsFranchise.franchiseId">
+                <a [routerLink]="['/franchise', seasonsFranchise.franchiseId]">{{seasonsFranchise.franchiseName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.seasonsFranchise.owner">Owner</span></dt>
+        <dd>
+            <div *ngIf="seasonsFranchise.ownerId">
+                <a [routerLink]="['/player', seasonsFranchise.ownerId]">{{seasonsFranchise.ownerFirstName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.seasonsFranchise.iconPlayer">Icon Player</span></dt>
+        <dd>
+            <div *ngIf="seasonsFranchise.iconPlayerId">
+                <a [routerLink]="['/player', seasonsFranchise.iconPlayerId]">{{seasonsFranchise.iconPlayerFirstName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'seasons-franchise/'+ seasonsFranchise.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

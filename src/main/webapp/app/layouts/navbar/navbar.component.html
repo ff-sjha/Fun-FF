@@ -88,15 +88,15 @@
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <li>
-                        <a class="dropdown-item" routerLink="season" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="player" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-cogs" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.season">Season</span>
+                            <span jhiTranslate="global.menu.entities.player">Player</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="tournament" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="season" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-cogs" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.tournament">Tournament</span>
+                            <span jhiTranslate="global.menu.entities.season">Season</span>
                         </a>
                     </li>
                     <li>
@@ -106,9 +106,15 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="player" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="seasons-franchise" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-cogs" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.player">Player</span>
+                            <span jhiTranslate="global.menu.entities.seasonsFranchise">Seasons Franchise</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="tournament" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-cogs" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.tournament">Tournament</span>
                         </a>
                     </li>
                     <li>
