@@ -1,0 +1,24 @@
+{
+    "fafiApp": {
+        "matchPlayers" : {
+            "home": {
+                "title": "Match Players",
+                "createLabel": "Create a new Match Players",
+                "createOrEditLabel": "Create or edit a Match Players"
+            },
+            "created": "A new Match Players is created with identifier {{ param }}",
+            "updated": "A Match Players is updated with identifier {{ param }}",
+            "deleted": "A Match Players is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Match Players {{ id }}?"
+            },
+            "detail": {
+                "title": "Match Players"
+            },
+            "playerOfTheMatch": "Player Of The Match",
+            "playerPointsEarned": "Player Points Earned",
+            "match": "Match",
+            "seasonsFranchisePlayer": "Seasons Franchise Player"
+        }
+    }
+}

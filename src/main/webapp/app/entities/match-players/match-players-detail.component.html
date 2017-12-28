@@ -1,0 +1,42 @@
+
+<div *ngIf="matchPlayers">
+    <h2><span jhiTranslate="fafiApp.matchPlayers.detail.title">Match Players</span> {{matchPlayers.id}}</h2>
+    <hr>
+    <fafi-alert-error></fafi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="fafiApp.matchPlayers.playerOfTheMatch">Player Of The Match</span></dt>
+        <dd>
+            <span>{{matchPlayers.playerOfTheMatch}}</span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.matchPlayers.playerPointsEarned">Player Points Earned</span></dt>
+        <dd>
+            <span>{{matchPlayers.playerPointsEarned}}</span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.matchPlayers.match">Match</span></dt>
+        <dd>
+            <div *ngIf="matchPlayers.matchId">
+                <a [routerLink]="['/match', matchPlayers.matchId]">{{matchPlayers.matchMatchNumber}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.matchPlayers.seasonsFranchisePlayer">Seasons Franchise Player</span></dt>
+        <dd>
+            <div *ngIf="matchPlayers.seasonsFranchisePlayerId">
+                <a [routerLink]="['/seasons-franchise-player', matchPlayers.seasonsFranchisePlayerId]">{{matchPlayers.seasonsFranchisePlayerPlayer}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'match-players/'+ matchPlayers.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

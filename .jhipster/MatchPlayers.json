@@ -1,0 +1,42 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "match",
+            "otherEntityName": "match",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "matchNumber"
+        },
+        {
+            "relationshipName": "seasonsFranchisePlayer",
+            "otherEntityName": "seasonsFranchisePlayer",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "player"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "playerOfTheMatch",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "playerPointsEarned",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171228162740",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "match_players",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}
