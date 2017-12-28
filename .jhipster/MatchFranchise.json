@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "match",
+            "otherEntityName": "match",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "matchNumber"
+        },
+        {
+            "relationshipName": "seasonsFranchise",
+            "otherEntityName": "seasonsFranchise",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "franchise"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20171228162049",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "match_franchise",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

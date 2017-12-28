@@ -28,6 +28,7 @@
                 "tieMatch": "Tie Match",
                 "seasonsFranchise": "Seasons Franchise",
                 "seasonsFranchisePlayer": "Seasons Franchise Player",
+                "matchFranchise": "Match Franchise",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -1,0 +1,51 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myMatchFranchiseLabel" jhiTranslate="fafiApp.matchFranchise.home.createOrEditLabel">Create or edit a Match Franchise</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <fafi-alert-error></fafi-alert-error>
+        <div class="form-group" [hidden]="!matchFranchise.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="matchFranchise.id" readonly />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.matchFranchise.match" for="field_match">Match</label>
+            <select class="form-control" id="field_match" name="match" [(ngModel)]="matchFranchise.matchId"  required>
+                <option *ngIf="!editForm.value.match" [ngValue]="null" selected></option>
+                <option [ngValue]="matchOption.id" *ngFor="let matchOption of matches; trackBy: trackMatchById">{{matchOption.matchNumber}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.match?.dirty && editForm.controls.match?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.match?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.matchFranchise.seasonsFranchise" for="field_seasonsFranchise">Seasons Franchise</label>
+            <select class="form-control" id="field_seasonsFranchise" name="seasonsFranchise" [(ngModel)]="matchFranchise.seasonsFranchiseId"  required>
+                <option *ngIf="!editForm.value.seasonsFranchise" [ngValue]="null" selected></option>
+                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchise}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.seasonsFranchise?.dirty && editForm.controls.seasonsFranchise?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.seasonsFranchise?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
