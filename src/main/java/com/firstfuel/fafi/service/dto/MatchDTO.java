@@ -3,6 +3,9 @@ package com.firstfuel.fafi.service.dto;
 
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
+
+import com.firstfuel.fafi.domain.enumeration.Games;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +29,7 @@ public class MatchDTO implements Serializable {
     private Integer pointsEarnedByFranchise;
 
     private Long tournamentId;
+    private Games tournamentType;
 
     private Long winningFranchiseId;
 
@@ -95,7 +99,15 @@ public class MatchDTO implements Serializable {
         this.winningFranchiseFranchiseName = seasonsFranchiseFranchiseName;
     }
 
-    @Override
+    public Games getTournamentType() {
+		return tournamentType;
+	}
+
+	public void setTournamentType(Games tournamentType) {
+		this.tournamentType = tournamentType;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

@@ -17,18 +17,16 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="playerOfTheMatch"><span jhiTranslate="fafiApp.matchPlayers.playerOfTheMatch">Player Of The Match</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="playerPointsEarned"><span jhiTranslate="fafiApp.matchPlayers.playerPointsEarned">Player Points Earned</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="matchMatchNumber"><span jhiTranslate="fafiApp.matchPlayers.match">Match</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="seasonsFranchisePlayerPlayer"><span jhiTranslate="fafiApp.matchPlayers.seasonsFranchisePlayer">Seasons Franchise Player</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="playerOfTheMatch"><span jhiTranslate="fafiApp.matchPlayers.playerOfTheMatch">Player Of The Match</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="playerPointsEarned"><span jhiTranslate="fafiApp.matchPlayers.playerPointsEarned">Player Points Earned</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let matchPlayers of matchPlayers ;trackBy: trackId">
                 <td><a [routerLink]="['../match-players', matchPlayers.id ]">{{matchPlayers.id}}</a></td>
-                <td>{{matchPlayers.playerOfTheMatch}}</td>
-                <td>{{matchPlayers.playerPointsEarned}}</td>
                 <td>
                     <div *ngIf="matchPlayers.matchId">
                         <a [routerLink]="['../match', matchPlayers.matchId  ]" >{{matchPlayers.matchMatchNumber}}</a>
@@ -36,9 +34,11 @@
                 </td>
                 <td>
                     <div *ngIf="matchPlayers.seasonsFranchisePlayerId">
-                        <a [routerLink]="['../seasons-franchise-player', matchPlayers.seasonsFranchisePlayerId  ]" >{{matchPlayers.seasonsFranchisePlayerPlayer}}</a>
+                        <a [routerLink]="['../seasons-franchise-player', matchPlayers.seasonsFranchisePlayerId  ]" >{{matchPlayers.seasonsFranchisePlayerFirstName+' '+matchPlayers.seasonsFranchisePlayerLastName}}</a>
                     </div>
                 </td>
+                <td>{{matchPlayers.playerOfTheMatch}}</td>
+                <td>{{matchPlayers.playerPointsEarned}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

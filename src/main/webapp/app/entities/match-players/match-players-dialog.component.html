@@ -46,7 +46,7 @@
             <label class="form-control-label" jhiTranslate="fafiApp.matchPlayers.seasonsFranchisePlayer" for="field_seasonsFranchisePlayer">Seasons Franchise Player</label>
             <select class="form-control" id="field_seasonsFranchisePlayer" name="seasonsFranchisePlayer" [(ngModel)]="matchPlayers.seasonsFranchisePlayerId"  required>
                 <option *ngIf="!editForm.value.seasonsFranchisePlayer" [ngValue]="null" selected></option>
-                <option [ngValue]="seasonsFranchisePlayerOption.id" *ngFor="let seasonsFranchisePlayerOption of seasonsfranchiseplayers; trackBy: trackSeasonsFranchisePlayerById">{{seasonsFranchisePlayerOption.player}}</option>
+                <option [ngValue]="seasonsFranchisePlayerOption.id" *ngFor="let seasonsFranchisePlayerOption of seasonsfranchiseplayers; trackBy: trackSeasonsFranchisePlayerById">{{seasonsFranchisePlayerOption.playerFirstName +' ' +seasonsFranchisePlayerOption.playerLastName}}</option>
             </select>
         </div>
         <div [hidden]="!(editForm.controls.seasonsFranchisePlayer?.dirty && editForm.controls.seasonsFranchisePlayer?.invalid)">

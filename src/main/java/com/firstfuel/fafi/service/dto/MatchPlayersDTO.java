@@ -25,7 +25,8 @@ public class MatchPlayersDTO implements Serializable {
 
     private Long seasonsFranchisePlayerId;
 
-    private String seasonsFranchisePlayerPlayer;
+    private String seasonsFranchisePlayerFirstName;
+    private String seasonsFranchisePlayerLastName;
 
     public Long getId() {
         return id;
@@ -75,15 +76,25 @@ public class MatchPlayersDTO implements Serializable {
         this.seasonsFranchisePlayerId = seasonsFranchisePlayerId;
     }
 
-    public String getSeasonsFranchisePlayerPlayer() {
-        return seasonsFranchisePlayerPlayer;
-    }
 
-    public void setSeasonsFranchisePlayerPlayer(String seasonsFranchisePlayerPlayer) {
-        this.seasonsFranchisePlayerPlayer = seasonsFranchisePlayerPlayer;
-    }
 
-    @Override
+    public String getSeasonsFranchisePlayerFirstName() {
+		return seasonsFranchisePlayerFirstName;
+	}
+
+	public void setSeasonsFranchisePlayerFirstName(String seasonsFranchisePlayerFirstName) {
+		this.seasonsFranchisePlayerFirstName = seasonsFranchisePlayerFirstName;
+	}
+
+	public String getSeasonsFranchisePlayerLastName() {
+		return seasonsFranchisePlayerLastName;
+	}
+
+	public void setSeasonsFranchisePlayerLastName(String seasonsFranchisePlayerLastName) {
+		this.seasonsFranchisePlayerLastName = seasonsFranchisePlayerLastName;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

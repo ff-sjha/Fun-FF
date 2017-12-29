@@ -40,7 +40,9 @@ export class MatchPlayersDialogComponent implements OnInit {
         this.isSaving = false;
         this.matchService.query()
             .subscribe((res: ResponseWrapper) => { this.matches = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.seasonsFranchisePlayerService.query()
+        this.seasonsFranchisePlayerService.query({
+            page: 0,
+            size: 1000})
             .subscribe((res: ResponseWrapper) => { this.seasonsfranchiseplayers = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
