@@ -19,6 +19,11 @@
 			separator=";" tableName="franchise" />
 		<loadData encoding="UTF-8" file="config/liquibase/players.csv"
 			separator=";" tableName="player" />
+		<loadData encoding="UTF-8" file="config/liquibase/seasons_franchise.csv"
+			separator=";" tableName="seasons_franchise" />
+		<loadData encoding="UTF-8"
+			file="config/liquibase/seasons_franchise_player.csv" separator=";"
+			tableName="seasons_franchise_player" />
 	</changeSet>
 
 </databaseChangeLog>
