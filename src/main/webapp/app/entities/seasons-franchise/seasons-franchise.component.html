@@ -39,12 +39,12 @@
                 </td>
                 <td>
                     <div *ngIf="seasonsFranchise.ownerId">
-                        <a [routerLink]="['../player', seasonsFranchise.ownerId  ]" >{{seasonsFranchise.ownerFirstName}}</a>
+                        <a [routerLink]="['../player', seasonsFranchise.ownerId  ]" >{{seasonsFranchise.ownerFirstName + ' ' +seasonsFranchise.ownerLastName }}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="seasonsFranchise.iconPlayerId">
-                        <a [routerLink]="['../player', seasonsFranchise.iconPlayerId  ]" >{{seasonsFranchise.iconPlayerFirstName}}</a>
+                        <a [routerLink]="['../player', seasonsFranchise.iconPlayerId  ]" >{{seasonsFranchise.iconPlayerFirstName +' ' +seasonsFranchise.iconPlayerLastName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -46,7 +46,9 @@ export class SeasonsFranchiseDialogComponent implements OnInit {
             .subscribe((res: ResponseWrapper) => { this.seasons = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.franchiseService.query()
             .subscribe((res: ResponseWrapper) => { this.franchises = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.playerService.query()
+        this.playerService.query({
+            page: 0,
+            size: 1000})
             .subscribe((res: ResponseWrapper) => { this.players = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
