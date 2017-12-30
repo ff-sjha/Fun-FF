@@ -39,6 +39,8 @@ public class MatchCriteria implements Serializable {
     private LongFilter tournamentId;
 
     private LongFilter winningFranchiseId;
+    
+    private BooleanFilter upcomingMatches;
 
     public MatchCriteria() {
     }
@@ -99,7 +101,15 @@ public class MatchCriteria implements Serializable {
         this.winningFranchiseId = winningFranchiseId;
     }
 
-    @Override
+    public BooleanFilter getUpcomingMatches() {
+		return upcomingMatches;
+	}
+
+	public void setUpcomingMatches(BooleanFilter upcomingMatches) {
+		this.upcomingMatches = upcomingMatches;
+	}
+
+	@Override
     public String toString() {
         return "MatchCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +

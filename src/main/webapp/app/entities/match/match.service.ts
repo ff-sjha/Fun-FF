@@ -46,7 +46,7 @@ export class MatchService {
 
     upcomingMatches(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
-        return this.http.get(this.resourceUrl, options)
+        return this.http.get(this.resourceUrl + '?upcomingMatches.equals=true', options)
             .map((res: Response) => this.convertResponse(res));
     }
 
