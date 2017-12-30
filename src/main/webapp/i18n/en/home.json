@@ -9,6 +9,9 @@
         		"title" : "News",
         		"event" : "Event"
         },
+        "tournament" : {
+        		"title" : "Active Tournaments"
+        },
         "franchise":{
         		"title" : "Leading Franchise",
         		"event" : "Event"

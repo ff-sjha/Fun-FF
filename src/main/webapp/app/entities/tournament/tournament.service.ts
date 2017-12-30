@@ -44,6 +44,12 @@ export class TournamentService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    queryActive(req?: any): Observable<ResponseWrapper> {
+        const options = createRequestOption(req);
+        return this.http.get(this.resourceUrl + '?active.equals=true', options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

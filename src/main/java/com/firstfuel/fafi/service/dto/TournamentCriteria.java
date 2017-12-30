@@ -48,6 +48,8 @@ public class TournamentCriteria implements Serializable {
     private LongFilter winningFranchiseId;
 
     private LongFilter playerOfTournamentId;
+    
+    private BooleanFilter active;
 
     public TournamentCriteria() {
     }
@@ -116,7 +118,15 @@ public class TournamentCriteria implements Serializable {
         this.playerOfTournamentId = playerOfTournamentId;
     }
 
-    @Override
+	public BooleanFilter getActive() {
+		return active;
+	}
+
+	public void setActive(BooleanFilter active) {
+		this.active = active;
+	}
+
+	@Override
     public String toString() {
         return "TournamentCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
