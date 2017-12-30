@@ -19,11 +19,16 @@
                     </span>
                 </a>
             </li>
-
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="fixture" (click)="collapseNavbar()">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.fixture">Fixture</span>
+                </a>
+            </li>
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="points-table" (click)="collapseNavbar()">
                     <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                    <span jhiTranslate="global.menu.points-table">Points table</span>
+                    <span jhiTranslate="global.menu.points-table">Points</span>
                 </a>
             </li>
 

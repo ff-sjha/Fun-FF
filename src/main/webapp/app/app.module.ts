@@ -15,6 +15,7 @@ import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
 import { FafiAppAboutUsModule } from './about-us/about-us.module';
+import { FafiAppFixtureModule } from './fixture/fixture.module';
 import { FafiAppContactUsModule } from './contact-us/contact-us.module';
 import { FafiAppPointsTableModule } from './points-table/points-table.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
@@ -40,6 +41,7 @@ import {
         FafiAccountModule,
         FafiEntityModule,
         FafiAppAboutUsModule,
+        FafiAppFixtureModule,
         FafiAppContactUsModule,
         FafiAppPointsTableModule,
         FafiGameModule

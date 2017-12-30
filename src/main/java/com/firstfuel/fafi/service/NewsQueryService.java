@@ -84,7 +84,7 @@ public class NewsQueryService extends QueryService<News> {
 	public List<NewsDTO> finAllNewsWithEvents() {
 		Specifications<News> specification = Specifications.where(null);
 		LocalDateFilter dateFilter = new LocalDateFilter();
-		dateFilter.setLessOrEqualThan(LocalDate.now());
+		dateFilter.setGreaterOrEqualThan(LocalDate.now());
 		specification= specification.and(buildRangeSpecification(dateFilter, News_.ativeTill));
 		final List<News> result = newsRepository.findAll(specification);
 		return result.stream().map(newsMapper::toDto).collect(Collectors.toList());
