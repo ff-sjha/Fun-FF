@@ -1,9 +1,21 @@
 {
     "home": {
-        "title": "Welcome, Java Hipster!",
-        "subtitle": "This is your homepage",
+        "title": "Welcome, FF Sports",
+        "subtitle": "This is home of FF Sports",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
+        },
+        "events":{
+        		"title" : "Upcoming Events",
+        		"event" : "Event"
+        },
+        "franchise":{
+        		"title" : "Leading Franchise",
+        		"event" : "Event"
+        },
+        "player":{
+        		"title" : "Leading Player",
+        		"event" : "Event"
         },
         "pointsTable": {
             "title": "Points Table",
