@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
 
     loadAll() {
         this.page = 0;
-        this.newsService.query().subscribe(
+        this.newsService.queryAnyNews().subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
@@ -93,9 +93,6 @@ export class HomeComponent implements OnInit {
         return item.id;
     }
     private onSuccess(data, headers) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = headers.get('X-Total-Count');
-        this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
         this.newslist = data;
     }

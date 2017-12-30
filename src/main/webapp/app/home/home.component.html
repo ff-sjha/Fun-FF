@@ -42,25 +42,18 @@
 				<h3 class="text-capitalize text-center"
 					jhiTranslate="home.events.title">Title</h3>
 			</div>
-			<div class="table-responsive">
-				<div id="newsAccordion" data-children=".item">
-					<table class="table table-striped">
-						<tbody>
-							<tr *ngFor="let news of newslist">
-								<td>
-									<div class="item">
-										<a data-toggle="collapse" data-parent="#newsAccordion"
-											href="#newsAccordion{news.id}" role="button"
-											aria-expanded="true" aria-controls="newsAccordion{news.id}">{{news.title}}</a>
-										<div id="newsAccordion{news.id}" class="collapse show"
-											role="tabpanel">
-											<p class="mb-3">{{news.details}}</p>
-										</div>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+
+			<div class="panel-group" id="newsGroup">
+				<div *ngFor="let news of newslist; let i = index">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a ng-click="toggleCollapsedStates($i)" href="#newsGroup-{{$i}}">{{news.title}}</a>
+						</h4>
+					</div>
+					<div id="newsGroup-{{$i}}" data-parent="newsGroup"
+						class="panel-collapse show">
+						<div class="panel-body">{{news.details}}</div>
+					</div>
 				</div>
 			</div>
 		</div>

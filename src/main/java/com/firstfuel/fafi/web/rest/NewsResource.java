@@ -103,6 +103,13 @@ public class NewsResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/news/with-events")
+    @Timed
+    public ResponseEntity<List<NewsDTO>> getAllNewsWithEvents() {
+        log.debug("REST request to get News with evnets by criteria:");
+        List<NewsDTO> page = newsQueryService.finAllNewsWithEvents();
+        return new ResponseEntity<>(page, HttpStatus.OK);
+    }
     /**
      * GET  /news/:id : get the "id" news.
      *
