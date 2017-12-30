@@ -6,6 +6,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import {Account, ITEMS_PER_PAGE, LoginModalService, Principal, ResponseWrapper} from '../shared';
 import {News, NewsService} from '../entities/news';
 import {Tournament, TournamentService} from '../entities/tournament';
+import {Match, MatchService} from '../entities/match';
 
 @Component({
     selector: 'fafi-home',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
     modalRef: NgbModalRef;
     newslist: News[];
     tournaments: Tournament[];
+    matches: Match[];
     totalItems: any;
     queryCount: any;
     links: any;
@@ -41,7 +43,8 @@ export class HomeComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private router: Router,
         private newsService: NewsService,
-        private tournamentService: TournamentService
+        private tournamentService: TournamentService,
+        private matchService: MatchService
     ) {
         this.page = 0;
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -88,6 +91,11 @@ export class HomeComponent implements OnInit {
                 (res: ResponseWrapper) => this.onSuccessTournament(res.json, res.headers),
                 (res: ResponseWrapper) => this.onError(res.json)
         );
+
+        this.matchService.upcomingMatches().subscribe(
+                (res: ResponseWrapper) => this.onSuccessMatch(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+        );
     }
 
     sort() {
@@ -106,6 +114,9 @@ export class HomeComponent implements OnInit {
     }
     private onSuccessTournament(data, headers) {
         this.tournaments = data;
+    }
+    private onSuccessMatch(data, headers) {
+        this.matches = data;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);

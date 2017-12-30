@@ -12,6 +12,9 @@
         "tournament" : {
         		"title" : "Active Tournaments"
         },
+         "match" : {
+                "title" : "Upcoming Matches"
+        },
         "franchise":{
         		"title" : "Leading Franchise",
         		"event" : "Event"
