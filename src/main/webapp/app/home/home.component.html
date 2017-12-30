@@ -36,59 +36,36 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-sm-12">
 		<div class="container">
 			<div>
 				<h3 class="text-capitalize text-center"
 					jhiTranslate="home.events.title">Title</h3>
 			</div>
 			<div class="table-responsive">
-				<table class="table table-striped">
-					<tbody>
-						<tr *ngFor="let franchise of franchises">
-							<td><a [routerLink]="['../franchise', franchise.id ]">{{franchise.id}}</a></td>
-							<td>{{franchise.name}}</td>
-						</tr>
-					</tbody>
-				</table>
+				<div id="newsAccordion" data-children=".item">
+					<table class="table table-striped">
+						<tbody>
+							<tr *ngFor="let news of newslist">
+								<td>
+									<div class="item">
+										<a data-toggle="collapse" data-parent="#newsAccordion"
+											href="#newsAccordion{news.id}" role="button"
+											aria-expanded="true" aria-controls="newsAccordion{news.id}">{{news.title}}</a>
+										<div id="newsAccordion{news.id}" class="collapse show"
+											role="tabpanel">
+											<p class="mb-3">{{news.details}}</p>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-4">
-		<div class="container">
-			<div>
-				<h3 class="text-capitalize text-center"
-					jhiTranslate="home.franchise.title">Title</h3>
-			</div>
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<tbody>
-						<tr *ngFor="let franchise of franchises">
-							<td><a [routerLink]="['../franchise', franchise.id ]">{{franchise.id}}</a></td>
-							<td>{{franchise.name}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-4">
-		<div class="container">
-			<div>
-				<h3 class="text-capitalize text-center"
-					jhiTranslate="home.player.title">Title</h3>
-			</div>
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<tbody>
-						<tr *ngFor="let franchise of franchises">
-							<td><a [routerLink]="['../franchise', franchise.id ]">{{franchise.id}}</a></td>
-							<td>{{franchise.name}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+
+
 </div>
 

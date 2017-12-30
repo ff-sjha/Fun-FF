@@ -30,6 +30,7 @@
                 "seasonsFranchisePlayer": "Seasons Franchise Player",
                 "matchFranchise": "Match Franchise",
                 "matchPlayers": "Match Players",
+                "news": "News",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

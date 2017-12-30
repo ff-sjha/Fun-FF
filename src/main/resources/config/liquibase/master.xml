@@ -16,6 +16,7 @@
     <include file="config/liquibase/changelog/20171228042412_added_entity_SeasonsFranchisePlayer.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171228162049_added_entity_MatchFranchise.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171228162740_added_entity_MatchPlayers.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171230014042_added_entity_News.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20171218182920_added_entity_constraints_Season.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171218185221_added_entity_constraints_Tournament.xml" relativeToChangelogFile="false"/>

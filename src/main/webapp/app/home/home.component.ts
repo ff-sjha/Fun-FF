@@ -4,7 +4,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import {Account, ITEMS_PER_PAGE, LoginModalService, Principal, ResponseWrapper} from '../shared';
-import {Franchise, FranchiseService} from '../entities/franchise';
+import {News, NewsService} from '../entities/news';
 
 @Component({
     selector: 'fafi-home',
@@ -17,7 +17,7 @@ import {Franchise, FranchiseService} from '../entities/franchise';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
-    franchises: Franchise[];
+    newslist: News[];
     totalItems: any;
     queryCount: any;
     links: any;
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private router: Router,
-        private franchiseService: FranchiseService
+        private newsService: NewsService
     ) {
         this.page = 0;
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -76,10 +76,7 @@ export class HomeComponent implements OnInit {
 
     loadAll() {
         this.page = 0;
-        this.franchiseService.query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+        this.newsService.query().subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
@@ -92,7 +89,7 @@ export class HomeComponent implements OnInit {
         }
         return result;
     }
-    trackId(index: number, item: Franchise) {
+    trackId(index: number, item: News) {
         return item.id;
     }
     private onSuccess(data, headers) {
@@ -100,7 +97,7 @@ export class HomeComponent implements OnInit {
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
-        this.franchises = data;
+        this.newslist = data;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
