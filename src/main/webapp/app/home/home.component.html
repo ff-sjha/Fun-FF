@@ -1,107 +1,115 @@
 <div class="row">
-	<div class="col-md-12">
-		<!--<span class="hipster img-fluid rounded"></span>-->
-		<!--<div class="container">-->
-		<ngb-carousel interval=2000> <!--<ng-template ngbSlide *ngFor="let image of images">
+    <div class="col-md-12">
+        <!--<span class="hipster img-fluid rounded"></span>-->
+        <!--<div class="container">-->
+        <ngb-carousel interval=2000> <!--<ng-template ngbSlide *ngFor="let image of images">
                 <img class="image-circle img-responsive" [src]="image.src" style="margin:auto;"/>
                 <div class="carousel-caption">
                     <h3>{{image.h3Text}}</h3>
                     <p>{{image.pText}}</p>
                 </div>
             </ng-template>--> <ng-template ngbSlide> <img
-			src="../../content/images/1.jpg" style="width: 100%; height: 500px" />
-		<div class="carousel-caption">
-			<h3>LUDO - Dice Rules</h3>
-			<p>The game of sweet revenge!</p>
-			<a class="morebtn" routerLink="ludo">LEARN MORE</a>
-		</div>
-		</ng-template> <ng-template ngbSlide> <img
-			src="../../content/images/2.jpg" style="width: 100%; height: 500px" />
-		<div class="carousel-caption">
-			<h3>FOOTBALL</h3>
-			<p>Prepare for Combat</p>
-			<a class="morebtn" routerLink="football">LEARN MORE</a>
-		</div>
-		</ng-template> <ng-template ngbSlide> <img
-			src="../../content/images/3.jpg" style="width: 100%; height: 500px" />
-		<div class="carousel-caption">
-			<h3>BADMINTON</h3>
-			<p>Smash like a champion!</p>
-			<a class="morebtn" routerLink="badminton">LEARN MORE</a>
-		</div>
-		</ng-template> </ngb-carousel>
-		<!--</div>-->
-	</div>
-	<div class="clear-fix"></div>
+            src="../../content/images/1.jpg"
+            style="width: 100%; height: 500px" />
+        <div class="carousel-caption">
+            <h3>LUDO - Dice Rules</h3>
+            <p>The game of sweet revenge!</p>
+            <a class="morebtn" routerLink="ludo">LEARN MORE</a>
+        </div>
+        </ng-template> <ng-template ngbSlide> <img
+            src="../../content/images/2.jpg"
+            style="width: 100%; height: 500px" />
+        <div class="carousel-caption">
+            <h3>FOOTBALL</h3>
+            <p>Prepare for Combat</p>
+            <a class="morebtn" routerLink="football">LEARN MORE</a>
+        </div>
+        </ng-template> <ng-template ngbSlide> <img
+            src="../../content/images/3.jpg"
+            style="width: 100%; height: 500px" />
+        <div class="carousel-caption">
+            <h3>BADMINTON</h3>
+            <p>Smash like a champion!</p>
+            <a class="morebtn" routerLink="badminton">LEARN MORE</a>
+        </div>
+        </ng-template> </ngb-carousel>
+        <!--</div>-->
+    </div>
+    <div class="clear-fix"></div>
 </div>
 
 <div class="row">
-	<div class="col-sm-12">
-		<div class="container">
-			<div>
-				<h3 class="text-capitalize text-center"
-					jhiTranslate="home.events.title">Title</h3>
-			</div>
+    <div class="col-sm-12">
+        <div class="container">
+            <div>
+                <h3 class="text-capitalize text-center"
+                    jhiTranslate="home.events.title">Title</h3>
+            </div>
 
-			<div class="panel-group" id="newsGroup">
-				<div *ngFor="let news of newslist; let i = index">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<a ng-click="toggleCollapsedStates($i)" href="#newsGroup-{{$i}}">{{news.title}}</a>
-						</h4>
-					</div>
-					<div id="newsGroup-{{$i}}" data-parent="newsGroup"
-						class="panel-collapse show">
-						<div class="panel-body">{{news.details}}</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            <div class="panel-group" id="newsGroup">
+                <div *ngFor="let news of newslist; let i = index">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a ng-click="toggleCollapsedStates($i)"
+                                href="#newsGroup-{{$i}}">{{news.title}}</a>
+                        </h4>
+                    </div>
+                    <div id="newsGroup-{{$i}}" data-parent="newsGroup"
+                        class="panel-collapse show">
+                        <div class="panel-body">{{news.details}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="row">
-	<div class="col-sm-12">
-		<div class="container">
-			<div>
-				<h3 class="text-capitalize text-center"
-					jhiTranslate="home.tournament.title">Title</h3>
-			</div>
-			<div class="table-responsive" *ngIf="tournaments">
-				<table class="table table-striped">
-					<thead>
-						<tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
-							<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
-								<span class="fa fa-sort"></span></th>
-							<th jhiSortBy="startDate"><span
-								jhiTranslate="fafiApp.tournament.startDate">Start Date</span> <span
-								class="fa fa-sort"></span></th>
-							<th jhiSortBy="endDate"><span
-								jhiTranslate="fafiApp.tournament.endDate">End Date</span> <span
-								class="fa fa-sort"></span></th>
-							<th jhiSortBy="type"><span
-								jhiTranslate="fafiApp.tournament.type">Type</span> <span
-								class="fa fa-sort"></span></th>
-							<th jhiSortBy="seasonName"><span
-								jhiTranslate="fafiApp.tournament.season">Season</span> <span
-								class="fa fa-sort"></span></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let tournament of tournaments ;trackBy: trackId">
-							<td><a [routerLink]="['../tournament', tournament.id ]">{{tournament.id}}</a></td>
-							<td>{{tournament.startDate | date:'mediumDate'}}</td>
-							<td>{{tournament.endDate | date:'mediumDate'}}</td>
-							<td jhiTranslate="{{'fafiApp.Games.' + tournament.type}}">{{tournament.type}}</td>
-							<td>
-								<div *ngIf="tournament.seasonId">
-									<a [routerLink]="['../season', tournament.seasonId  ]">{{tournament.seasonName}}</a>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+    <div class="col-sm-12">
+        <div class="container">
+            <div>
+                <h3 class="text-capitalize text-center"
+                    jhiTranslate="home.tournament.title">Title</h3>
+            </div>
+            <div class="table-responsive" *ngIf="tournaments">
+                <table class="table table-striped">
+                    <thead>
+                        <tr jhiSort [(predicate)]="predicate"
+                            [(ascending)]="reverse">
+                            <th jhiSortBy="type"><span
+                                jhiTranslate="fafiApp.tournament.type">Type</span></th>
+                            <th jhiSortBy="seasonName"><span
+                                jhiTranslate="fafiApp.tournament.season">Season</span></th>
+                            <th jhiSortBy="startDate"><span
+                                jhiTranslate="fafiApp.tournament.startDate">Start
+                                    Date</span></th>
+                            <th jhiSortBy="endDate"><span
+                                jhiTranslate="fafiApp.tournament.endDate">End
+                                    Date</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let tournament of tournaments ;trackBy: trackId">
+                            <td><div
+                                    *ngIf="tournament.id">
+                                    <a
+                                        [routerLink]="['../tournament', tournament.id ]">{{tournament.type}}</a>
+                                </div></td>
+                            <td>
+                                <div *ngIf="tournament.seasonId">
+                                    <a
+                                        [routerLink]="['../season', tournament.seasonId  ]">{{tournament.seasonName}}</a>
+                                </div>
+                            </td>
+                            <td>{{tournament.startDate |
+                                date:'mediumDate'}}</td>
+                            <td>{{tournament.endDate |
+                                date:'mediumDate'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
