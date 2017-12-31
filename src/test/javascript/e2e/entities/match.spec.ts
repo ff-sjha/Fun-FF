@@ -35,10 +35,10 @@ describe('Match e2e test', () => {
         expect(matchDialogPage.getStartDateTimeInput()).toMatch('2001-12-31T02:30');
         matchDialogPage.setEndDateTimeInput(12310020012301);
         expect(matchDialogPage.getEndDateTimeInput()).toMatch('2001-12-31T02:30');
-        matchDialogPage.setMatchNumberInput('5');
-        expect(matchDialogPage.getMatchNumberInput()).toMatch('5');
         matchDialogPage.setPointsEarnedByFranchiseInput('5');
         expect(matchDialogPage.getPointsEarnedByFranchiseInput()).toMatch('5');
+        matchDialogPage.setMatchNameInput('matchName');
+        expect(matchDialogPage.getMatchNameInput()).toMatch('matchName');
         matchDialogPage.tournamentSelectLastOption();
         matchDialogPage.winningFranchiseSelectLastOption();
         matchDialogPage.save();
@@ -69,8 +69,8 @@ export class MatchDialogPage {
     closeButton = element(by.css('button.close'));
     startDateTimeInput = element(by.css('input#field_startDateTime'));
     endDateTimeInput = element(by.css('input#field_endDateTime'));
-    matchNumberInput = element(by.css('input#field_matchNumber'));
     pointsEarnedByFranchiseInput = element(by.css('input#field_pointsEarnedByFranchise'));
+    matchNameInput = element(by.css('input#field_matchName'));
     tournamentSelect = element(by.css('select#field_tournament'));
     winningFranchiseSelect = element(by.css('select#field_winningFranchise'));
 
@@ -94,20 +94,20 @@ export class MatchDialogPage {
         return this.endDateTimeInput.getAttribute('value');
     }
 
-    setMatchNumberInput = function(matchNumber) {
-        this.matchNumberInput.sendKeys(matchNumber);
-    }
-
-    getMatchNumberInput = function() {
-        return this.matchNumberInput.getAttribute('value');
-    }
-
     setPointsEarnedByFranchiseInput = function(pointsEarnedByFranchise) {
         this.pointsEarnedByFranchiseInput.sendKeys(pointsEarnedByFranchise);
     }
 
     getPointsEarnedByFranchiseInput = function() {
         return this.pointsEarnedByFranchiseInput.getAttribute('value');
+    }
+
+    setMatchNameInput = function(matchName) {
+        this.matchNameInput.sendKeys(matchName);
+    }
+
+    getMatchNameInput = function() {
+        return this.matchNameInput.getAttribute('value');
     }
 
     tournamentSelectLastOption = function() {

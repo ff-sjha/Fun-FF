@@ -32,9 +32,9 @@ public class MatchCriteria implements Serializable {
 
     private ZonedDateTimeFilter endDateTime;
 
-    private IntegerFilter matchNumber;
-
     private IntegerFilter pointsEarnedByFranchise;
+
+    private StringFilter matchName;
 
     private LongFilter tournamentId;
 
@@ -69,20 +69,20 @@ public class MatchCriteria implements Serializable {
         this.endDateTime = endDateTime;
     }
 
-    public IntegerFilter getMatchNumber() {
-        return matchNumber;
-    }
-
-    public void setMatchNumber(IntegerFilter matchNumber) {
-        this.matchNumber = matchNumber;
-    }
-
     public IntegerFilter getPointsEarnedByFranchise() {
         return pointsEarnedByFranchise;
     }
 
     public void setPointsEarnedByFranchise(IntegerFilter pointsEarnedByFranchise) {
         this.pointsEarnedByFranchise = pointsEarnedByFranchise;
+    }
+
+    public StringFilter getMatchName() {
+        return matchName;
+    }
+
+    public void setMatchName(StringFilter matchName) {
+        this.matchName = matchName;
     }
 
     public LongFilter getTournamentId() {
@@ -115,8 +115,9 @@ public class MatchCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (startDateTime != null ? "startDateTime=" + startDateTime + ", " : "") +
                 (endDateTime != null ? "endDateTime=" + endDateTime + ", " : "") +
-                (matchNumber != null ? "matchNumber=" + matchNumber + ", " : "") +
+                (upcomingMatches != null ? "upcomingMatches=" + upcomingMatches + ", " : "") +
                 (pointsEarnedByFranchise != null ? "pointsEarnedByFranchise=" + pointsEarnedByFranchise + ", " : "") +
+                (matchName != null ? "matchName=" + matchName + ", " : "") +
                 (tournamentId != null ? "tournamentId=" + tournamentId + ", " : "") +
                 (winningFranchiseId != null ? "winningFranchiseId=" + winningFranchiseId + ", " : "") +
             "}";

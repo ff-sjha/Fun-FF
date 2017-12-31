@@ -24,17 +24,15 @@
             "fieldType": "ZonedDateTime"
         },
         {
-            "fieldName": "matchNumber",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required",
-                "min"
-            ],
-            "fieldValidateRulesMin": "1"
-        },
-        {
             "fieldName": "pointsEarnedByFranchise",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "matchName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20171218190035",

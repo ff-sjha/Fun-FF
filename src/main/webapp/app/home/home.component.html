@@ -118,7 +118,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Match Number</th>
+                            <th>Match Name</th>
                             <th>Tournament</th>
                             <th>Start Date Time</th>
                             <th>End Date Time</th>
@@ -128,7 +128,7 @@
                         <tr
                             *ngFor="let match of matches ;trackBy: trackId">
                             <td><a
-                                [routerLink]="['../match', match.id ]">{{match.matchNumber}}</a></td>
+                                [routerLink]="['../match', match.id ]">{{match.matchName}}</a></td>
                             <td>
                                 <div *ngIf="match.tournamentId">
                                     <a

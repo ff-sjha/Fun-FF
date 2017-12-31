@@ -22,18 +22,18 @@ public class MatchDTO implements Serializable {
 
     private ZonedDateTime endDateTime;
 
-    @NotNull
-    @Min(value = 1)
-    private Integer matchNumber;
-
     private Integer pointsEarnedByFranchise;
 
+    @NotNull
+    private String matchName;
+
     private Long tournamentId;
-    private Games tournamentType;
 
     private Long winningFranchiseId;
 
     private String winningFranchiseFranchiseName;
+    
+    private Games tournamentType;
 
     public Long getId() {
         return id;
@@ -59,20 +59,20 @@ public class MatchDTO implements Serializable {
         this.endDateTime = endDateTime;
     }
 
-    public Integer getMatchNumber() {
-        return matchNumber;
-    }
-
-    public void setMatchNumber(Integer matchNumber) {
-        this.matchNumber = matchNumber;
-    }
-
     public Integer getPointsEarnedByFranchise() {
         return pointsEarnedByFranchise;
     }
 
     public void setPointsEarnedByFranchise(Integer pointsEarnedByFranchise) {
         this.pointsEarnedByFranchise = pointsEarnedByFranchise;
+    }
+
+    public String getMatchName() {
+        return matchName;
+    }
+
+    public void setMatchName(String matchName) {
+        this.matchName = matchName;
     }
 
     public Long getTournamentId() {
@@ -134,8 +134,8 @@ public class MatchDTO implements Serializable {
             "id=" + getId() +
             ", startDateTime='" + getStartDateTime() + "'" +
             ", endDateTime='" + getEndDateTime() + "'" +
-            ", matchNumber=" + getMatchNumber() +
             ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() +
+            ", matchName='" + getMatchName() + "'" +
             "}";
     }
 }

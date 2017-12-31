@@ -12,18 +12,18 @@
         <dd>
             <span>{{match.endDateTime | date:'medium'}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.matchNumber">Match Number</span></dt>
-        <dd>
-            <span>{{match.matchNumber}}</span>
-        </dd>
         <dt><span jhiTranslate="fafiApp.match.pointsEarnedByFranchise">Points Earned By Franchise</span></dt>
         <dd>
             <span>{{match.pointsEarnedByFranchise}}</span>
         </dd>
+        <dt><span jhiTranslate="fafiApp.match.matchName">Match Name</span></dt>
+        <dd>
+            <span>{{match.matchName}}</span>
+        </dd>
         <dt><span jhiTranslate="fafiApp.match.tournament">Tournament</span></dt>
         <dd>
             <div *ngIf="match.tournamentId">
-                <a [routerLink]="['/tournament', match.tournamentId]">{{match.tournamentType}}</a>
+                <a [routerLink]="['/tournament', match.tournamentId]">{{match.tournamentId}}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="fafiApp.match.winningFranchise">Winning Franchise</span></dt>

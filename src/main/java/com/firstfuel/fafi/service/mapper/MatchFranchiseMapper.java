@@ -12,7 +12,7 @@ import org.mapstruct.*;
 public interface MatchFranchiseMapper extends EntityMapper<MatchFranchiseDTO, MatchFranchise> {
 
     @Mapping(source = "match.id", target = "matchId")
-    @Mapping(source = "match.matchNumber", target = "matchMatchNumber")
+    @Mapping(source = "match.matchName", target = "matchName")
     @Mapping(source = "seasonsFranchise.id", target = "seasonsFranchiseId")
     @Mapping(source = "seasonsFranchise.franchise.name", target = "seasonsFranchiseFranchise")
     MatchFranchiseDTO toDto(MatchFranchise matchFranchise); 

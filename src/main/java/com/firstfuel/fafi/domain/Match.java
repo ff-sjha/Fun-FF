@@ -30,13 +30,12 @@ public class Match implements Serializable {
     @Column(name = "end_date_time")
     private ZonedDateTime endDateTime;
 
-    @NotNull
-    @Min(value = 1)
-    @Column(name = "match_number", nullable = false)
-    private Integer matchNumber;
-
     @Column(name = "points_earned_by_franchise")
     private Integer pointsEarnedByFranchise;
+
+    @NotNull
+    @Column(name = "match_name", nullable = false)
+    private String matchName;
 
     @ManyToOne
     private Tournament tournament;
@@ -79,19 +78,6 @@ public class Match implements Serializable {
         this.endDateTime = endDateTime;
     }
 
-    public Integer getMatchNumber() {
-        return matchNumber;
-    }
-
-    public Match matchNumber(Integer matchNumber) {
-        this.matchNumber = matchNumber;
-        return this;
-    }
-
-    public void setMatchNumber(Integer matchNumber) {
-        this.matchNumber = matchNumber;
-    }
-
     public Integer getPointsEarnedByFranchise() {
         return pointsEarnedByFranchise;
     }
@@ -103,6 +89,19 @@ public class Match implements Serializable {
 
     public void setPointsEarnedByFranchise(Integer pointsEarnedByFranchise) {
         this.pointsEarnedByFranchise = pointsEarnedByFranchise;
+    }
+
+    public String getMatchName() {
+        return matchName;
+    }
+
+    public Match matchName(String matchName) {
+        this.matchName = matchName;
+        return this;
+    }
+
+    public void setMatchName(String matchName) {
+        this.matchName = matchName;
     }
 
     public Tournament getTournament() {
@@ -158,8 +157,8 @@ public class Match implements Serializable {
             "id=" + getId() +
             ", startDateTime='" + getStartDateTime() + "'" +
             ", endDateTime='" + getEndDateTime() + "'" +
-            ", matchNumber=" + getMatchNumber() +
             ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() +
+            ", matchName='" + getMatchName() + "'" +
             "}";
     }
 }

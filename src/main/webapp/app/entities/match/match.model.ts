@@ -5,8 +5,8 @@ export class Match implements BaseEntity {
         public id?: number,
         public startDateTime?: any,
         public endDateTime?: any,
-        public matchNumber?: number,
         public pointsEarnedByFranchise?: number,
+        public matchName?: string,
         public tournamentId?: number,
         public winningFranchiseId?: number,
     ) {

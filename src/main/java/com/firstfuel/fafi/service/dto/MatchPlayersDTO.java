@@ -21,7 +21,7 @@ public class MatchPlayersDTO implements Serializable {
 
     private Long matchId;
 
-    private String matchMatchNumber;
+    private String matchName;
 
     private Long seasonsFranchisePlayerId;
 
@@ -60,15 +60,20 @@ public class MatchPlayersDTO implements Serializable {
         this.matchId = matchId;
     }
 
-    public String getMatchMatchNumber() {
-        return matchMatchNumber;
-    }
 
-    public void setMatchMatchNumber(String matchMatchNumber) {
-        this.matchMatchNumber = matchMatchNumber;
-    }
+    public String getMatchName() {
+		return matchName;
+	}
 
-    public Long getSeasonsFranchisePlayerId() {
+	public void setMatchName(String matchName) {
+		this.matchName = matchName;
+	}
+
+	public Boolean getPlayerOfTheMatch() {
+		return playerOfTheMatch;
+	}
+
+	public Long getSeasonsFranchisePlayerId() {
         return seasonsFranchisePlayerId;
     }
 
