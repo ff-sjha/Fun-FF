@@ -2,6 +2,9 @@ package com.firstfuel.fafi.service.dto;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
@@ -37,6 +40,8 @@ public class MatchDTO implements Serializable {
     private String winningFranchiseFranchiseName;
 
     private Games tournamentType;
+    
+    private Map<String, List<PlayerDTO>> teamPlayers = new HashMap<>();
 
     public Long getId() {
         return id;
@@ -124,6 +129,15 @@ public class MatchDTO implements Serializable {
 
     public void setTournamentType(Games tournamentType) {
         this.tournamentType = tournamentType;
+    }
+    
+
+    public Map<String, List<PlayerDTO>> getTeamPlayers() {
+        return teamPlayers;
+    }
+
+    public void setTeamPlayers(Map<String, List<PlayerDTO>> teamPlayers) {
+        this.teamPlayers = teamPlayers;
     }
 
     @Override

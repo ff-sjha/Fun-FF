@@ -58,7 +58,7 @@ export class FixtureComponent implements OnInit {
   }
 
   loadAll() {
-      this.matchService.upcomingMatches().subscribe(
+      this.matchService.fixtures().subscribe(
               (res: ResponseWrapper) => this.onSuccessMatch(res.json, res.headers),
               (res: ResponseWrapper) => this.onError(res.json)
       );

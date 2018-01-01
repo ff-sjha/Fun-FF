@@ -1,9 +1,13 @@
 package com.firstfuel.fafi.repository;
 
-import com.firstfuel.fafi.domain.MatchPlayers;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.data.jpa.repository.*;
+import com.firstfuel.fafi.domain.Match;
+import com.firstfuel.fafi.domain.MatchPlayers;
 
 
 /**
@@ -12,5 +16,7 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface MatchPlayersRepository extends JpaRepository<MatchPlayers, Long>, JpaSpecificationExecutor<MatchPlayers> {
+
+    List<MatchPlayers> findByMatch(Match m);
 
 }

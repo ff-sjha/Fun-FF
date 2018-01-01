@@ -45,7 +45,12 @@ export class MatchService {
     }
 
     upcomingMatches(): Observable<ResponseWrapper> {
-        return this.http.get(this.resourceUrl + '?upcomingMatches.equals=true')
+        return this.http.get(this.resourceUrl + '/upcoming-matches')
+            .map((res: Response) => this.convertResponse(res));
+    }
+
+    fixtures(): Observable<ResponseWrapper> {
+        return this.http.get(this.resourceUrl + '/fixtures')
             .map((res: Response) => this.convertResponse(res));
     }
 
