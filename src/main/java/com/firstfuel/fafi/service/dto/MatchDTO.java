@@ -1,15 +1,13 @@
 package com.firstfuel.fafi.service.dto;
 
-
+import java.io.Serializable;
 import java.time.ZonedDateTime;
-import javax.validation.constraints.*;
+import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
 
 import com.firstfuel.fafi.domain.enumeration.Games;
-
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import com.firstfuel.fafi.domain.enumeration.Stage;
 
 /**
  * A DTO for the Match entity.
@@ -27,12 +25,15 @@ public class MatchDTO implements Serializable {
     @NotNull
     private String matchName;
 
+    @NotNull
+    private Stage stage;
+
     private Long tournamentId;
 
     private Long winningFranchiseId;
 
     private String winningFranchiseFranchiseName;
-    
+
     private Games tournamentType;
 
     public Long getId() {
@@ -75,6 +76,14 @@ public class MatchDTO implements Serializable {
         this.matchName = matchName;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     public Long getTournamentId() {
         return tournamentId;
     }
@@ -100,14 +109,14 @@ public class MatchDTO implements Serializable {
     }
 
     public Games getTournamentType() {
-		return tournamentType;
-	}
+        return tournamentType;
+    }
 
-	public void setTournamentType(Games tournamentType) {
-		this.tournamentType = tournamentType;
-	}
+    public void setTournamentType(Games tournamentType) {
+        this.tournamentType = tournamentType;
+    }
 
-	@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -117,7 +126,7 @@ public class MatchDTO implements Serializable {
         }
 
         MatchDTO matchDTO = (MatchDTO) o;
-        if(matchDTO.getId() == null || getId() == null) {
+        if (matchDTO.getId() == null || getId() == null) {
             return false;
         }
         return Objects.equals(getId(), matchDTO.getId());
@@ -130,12 +139,8 @@ public class MatchDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "MatchDTO{" +
-            "id=" + getId() +
-            ", startDateTime='" + getStartDateTime() + "'" +
-            ", endDateTime='" + getEndDateTime() + "'" +
-            ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() +
-            ", matchName='" + getMatchName() + "'" +
-            "}";
+        return "MatchDTO{" + "id=" + getId() + ", startDateTime='" + getStartDateTime() + "'" + ", endDateTime='"
+                + getEndDateTime() + "'" + ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() + ", matchName='"
+                + getMatchName() + "'" + ", stage='" + getStage() + "'" + "}";
     }
 }

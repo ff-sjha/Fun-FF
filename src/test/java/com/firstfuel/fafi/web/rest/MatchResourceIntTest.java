@@ -41,6 +41,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.firstfuel.fafi.domain.enumeration.Stage;
 /**
  * Test class for the MatchResource REST controller.
  *
@@ -61,6 +62,9 @@ public class MatchResourceIntTest {
 
     private static final String DEFAULT_MATCH_NAME = "AAAAAAAAAA";
     private static final String UPDATED_MATCH_NAME = "BBBBBBBBBB";
+
+    private static final Stage DEFAULT_STAGE = Stage.LEAGUE;
+    private static final Stage UPDATED_STAGE = Stage.QUARTER_FINAL;
 
     @Autowired
     private MatchRepository matchRepository;
@@ -112,7 +116,8 @@ public class MatchResourceIntTest {
             .startDateTime(DEFAULT_START_DATE_TIME)
             .endDateTime(DEFAULT_END_DATE_TIME)
             .pointsEarnedByFranchise(DEFAULT_POINTS_EARNED_BY_FRANCHISE)
-            .matchName(DEFAULT_MATCH_NAME);
+            .matchName(DEFAULT_MATCH_NAME)
+            .stage(DEFAULT_STAGE);
         return match;
     }
 
@@ -141,6 +146,7 @@ public class MatchResourceIntTest {
         assertThat(testMatch.getEndDateTime()).isEqualTo(DEFAULT_END_DATE_TIME);
         assertThat(testMatch.getPointsEarnedByFranchise()).isEqualTo(DEFAULT_POINTS_EARNED_BY_FRANCHISE);
         assertThat(testMatch.getMatchName()).isEqualTo(DEFAULT_MATCH_NAME);
+        assertThat(testMatch.getStage()).isEqualTo(DEFAULT_STAGE);
     }
 
     @Test
@@ -184,6 +190,25 @@ public class MatchResourceIntTest {
 
     @Test
     @Transactional
+    public void checkStageIsRequired() throws Exception {
+        int databaseSizeBeforeTest = matchRepository.findAll().size();
+        // set the field null
+        match.setStage(null);
+
+        // Create the Match, which fails.
+        MatchDTO matchDTO = matchMapper.toDto(match);
+
+        restMatchMockMvc.perform(post("/api/matches")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(matchDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Match> matchList = matchRepository.findAll();
+        assertThat(matchList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllMatches() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
@@ -196,7 +221,8 @@ public class MatchResourceIntTest {
             .andExpect(jsonPath("$.[*].startDateTime").value(hasItem(sameInstant(DEFAULT_START_DATE_TIME))))
             .andExpect(jsonPath("$.[*].endDateTime").value(hasItem(sameInstant(DEFAULT_END_DATE_TIME))))
             .andExpect(jsonPath("$.[*].pointsEarnedByFranchise").value(hasItem(DEFAULT_POINTS_EARNED_BY_FRANCHISE)))
-            .andExpect(jsonPath("$.[*].matchName").value(hasItem(DEFAULT_MATCH_NAME.toString())));
+            .andExpect(jsonPath("$.[*].matchName").value(hasItem(DEFAULT_MATCH_NAME.toString())))
+            .andExpect(jsonPath("$.[*].stage").value(hasItem(DEFAULT_STAGE.toString())));
     }
 
     @Test
@@ -213,7 +239,8 @@ public class MatchResourceIntTest {
             .andExpect(jsonPath("$.startDateTime").value(sameInstant(DEFAULT_START_DATE_TIME)))
             .andExpect(jsonPath("$.endDateTime").value(sameInstant(DEFAULT_END_DATE_TIME)))
             .andExpect(jsonPath("$.pointsEarnedByFranchise").value(DEFAULT_POINTS_EARNED_BY_FRANCHISE))
-            .andExpect(jsonPath("$.matchName").value(DEFAULT_MATCH_NAME.toString()));
+            .andExpect(jsonPath("$.matchName").value(DEFAULT_MATCH_NAME.toString()))
+            .andExpect(jsonPath("$.stage").value(DEFAULT_STAGE.toString()));
     }
 
     @Test
@@ -455,6 +482,45 @@ public class MatchResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllMatchesByStageIsEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where stage equals to DEFAULT_STAGE
+        defaultMatchShouldBeFound("stage.equals=" + DEFAULT_STAGE);
+
+        // Get all the matchList where stage equals to UPDATED_STAGE
+        defaultMatchShouldNotBeFound("stage.equals=" + UPDATED_STAGE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByStageIsInShouldWork() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where stage in DEFAULT_STAGE or UPDATED_STAGE
+        defaultMatchShouldBeFound("stage.in=" + DEFAULT_STAGE + "," + UPDATED_STAGE);
+
+        // Get all the matchList where stage equals to UPDATED_STAGE
+        defaultMatchShouldNotBeFound("stage.in=" + UPDATED_STAGE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByStageIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where stage is not null
+        defaultMatchShouldBeFound("stage.specified=true");
+
+        // Get all the matchList where stage is null
+        defaultMatchShouldNotBeFound("stage.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllMatchesByTournamentIsEqualToSomething() throws Exception {
         // Initialize the database
         Tournament tournament = TournamentResourceIntTest.createEntity(em);
@@ -501,7 +567,8 @@ public class MatchResourceIntTest {
             .andExpect(jsonPath("$.[*].startDateTime").value(hasItem(sameInstant(DEFAULT_START_DATE_TIME))))
             .andExpect(jsonPath("$.[*].endDateTime").value(hasItem(sameInstant(DEFAULT_END_DATE_TIME))))
             .andExpect(jsonPath("$.[*].pointsEarnedByFranchise").value(hasItem(DEFAULT_POINTS_EARNED_BY_FRANCHISE)))
-            .andExpect(jsonPath("$.[*].matchName").value(hasItem(DEFAULT_MATCH_NAME.toString())));
+            .andExpect(jsonPath("$.[*].matchName").value(hasItem(DEFAULT_MATCH_NAME.toString())))
+            .andExpect(jsonPath("$.[*].stage").value(hasItem(DEFAULT_STAGE.toString())));
     }
 
     /**
@@ -539,7 +606,8 @@ public class MatchResourceIntTest {
             .startDateTime(UPDATED_START_DATE_TIME)
             .endDateTime(UPDATED_END_DATE_TIME)
             .pointsEarnedByFranchise(UPDATED_POINTS_EARNED_BY_FRANCHISE)
-            .matchName(UPDATED_MATCH_NAME);
+            .matchName(UPDATED_MATCH_NAME)
+            .stage(UPDATED_STAGE);
         MatchDTO matchDTO = matchMapper.toDto(updatedMatch);
 
         restMatchMockMvc.perform(put("/api/matches")
@@ -555,6 +623,7 @@ public class MatchResourceIntTest {
         assertThat(testMatch.getEndDateTime()).isEqualTo(UPDATED_END_DATE_TIME);
         assertThat(testMatch.getPointsEarnedByFranchise()).isEqualTo(UPDATED_POINTS_EARNED_BY_FRANCHISE);
         assertThat(testMatch.getMatchName()).isEqualTo(UPDATED_MATCH_NAME);
+        assertThat(testMatch.getStage()).isEqualTo(UPDATED_STAGE);
     }
 
     @Test

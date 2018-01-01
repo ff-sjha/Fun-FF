@@ -19,6 +19,7 @@
             "endDateTime": "End Date Time",
             "pointsEarnedByFranchise": "Points Earned By Franchise",
             "matchName": "Match Name",
+            "stage": "Stage",
             "tournament": "Tournament",
             "winningFranchise": "Winning Franchise"
         }

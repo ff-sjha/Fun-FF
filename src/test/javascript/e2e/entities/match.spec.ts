@@ -39,6 +39,7 @@ describe('Match e2e test', () => {
         expect(matchDialogPage.getPointsEarnedByFranchiseInput()).toMatch('5');
         matchDialogPage.setMatchNameInput('matchName');
         expect(matchDialogPage.getMatchNameInput()).toMatch('matchName');
+        matchDialogPage.stageSelectLastOption();
         matchDialogPage.tournamentSelectLastOption();
         matchDialogPage.winningFranchiseSelectLastOption();
         matchDialogPage.save();
@@ -71,6 +72,7 @@ export class MatchDialogPage {
     endDateTimeInput = element(by.css('input#field_endDateTime'));
     pointsEarnedByFranchiseInput = element(by.css('input#field_pointsEarnedByFranchise'));
     matchNameInput = element(by.css('input#field_matchName'));
+    stageSelect = element(by.css('select#field_stage'));
     tournamentSelect = element(by.css('select#field_tournament'));
     winningFranchiseSelect = element(by.css('select#field_winningFranchise'));
 
@@ -110,6 +112,17 @@ export class MatchDialogPage {
         return this.matchNameInput.getAttribute('value');
     }
 
+    setStageSelect = function(stage) {
+        this.stageSelect.sendKeys(stage);
+    }
+
+    getStageSelect = function() {
+        return this.stageSelect.element(by.css('option:checked')).getText();
+    }
+
+    stageSelectLastOption = function() {
+        this.stageSelect.all(by.tagName('option')).last().click();
+    }
     tournamentSelectLastOption = function() {
         this.tournamentSelect.all(by.tagName('option')).last().click();
     }

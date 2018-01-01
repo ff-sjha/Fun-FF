@@ -20,6 +20,10 @@
         <dd>
             <span>{{match.matchName}}</span>
         </dd>
+        <dt><span jhiTranslate="fafiApp.match.stage">Stage</span></dt>
+        <dd>
+            <span jhiTranslate="{{'fafiApp.Stage.' + match.stage}}">{{match.stage}}</span>
+        </dd>
         <dt><span jhiTranslate="fafiApp.match.tournament">Tournament</span></dt>
         <dd>
             <div *ngIf="match.tournamentId">

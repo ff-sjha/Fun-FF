@@ -1,0 +1,13 @@
+{
+    "fafiApp": {
+        "Stage" : {
+            "null": "",
+            "LEAGUE": "LEAGUE",
+            "QUARTER_FINAL": "QUARTER_FINAL",
+            "SEMI_FINAL": "SEMI_FINAL",
+            "FINAL": "FINAL",
+            "PLAYOFF": "PLAYOFF",
+            "KNOCK_OUT": "KNOCK_OUT"
+        }
+    }
+}

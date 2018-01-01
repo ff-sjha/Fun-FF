@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+import com.firstfuel.fafi.domain.enumeration.Stage;
+
 /**
  * A Match.
  */
@@ -36,6 +38,11 @@ public class Match implements Serializable {
     @NotNull
     @Column(name = "match_name", nullable = false)
     private String matchName;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "stage", nullable = false)
+    private Stage stage;
 
     @ManyToOne
     private Tournament tournament;
@@ -104,6 +111,19 @@ public class Match implements Serializable {
         this.matchName = matchName;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Match stage(Stage stage) {
+        this.stage = stage;
+        return this;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     public Tournament getTournament() {
         return tournament;
     }
@@ -159,6 +179,7 @@ public class Match implements Serializable {
             ", endDateTime='" + getEndDateTime() + "'" +
             ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() +
             ", matchName='" + getMatchName() + "'" +
+            ", stage='" + getStage() + "'" +
             "}";
     }
 }

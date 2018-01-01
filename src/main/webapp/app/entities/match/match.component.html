@@ -18,6 +18,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="matchName"><span jhiTranslate="fafiApp.match.matchName">Match Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="stage"><span jhiTranslate="fafiApp.match.stage">Stage</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="tournamentType"><span jhiTranslate="fafiApp.match.tournament">Tournament</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="startDateTime"><span jhiTranslate="fafiApp.match.startDateTime">Start Date Time</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="endDateTime"><span jhiTranslate="fafiApp.match.endDateTime">End Date Time</span> <span class="fa fa-sort"></span></th>
@@ -30,6 +31,7 @@
             <tr *ngFor="let match of matches ;trackBy: trackId">
                 <td><a [routerLink]="['../match', match.id ]">{{match.id}}</a></td>
                 <td>{{match.matchName}}</td>
+                <td jhiTranslate="{{'fafiApp.Stage.' + match.stage}}">{{match.stage}}</td>
                 <td>
                     <div *ngIf="match.tournamentId">
                         <a [routerLink]="['../tournament', match.tournamentId  ]" >{{match.tournamentType}}</a>

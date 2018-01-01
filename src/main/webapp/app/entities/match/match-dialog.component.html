@@ -42,6 +42,23 @@
                 </small>
             </div>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.match.stage" for="field_stage">Stage</label>
+            <select class="form-control" name="stage" [(ngModel)]="match.stage" id="field_stage"  required>
+                <option value="LEAGUE">{{'fafiApp.Stage.LEAGUE' | translate}}</option>
+                <option value="QUARTER_FINAL">{{'fafiApp.Stage.QUARTER_FINAL' | translate}}</option>
+                <option value="SEMI_FINAL">{{'fafiApp.Stage.SEMI_FINAL' | translate}}</option>
+                <option value="FINAL">{{'fafiApp.Stage.FINAL' | translate}}</option>
+                <option value="PLAYOFF">{{'fafiApp.Stage.PLAYOFF' | translate}}</option>
+                <option value="KNOCK_OUT">{{'fafiApp.Stage.KNOCK_OUT' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.stage?.dirty && editForm.controls.stage?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.stage?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.match.tournament" for="field_tournament">Tournament</label>

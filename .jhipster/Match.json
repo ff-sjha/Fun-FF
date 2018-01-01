@@ -33,6 +33,14 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "stage",
+            "fieldType": "Stage",
+            "fieldValues": "LEAGUE, QUARTER_FINAL, SEMI_FINAL, FINAL, PLAYOFF, KNOCK_OUT",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20171218190035",
