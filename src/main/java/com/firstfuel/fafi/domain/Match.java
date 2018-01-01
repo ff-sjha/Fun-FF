@@ -44,6 +44,9 @@ public class Match implements Serializable {
     @Column(name = "stage", nullable = false)
     private Stage stage;
 
+    @Column(name = "venue")
+    private String venue;
+
     @ManyToOne
     private Tournament tournament;
 
@@ -124,6 +127,19 @@ public class Match implements Serializable {
         this.stage = stage;
     }
 
+    public String getVenue() {
+        return venue;
+    }
+
+    public Match venue(String venue) {
+        this.venue = venue;
+        return this;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
     public Tournament getTournament() {
         return tournament;
     }
@@ -180,6 +196,7 @@ public class Match implements Serializable {
             ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() +
             ", matchName='" + getMatchName() + "'" +
             ", stage='" + getStage() + "'" +
+            ", venue='" + getVenue() + "'" +
             "}";
     }
 }

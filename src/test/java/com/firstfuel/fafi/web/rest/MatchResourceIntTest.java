@@ -66,6 +66,9 @@ public class MatchResourceIntTest {
     private static final Stage DEFAULT_STAGE = Stage.LEAGUE;
     private static final Stage UPDATED_STAGE = Stage.QUARTER_FINAL;
 
+    private static final String DEFAULT_VENUE = "AAAAAAAAAA";
+    private static final String UPDATED_VENUE = "BBBBBBBBBB";
+
     @Autowired
     private MatchRepository matchRepository;
 
@@ -117,7 +120,8 @@ public class MatchResourceIntTest {
             .endDateTime(DEFAULT_END_DATE_TIME)
             .pointsEarnedByFranchise(DEFAULT_POINTS_EARNED_BY_FRANCHISE)
             .matchName(DEFAULT_MATCH_NAME)
-            .stage(DEFAULT_STAGE);
+            .stage(DEFAULT_STAGE)
+            .venue(DEFAULT_VENUE);
         return match;
     }
 
@@ -147,6 +151,7 @@ public class MatchResourceIntTest {
         assertThat(testMatch.getPointsEarnedByFranchise()).isEqualTo(DEFAULT_POINTS_EARNED_BY_FRANCHISE);
         assertThat(testMatch.getMatchName()).isEqualTo(DEFAULT_MATCH_NAME);
         assertThat(testMatch.getStage()).isEqualTo(DEFAULT_STAGE);
+        assertThat(testMatch.getVenue()).isEqualTo(DEFAULT_VENUE);
     }
 
     @Test
@@ -222,7 +227,8 @@ public class MatchResourceIntTest {
             .andExpect(jsonPath("$.[*].endDateTime").value(hasItem(sameInstant(DEFAULT_END_DATE_TIME))))
             .andExpect(jsonPath("$.[*].pointsEarnedByFranchise").value(hasItem(DEFAULT_POINTS_EARNED_BY_FRANCHISE)))
             .andExpect(jsonPath("$.[*].matchName").value(hasItem(DEFAULT_MATCH_NAME.toString())))
-            .andExpect(jsonPath("$.[*].stage").value(hasItem(DEFAULT_STAGE.toString())));
+            .andExpect(jsonPath("$.[*].stage").value(hasItem(DEFAULT_STAGE.toString())))
+            .andExpect(jsonPath("$.[*].venue").value(hasItem(DEFAULT_VENUE.toString())));
     }
 
     @Test
@@ -240,7 +246,8 @@ public class MatchResourceIntTest {
             .andExpect(jsonPath("$.endDateTime").value(sameInstant(DEFAULT_END_DATE_TIME)))
             .andExpect(jsonPath("$.pointsEarnedByFranchise").value(DEFAULT_POINTS_EARNED_BY_FRANCHISE))
             .andExpect(jsonPath("$.matchName").value(DEFAULT_MATCH_NAME.toString()))
-            .andExpect(jsonPath("$.stage").value(DEFAULT_STAGE.toString()));
+            .andExpect(jsonPath("$.stage").value(DEFAULT_STAGE.toString()))
+            .andExpect(jsonPath("$.venue").value(DEFAULT_VENUE.toString()));
     }
 
     @Test
@@ -521,6 +528,45 @@ public class MatchResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllMatchesByVenueIsEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where venue equals to DEFAULT_VENUE
+        defaultMatchShouldBeFound("venue.equals=" + DEFAULT_VENUE);
+
+        // Get all the matchList where venue equals to UPDATED_VENUE
+        defaultMatchShouldNotBeFound("venue.equals=" + UPDATED_VENUE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVenueIsInShouldWork() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where venue in DEFAULT_VENUE or UPDATED_VENUE
+        defaultMatchShouldBeFound("venue.in=" + DEFAULT_VENUE + "," + UPDATED_VENUE);
+
+        // Get all the matchList where venue equals to UPDATED_VENUE
+        defaultMatchShouldNotBeFound("venue.in=" + UPDATED_VENUE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVenueIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where venue is not null
+        defaultMatchShouldBeFound("venue.specified=true");
+
+        // Get all the matchList where venue is null
+        defaultMatchShouldNotBeFound("venue.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllMatchesByTournamentIsEqualToSomething() throws Exception {
         // Initialize the database
         Tournament tournament = TournamentResourceIntTest.createEntity(em);
@@ -568,7 +614,8 @@ public class MatchResourceIntTest {
             .andExpect(jsonPath("$.[*].endDateTime").value(hasItem(sameInstant(DEFAULT_END_DATE_TIME))))
             .andExpect(jsonPath("$.[*].pointsEarnedByFranchise").value(hasItem(DEFAULT_POINTS_EARNED_BY_FRANCHISE)))
             .andExpect(jsonPath("$.[*].matchName").value(hasItem(DEFAULT_MATCH_NAME.toString())))
-            .andExpect(jsonPath("$.[*].stage").value(hasItem(DEFAULT_STAGE.toString())));
+            .andExpect(jsonPath("$.[*].stage").value(hasItem(DEFAULT_STAGE.toString())))
+            .andExpect(jsonPath("$.[*].venue").value(hasItem(DEFAULT_VENUE.toString())));
     }
 
     /**
@@ -607,7 +654,8 @@ public class MatchResourceIntTest {
             .endDateTime(UPDATED_END_DATE_TIME)
             .pointsEarnedByFranchise(UPDATED_POINTS_EARNED_BY_FRANCHISE)
             .matchName(UPDATED_MATCH_NAME)
-            .stage(UPDATED_STAGE);
+            .stage(UPDATED_STAGE)
+            .venue(UPDATED_VENUE);
         MatchDTO matchDTO = matchMapper.toDto(updatedMatch);
 
         restMatchMockMvc.perform(put("/api/matches")
@@ -624,6 +672,7 @@ public class MatchResourceIntTest {
         assertThat(testMatch.getPointsEarnedByFranchise()).isEqualTo(UPDATED_POINTS_EARNED_BY_FRANCHISE);
         assertThat(testMatch.getMatchName()).isEqualTo(UPDATED_MATCH_NAME);
         assertThat(testMatch.getStage()).isEqualTo(UPDATED_STAGE);
+        assertThat(testMatch.getVenue()).isEqualTo(UPDATED_VENUE);
     }
 
     @Test

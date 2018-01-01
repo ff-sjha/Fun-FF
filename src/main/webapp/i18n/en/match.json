@@ -20,6 +20,7 @@
             "pointsEarnedByFranchise": "Points Earned By Franchise",
             "matchName": "Match Name",
             "stage": "Stage",
+            "venue": "Venue",
             "tournament": "Tournament",
             "winningFranchise": "Winning Franchise"
         }

@@ -41,6 +41,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "venue",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171218190035",

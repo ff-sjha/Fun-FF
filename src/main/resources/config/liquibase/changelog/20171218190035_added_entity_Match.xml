@@ -42,6 +42,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="venue" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="tournament_id" type="bigint">
                 <constraints nullable="true" />
             </column>

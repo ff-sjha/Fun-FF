@@ -59,12 +59,17 @@
                 </small>
             </div>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.match.venue" for="field_venue">Venue</label>
+            <input type="text" class="form-control" name="venue" id="field_venue"
+                [(ngModel)]="match.venue" />
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.match.tournament" for="field_tournament">Tournament</label>
             <select class="form-control" id="field_tournament" name="tournament" [(ngModel)]="match.tournamentId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="tournamentOption.id" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.type}}</option>
+                <option [ngValue]="tournamentOption.id" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.id}}</option>
             </select>
         </div>
         <div class="form-group">

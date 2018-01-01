@@ -28,6 +28,8 @@ public class MatchDTO implements Serializable {
     @NotNull
     private Stage stage;
 
+    private String venue;
+
     private Long tournamentId;
 
     private Long winningFranchiseId;
@@ -82,6 +84,14 @@ public class MatchDTO implements Serializable {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
     public Long getTournamentId() {
@@ -141,6 +151,6 @@ public class MatchDTO implements Serializable {
     public String toString() {
         return "MatchDTO{" + "id=" + getId() + ", startDateTime='" + getStartDateTime() + "'" + ", endDateTime='"
                 + getEndDateTime() + "'" + ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() + ", matchName='"
-                + getMatchName() + "'" + ", stage='" + getStage() + "'" + "}";
+                + getMatchName() + "'" + ", stage='" + getStage() + "'" + ", venue='" + getVenue() + "'" + "}";
     }
 }
