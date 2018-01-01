@@ -27,7 +27,7 @@
                 <td><a [routerLink]="['../match-franchise', matchFranchise.id ]">{{matchFranchise.id}}</a></td>
                 <td>
                     <div *ngIf="matchFranchise.matchId">
-                        <a [routerLink]="['../match', matchFranchise.matchId  ]" >{{matchFranchise.matchMatchNumber}}</a>
+                        <a [routerLink]="['../match', matchFranchise.matchId  ]" >{{matchFranchise.matchName}}</a>
                     </div>
                 </td>
                 <td>

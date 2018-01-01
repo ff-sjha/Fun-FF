@@ -17,7 +17,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="matchMatchNumber"><span jhiTranslate="fafiApp.matchPlayers.match">Match</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="matchName"><span jhiTranslate="fafiApp.matchPlayers.match">Match</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="seasonsFranchisePlayerPlayer"><span jhiTranslate="fafiApp.matchPlayers.seasonsFranchisePlayer">Seasons Franchise Player</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="playerOfTheMatch"><span jhiTranslate="fafiApp.matchPlayers.playerOfTheMatch">Player Of The Match</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="playerPointsEarned"><span jhiTranslate="fafiApp.matchPlayers.playerPointsEarned">Player Points Earned</span> <span class="fa fa-sort"></span></th>
@@ -29,7 +29,7 @@
                 <td><a [routerLink]="['../match-players', matchPlayers.id ]">{{matchPlayers.id}}</a></td>
                 <td>
                     <div *ngIf="matchPlayers.matchId">
-                        <a [routerLink]="['../match', matchPlayers.matchId  ]" >{{matchPlayers.matchMatchNumber}}</a>
+                        <a [routerLink]="['../match', matchPlayers.matchId  ]" >{{matchPlayers.matchName}}</a>
                     </div>
                 </td>
                 <td>

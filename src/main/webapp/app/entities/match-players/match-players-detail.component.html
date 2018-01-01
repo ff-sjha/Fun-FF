@@ -15,7 +15,7 @@
         <dt><span jhiTranslate="fafiApp.matchPlayers.match">Match</span></dt>
         <dd>
             <div *ngIf="matchPlayers.matchId">
-                <a [routerLink]="['/match', matchPlayers.matchId]">{{matchPlayers.matchMatchNumber}}</a>
+                <a [routerLink]="['/match', matchPlayers.matchId]">{{matchPlayers.matchName}}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="fafiApp.matchPlayers.seasonsFranchisePlayer">Seasons Franchise Player</span></dt>
