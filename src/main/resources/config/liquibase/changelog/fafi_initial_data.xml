@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<property name="now" value="now()" dbms="h2" />
+    <property name="now" value="now()" dbms="h2" />
 
-	<property name="now" value="now()" dbms="mysql" />
-	<property name="autoIncrement" value="true" />
+    <property name="now" value="now()" dbms="mysql" />
+    <property name="autoIncrement" value="true" />
 
-	<property name="floatType" value="float4" dbms="postgresql, h2" />
-	<property name="floatType" value="float" dbms="mysql, oracle, mssql" />
+    <property name="floatType" value="float4" dbms="postgresql, h2" />
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql" />
 
-	<changeSet id="20171229073820-1" author="Ameeth Paatil">
-		<loadData encoding="UTF-8" file="config/liquibase/seasons.csv"
-			separator=";" tableName="season" />
-		<loadData encoding="UTF-8" file="config/liquibase/franchise.csv"
-			separator=";" tableName="franchise" />
-		<loadData encoding="UTF-8" file="config/liquibase/players.csv"
-			separator=";" tableName="player" />
-		<loadData encoding="UTF-8" file="config/liquibase/seasons_franchise.csv"
-			separator=";" tableName="seasons_franchise" />
-		<loadData encoding="UTF-8"
-			file="config/liquibase/seasons_franchise_player.csv" separator=";"
-			tableName="seasons_franchise_player" />
-	</changeSet>
+    <changeSet id="20171229073820-1" author="Ameeth Paatil">
+        <loadData encoding="UTF-8" file="config/liquibase/seasons.csv"
+            separator=";" tableName="season">
+            <column name="active" type="boolean" />
+        </loadData>
+        <loadData encoding="UTF-8" file="config/liquibase/franchise.csv"
+            separator=";" tableName="franchise">
+            <column name="active" type="boolean" />
+        </loadData>
+        <loadData encoding="UTF-8" file="config/liquibase/players.csv"
+            separator=";" tableName="player">
+            <column name="active" type="boolean" />
+        </loadData>
+        <loadData encoding="UTF-8"
+            file="config/liquibase/seasons_franchise.csv" separator=";"
+            tableName="seasons_franchise" />
+        <loadData encoding="UTF-8"
+            file="config/liquibase/seasons_franchise_player.csv"
+            separator=";" tableName="seasons_franchise_player" />
+    </changeSet>
 
 </databaseChangeLog>
