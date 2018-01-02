@@ -2,6 +2,7 @@ package com.firstfuel.fafi.service;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import com.firstfuel.fafi.domain.SeasonsFranchise_;
 import com.firstfuel.fafi.domain.Tournament_;
 import com.firstfuel.fafi.repository.MatchPlayersRepository;
 import com.firstfuel.fafi.repository.MatchRepository;
+import com.firstfuel.fafi.service.dto.FranchisePlayersDTO;
 import com.firstfuel.fafi.service.dto.MatchCriteria;
 import com.firstfuel.fafi.service.dto.MatchDTO;
 import com.firstfuel.fafi.service.dto.PlayerDTO;
@@ -121,15 +123,22 @@ public class MatchQueryService extends QueryService<Match> {
         result.forEach(m -> {
             MatchDTO matchDto = matchMapper.toDto(m);
             List<MatchPlayers> matchPlayers = matchPlayerRepository.findByMatch(m);
+            Map<String, List<PlayerDTO>> teamPlayers = new HashMap<>();
+            Map<String, Long> franchaiseId = new HashMap<>();
             matchPlayers.forEach(mp -> {
                 Franchise fr = mp.getSeasonsFranchisePlayer().getSeasonsFranchise().getFranchise();
                 Player pl = mp.getSeasonsFranchisePlayer().getPlayer();
-                Map<String, List<PlayerDTO>> teamPlayers = matchDto.getTeamPlayers();
                 if (!teamPlayers.containsKey(fr.getName())) {
                     teamPlayers.put(fr.getName(), new ArrayList<>());
                 }
+                franchaiseId.put(fr.getName(), fr.getId());
                 teamPlayers.get(fr.getName()).add(playerMapper.toDto(pl));
             });
+            List<FranchisePlayersDTO> fplayers = new ArrayList<>(teamPlayers.size());
+            teamPlayers.forEach((k, v) -> {
+                fplayers.add(new FranchisePlayersDTO(franchaiseId.get(k), k, teamPlayers.get(k)));
+            });
+            matchDto.setTeamPlayers(fplayers);
             response.add(matchDto);
         });
         return response;

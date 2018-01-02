@@ -231,7 +231,7 @@ public class TieMatchResourceIntTest {
         em.persist(winner);
         em.flush();
         tieMatch.setWinner(winner);
-        winner.setTieMatch(tieMatch);
+        //winner.setTieMatch(tieMatch);
         tieMatchRepository.saveAndFlush(tieMatch);
         Long winnerId = winner.getId();
 
