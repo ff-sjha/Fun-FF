@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Franchise } from '../entities/franchise';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Rx';
+import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../shared';
+
+import { PointsTablePlayer } from './points-table-player.model';
+import { PointsTableService } from './points-table.service';
 
 @Component({
   selector: 'fafi-points-table',
@@ -8,14 +13,64 @@ import { Franchise } from '../entities/franchise';
     'points-table.scss'
   ]
 })
-export class PointsTableComponent implements OnInit {
+export class PointsTableComponent implements OnInit, OnDestroy{
 
-    franchises: Franchise[];
+    pointsTable: PointsTablePlayer[];
+    currentAccount: any;
+    eventSubscriber: Subscription;
+    itemsPerPage: number;
+    links: any;
+    page: any;
+    predicate: any;
+    queryCount: any;
+    reverse: any;
+    totalItems: number;
 
-  constructor() {
+  constructor(    
+        private pointsTableService: PointsTableService,
+        private jhiAlertService: JhiAlertService,
+        private dataUtils: JhiDataUtils,
+        private eventManager: JhiEventManager,
+        private parseLinks: JhiParseLinks,
+        private principal: Principal
+  ) {
   }
 
-  ngOnInit() {
-  }
+    loadAll() {
+        this.pointsTableService.query({
+            page: this.page,
+            size: this.itemsPerPage,
+            sort: this.sort()
+        }).subscribe(
+            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
+    ngOnInit() {
+        this.loadAll();
+    }
 
+    ngOnDestroy() {
+        this.eventManager.destroy(this.eventSubscriber);
+    }
+    
+    private onSuccess(data, headers) {
+        this.links = this.parseLinks.parse(headers.get('link'));
+        this.totalItems = headers.get('X-Total-Count');
+        for (let i = 0; i < data.length; i++) {
+            this.pointsTable.push(data[i]);
+        }
+    }
+
+    private onError(error) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+    
+   sort() {
+        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+        if (this.predicate !== 'id') {
+            result.push('id');
+        }
+        return result;
+    }
 }

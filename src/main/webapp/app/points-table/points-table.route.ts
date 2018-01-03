@@ -9,6 +9,5 @@ export const POINTS_TABLE_ROUTE: Route = {
   data: {
     authorities: [],
     pageTitle: 'points-table.title'
-  },
-  canActivate: [UserRouteAccessService]
+  }
 };

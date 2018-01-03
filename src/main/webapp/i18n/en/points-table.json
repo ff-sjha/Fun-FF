@@ -1,5 +1,14 @@
 {
-  "points-table": {
-    "title": "Statistics"
-  }
+	"points-table": {
+		"title": "Statistics",
+		"playerRanking": "Player Ranking",
+		"teamRanking": "Team Ranking",
+		"player": {
+			"name":"Name",
+			"points": "Points"
+		},
+		"franchise": {
+			
+		}
+	}
 }

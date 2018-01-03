@@ -2,8 +2,11 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { FafiSharedModule } from '../shared';
-
-import { POINTS_TABLE_ROUTE, PointsTableComponent } from './';
+import {
+    PointsTableService,
+    PointsTableComponent,
+    POINTS_TABLE_ROUTE,
+} from './';
 
 @NgModule({
     imports: [
@@ -14,8 +17,10 @@ import { POINTS_TABLE_ROUTE, PointsTableComponent } from './';
       PointsTableComponent,
     ],
     entryComponents: [
+        PointsTableComponent,
     ],
     providers: [
+        PointsTableService,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
