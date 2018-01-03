@@ -5,47 +5,58 @@
                 <h3 class="text-capitalize text-center"
                     jhiTranslate="fixture.match.upcoming">Title</h3>
             </div>
-            <div class="table-responsive" *ngIf="matches">
-                <div *ngFor="let match of matches ;trackBy: id">
-                    <div class="col-sm-12 border">
-                        <div class="row">
-                            <div class="col-sm-8 border" text-align:
-                                center>
-                                <h4 class="panel-title">{{match.matchName}}</h4>
-                            </div>
-                            <div class="col-sm-4 border">
-                                <b>Venue:</b> {{match.venue}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 border">
-                                <b>Start Date:</b> {{match.startDateTime
-                                | date:'medium'}}
-                            </div>
+            <table class="table table-striped">
+                <tbody>
+                    <tr *ngFor="let match of matches ;trackBy: trackId">
+                        <td>
+                            <div class="col-sm-12 border">
+                                <div class="row">
+                                    <div class="col-sm-3 border"
+                                        text-align: center>
+                                        <h4 class="panel-title">{{match.matchName}}</h4>
+                                    </div>
+                                    <div class="col-sm-3 border">
+                                        <b>Type:</b>{{match.tournamentType}}
+                                    </div>
+                                    <div class="col-sm-3 border">
+                                        <b>Stage:</b>{{match.stage}}
+                                    </div>
+                                    <div class="col-sm-3 border">
+                                        <b>Venue:</b> {{match.venue}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 border">
+                                        <b>Start Date:</b>
+                                        {{match.startDateTime |
+                                        date:'medium'}}
+                                    </div>
 
-                            <div class="col-sm-6 border ">
-                                <b>End Date:</b> {{match.endDateTime |
-                                date:'medium'}}
-                            </div>
-                        </div>
-                        <div *ngFor="let franchise of match.teamPlayers">
-                            <div class="row">
-                                <div class="col-sm-4 border">
-                                    {{franchise.franchiseName}}</div>
-                                <div class="col-sm-8 border">
-                                    <div
-                                        *ngFor="let player of franchise.players">
-                                        {{player.firstName}}
-                                        {{player.LastName}}</div>
+                                    <div class="col-sm-6 border ">
+                                        <b>End Date:</b>
+                                        {{match.endDateTime |
+                                        date:'medium'}}
+                                    </div>
+                                </div>
+                                <div
+                                    *ngFor="let franchise of match.teamPlayers">
+                                    <div class="row">
+                                        <div class="col-sm-4 border">
+                                            {{franchise.franchiseName}}</div>
+                                        <div class="col-sm-8 border">
+                                            <div
+                                                *ngFor="let player of franchise.players">
+                                                {{player.firstName}}
+                                                {{player.lastName}}</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="pad"></div>
         </div>
     </div>
-</div>
-</div>
 </div>

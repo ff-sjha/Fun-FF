@@ -119,6 +119,7 @@
                     <thead>
                         <tr>
                             <th>Match Name</th>
+                            <th>Stage</th>
                             <th>Tournament</th>
                             <th>Start Date Time</th>
                             <th>End Date Time</th>
@@ -129,6 +130,7 @@
                             *ngFor="let match of matches ;trackBy: trackId">
                             <td><a
                                 [routerLink]="['../match', match.id ]">{{match.matchName}}</a></td>
+                            <td>{{match.stage}}</td>
                             <td>
                                 <div *ngIf="match.tournamentId">
                                     <a

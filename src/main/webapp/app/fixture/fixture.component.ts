@@ -70,6 +70,11 @@ export class FixtureComponent implements OnInit {
               (res: ResponseWrapper) => this.onError(res.json)
       );
   }
+
+  trackId(index: number, item: Match) {
+      return item.id;
+  }
+
   private onSuccessSeason(data, headers) {
       this.seasons = data;
   }

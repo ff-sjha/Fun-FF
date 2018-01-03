@@ -1,5 +1,6 @@
 package com.firstfuel.fafi.service;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,12 +114,8 @@ public class MatchQueryService extends QueryService<Match> {
 
     @Transactional(readOnly = true)
     public List<MatchDTO> getFixtures() {
-        log.debug("getAllUpcomingMatches");
-        ZonedDateTimeFilter dateFilter = new ZonedDateTimeFilter();
-        dateFilter.setGreaterOrEqualThan(ZonedDateTime.now());
-        Specifications<Match> specification = Specifications
-                .where(buildRangeSpecification(dateFilter, Match_.endDateTime));
-        final List<Match> result = matchRepository.findAll(specification, new Sort(Direction.ASC, "startDateTime"));
+        log.debug("getFixtures");
+        final List<Match> result = matchRepository.findByTournamentEndDateGreaterThanEqualOrderByStartDateTimeAsc(LocalDate.now());
         List<MatchDTO> response = new ArrayList<>();
         result.forEach(m -> {
             MatchDTO matchDto = matchMapper.toDto(m);
