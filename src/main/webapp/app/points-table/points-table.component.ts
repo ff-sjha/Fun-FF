@@ -13,7 +13,8 @@ import { PointsTableService } from './points-table.service';
     'points-table.scss'
   ]
 })
-export class PointsTableComponent implements OnInit, OnDestroy{
+
+export class PointsTableComponent implements OnInit, OnDestroy {
 
     pointsTable: PointsTablePlayer[];
     currentAccount: any;
@@ -26,7 +27,7 @@ export class PointsTableComponent implements OnInit, OnDestroy{
     reverse: any;
     totalItems: number;
 
-  constructor(    
+  constructor(
         private pointsTableService: PointsTableService,
         private jhiAlertService: JhiAlertService,
         private dataUtils: JhiDataUtils,
@@ -34,6 +35,7 @@ export class PointsTableComponent implements OnInit, OnDestroy{
         private parseLinks: JhiParseLinks,
         private principal: Principal
   ) {
+    this.pointsTable = [];
   }
 
     loadAll() {
@@ -51,12 +53,9 @@ export class PointsTableComponent implements OnInit, OnDestroy{
     }
 
     ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
     }
-    
+
     private onSuccess(data, headers) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = headers.get('X-Total-Count');
         for (let i = 0; i < data.length; i++) {
             this.pointsTable.push(data[i]);
         }
@@ -65,7 +64,7 @@ export class PointsTableComponent implements OnInit, OnDestroy{
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
-    
+
    sort() {
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
         if (this.predicate !== 'id') {
