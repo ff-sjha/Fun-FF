@@ -5,7 +5,8 @@
 		"teamRanking": "Team Ranking",
 		"player": {
 			"name":"Name",
-			"points": "Points"
+			"points": "Total Points",
+			"matches": "Matches"
 		},
 		"franchise": {
 			
