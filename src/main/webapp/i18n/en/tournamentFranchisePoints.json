@@ -1,0 +1,23 @@
+{
+    "fafiApp": {
+        "tournamentFranchisePoints" : {
+            "home": {
+                "title": "Tournament Franchise Points",
+                "createLabel": "Create a new Tournament Franchise Points",
+                "createOrEditLabel": "Create or edit a Tournament Franchise Points"
+            },
+            "created": "A new Tournament Franchise Points is created with identifier {{ param }}",
+            "updated": "A Tournament Franchise Points is updated with identifier {{ param }}",
+            "deleted": "A Tournament Franchise Points is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tournament Franchise Points {{ id }}?"
+            },
+            "detail": {
+                "title": "Tournament Franchise Points"
+            },
+            "points": "Points",
+            "tournament": "Tournament",
+            "franchise": "Franchise"
+        }
+    }
+}

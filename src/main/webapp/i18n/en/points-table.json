@@ -9,7 +9,8 @@
 			"matches": "Matches"
 		},
 		"franchise": {
-			
+			"name":"Name",
+            "points": "Total Points"
 		}
 	}
 }

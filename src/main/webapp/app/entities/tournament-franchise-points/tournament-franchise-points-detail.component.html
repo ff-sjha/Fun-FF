@@ -1,0 +1,38 @@
+
+<div *ngIf="tournamentFranchisePoints">
+    <h2><span jhiTranslate="fafiApp.tournamentFranchisePoints.detail.title">Tournament Franchise Points</span> {{tournamentFranchisePoints.id}}</h2>
+    <hr>
+    <fafi-alert-error></fafi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="fafiApp.tournamentFranchisePoints.points">Points</span></dt>
+        <dd>
+            <span>{{tournamentFranchisePoints.points}}</span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.tournamentFranchisePoints.tournament">Tournament</span></dt>
+        <dd>
+            <div *ngIf="tournamentFranchisePoints.tournamentId">
+                <a [routerLink]="['/tournament', tournamentFranchisePoints.tournamentId]">{{tournamentFranchisePoints.tournamentType}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.tournamentFranchisePoints.franchise">Franchise</span></dt>
+        <dd>
+            <div *ngIf="tournamentFranchisePoints.franchiseId">
+                <a [routerLink]="['/franchise', tournamentFranchisePoints.franchiseId]">{{tournamentFranchisePoints.franchiseName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tournament-franchise-points/'+ tournamentFranchisePoints.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

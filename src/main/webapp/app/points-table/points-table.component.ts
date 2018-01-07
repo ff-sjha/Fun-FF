@@ -4,6 +4,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'n
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../shared';
 
 import { PointsTablePlayer } from './points-table-player.model';
+import { PointsTableFanchise } from './points-table-franchise.model';
 import { PointsTableService } from './points-table.service';
 
 @Component({
@@ -16,7 +17,8 @@ import { PointsTableService } from './points-table.service';
 
 export class PointsTableComponent implements OnInit, OnDestroy {
 
-    pointsTable: PointsTablePlayer[];
+    pointsTablePlayer: PointsTablePlayer[];
+    pointsTableFranchise: PointsTableFanchise[];
     currentAccount: any;
     eventSubscriber: Subscription;
     itemsPerPage: number;
@@ -35,16 +37,25 @@ export class PointsTableComponent implements OnInit, OnDestroy {
         private parseLinks: JhiParseLinks,
         private principal: Principal
   ) {
-    this.pointsTable = [];
+    this.pointsTablePlayer = [];
+    this.pointsTableFranchise = [];
   }
 
     loadAll() {
-        this.pointsTableService.query({
+        this.pointsTableService.queryPlayerPoints({
             page: this.page,
             size: this.itemsPerPage,
             sort: this.sort()
         }).subscribe(
-            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+            (res: ResponseWrapper) => this.onSuccessPlayer(res.json, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+        this.pointsTableService.queryFranchisePoints({
+            page: this.page,
+            size: this.itemsPerPage,
+            sort: this.sort()
+        }).subscribe(
+            (res: ResponseWrapper) => this.onSuccessFanchise(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
@@ -55,9 +66,15 @@ export class PointsTableComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
     }
 
-    private onSuccess(data, headers) {
+    private onSuccessPlayer(data, headers) {
         for (let i = 0; i < data.length; i++) {
-            this.pointsTable.push(data[i]);
+            this.pointsTablePlayer.push(data[i]);
+        }
+    }
+
+    private onSuccessFanchise(data, headers) {
+        for (let i = 0; i < data.length; i++) {
+            this.pointsTableFranchise.push(data[i]);
         }
     }
 

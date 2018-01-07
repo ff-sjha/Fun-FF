@@ -6,6 +6,7 @@ import { SERVER_API_URL } from '../app.constants';
 import { JhiDateUtils } from 'ng-jhipster';
 
 import { PointsTablePlayer } from './points-table-player.model';
+import { PointsTableFanchise } from './points-table-franchise.model';
 import { ResponseWrapper, createRequestOption } from '../shared';
 
 @Injectable()
@@ -15,9 +16,15 @@ export class PointsTableService {
 
     constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
-    query(req?: any): Observable<ResponseWrapper> {
+    queryPlayerPoints(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
-        return this.http.get(this.resourceUrl, options)
+        return this.http.get(this.resourceUrl + '/players', options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
+    queryFranchisePoints(req?: any): Observable<ResponseWrapper> {
+        const options = createRequestOption(req);
+        return this.http.get(this.resourceUrl + '/franchise', options)
             .map((res: Response) => this.convertResponse(res));
     }
 

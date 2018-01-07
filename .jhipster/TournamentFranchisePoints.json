@@ -1,0 +1,38 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "tournament",
+            "otherEntityName": "tournament",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "type"
+        },
+        {
+            "relationshipName": "franchise",
+            "otherEntityName": "franchise",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "points",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180106133213",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "tournament_franchise_points",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

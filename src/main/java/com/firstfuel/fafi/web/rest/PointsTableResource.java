@@ -15,22 +15,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.firstfuel.fafi.repository.PlayerRepository;
+import com.firstfuel.fafi.repository.TournamentFranchisePointsRepository;
+import com.firstfuel.fafi.service.dto.FranchisePointsDTO;
 import com.firstfuel.fafi.service.dto.PlayerCriteria;
 import com.firstfuel.fafi.service.dto.PlayerPointsDTO;
 
 @RestController
 @RequestMapping("/api")
 public class PointsTableResource {
-    
+
     private final Logger log = LoggerFactory.getLogger(PointsTableResource.class);
 
     @Autowired
     private PlayerRepository playerRepo;
-    
-    @GetMapping("/points-table")
+    @Autowired
+    private TournamentFranchisePointsRepository frenchisePointRepo;
+
+    @GetMapping("/points-table/players")
     @Timed
     public ResponseEntity<List<PlayerPointsDTO>> getAllPlayers(PlayerCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Players by criteria: {}", criteria);
         return new ResponseEntity<>(playerRepo.getPlayerPoints(), new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @GetMapping("/points-table/franchise")
+    @Timed
+    public ResponseEntity<List<FranchisePointsDTO>> getAllFranchise(PlayerCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Players by criteria: {}", criteria);
+        return new ResponseEntity<>(frenchisePointRepo.getFranchisePoints(), new HttpHeaders(), HttpStatus.OK);
     }
 }

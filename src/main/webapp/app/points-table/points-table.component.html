@@ -25,7 +25,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let pp of pointsTable">
+                                    <tr *ngFor="let pp of pointsTablePlayer">
                                         <td>{{pp.firstName}}
                                             {{pp.lastName}}</td>
                                         <td>{{pp.totalPoints}}</td>
@@ -39,6 +39,24 @@
                         <div>
                             <h3 class="text-capitalize text-center"
                                 jhiTranslate="points-table.teamRanking">Title</h3>
+                                <table class="table table-striped">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><span
+                                            jhiTranslate="points-table.franchise.name">Name</span></th>
+                                        <th><span
+                                            jhiTranslate="points-table.franchise.points">Points</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let fp of pointsTableFranchise">
+                                        <td>{{fp.name}}
+                                        <td>{{fp.totalPoints}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </table>
                         </div>
                     </div>
                 </div>
