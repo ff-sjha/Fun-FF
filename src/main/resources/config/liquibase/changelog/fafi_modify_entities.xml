@@ -40,4 +40,11 @@
 		<addUniqueConstraint columnNames="first_name, last_name"
 			tableName="player" constraintName="uk_player_name" />
 	</changeSet>
+    <changeSet id="20180110153701-1" author="Ameeth Paatil">
+        <addColumn tableName="fafi_match">
+             <column name="completed" type="bit" defaultValueBoolean="false">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

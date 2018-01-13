@@ -38,6 +38,8 @@ public class MatchDTO implements Serializable {
     private String winningFranchiseFranchiseName;
 
     private Games tournamentType;
+    
+    private Boolean completed;
 
     private List<FranchisePlayersDTO> teamPlayers;
 
@@ -135,6 +137,15 @@ public class MatchDTO implements Serializable {
 
     public void setTeamPlayers(List<FranchisePlayersDTO> teamPlayers) {
         this.teamPlayers = teamPlayers;
+    }
+    
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 
     @Override

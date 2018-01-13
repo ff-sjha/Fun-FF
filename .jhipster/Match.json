@@ -45,6 +45,13 @@
         {
             "fieldName": "venue",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "completed",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20171218190035",

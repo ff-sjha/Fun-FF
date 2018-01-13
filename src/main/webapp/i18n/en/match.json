@@ -21,6 +21,7 @@
             "matchName": "Match Name",
             "stage": "Stage",
             "venue": "Venue",
+            "completed": "Completed",
             "tournament": "Tournament",
             "winningFranchise": "Winning Franchise"
         }

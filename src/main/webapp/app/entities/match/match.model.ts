@@ -18,8 +18,10 @@ export class Match implements BaseEntity {
         public matchName?: string,
         public stage?: Stage,
         public venue?: string,
+        public completed?: boolean,
         public tournamentId?: number,
         public winningFranchiseId?: number,
     ) {
+        this.completed = false;
     }
 }

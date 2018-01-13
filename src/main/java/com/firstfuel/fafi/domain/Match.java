@@ -47,6 +47,10 @@ public class Match implements Serializable {
     @Column(name = "venue")
     private String venue;
 
+    @NotNull
+    @Column(name = "completed", nullable = false)
+    private Boolean completed;
+
     @ManyToOne
     private Tournament tournament;
 
@@ -140,6 +144,19 @@ public class Match implements Serializable {
         this.venue = venue;
     }
 
+    public Boolean isCompleted() {
+        return completed;
+    }
+
+    public Match completed(Boolean completed) {
+        this.completed = completed;
+        return this;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
+
     public Tournament getTournament() {
         return tournament;
     }
@@ -197,6 +214,7 @@ public class Match implements Serializable {
             ", matchName='" + getMatchName() + "'" +
             ", stage='" + getStage() + "'" +
             ", venue='" + getVenue() + "'" +
+            ", completed='" + isCompleted() + "'" +
             "}";
     }
 }

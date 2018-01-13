@@ -64,6 +64,17 @@
             <input type="text" class="form-control" name="venue" id="field_venue"
                 [(ngModel)]="match.venue" />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.match.completed" for="field_completed">Completed</label>
+            <input type="checkbox" class="form-control" name="completed" id="field_completed"
+                [(ngModel)]="match.completed" />
+            <div [hidden]="!(editForm.controls.completed?.dirty && editForm.controls.completed?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.completed?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.match.tournament" for="field_tournament">Tournament</label>
