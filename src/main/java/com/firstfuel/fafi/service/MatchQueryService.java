@@ -31,9 +31,9 @@ import com.firstfuel.fafi.repository.MatchRepository;
 import com.firstfuel.fafi.service.dto.FranchisePlayersDTO;
 import com.firstfuel.fafi.service.dto.MatchCriteria;
 import com.firstfuel.fafi.service.dto.MatchDTO;
-import com.firstfuel.fafi.service.dto.PlayerDTO;
+import com.firstfuel.fafi.service.dto.MatchPlayersDTO;
 import com.firstfuel.fafi.service.mapper.MatchMapper;
-import com.firstfuel.fafi.service.mapper.PlayerMapper;
+import com.firstfuel.fafi.service.mapper.MatchPlayersMapper;
 
 import io.github.jhipster.service.QueryService;
 import io.github.jhipster.service.filter.ZonedDateTimeFilter;
@@ -59,7 +59,9 @@ public class MatchQueryService extends QueryService<Match> {
     private final MatchMapper matchMapper;
 
     @Autowired
-    private PlayerMapper playerMapper;
+    private MatchPlayersMapper matchPlayerMapper;
+    
+    
 
     public MatchQueryService(MatchRepository matchRepository, MatchMapper matchMapper) {
         this.matchRepository = matchRepository;
@@ -120,7 +122,7 @@ public class MatchQueryService extends QueryService<Match> {
         result.forEach(m -> {
             MatchDTO matchDto = matchMapper.toDto(m);
             List<MatchPlayers> matchPlayers = matchPlayerRepository.findByMatch(m);
-            Map<String, List<PlayerDTO>> teamPlayers = new HashMap<>();
+            Map<String, List<MatchPlayersDTO>> teamPlayers = new HashMap<>();
             Map<String, Long> franchaiseId = new HashMap<>();
             matchPlayers.forEach(mp -> {
                 Franchise fr = mp.getSeasonsFranchisePlayer().getSeasonsFranchise().getFranchise();
@@ -129,7 +131,7 @@ public class MatchQueryService extends QueryService<Match> {
                     teamPlayers.put(fr.getName(), new ArrayList<>());
                 }
                 franchaiseId.put(fr.getName(), fr.getId());
-                teamPlayers.get(fr.getName()).add(playerMapper.toDto(pl));
+                teamPlayers.get(fr.getName()).add(matchPlayerMapper.toDto(mp));
             });
             List<FranchisePlayersDTO> fplayers = new ArrayList<>(teamPlayers.size());
             teamPlayers.forEach((k, v) -> {
