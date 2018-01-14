@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "match",
+            "otherEntityName": "match",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "matchName"
+        },
+        {
+            "relationshipName": "umpire",
+            "otherEntityName": "player",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "firstName"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20180114120336",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "match_umpire",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

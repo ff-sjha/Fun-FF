@@ -44,13 +44,24 @@
                                         <div class="col-sm-4 border">
                                             {{franchise.franchiseName}}</div>
                                         <div class="col-sm-8 border">
-                                            <div
+                                            <span
                                                 *ngFor="let player of franchise.players" [class.player-of-match] ="player.playerOfTheMatch">
                                                 {{player.seasonsFranchisePlayerFirstName}}
-                                                {{player.seasonsFranchisePlayerLastName}}</div>
+                                                {{player.seasonsFranchisePlayerLastName}}, </span>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3 border">
+                                        <b>Umpire(s):</b>
+                                    </div>
+                                    <div class="col-sm-9 border">
+                                        <span *ngFor="let umpire of match.umpires" >
+                                                {{umpire.firstName}} {{umpire.lastName}}, 
+                                        </span>
+                                    </div>
+                               </div>
                             </div>
                         </td>
                     </tr>

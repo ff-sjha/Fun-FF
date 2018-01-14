@@ -33,6 +33,7 @@
                 "matchPlayers": "Match Players",
                 "news": "News",
                 "tournamentFranchisePoints": "Tournament Franchise Points",
+                "matchUmpire": "Match Umpire",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

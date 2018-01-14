@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -22,8 +23,8 @@ import com.firstfuel.fafi.domain.Franchise;
 // for static metamodels
 import com.firstfuel.fafi.domain.Match;
 import com.firstfuel.fafi.domain.MatchPlayers;
+import com.firstfuel.fafi.domain.MatchUmpire;
 import com.firstfuel.fafi.domain.Match_;
-import com.firstfuel.fafi.domain.Player;
 import com.firstfuel.fafi.domain.SeasonsFranchise_;
 import com.firstfuel.fafi.domain.Tournament_;
 import com.firstfuel.fafi.repository.MatchPlayersRepository;
@@ -32,10 +33,13 @@ import com.firstfuel.fafi.service.dto.FranchisePlayersDTO;
 import com.firstfuel.fafi.service.dto.MatchCriteria;
 import com.firstfuel.fafi.service.dto.MatchDTO;
 import com.firstfuel.fafi.service.dto.MatchPlayersDTO;
+import com.firstfuel.fafi.service.dto.MatchUmpireCriteria;
+import com.firstfuel.fafi.service.dto.MatchUmpireDTO;
 import com.firstfuel.fafi.service.mapper.MatchMapper;
 import com.firstfuel.fafi.service.mapper.MatchPlayersMapper;
 
 import io.github.jhipster.service.QueryService;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.ZonedDateTimeFilter;
 
 /**
@@ -60,8 +64,9 @@ public class MatchQueryService extends QueryService<Match> {
 
     @Autowired
     private MatchPlayersMapper matchPlayerMapper;
-    
-    
+
+    @Autowired
+    private MatchUmpireQueryService matchUmpireQueryService;
 
     public MatchQueryService(MatchRepository matchRepository, MatchMapper matchMapper) {
         this.matchRepository = matchRepository;
@@ -117,7 +122,8 @@ public class MatchQueryService extends QueryService<Match> {
     @Transactional(readOnly = true)
     public List<MatchDTO> getFixtures() {
         log.debug("getFixtures");
-        final List<Match> result = matchRepository.findByTournamentEndDateGreaterThanEqualOrderByStartDateTimeAsc(LocalDate.now());
+        final List<Match> result = matchRepository
+                .findByTournamentEndDateGreaterThanEqualOrderByStartDateTimeAsc(LocalDate.now());
         List<MatchDTO> response = new ArrayList<>();
         result.forEach(m -> {
             MatchDTO matchDto = matchMapper.toDto(m);
@@ -126,7 +132,6 @@ public class MatchQueryService extends QueryService<Match> {
             Map<String, Long> franchaiseId = new HashMap<>();
             matchPlayers.forEach(mp -> {
                 Franchise fr = mp.getSeasonsFranchisePlayer().getSeasonsFranchise().getFranchise();
-                Player pl = mp.getSeasonsFranchisePlayer().getPlayer();
                 if (!teamPlayers.containsKey(fr.getName())) {
                     teamPlayers.put(fr.getName(), new ArrayList<>());
                 }
@@ -138,6 +143,22 @@ public class MatchQueryService extends QueryService<Match> {
                 fplayers.add(new FranchisePlayersDTO(franchaiseId.get(k), k, teamPlayers.get(k)));
             });
             matchDto.setTeamPlayers(fplayers);
+            MatchUmpireCriteria criteria = new MatchUmpireCriteria();
+            LongFilter matchId = new LongFilter();
+            matchId.setEquals(m.getId());
+            criteria.setMatchId(matchId);
+            Page<MatchUmpire> page = matchUmpireQueryService.findByCriteria(criteria, new PageRequest(0, 1000));
+            List<MatchUmpireDTO> umpires = new ArrayList<>();
+            page.forEach(u -> {
+                MatchUmpireDTO umpire = new MatchUmpireDTO();
+                umpire.setId(u.getId());
+                umpire.setFirstName(u.getUmpire().getFirstName());
+                umpire.setLastName(u.getUmpire().getLastName());
+                umpire.setMatchId(u.getMatch().getId());
+                umpire.setUmpireId(u.getUmpire().getId());
+                umpires.add(umpire);
+            });
+            matchDto.setUmpires(umpires);
             response.add(matchDto);
         });
         return response;

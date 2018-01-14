@@ -1,0 +1,22 @@
+{
+    "fafiApp": {
+        "matchUmpire" : {
+            "home": {
+                "title": "Match Umpires",
+                "createLabel": "Create a new Match Umpire",
+                "createOrEditLabel": "Create or edit a Match Umpire"
+            },
+            "created": "A new Match Umpire is created with identifier {{ param }}",
+            "updated": "A Match Umpire is updated with identifier {{ param }}",
+            "deleted": "A Match Umpire is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Match Umpire {{ id }}?"
+            },
+            "detail": {
+                "title": "Match Umpire"
+            },
+            "match": "Match",
+            "umpire": "Umpire"
+        }
+    }
+}

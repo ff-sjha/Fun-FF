@@ -42,6 +42,8 @@ public class MatchDTO implements Serializable {
     private Boolean completed;
 
     private List<FranchisePlayersDTO> teamPlayers;
+    
+    private List<MatchUmpireDTO> umpires;
 
     public Long getId() {
         return id;
@@ -146,6 +148,14 @@ public class MatchDTO implements Serializable {
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+    }
+
+    public List<MatchUmpireDTO> getUmpires() {
+        return umpires;
+    }
+
+    public void setUmpires(List<MatchUmpireDTO> umpires) {
+        this.umpires = umpires;
     }
 
     @Override

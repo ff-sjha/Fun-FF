@@ -153,6 +153,12 @@
                         </a>
                     </li>
                     <li>
+                        <a class="dropdown-item" routerLink="match-umpire" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-cogs" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.matchUmpire">Match Umpire</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item" routerLink="tie-team" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-cogs" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.tieTeam">Tie Team</span>
@@ -171,6 +177,7 @@
                             <span jhiTranslate="global.menu.entities.news">News</span>
                         </a>
                     </li>
+
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
