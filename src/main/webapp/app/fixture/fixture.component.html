@@ -45,9 +45,9 @@
                                             {{franchise.franchiseName}}</div>
                                         <div class="col-sm-8 border">
                                             <span
-                                                *ngFor="let player of franchise.players" [class.player-of-match] ="player.playerOfTheMatch">
+                                                *ngFor="let player of franchise.players; let last = last" [class.player-of-match] ="player.playerOfTheMatch">
                                                 {{player.seasonsFranchisePlayerFirstName}}
-                                                {{player.seasonsFranchisePlayerLastName}}, </span>
+                                                {{player.seasonsFranchisePlayerLastName}}{{last? ' ' : ', '}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -57,8 +57,8 @@
                                         <b>Umpire(s):</b>
                                     </div>
                                     <div class="col-sm-9 border">
-                                        <span *ngFor="let umpire of match.umpires" >
-                                                {{umpire.firstName}} {{umpire.lastName}}, 
+                                        <span *ngFor="let umpire of match.umpires let last = last" >
+                                                {{umpire.firstName}} {{umpire.lastName}}{{last? ' ' : ', '}}
                                         </span>
                                     </div>
                                </div>
