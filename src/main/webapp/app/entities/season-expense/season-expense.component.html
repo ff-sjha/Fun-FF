@@ -1,0 +1,76 @@
+<div>
+    <h2>
+        <span jhiTranslate="fafiApp.seasonExpense.home.title">Season Expenses</span>
+        <button class="btn btn-primary float-right jh-create-entity create-season-expense" [routerLink]="['/', { outlets: { popup: ['season-expense-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="fafiApp.seasonExpense.home.createLabel">
+            Create new Season Expense
+            </span>
+        </button>
+    </h2>
+    <fafi-alert></fafi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="seasonExpenses">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="incurredDate"><span jhiTranslate="fafiApp.seasonExpense.incurredDate">Incurred Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="description"><span jhiTranslate="fafiApp.seasonExpense.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="amount"><span jhiTranslate="fafiApp.seasonExpense.amount">Amount</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="season.name"><span jhiTranslate="fafiApp.seasonExpense.season">Season</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let seasonExpense of seasonExpenses ;trackBy: trackId">
+                <td><a [routerLink]="['../season-expense', seasonExpense.id ]">{{seasonExpense.id}}</a></td>
+                <td>{{seasonExpense.incurredDate | date:'mediumDate'}}</td>
+                <td>{{seasonExpense.description}}</td>
+                <td>{{seasonExpense.amount}}</td>
+                <td>
+                    <div *ngIf="seasonExpense.season">
+                        <a [routerLink]="['../season', seasonExpense.season?.id ]" >{{seasonExpense.season?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../season-expense', seasonExpense.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'season-expense/'+ seasonExpense.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'season-expense/'+ seasonExpense.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="seasonExpenses && seasonExpenses.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>

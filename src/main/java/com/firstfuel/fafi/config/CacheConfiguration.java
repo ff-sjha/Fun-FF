@@ -63,6 +63,7 @@ public class CacheConfiguration {
             cm.createCache(com.firstfuel.fafi.domain.News.class.getName(), jcacheConfiguration);
             cm.createCache(com.firstfuel.fafi.domain.TournamentFranchisePoints.class.getName(), jcacheConfiguration);
             cm.createCache(com.firstfuel.fafi.domain.MatchUmpire.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firstfuel.fafi.domain.SeasonExpense.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

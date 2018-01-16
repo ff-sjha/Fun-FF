@@ -34,6 +34,7 @@
                 "news": "News",
                 "tournamentFranchisePoints": "Tournament Franchise Points",
                 "matchUmpire": "Match Umpire",
+                "seasonExpense": "Season Expense",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

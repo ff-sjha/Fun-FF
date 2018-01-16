@@ -1,0 +1,24 @@
+{
+    "fafiApp": {
+        "seasonExpense" : {
+            "home": {
+                "title": "Season Expenses",
+                "createLabel": "Create a new Season Expense",
+                "createOrEditLabel": "Create or edit a Season Expense"
+            },
+            "created": "A new Season Expense is created with identifier {{ param }}",
+            "updated": "A Season Expense is updated with identifier {{ param }}",
+            "deleted": "A Season Expense is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Season Expense {{ id }}?"
+            },
+            "detail": {
+                "title": "Season Expense"
+            },
+            "incurredDate": "Incurred Date",
+            "description": "Description",
+            "amount": "Amount",
+            "season": "Season"
+        }
+    }
+}

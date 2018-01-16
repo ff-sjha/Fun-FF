@@ -14,6 +14,7 @@ import { FafiMatchPlayersModule } from './match-players/match-players.module';
 import { FafiNewsModule } from './news/news.module';
 import { FafiTournamentFranchisePointsModule } from './tournament-franchise-points/tournament-franchise-points.module';
 import { FafiMatchUmpireModule } from './match-umpire/match-umpire.module';
+import { FafiSeasonExpenseModule } from './season-expense/season-expense.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -32,6 +33,7 @@ import { FafiMatchUmpireModule } from './match-umpire/match-umpire.module';
         FafiNewsModule,
         FafiTournamentFranchisePointsModule,
         FafiMatchUmpireModule,
+        FafiSeasonExpenseModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
