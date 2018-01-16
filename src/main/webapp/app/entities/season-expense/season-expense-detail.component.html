@@ -16,10 +16,10 @@
         <dd>
             <span>{{seasonExpense.amount}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.seasonExpense.season">Season</span></dt>
+        <dt><span jhiTranslate="fafiApp.seasonExpense.tournament">Tournament</span></dt>
         <dd>
-            <div *ngIf="seasonExpense.season">
-                <a [routerLink]="['/season', seasonExpense.season?.id]">{{seasonExpense.season?.name}}</a>
+            <div *ngIf="seasonExpense.tournament">
+                <a [routerLink]="['/tournament', seasonExpense.tournament?.id]">{{seasonExpense.tournament?.type}}</a>
             </div>
         </dd>
     </dl>

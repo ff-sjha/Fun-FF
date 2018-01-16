@@ -8,7 +8,7 @@ import { FafiTestModule } from '../../../test.module';
 import { SeasonExpenseDialogComponent } from '../../../../../../main/webapp/app/entities/season-expense/season-expense-dialog.component';
 import { SeasonExpenseService } from '../../../../../../main/webapp/app/entities/season-expense/season-expense.service';
 import { SeasonExpense } from '../../../../../../main/webapp/app/entities/season-expense/season-expense.model';
-import { SeasonService } from '../../../../../../main/webapp/app/entities/season';
+import { TournamentService } from '../../../../../../main/webapp/app/entities/tournament';
 
 describe('Component Tests', () => {
 
@@ -24,7 +24,7 @@ describe('Component Tests', () => {
                 imports: [FafiTestModule],
                 declarations: [SeasonExpenseDialogComponent],
                 providers: [
-                    SeasonService,
+                    TournamentService,
                     SeasonExpenseService
                 ]
             })

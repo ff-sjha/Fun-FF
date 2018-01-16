@@ -20,7 +20,7 @@
             <th jhiSortBy="incurredDate"><span jhiTranslate="fafiApp.seasonExpense.incurredDate">Incurred Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="description"><span jhiTranslate="fafiApp.seasonExpense.description">Description</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="amount"><span jhiTranslate="fafiApp.seasonExpense.amount">Amount</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="season.name"><span jhiTranslate="fafiApp.seasonExpense.season">Season</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tournament.type"><span jhiTranslate="fafiApp.seasonExpense.tournament">Tournament</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,8 +31,8 @@
                 <td>{{seasonExpense.description}}</td>
                 <td>{{seasonExpense.amount}}</td>
                 <td>
-                    <div *ngIf="seasonExpense.season">
-                        <a [routerLink]="['../season', seasonExpense.season?.id ]" >{{seasonExpense.season?.name}}</a>
+                    <div *ngIf="seasonExpense.tournament">
+                        <a [routerLink]="['../tournament', seasonExpense.tournament?.id ]" >{{seasonExpense.tournament?.type}}</a>
                     </div>
                 </td>
                 <td class="text-right">

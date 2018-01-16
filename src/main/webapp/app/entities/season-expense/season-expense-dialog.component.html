@@ -64,15 +64,15 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.seasonExpense.season" for="field_season">Season</label>
-            <select class="form-control" id="field_season" name="season" [(ngModel)]="seasonExpense.season"  required>
-                <option *ngIf="!editForm.value.season" [ngValue]="null" selected></option>
-                <option [ngValue]="seasonOption.id === seasonExpense.season?.id ? seasonExpense.season : seasonOption" *ngFor="let seasonOption of seasons; trackBy: trackSeasonById">{{seasonOption.name}}</option>
+            <label class="form-control-label" jhiTranslate="fafiApp.seasonExpense.tournament" for="field_tournament">Tournament</label>
+            <select class="form-control" id="field_tournament" name="tournament" [(ngModel)]="seasonExpense.tournament"  required>
+                <option *ngIf="!editForm.value.tournament" [ngValue]="null" selected></option>
+                <option [ngValue]="tournamentOption.id === seasonExpense.tournament?.id ? seasonExpense.tournament : tournamentOption" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.type}}</option>
             </select>
         </div>
-        <div [hidden]="!(editForm.controls.season?.dirty && editForm.controls.season?.invalid)">
+        <div [hidden]="!(editForm.controls.tournament?.dirty && editForm.controls.tournament?.invalid)">
             <small class="form-text text-danger"
-                [hidden]="!editForm.controls.season?.errors?.required" jhiTranslate="entity.validation.required">
+                [hidden]="!editForm.controls.tournament?.errors?.required" jhiTranslate="entity.validation.required">
                 This field is required.
             </small>
         </div>

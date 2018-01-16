@@ -81,8 +81,8 @@ public class SeasonExpenseQueryService extends QueryService<SeasonExpense> {
             if (criteria.getAmount() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getAmount(), SeasonExpense_.amount));
             }
-            if (criteria.getSeasonId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getSeasonId(), SeasonExpense_.season, Season_.id));
+            if (criteria.getTournamentId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getTournamentId(), SeasonExpense_.tournament, Tournament_.id));
             }
         }
         return specification;

@@ -34,7 +34,7 @@ public class SeasonExpenseCriteria implements Serializable {
 
     private DoubleFilter amount;
 
-    private LongFilter seasonId;
+    private LongFilter tournamentId;
 
     public SeasonExpenseCriteria() {
     }
@@ -71,12 +71,12 @@ public class SeasonExpenseCriteria implements Serializable {
         this.amount = amount;
     }
 
-    public LongFilter getSeasonId() {
-        return seasonId;
+    public LongFilter getTournamentId() {
+        return tournamentId;
     }
 
-    public void setSeasonId(LongFilter seasonId) {
-        this.seasonId = seasonId;
+    public void setTournamentId(LongFilter tournamentId) {
+        this.tournamentId = tournamentId;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class SeasonExpenseCriteria implements Serializable {
                 (incurredDate != null ? "incurredDate=" + incurredDate + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
                 (amount != null ? "amount=" + amount + ", " : "") +
-                (seasonId != null ? "seasonId=" + seasonId + ", " : "") +
+                (tournamentId != null ? "tournamentId=" + tournamentId + ", " : "") +
             "}";
     }
 

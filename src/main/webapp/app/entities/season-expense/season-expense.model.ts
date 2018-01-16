@@ -6,7 +6,7 @@ export class SeasonExpense implements BaseEntity {
         public incurredDate?: any,
         public description?: string,
         public amount?: number,
-        public season?: BaseEntity,
+        public tournament?: BaseEntity,
     ) {
     }
 }

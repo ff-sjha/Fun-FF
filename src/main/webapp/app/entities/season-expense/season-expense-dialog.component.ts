@@ -9,7 +9,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { SeasonExpense } from './season-expense.model';
 import { SeasonExpensePopupService } from './season-expense-popup.service';
 import { SeasonExpenseService } from './season-expense.service';
-import { Season, SeasonService } from '../season';
+import { Tournament, TournamentService } from '../tournament';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -21,22 +21,22 @@ export class SeasonExpenseDialogComponent implements OnInit {
     seasonExpense: SeasonExpense;
     isSaving: boolean;
 
-    seasons: Season[];
+    tournaments: Tournament[];
     incurredDateDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private seasonExpenseService: SeasonExpenseService,
-        private seasonService: SeasonService,
+        private tournamentService: TournamentService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.seasonService.query()
-            .subscribe((res: ResponseWrapper) => { this.seasons = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.tournamentService.query()
+            .subscribe((res: ResponseWrapper) => { this.tournaments = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -73,7 +73,7 @@ export class SeasonExpenseDialogComponent implements OnInit {
         this.jhiAlertService.error(error.message, null, null);
     }
 
-    trackSeasonById(index: number, item: Season) {
+    trackTournamentById(index: number, item: Tournament) {
         return item.id;
     }
 }

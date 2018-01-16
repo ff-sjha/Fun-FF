@@ -3,7 +3,7 @@ package com.firstfuel.fafi.web.rest;
 import com.firstfuel.fafi.FafiApp;
 
 import com.firstfuel.fafi.domain.SeasonExpense;
-import com.firstfuel.fafi.domain.Season;
+import com.firstfuel.fafi.domain.Tournament;
 import com.firstfuel.fafi.repository.SeasonExpenseRepository;
 import com.firstfuel.fafi.service.SeasonExpenseService;
 import com.firstfuel.fafi.web.rest.errors.ExceptionTranslator;
@@ -101,10 +101,10 @@ public class SeasonExpenseResourceIntTest {
             .description(DEFAULT_DESCRIPTION)
             .amount(DEFAULT_AMOUNT);
         // Add required entity
-        Season season = SeasonResourceIntTest.createEntity(em);
-        em.persist(season);
+        Tournament tournament = TournamentResourceIntTest.createEntity(em);
+        em.persist(tournament);
         em.flush();
-        seasonExpense.setSeason(season);
+        seasonExpense.setTournament(tournament);
         return seasonExpense;
     }
 
@@ -384,20 +384,20 @@ public class SeasonExpenseResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllSeasonExpensesBySeasonIsEqualToSomething() throws Exception {
+    public void getAllSeasonExpensesByTournamentIsEqualToSomething() throws Exception {
         // Initialize the database
-        Season season = SeasonResourceIntTest.createEntity(em);
-        em.persist(season);
+        Tournament tournament = TournamentResourceIntTest.createEntity(em);
+        em.persist(tournament);
         em.flush();
-        seasonExpense.setSeason(season);
+        seasonExpense.setTournament(tournament);
         seasonExpenseRepository.saveAndFlush(seasonExpense);
-        Long seasonId = season.getId();
+        Long tournamentId = tournament.getId();
 
-        // Get all the seasonExpenseList where season equals to seasonId
-        defaultSeasonExpenseShouldBeFound("seasonId.equals=" + seasonId);
+        // Get all the seasonExpenseList where tournament equals to tournamentId
+        defaultSeasonExpenseShouldBeFound("tournamentId.equals=" + tournamentId);
 
-        // Get all the seasonExpenseList where season equals to seasonId + 1
-        defaultSeasonExpenseShouldNotBeFound("seasonId.equals=" + (seasonId + 1));
+        // Get all the seasonExpenseList where tournament equals to tournamentId + 1
+        defaultSeasonExpenseShouldNotBeFound("tournamentId.equals=" + (tournamentId + 1));
     }
 
     /**

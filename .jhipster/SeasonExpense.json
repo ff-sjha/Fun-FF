@@ -2,13 +2,13 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "season",
-            "otherEntityName": "season",
+            "relationshipName": "tournament",
+            "otherEntityName": "tournament",
             "relationshipType": "many-to-one",
             "relationshipValidateRules": [
                 "required"
             ],
-            "otherEntityField": "name"
+            "otherEntityField": "type"
         }
     ],
     "fields": [

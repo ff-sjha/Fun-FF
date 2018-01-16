@@ -40,7 +40,7 @@ public class SeasonExpense implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    private Season season;
+    private Tournament tournament;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -90,17 +90,17 @@ public class SeasonExpense implements Serializable {
         this.amount = amount;
     }
 
-    public Season getSeason() {
-        return season;
+    public Tournament getTournament() {
+        return tournament;
     }
 
-    public SeasonExpense season(Season season) {
-        this.season = season;
+    public SeasonExpense tournament(Tournament tournament) {
+        this.tournament = tournament;
         return this;
     }
 
-    public void setSeason(Season season) {
-        this.season = season;
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -37,7 +37,7 @@ describe('SeasonExpense e2e test', () => {
         expect(seasonExpenseDialogPage.getDescriptionInput()).toMatch('description');
         seasonExpenseDialogPage.setAmountInput('5');
         expect(seasonExpenseDialogPage.getAmountInput()).toMatch('5');
-        seasonExpenseDialogPage.seasonSelectLastOption();
+        seasonExpenseDialogPage.tournamentSelectLastOption();
         seasonExpenseDialogPage.save();
         expect(seasonExpenseDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });*/
@@ -67,7 +67,7 @@ export class SeasonExpenseDialogPage {
     incurredDateInput = element(by.css('input#field_incurredDate'));
     descriptionInput = element(by.css('input#field_description'));
     amountInput = element(by.css('input#field_amount'));
-    seasonSelect = element(by.css('select#field_season'));
+    tournamentSelect = element(by.css('select#field_tournament'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -97,20 +97,20 @@ export class SeasonExpenseDialogPage {
         return this.amountInput.getAttribute('value');
     }
 
-    seasonSelectLastOption = function() {
-        this.seasonSelect.all(by.tagName('option')).last().click();
+    tournamentSelectLastOption = function() {
+        this.tournamentSelect.all(by.tagName('option')).last().click();
     }
 
-    seasonSelectOption = function(option) {
-        this.seasonSelect.sendKeys(option);
+    tournamentSelectOption = function(option) {
+        this.tournamentSelect.sendKeys(option);
     }
 
-    getSeasonSelect = function() {
-        return this.seasonSelect;
+    getTournamentSelect = function() {
+        return this.tournamentSelect;
     }
 
-    getSeasonSelectedOption = function() {
-        return this.seasonSelect.element(by.css('option:checked')).getText();
+    getTournamentSelectedOption = function() {
+        return this.tournamentSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

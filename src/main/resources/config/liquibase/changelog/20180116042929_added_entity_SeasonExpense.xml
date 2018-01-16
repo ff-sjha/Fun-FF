@@ -34,7 +34,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="season_id" type="bigint">
+            <column name="tournament_id" type="bigint">
                 <constraints nullable="false" />
             </column>
 
