@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiLanguageService } from 'ng-jhipster';
+import { JhiLanguageService, JhiAlertService } from 'ng-jhipster';
 
 import { ProfileService } from '../profiles/profile.service';
-import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
-
+import { JhiLanguageHelper, Principal, LoginModalService, LoginService, ResponseWrapper } from '../../shared';
+import { SeasonsFranchise, SeasonsFranchiseService } from '../../entities/seasons-franchise';
 import { VERSION } from '../../app.constants';
 
 @Component({
@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    seasonsFranchises: SeasonsFranchise[];
 
     constructor(
         private loginService: LoginService,
@@ -30,7 +31,9 @@ export class NavbarComponent implements OnInit {
         private principal: Principal,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router
+        private router: Router,
+        private jhiAlertService: JhiAlertService,
+        private seasonsFranchiseService: SeasonsFranchiseService
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
@@ -45,6 +48,11 @@ export class NavbarComponent implements OnInit {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+
+        this.seasonsFranchiseService.queryActiveSeason({}).subscribe(
+            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
     }
 
     changeLanguage(languageKey: string) {
@@ -75,5 +83,13 @@ export class NavbarComponent implements OnInit {
 
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
+    }
+
+    private onSuccess(data, headers) {
+        // this.page = pagingParams.page;
+        this.seasonsFranchises = data;
+    }
+    private onError(error) {
+        this.jhiAlertService.error(error.message, null, null);
     }
 }

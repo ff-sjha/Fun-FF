@@ -103,6 +103,15 @@ public class SeasonsFranchiseResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/seasons-franchises/active")
+    @Timed
+    public ResponseEntity<List<SeasonsFranchiseDTO>> getAllActiveSeasonsFranchises(SeasonsFranchiseCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get SeasonsFranchises by criteria: {}", criteria);
+        Page<SeasonsFranchiseDTO> page = seasonsFranchiseQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/seasons-franchises");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
     /**
      * GET  /seasons-franchises/:id : get the "id" seasonsFranchise.
      *

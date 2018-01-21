@@ -21,7 +21,7 @@
             </li>
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="fixture" (click)="collapseNavbar()">
-                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    <i class="fa fa-meetup" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.fixture">Fixture</span>
                 </a>
             </li>
@@ -31,11 +31,30 @@
                     <span jhiTranslate="global.menu.points-table">Points</span>
                 </a>
             </li>
+            <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="franchise-menu">
+                    <span>
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.franchises">
+                            Franchises
+                        </span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li *ngFor="let seasonsFranchise of seasonsFranchises" >
+                        <a class="dropdown-item" [routerLink]="['../seasons-franchise', seasonsFranchise.id ]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-users" aria-hidden="true"></i>
+                            <span >{{seasonsFranchise.franchiseName}}</span>
+                        </a>
+                    </li>
+                    <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+                </ul>
+            </li>
 
             <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="games-menu">
                     <span>
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        <i class="fa fa-trophy" aria-hidden="true"></i>
                         <span jhiTranslate="global.menu.games.main">
                             Games
                         </span>
@@ -44,37 +63,37 @@
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <li>
                         <a class="dropdown-item" routerLink="football" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-info" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-trophy" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.games.football">Football</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="chess" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-info" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-trophy" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.games.chess">Chess</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="ludo" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-info" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-trophy" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.games.ludo">Ludo</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="badminton" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-info" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-trophy" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.games.badminton">Badminton</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="table-tennis" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-info" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-trophy" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.games.table-tennis">Table Tennis</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="box-cricket" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-info" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-trophy" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.games.box-cricket">Box Cricket</span>
                         </a>
                     </li>

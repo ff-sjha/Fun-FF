@@ -33,5 +33,10 @@
             file="config/liquibase/seasons_franchise_player.csv"
             separator=";" tableName="seasons_franchise_player" />
     </changeSet>
-
+     <changeSet id="20180117100900-1" author="Ameeth Paatil">
+        <insert tableName="fafi_user_authority">
+            <column name="user_id" value="2"/>
+            <column name="authority_name" value="ROLE_USER"/>
+        </insert>
+     </changeSet>
 </databaseChangeLog>

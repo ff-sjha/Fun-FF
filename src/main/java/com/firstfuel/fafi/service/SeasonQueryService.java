@@ -1,6 +1,5 @@
 package com.firstfuel.fafi.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,28 +10,31 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
+// for static metamodels
+import com.firstfuel.fafi.domain.Franchise_;
 import com.firstfuel.fafi.domain.Season;
-import com.firstfuel.fafi.domain.*; // for static metamodels
+import com.firstfuel.fafi.domain.Season_;
+import com.firstfuel.fafi.domain.Tournament_;
 import com.firstfuel.fafi.repository.SeasonRepository;
 import com.firstfuel.fafi.service.dto.SeasonCriteria;
-
 import com.firstfuel.fafi.service.dto.SeasonDTO;
 import com.firstfuel.fafi.service.mapper.SeasonMapper;
 
+import io.github.jhipster.service.QueryService;
+import io.github.jhipster.service.filter.BooleanFilter;
+
 /**
  * Service for executing complex queries for Season entities in the database.
- * The main input is a {@link SeasonCriteria} which get's converted to {@link Specifications},
- * in a way that all the filters must apply.
- * It returns a {@link List} of {@link SeasonDTO} or a {@link Page} of {@link SeasonDTO} which fulfills the criteria.
+ * The main input is a {@link SeasonCriteria} which get's converted to
+ * {@link Specifications}, in a way that all the filters must apply. It returns
+ * a {@link List} of {@link SeasonDTO} or a {@link Page} of {@link SeasonDTO}
+ * which fulfills the criteria.
  */
 @Service
 @Transactional(readOnly = true)
 public class SeasonQueryService extends QueryService<Season> {
 
     private final Logger log = LoggerFactory.getLogger(SeasonQueryService.class);
-
 
     private final SeasonRepository seasonRepository;
 
@@ -44,8 +46,12 @@ public class SeasonQueryService extends QueryService<Season> {
     }
 
     /**
-     * Return a {@link List} of {@link SeasonDTO} which matches the criteria from the database
-     * @param criteria The object which holds all the filters, which the entities should match.
+     * Return a {@link List} of {@link SeasonDTO} which matches the criteria from
+     * the database
+     * 
+     * @param criteria
+     *            The object which holds all the filters, which the entities should
+     *            match.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
@@ -55,10 +61,26 @@ public class SeasonQueryService extends QueryService<Season> {
         return seasonMapper.toDto(seasonRepository.findAll(specification));
     }
 
+    @Transactional(readOnly = true)
+    public SeasonDTO getActiveSeason() {
+        SeasonCriteria criteria = new SeasonCriteria();
+        BooleanFilter active = new BooleanFilter();
+        active.setEquals(true);
+        criteria.setActive(active);
+        final Specifications<Season> specification = createSpecification(criteria);
+        Season season = seasonRepository.findOne(specification);
+        return seasonMapper.toDto(season);
+    }
+
     /**
-     * Return a {@link Page} of {@link SeasonDTO} which matches the criteria from the database
-     * @param criteria The object which holds all the filters, which the entities should match.
-     * @param page The page, which should be returned.
+     * Return a {@link Page} of {@link SeasonDTO} which matches the criteria from
+     * the database
+     * 
+     * @param criteria
+     *            The object which holds all the filters, which the entities should
+     *            match.
+     * @param page
+     *            The page, which should be returned.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
@@ -91,10 +113,12 @@ public class SeasonQueryService extends QueryService<Season> {
                 specification = specification.and(buildSpecification(criteria.getActive(), Season_.active));
             }
             if (criteria.getTournamentId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getTournamentId(), Season_.tournaments, Tournament_.id));
+                specification = specification.and(buildReferringEntitySpecification(criteria.getTournamentId(),
+                        Season_.tournaments, Tournament_.id));
             }
             if (criteria.getWinnerId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getWinnerId(), Season_.winner, Franchise_.id));
+                specification = specification
+                        .and(buildReferringEntitySpecification(criteria.getWinnerId(), Season_.winner, Franchise_.id));
             }
         }
         return specification;
