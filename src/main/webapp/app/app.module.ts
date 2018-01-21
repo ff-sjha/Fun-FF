@@ -18,6 +18,7 @@ import { FafiAppAboutUsModule } from './about-us/about-us.module';
 import { FafiAppFixtureModule } from './fixture/fixture.module';
 import { FafiAppContactUsModule } from './contact-us/contact-us.module';
 import { FafiAppPointsTableModule } from './points-table/points-table.module';
+import { FafiAppFranchiseInfoModule } from './franchise-info/franchise-info.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 
 import {
@@ -44,6 +45,7 @@ import {
         FafiAppFixtureModule,
         FafiAppContactUsModule,
         FafiAppPointsTableModule,
+        FafiAppFranchiseInfoModule,
         FafiGameModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],

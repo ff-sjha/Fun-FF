@@ -5,7 +5,6 @@ import { JhiLanguageService, JhiAlertService } from 'ng-jhipster';
 
 import { ProfileService } from '../profiles/profile.service';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService, ResponseWrapper } from '../../shared';
-import { SeasonsFranchise, SeasonsFranchiseService } from '../../entities/seasons-franchise';
 import { VERSION } from '../../app.constants';
 
 @Component({
@@ -22,7 +21,6 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
-    seasonsFranchises: SeasonsFranchise[];
 
     constructor(
         private loginService: LoginService,
@@ -32,8 +30,7 @@ export class NavbarComponent implements OnInit {
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
         private router: Router,
-        private jhiAlertService: JhiAlertService,
-        private seasonsFranchiseService: SeasonsFranchiseService
+        private jhiAlertService: JhiAlertService
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
@@ -49,10 +46,6 @@ export class NavbarComponent implements OnInit {
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
 
-        this.seasonsFranchiseService.queryActiveSeason({}).subscribe(
-            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
     }
 
     changeLanguage(languageKey: string) {
@@ -83,13 +76,5 @@ export class NavbarComponent implements OnInit {
 
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
-    }
-
-    private onSuccess(data, headers) {
-        // this.page = pagingParams.page;
-        this.seasonsFranchises = data;
-    }
-    private onError(error) {
-        this.jhiAlertService.error(error.message, null, null);
     }
 }

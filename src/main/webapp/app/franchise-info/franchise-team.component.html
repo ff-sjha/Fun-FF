@@ -1,0 +1,22 @@
+<div  class="container">
+<div class="table-responsive" *ngIf="seasonsFranchisePlayers">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+        <th><span jhiTranslate="fafiApp.seasonsFranchisePlayer.player">Player</span> <span class="fa"></span></th>
+        <th><span jhiTranslate="fafiApp.seasonsFranchisePlayer.bidPrice">Bid Price</span> <span class="fa"></span></th>
+        <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let seasonsFranchisePlayer of seasonsFranchisePlayers ;trackBy: trackId">
+            <td>
+                <div *ngIf="seasonsFranchisePlayer.playerId">
+                    <a [routerLink]="['../player', seasonsFranchisePlayer.playerId  ]" >{{seasonsFranchisePlayer.playerFirstName + ' ' + seasonsFranchisePlayer.playerLastName}}</a>
+                </div>
+            </td>
+            <td>{{seasonsFranchisePlayer.bidPrice}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

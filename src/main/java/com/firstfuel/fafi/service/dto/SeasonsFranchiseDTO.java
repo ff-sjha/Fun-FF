@@ -3,6 +3,8 @@ package com.firstfuel.fafi.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * A DTO for the SeasonsFranchise entity.
  */
@@ -18,6 +20,10 @@ public class SeasonsFranchiseDTO implements Serializable {
 
 	private String franchiseName;
 
+    private String logoPath;
+
+    private Boolean active;
+    
 	private Long ownerId;
 
 	private String ownerFirstName;
@@ -117,7 +123,23 @@ public class SeasonsFranchiseDTO implements Serializable {
 		this.iconPlayerLastName = iconPlayerLastName;
 	}
 
-	@Override
+	public String getLogoPath() {
+        return logoPath;
+    }
+
+    public void setLogoPath(String logoPath) {
+        this.logoPath = logoPath;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    @Override
 	public boolean equals(Object o) {
 		if (this == o) {
 			return true;

@@ -42,6 +42,13 @@ export class SeasonsFranchisePlayerService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    queryByFranchiseId(franchiseId: string, req?: any): Observable<ResponseWrapper> {
+        const options = createRequestOption(req);
+        options.params.set('seasonsFranchiseId.equals', franchiseId);
+        return this.http.get(this.resourceUrl, options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }
