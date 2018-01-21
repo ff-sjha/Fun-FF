@@ -32,7 +32,7 @@ export const seasonRoute: Routes = [
             'pagingParams': SeasonResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.season.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -40,7 +40,7 @@ export const seasonRoute: Routes = [
         path: 'season/:id',
         component: SeasonDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.season.home.title'
         },
         canActivate: [UserRouteAccessService]

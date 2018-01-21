@@ -32,7 +32,7 @@ export const playerRoute: Routes = [
             'pagingParams': PlayerResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.player.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -40,7 +40,7 @@ export const playerRoute: Routes = [
         path: 'player/:id',
         component: PlayerDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.player.home.title'
         },
         canActivate: [UserRouteAccessService]

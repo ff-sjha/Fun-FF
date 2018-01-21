@@ -11,7 +11,7 @@ export const newsRoute: Routes = [
         path: 'news',
         component: NewsComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.news.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -19,7 +19,7 @@ export const newsRoute: Routes = [
         path: 'news/:id',
         component: NewsDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.news.home.title'
         },
         canActivate: [UserRouteAccessService]

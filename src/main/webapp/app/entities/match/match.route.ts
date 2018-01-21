@@ -32,7 +32,7 @@ export const matchRoute: Routes = [
             'pagingParams': MatchResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.match.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -40,7 +40,7 @@ export const matchRoute: Routes = [
         path: 'match/:id',
         component: MatchDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.match.home.title'
         },
         canActivate: [UserRouteAccessService]

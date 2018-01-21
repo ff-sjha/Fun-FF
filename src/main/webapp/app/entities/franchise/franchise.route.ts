@@ -32,7 +32,7 @@ export const franchiseRoute: Routes = [
             'pagingParams': FranchiseResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.franchise.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -40,7 +40,7 @@ export const franchiseRoute: Routes = [
         path: 'franchise/:id',
         component: FranchiseDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.franchise.home.title'
         },
         canActivate: [UserRouteAccessService]

@@ -32,7 +32,7 @@ export const seasonsFranchiseRoute: Routes = [
             'pagingParams': SeasonsFranchiseResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.seasonsFranchise.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -40,7 +40,7 @@ export const seasonsFranchiseRoute: Routes = [
         path: 'seasons-franchise/:id',
         component: SeasonsFranchiseDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'fafiApp.seasonsFranchise.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -52,7 +52,7 @@ export const seasonsFranchisePopupRoute: Routes = [
         path: 'seasons-franchise-new',
         component: SeasonsFranchisePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'fafiApp.seasonsFranchise.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -62,7 +62,7 @@ export const seasonsFranchisePopupRoute: Routes = [
         path: 'seasons-franchise/:id/edit',
         component: SeasonsFranchisePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'fafiApp.seasonsFranchise.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -72,7 +72,7 @@ export const seasonsFranchisePopupRoute: Routes = [
         path: 'seasons-franchise/:id/delete',
         component: SeasonsFranchiseDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'fafiApp.seasonsFranchise.home.title'
         },
         canActivate: [UserRouteAccessService],
