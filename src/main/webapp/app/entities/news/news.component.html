@@ -28,7 +28,7 @@
             <tr *ngFor="let news of news ;trackBy: trackId">
                 <td><a [routerLink]="['../news', news.id ]">{{news.id}}</a></td>
                 <td>{{news.title}}</td>
-                <td>{{news.details}}</td>
+                <td><div [innerHTML]="[news.details]"></div></td>
                 <td>{{news.activeFrom | date:'mediumDate'}}</td>
                 <td>{{news.ativeTill | date:'mediumDate'}}</td>
                 <td class="text-right">

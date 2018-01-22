@@ -56,7 +56,7 @@
                     </div>
                     <div id="newsGroup-{{$i}}" data-parent="newsGroup"
                         class="panel-collapse show">
-                        <div class="panel-body">{{news.details}}</div>
+                        <div class="panel-body" [innerHTML]="[news.details]"></div>
                     </div>
                 </div>
             </div>
