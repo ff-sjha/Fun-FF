@@ -1,5 +1,6 @@
 package com.firstfuel.fafi.service.dto;
 
+
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -31,16 +32,33 @@ public class MatchDTO implements Serializable {
 
     private String venue;
 
+    @NotNull
+    private Boolean completed;
+
     private Long tournamentId;
 
     private Long winningFranchiseId;
 
     private String winningFranchiseFranchiseName;
 
+    private Long team1Id;
+
+    private String team1Franchise;
+
+    private Long team2Id;
+
+    private String team2Franchise;
+
+    private Long team3Id;
+
+    private String team3Franchise;
+
+    private Long team4Id;
+
+    private String team4Franchise;
+
     private Games tournamentType;
     
-    private Boolean completed;
-
     private List<FranchisePlayersDTO> teamPlayers;
     
     private List<MatchUmpireDTO> umpires;
@@ -101,6 +119,14 @@ public class MatchDTO implements Serializable {
         this.venue = venue;
     }
 
+    public Boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
+
     public Long getTournamentId() {
         return tournamentId;
     }
@@ -125,6 +151,70 @@ public class MatchDTO implements Serializable {
         this.winningFranchiseFranchiseName = seasonsFranchiseFranchiseName;
     }
 
+    public Long getTeam1Id() {
+        return team1Id;
+    }
+
+    public void setTeam1Id(Long seasonsFranchiseId) {
+        this.team1Id = seasonsFranchiseId;
+    }
+
+    public String getTeam1Franchise() {
+        return team1Franchise;
+    }
+
+    public void setTeam1Franchise(String seasonsFranchiseFranchise) {
+        this.team1Franchise = seasonsFranchiseFranchise;
+    }
+
+    public Long getTeam2Id() {
+        return team2Id;
+    }
+
+    public void setTeam2Id(Long seasonsFranchiseId) {
+        this.team2Id = seasonsFranchiseId;
+    }
+
+    public String getTeam2Franchise() {
+        return team2Franchise;
+    }
+
+    public void setTeam2Franchise(String seasonsFranchiseFranchise) {
+        this.team2Franchise = seasonsFranchiseFranchise;
+    }
+
+    public Long getTeam3Id() {
+        return team3Id;
+    }
+
+    public void setTeam3Id(Long seasonsFranchiseId) {
+        this.team3Id = seasonsFranchiseId;
+    }
+
+    public String getTeam3Franchise() {
+        return team3Franchise;
+    }
+
+    public void setTeam3Franchise(String seasonsFranchiseFranchise) {
+        this.team3Franchise = seasonsFranchiseFranchise;
+    }
+
+    public Long getTeam4Id() {
+        return team4Id;
+    }
+
+    public void setTeam4Id(Long seasonsFranchiseId) {
+        this.team4Id = seasonsFranchiseId;
+    }
+
+    public String getTeam4Franchise() {
+        return team4Franchise;
+    }
+
+    public void setTeam4Franchise(String seasonsFranchiseFranchise) {
+        this.team4Franchise = seasonsFranchiseFranchise;
+    }
+
     public Games getTournamentType() {
         return tournamentType;
     }
@@ -139,15 +229,6 @@ public class MatchDTO implements Serializable {
 
     public void setTeamPlayers(List<FranchisePlayersDTO> teamPlayers) {
         this.teamPlayers = teamPlayers;
-    }
-    
-
-    public Boolean getCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
     }
 
     public List<MatchUmpireDTO> getUmpires() {
@@ -168,7 +249,7 @@ public class MatchDTO implements Serializable {
         }
 
         MatchDTO matchDTO = (MatchDTO) o;
-        if (matchDTO.getId() == null || getId() == null) {
+        if(matchDTO.getId() == null || getId() == null) {
             return false;
         }
         return Objects.equals(getId(), matchDTO.getId());
@@ -181,8 +262,15 @@ public class MatchDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "MatchDTO{" + "id=" + getId() + ", startDateTime='" + getStartDateTime() + "'" + ", endDateTime='"
-                + getEndDateTime() + "'" + ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() + ", matchName='"
-                + getMatchName() + "'" + ", stage='" + getStage() + "'" + ", venue='" + getVenue() + "'" + "}";
+        return "MatchDTO{" +
+            "id=" + getId() +
+            ", startDateTime='" + getStartDateTime() + "'" +
+            ", endDateTime='" + getEndDateTime() + "'" +
+            ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() +
+            ", matchName='" + getMatchName() + "'" +
+            ", stage='" + getStage() + "'" +
+            ", venue='" + getVenue() + "'" +
+            ", completed='" + isCompleted() + "'" +
+            "}";
     }
 }

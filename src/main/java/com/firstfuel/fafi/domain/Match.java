@@ -57,6 +57,18 @@ public class Match implements Serializable {
     @ManyToOne
     private SeasonsFranchise winningFranchise;
 
+    @ManyToOne
+    private SeasonsFranchise team1;
+
+    @ManyToOne
+    private SeasonsFranchise team2;
+
+    @ManyToOne
+    private SeasonsFranchise team3;
+
+    @ManyToOne
+    private SeasonsFranchise team4;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -181,6 +193,58 @@ public class Match implements Serializable {
 
     public void setWinningFranchise(SeasonsFranchise seasonsFranchise) {
         this.winningFranchise = seasonsFranchise;
+    }
+
+    public SeasonsFranchise getTeam1() {
+        return team1;
+    }
+
+    public Match team1(SeasonsFranchise seasonsFranchise) {
+        this.team1 = seasonsFranchise;
+        return this;
+    }
+
+    public void setTeam1(SeasonsFranchise seasonsFranchise) {
+        this.team1 = seasonsFranchise;
+    }
+
+    public SeasonsFranchise getTeam2() {
+        return team2;
+    }
+
+    public Match team2(SeasonsFranchise seasonsFranchise) {
+        this.team2 = seasonsFranchise;
+        return this;
+    }
+
+    public void setTeam2(SeasonsFranchise seasonsFranchise) {
+        this.team2 = seasonsFranchise;
+    }
+
+    public SeasonsFranchise getTeam3() {
+        return team3;
+    }
+
+    public Match team3(SeasonsFranchise seasonsFranchise) {
+        this.team3 = seasonsFranchise;
+        return this;
+    }
+
+    public void setTeam3(SeasonsFranchise seasonsFranchise) {
+        this.team3 = seasonsFranchise;
+    }
+
+    public SeasonsFranchise getTeam4() {
+        return team4;
+    }
+
+    public Match team4(SeasonsFranchise seasonsFranchise) {
+        this.team4 = seasonsFranchise;
+        return this;
+    }
+
+    public void setTeam4(SeasonsFranchise seasonsFranchise) {
+        this.team4 = seasonsFranchise;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

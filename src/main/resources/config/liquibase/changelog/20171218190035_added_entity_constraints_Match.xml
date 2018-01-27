@@ -20,5 +20,29 @@
                                  referencedColumnNames="id"
                                  referencedTableName="seasons_franchise"/>
 
+        <addForeignKeyConstraint baseColumnNames="team1_id"
+                                 baseTableName="fafi_match"
+                                 constraintName="fk_match_team1_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seasons_franchise"/>
+
+        <addForeignKeyConstraint baseColumnNames="team2_id"
+                                 baseTableName="fafi_match"
+                                 constraintName="fk_match_team2_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seasons_franchise"/>
+
+        <addForeignKeyConstraint baseColumnNames="team3_id"
+                                 baseTableName="fafi_match"
+                                 constraintName="fk_match_team3_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seasons_franchise"/>
+
+        <addForeignKeyConstraint baseColumnNames="team4_id"
+                                 baseTableName="fafi_match"
+                                 constraintName="fk_match_team4_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seasons_franchise"/>
+
     </changeSet>
 </databaseChangeLog>

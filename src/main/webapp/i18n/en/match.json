@@ -23,7 +23,11 @@
             "venue": "Venue",
             "completed": "Completed",
             "tournament": "Tournament",
-            "winningFranchise": "Winning Franchise"
+            "winningFranchise": "Winning Franchise",
+            "team1": "Team 1",
+            "team2": "Team 2",
+            "team3": "Team 3",
+            "team4": "Team 4"
         }
     }
 }

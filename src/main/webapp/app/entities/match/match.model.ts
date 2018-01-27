@@ -21,6 +21,10 @@ export class Match implements BaseEntity {
         public completed?: boolean,
         public tournamentId?: number,
         public winningFranchiseId?: number,
+        public team1Id?: number,
+        public team2Id?: number,
+        public team3Id?: number,
+        public team4Id?: number,
     ) {
         this.completed = false;
     }

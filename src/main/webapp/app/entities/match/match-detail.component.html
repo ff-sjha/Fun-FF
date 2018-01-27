@@ -44,6 +44,30 @@
                 <a [routerLink]="['/seasons-franchise', match.winningFranchiseId]">{{match.winningFranchiseFranchiseName}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="fafiApp.match.team1">Team 1</span></dt>
+        <dd>
+            <div *ngIf="match.team1Id">
+                <a [routerLink]="['/seasons-franchise', match.team1Id]">{{match.team1Franchise}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.match.team2">Team 2</span></dt>
+        <dd>
+            <div *ngIf="match.team2Id">
+                <a [routerLink]="['/seasons-franchise', match.team2Id]">{{match.team2Franchise}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.match.team3">Team 3</span></dt>
+        <dd>
+            <div *ngIf="match.team3Id">
+                <a [routerLink]="['/seasons-franchise', match.team3Id]">{{match.team3Franchise}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.match.team4">Team 4</span></dt>
+        <dd>
+            <div *ngIf="match.team4Id">
+                <a [routerLink]="['/seasons-franchise', match.team4Id]">{{match.team4Franchise}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

@@ -12,6 +12,30 @@
             "otherEntityName": "seasonsFranchise",
             "relationshipType": "many-to-one",
             "otherEntityField": "franchiseName"
+        },
+        {
+            "relationshipName": "team1",
+            "otherEntityName": "seasonsFranchise",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "franchise"
+        },
+        {
+            "relationshipName": "team2",
+            "otherEntityName": "seasonsFranchise",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "franchise"
+        },
+        {
+            "relationshipName": "team3",
+            "otherEntityName": "seasonsFranchise",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "franchise"
+        },
+        {
+            "relationshipName": "team4",
+            "otherEntityName": "seasonsFranchise",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "franchise"
         }
     ],
     "fields": [

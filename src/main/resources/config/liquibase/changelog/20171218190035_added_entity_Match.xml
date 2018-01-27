@@ -46,11 +46,31 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="completed" type="bit">
+                <constraints nullable="false" />
+            </column>
+
             <column name="tournament_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <column name="winning_franchise_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="team1_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="team2_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="team3_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="team4_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

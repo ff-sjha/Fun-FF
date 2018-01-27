@@ -17,32 +17,60 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="matchName"><span jhiTranslate="fafiApp.match.matchName">Match Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="stage"><span jhiTranslate="fafiApp.match.stage">Stage</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="tournamentType"><span jhiTranslate="fafiApp.match.tournament">Tournament</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="startDateTime"><span jhiTranslate="fafiApp.match.startDateTime">Start Date Time</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="endDateTime"><span jhiTranslate="fafiApp.match.endDateTime">End Date Time</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="pointsEarnedByFranchise"><span jhiTranslate="fafiApp.match.pointsEarnedByFranchise">Points Earned By Franchise</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="matchName"><span jhiTranslate="fafiApp.match.matchName">Match Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="stage"><span jhiTranslate="fafiApp.match.stage">Stage</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="venue"><span jhiTranslate="fafiApp.match.venue">Venue</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="completed"><span jhiTranslate="fafiApp.match.completed">Completed</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tournamentId"><span jhiTranslate="fafiApp.match.tournament">Tournament</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="winningFranchiseFranchiseName"><span jhiTranslate="fafiApp.match.winningFranchise">Winning Franchise</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="team1Franchise"><span jhiTranslate="fafiApp.match.team1">Team 1</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="team2Franchise"><span jhiTranslate="fafiApp.match.team2">Team 2</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="team3Franchise"><span jhiTranslate="fafiApp.match.team3">Team 3</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="team4Franchise"><span jhiTranslate="fafiApp.match.team4">Team 4</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let match of matches ;trackBy: trackId">
                 <td><a [routerLink]="['../match', match.id ]">{{match.id}}</a></td>
-                <td>{{match.matchName}}</td>
-                <td jhiTranslate="{{'fafiApp.Stage.' + match.stage}}">{{match.stage}}</td>
-                <td>
-                    <div *ngIf="match.tournamentId">
-                        <a [routerLink]="['../tournament', match.tournamentId  ]" >{{match.tournamentType}}</a>
-                    </div>
-                </td>
                 <td>{{match.startDateTime | date:'medium'}}</td>
                 <td>{{match.endDateTime | date:'medium'}}</td>
                 <td>{{match.pointsEarnedByFranchise}}</td>
+                <td>{{match.matchName}}</td>
+                <td jhiTranslate="{{'fafiApp.Stage.' + match.stage}}">{{match.stage}}</td>
+                <td>{{match.venue}}</td>
+                <td>{{match.completed}}</td>
+                <td>
+                    <div *ngIf="match.tournamentId">
+                        <a [routerLink]="['../tournament', match.tournamentId  ]" >{{match.tournamentId}}</a>
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="match.winningFranchiseId">
                         <a [routerLink]="['../seasons-franchise', match.winningFranchiseId  ]" >{{match.winningFranchiseFranchiseName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="match.team1Id">
+                        <a [routerLink]="['../seasons-franchise', match.team1Id  ]" >{{match.team1Franchise}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="match.team2Id">
+                        <a [routerLink]="['../seasons-franchise', match.team2Id  ]" >{{match.team2Franchise}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="match.team3Id">
+                        <a [routerLink]="['../seasons-franchise', match.team3Id  ]" >{{match.team3Franchise}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="match.team4Id">
+                        <a [routerLink]="['../seasons-franchise', match.team4Id  ]" >{{match.team4Franchise}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -44,16 +44,6 @@ export class MatchService {
             .map((res: Response) => this.convertResponse(res));
     }
 
-    upcomingMatches(): Observable<ResponseWrapper> {
-        return this.http.get(this.resourceUrl + '/upcoming-matches')
-            .map((res: Response) => this.convertResponse(res));
-    }
-
-    fixtures(): Observable<ResponseWrapper> {
-        return this.http.get(this.resourceUrl + '/fixtures')
-            .map((res: Response) => this.convertResponse(res));
-    }
-
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }
