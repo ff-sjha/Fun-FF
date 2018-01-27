@@ -37,6 +37,7 @@
                 "matchUmpire": "Match Umpire",
                 "seasonExpense": "Season Expense",
                 "tieMatchPlayers": "Tie Match Players",
+                "tieMatchSets": "Tie Match Sets",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

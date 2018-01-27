@@ -1,0 +1,23 @@
+{
+    "fafiApp": {
+        "tieMatchSets" : {
+            "home": {
+                "title": "Tie Match Sets",
+                "createLabel": "Create a new Tie Match Sets",
+                "createOrEditLabel": "Create or edit a Tie Match Sets"
+            },
+            "created": "A new Tie Match Sets is created with identifier {{ param }}",
+            "updated": "A Tie Match Sets is updated with identifier {{ param }}",
+            "deleted": "A Tie Match Sets is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tie Match Sets {{ id }}?"
+            },
+            "detail": {
+                "title": "Tie Match Sets"
+            },
+            "setNumber": "Set Number",
+            "team1Points": "Team 1 Points",
+            "team2Points": "Team 2 Points"
+        }
+    }
+}

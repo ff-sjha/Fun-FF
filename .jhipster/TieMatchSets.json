@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "setNumber",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": "1"
+        },
+        {
+            "fieldName": "team1Points",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "team2Points",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180127124126",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "tie_match_sets",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

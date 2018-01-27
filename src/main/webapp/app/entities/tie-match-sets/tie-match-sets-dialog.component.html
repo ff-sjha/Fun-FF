@@ -1,0 +1,54 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myTieMatchSetsLabel" jhiTranslate="fafiApp.tieMatchSets.home.createOrEditLabel">Create or edit a Tie Match Sets</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <fafi-alert-error></fafi-alert-error>
+        <div class="form-group" [hidden]="!tieMatchSets.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="tieMatchSets.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.tieMatchSets.setNumber" for="field_setNumber">Set Number</label>
+            <input type="number" class="form-control" name="setNumber" id="field_setNumber"
+                [(ngModel)]="tieMatchSets.setNumber" required min="1"/>
+            <div [hidden]="!(editForm.controls.setNumber?.dirty && editForm.controls.setNumber?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.setNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.setNumber?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
+                    This field should be at least 1.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.setNumber?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.tieMatchSets.team1Points" for="field_team1Points">Team 1 Points</label>
+            <input type="number" class="form-control" name="team1Points" id="field_team1Points"
+                [(ngModel)]="tieMatchSets.team1Points" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.tieMatchSets.team2Points" for="field_team2Points">Team 2 Points</label>
+            <input type="number" class="form-control" name="team2Points" id="field_team2Points"
+                [(ngModel)]="tieMatchSets.team2Points" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
