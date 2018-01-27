@@ -36,6 +36,7 @@
                 "tournamentFranchisePoints": "Tournament Franchise Points",
                 "matchUmpire": "Match Umpire",
                 "seasonExpense": "Season Expense",
+                "tieMatchPlayers": "Tie Match Players",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

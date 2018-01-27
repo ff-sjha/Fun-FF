@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "tieMatch",
+            "otherEntityName": "tieMatch",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "tieType"
+        },
+        {
+            "relationshipName": "seasonsFranchisePlayer",
+            "otherEntityName": "seasonsFranchisePlayer",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20180127123607",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "tie_match_players",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

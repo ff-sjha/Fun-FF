@@ -1,0 +1,76 @@
+<div>
+    <h2>
+        <span jhiTranslate="fafiApp.tieMatchPlayers.home.title">Tie Match Players</span>
+        <button class="btn btn-primary float-right jh-create-entity create-tie-match-players" [routerLink]="['/', { outlets: { popup: ['tie-match-players-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="fafiApp.tieMatchPlayers.home.createLabel">
+            Create new Tie Match Players
+            </span>
+        </button>
+    </h2>
+    <fafi-alert></fafi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="tieMatchPlayers">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tieMatch.tieType"><span jhiTranslate="fafiApp.tieMatchPlayers.tieMatch">Tie Match</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="seasonsFranchisePlayer.id"><span jhiTranslate="fafiApp.tieMatchPlayers.seasonsFranchisePlayer">Seasons Franchise Player</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let tieMatchPlayers of tieMatchPlayers ;trackBy: trackId">
+                <td><a [routerLink]="['../tie-match-players', tieMatchPlayers.id ]">{{tieMatchPlayers.id}}</a></td>
+                <td>
+                    <div *ngIf="tieMatchPlayers.tieMatch">
+                        <a [routerLink]="['../tie-match', tieMatchPlayers.tieMatch?.id ]" >{{tieMatchPlayers.tieMatch?.tieType}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tieMatchPlayers.seasonsFranchisePlayer">
+                        <a [routerLink]="['../seasons-franchise-player', tieMatchPlayers.seasonsFranchisePlayer?.id ]" >{{tieMatchPlayers.seasonsFranchisePlayer?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../tie-match-players', tieMatchPlayers.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tie-match-players/'+ tieMatchPlayers.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tie-match-players/'+ tieMatchPlayers.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="tieMatchPlayers && tieMatchPlayers.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>

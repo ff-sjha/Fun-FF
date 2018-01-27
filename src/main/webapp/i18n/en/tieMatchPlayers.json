@@ -1,0 +1,22 @@
+{
+    "fafiApp": {
+        "tieMatchPlayers" : {
+            "home": {
+                "title": "Tie Match Players",
+                "createLabel": "Create a new Tie Match Players",
+                "createOrEditLabel": "Create or edit a Tie Match Players"
+            },
+            "created": "A new Tie Match Players is created with identifier {{ param }}",
+            "updated": "A Tie Match Players is updated with identifier {{ param }}",
+            "deleted": "A Tie Match Players is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tie Match Players {{ id }}?"
+            },
+            "detail": {
+                "title": "Tie Match Players"
+            },
+            "tieMatch": "Tie Match",
+            "seasonsFranchisePlayer": "Seasons Franchise Player"
+        }
+    }
+}

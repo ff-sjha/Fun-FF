@@ -182,6 +182,12 @@
                             <span jhiTranslate="global.menu.entities.tieMatch">Tie Match</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="tie-match-players" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.tieMatchPlayers">Tie Match Players</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
