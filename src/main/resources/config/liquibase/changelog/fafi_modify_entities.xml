@@ -1,50 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<property name="now" value="now()" dbms="h2" />
+    <property name="now" value="now()" dbms="h2" />
 
-	<property name="now" value="now()" dbms="mysql" />
-	<property name="autoIncrement" value="true" />
+    <property name="now" value="now()" dbms="mysql" />
+    <property name="autoIncrement" value="true" />
 
-	<property name="floatType" value="float4" dbms="postgresql, h2" />
-	<property name="floatType" value="float" dbms="mysql, oracle, mssql" />
+    <property name="floatType" value="float4" dbms="postgresql, h2" />
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql" />
 
-	<!-- Added the entity Player. -->
-	<changeSet id="20171225183905-1" author="Narendra Kumar">
+    <!-- Added the entity Player. -->
+    <changeSet id="20171225183905-1" author="Narendra Kumar">
 
-		<createTable tableName="player_opted_games">
-			<column name="player_id" type="bigint">
-				<constraints nullable="false" />
-			</column>
-			<column name="opted_games" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
+        <createTable tableName="player_opted_games">
+            <column name="player_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="opted_games" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
 
-		<addPrimaryKey columnNames="player_id, opted_games"
-			tableName="player_opted_games" />
+        <addPrimaryKey columnNames="player_id, opted_games"
+            tableName="player_opted_games" />
 
-	</changeSet>
-	<changeSet id="20171228084801-1" author="Ameeth Paatil">
-		<addUniqueConstraint columnNames="season_id, franchise_id"
-			tableName="seasons_franchise" constraintName="uk_seasons_franchise" />
-		<addUniqueConstraint columnNames="season_id, owner_id"
-			tableName="seasons_franchise" constraintName="uk_seasons_franchise_owner_id" />
-		<addUniqueConstraint columnNames="season_id, icon_player_id"
-			tableName="seasons_franchise" constraintName="uk_seasons_franchise_icon_player_id" />
-	</changeSet>
-	<changeSet id="20171228084801-2" author="Ameeth Paatil">
-		<addUniqueConstraint columnNames="first_name, last_name"
-			tableName="player" constraintName="uk_player_name" />
-	</changeSet>
+    </changeSet>
+    <changeSet id="20171228084801-1" author="Ameeth Paatil">
+        <addUniqueConstraint columnNames="season_id, franchise_id"
+            tableName="seasons_franchise" constraintName="uk_seasons_franchise" />
+        <addUniqueConstraint columnNames="season_id, owner_id"
+            tableName="seasons_franchise" constraintName="uk_seasons_franchise_owner_id" />
+        <addUniqueConstraint columnNames="season_id, icon_player_id"
+            tableName="seasons_franchise" constraintName="uk_seasons_franchise_icon_player_id" />
+    </changeSet>
+    <changeSet id="20171228084801-2" author="Ameeth Paatil">
+        <addUniqueConstraint columnNames="first_name, last_name"
+            tableName="player" constraintName="uk_player_name" />
+    </changeSet>
     <changeSet id="20180110153701-1" author="Ameeth Paatil">
         <addColumn tableName="fafi_match">
-             <column name="completed" type="bit" defaultValueBoolean="false">
+            <column name="completed" type="bit"
+                defaultValueBoolean="false">
                 <constraints nullable="false" />
             </column>
         </addColumn>
+    </changeSet>
+    <changeSet id="201801271841-1" author="Ameeth Paatil">
+        <addColumn tableName="fafi_match">
+            <column name="team1_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="team2_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="team3_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="team4_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="201801271841-2" author="Ameeth Paatil">
+
+        <addForeignKeyConstraint
+            baseColumnNames="team1_id" baseTableName="fafi_match"
+            constraintName="fk_match_team1_id" referencedColumnNames="id"
+            referencedTableName="seasons_franchise" />
+
+        <addForeignKeyConstraint
+            baseColumnNames="team2_id" baseTableName="fafi_match"
+            constraintName="fk_match_team2_id" referencedColumnNames="id"
+            referencedTableName="seasons_franchise" />
+
+        <addForeignKeyConstraint
+            baseColumnNames="team3_id" baseTableName="fafi_match"
+            constraintName="fk_match_team3_id" referencedColumnNames="id"
+            referencedTableName="seasons_franchise" />
+
+        <addForeignKeyConstraint
+            baseColumnNames="team4_id" baseTableName="fafi_match"
+            constraintName="fk_match_team4_id" referencedColumnNames="id"
+            referencedTableName="seasons_franchise" />
     </changeSet>
 </databaseChangeLog>
