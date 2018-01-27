@@ -47,16 +47,17 @@
             </div>
 
             <div class="panel-group" id="newsGroup">
-                <div *ngFor="let news of newslist; let i = index">
+                <div *ngFor="let news of newslist; let index = index">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a ng-click="toggleCollapsedStates($i)"
-                                href="#newsGroup-{{$i}}">{{news.title}}</a>
+                            <a href="#newsGroup-{{index}}">{{news.title}}</a>
                         </h4>
                     </div>
-                    <div id="newsGroup-{{$i}}" data-parent="newsGroup"
+                    <div id="newsGroup-{{index}}"
+                        data-parent="newsGroup"
                         class="panel-collapse show">
-                        <div class="panel-body" [innerHTML]="[news.details]"></div>
+                        <div class="panel-body"
+                            [innerHTML]="[news.details]"></div>
                     </div>
                 </div>
             </div>
