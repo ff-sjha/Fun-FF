@@ -5,8 +5,6 @@ import { FafiPlayerModule } from './player/player.module';
 import { FafiFranchiseModule } from './franchise/franchise.module';
 import { FafiTournamentModule } from './tournament/tournament.module';
 import { FafiMatchModule } from './match/match.module';
-import { FafiTieTeamModule } from './tie-team/tie-team.module';
-import { FafiTieMatchModule } from './tie-match/tie-match.module';
 import { FafiSeasonsFranchiseModule } from './seasons-franchise/seasons-franchise.module';
 import { FafiSeasonsFranchisePlayerModule } from './seasons-franchise-player/seasons-franchise-player.module';
 import { FafiMatchFranchiseModule } from './match-franchise/match-franchise.module';
@@ -24,8 +22,6 @@ import { FafiSeasonExpenseModule } from './season-expense/season-expense.module'
         FafiFranchiseModule,
         FafiTournamentModule,
         FafiMatchModule,
-        FafiTieTeamModule,
-        FafiTieMatchModule,
         FafiSeasonsFranchiseModule,
         FafiSeasonsFranchisePlayerModule,
         FafiMatchFranchiseModule,

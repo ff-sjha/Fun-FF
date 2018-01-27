@@ -1,31 +1,7 @@
 {
     "fluentMethods": true,
-    "relationships": [
-        {
-            "relationshipName": "tiePlayers",
-            "otherEntityName": "player",
-            "relationshipType": "many-to-many",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "tieTeam"
-        },
-        {
-            "relationshipName": "franchise",
-            "otherEntityName": "franchise",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
-    ],
-    "fields": [
-        {
-            "fieldName": "points",
-            "fieldType": "Double"
-        },
-        {
-            "fieldName": "name",
-            "fieldType": "String"
-        }
-    ],
+    "relationships": [],
+    "fields": [],
     "changelogDate": "20171220183725",
     "dto": "mapstruct",
     "service": "serviceImpl",
