@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "match",
+            "otherEntityName": "match",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "matchName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "tieType",
+            "fieldType": "TieType",
+            "fieldValues": "SINGLES, DOUBLES, MIX_DOUBLES, MENS_SINGLES, WOMENS_SINGLES, MENS_DOUBLES, WOMENS_DOUBLES",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180127123236",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "tie_match",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

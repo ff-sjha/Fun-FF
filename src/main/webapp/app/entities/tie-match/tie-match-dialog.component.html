@@ -1,0 +1,56 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myTieMatchLabel" jhiTranslate="fafiApp.tieMatch.home.createOrEditLabel">Create or edit a Tie Match</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <fafi-alert-error></fafi-alert-error>
+        <div class="form-group" [hidden]="!tieMatch.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="tieMatch.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.tieMatch.tieType" for="field_tieType">Tie Type</label>
+            <select class="form-control" name="tieType" [(ngModel)]="tieMatch.tieType" id="field_tieType"  required>
+                <option value="SINGLES">{{'fafiApp.TieType.SINGLES' | translate}}</option>
+                <option value="DOUBLES">{{'fafiApp.TieType.DOUBLES' | translate}}</option>
+                <option value="MIX_DOUBLES">{{'fafiApp.TieType.MIX_DOUBLES' | translate}}</option>
+                <option value="MENS_SINGLES">{{'fafiApp.TieType.MENS_SINGLES' | translate}}</option>
+                <option value="WOMENS_SINGLES">{{'fafiApp.TieType.WOMENS_SINGLES' | translate}}</option>
+                <option value="MENS_DOUBLES">{{'fafiApp.TieType.MENS_DOUBLES' | translate}}</option>
+                <option value="WOMENS_DOUBLES">{{'fafiApp.TieType.WOMENS_DOUBLES' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.tieType?.dirty && editForm.controls.tieType?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.tieType?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.tieMatch.match" for="field_match">Match</label>
+            <select class="form-control" id="field_match" name="match" [(ngModel)]="tieMatch.match"  required>
+                <option *ngIf="!editForm.value.match" [ngValue]="null" selected></option>
+                <option [ngValue]="matchOption.id === tieMatch.match?.id ? tieMatch.match : matchOption" *ngFor="let matchOption of matches; trackBy: trackMatchById">{{matchOption.matchName}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.match?.dirty && editForm.controls.match?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.match?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

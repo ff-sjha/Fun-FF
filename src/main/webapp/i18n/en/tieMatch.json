@@ -15,10 +15,8 @@
             "detail": {
                 "title": "Tie Match"
             },
-            "match": "Match",
-            "team1": "Team 1",
-            "team2": "Team 2",
-            "winner": "Winner"
+            "tieType": "Tie Type",
+            "match": "Match"
         }
     }
 }

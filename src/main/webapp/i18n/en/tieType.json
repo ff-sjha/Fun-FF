@@ -1,0 +1,14 @@
+{
+    "fafiApp": {
+        "TieType" : {
+            "null": "",
+            "SINGLES": "SINGLES",
+            "DOUBLES": "DOUBLES",
+            "MIX_DOUBLES": "MIX_DOUBLES",
+            "MENS_SINGLES": "MENS_SINGLES",
+            "WOMENS_SINGLES": "WOMENS_SINGLES",
+            "MENS_DOUBLES": "MENS_DOUBLES",
+            "WOMENS_DOUBLES": "WOMENS_DOUBLES"
+        }
+    }
+}
