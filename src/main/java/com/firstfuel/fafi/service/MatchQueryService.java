@@ -142,22 +142,22 @@ public class MatchQueryService extends QueryService<Match> {
             });
             if (m.getTeam1() != null) {
                 Franchise franchise = m.getTeam1().getFranchise();
-                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(),
+                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(), m.getTeam1Points(),
                         teamPlayers.get(franchise.getId())));
             }
             if (m.getTeam2() != null) {
                 Franchise franchise = m.getTeam2().getFranchise();
-                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(),
+                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(), m.getTeam2Points(),
                         teamPlayers.get(franchise.getId())));
             }
             if (m.getTeam3() != null) {
                 Franchise franchise = m.getTeam3().getFranchise();
-                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(),
+                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(), m.getTeam3Points(),
                         teamPlayers.get(franchise.getId())));
             }
             if (m.getTeam4() != null) {
                 Franchise franchise = m.getTeam4().getFranchise();
-                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(),
+                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(), m.getTeam4Points(),
                         teamPlayers.get(franchise.getId())));
             }
             matchDto.setTeamPlayers(fplayers);

@@ -7,10 +7,11 @@
             </div>
             <table class="table table-striped">
                 <tbody>
-                    <tr *ngFor="let match of matches ;trackBy: trackId"  >
+                    <tr *ngFor="let match of matches ;trackBy: trackId">
                         <td>
                             <div class="col-sm-12 border">
-                                <div class="row" [class.match-complete] ="match.completed">
+                                <div class="row"
+                                    [class.match-complete]="match.completed">
                                     <div class="col-sm-3 border"
                                         text-align: center>
                                         <h4 class="panel-title">{{match.matchName}}</h4>
@@ -25,7 +26,8 @@
                                         <b>Venue:</b> {{match.venue}}
                                     </div>
                                 </div>
-                                <div class="row" [class.match-complete] ="match.completed">
+                                <div class="row"
+                                    [class.match-complete]="match.completed">
                                     <div class="col-sm-6 border">
                                         <b>Start Date:</b>
                                         {{match.startDateTime |
@@ -38,32 +40,87 @@
                                         date:'medium'}}
                                     </div>
                                 </div>
-                                <div ng-if="match.teamPlayers.length > 0">
-                                    <div class="row" >Teams</div>
+                                <div
+                                    *ngIf="match.teamPlayers.length > 0">
                                     <div
-                                        *ngFor="let franchise of match.teamPlayers">
+                                        *ngIf="match.tournamentType == 'FOOTBALL'">
                                         <div class="row">
-                                            <div class="col-sm-4 border" [class.player-of-match] ="franchise.franchiseId == match.winningFranchiseId">
-                                                {{franchise.franchiseName}}</div>
+                                            <div class="col-sm-4 border">
+                                                <b>Team Names</b>
+                                            </div>
+                                            <div class="col-sm-6 border">
+                                                <b> Players</b>
+                                            </div>
+                                            <div class="col-sm-2 border">
+                                                <b> Goals</b>
+                                            </div>
+                                        </div>
+                                        <div
+                                            *ngFor="let franchise of match.teamPlayers">
+                                            <div class="row">
+                                                <div
+                                                    class="col-sm-4 border"
+                                                    [class.player-of-match]="franchise.franchiseId == match.winningFranchiseId">
+                                                    {{franchise.franchiseName}}</div>
+                                                <div
+                                                    class="col-sm-6 border">
+                                                    <span
+                                                        *ngFor="let player of franchise.players; let last = last"
+                                                        [class.player-of-match]="player.playerOfTheMatch">
+                                                        {{player.seasonsFranchisePlayerFirstName}}
+                                                        {{player.seasonsFranchisePlayerLastName}}{{last?
+                                                        ' ' : ', '}}</span>
+                                                </div>
+                                                <div
+                                                    class="col-sm-2 border">
+                                                    {{franchise.goals}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="match.tournamentType != 'FOOTBALL'">
+                                        <div class="row">
+                                            <div class="col-sm-4 border">
+                                                <b>Team Names</b>
+                                            </div>
                                             <div class="col-sm-8 border">
-                                                <span
-                                                    *ngFor="let player of franchise.players; let last = last" [class.player-of-match] ="player.playerOfTheMatch">
-                                                    {{player.seasonsFranchisePlayerFirstName}}
-                                                    {{player.seasonsFranchisePlayerLastName}}{{last? ' ' : ', '}}</span>
+                                                <b> Players</b>
+                                            </div>
+                                        </div>
+                                        <div
+                                            *ngFor="let franchise of match.teamPlayers">
+
+                                            <div class="row">
+                                                <div
+                                                    class="col-sm-4 border"
+                                                    [class.player-of-match]="franchise.franchiseId == match.winningFranchiseId">
+                                                    {{franchise.franchiseName}}</div>
+                                                <div
+                                                    class="col-sm-8 border">
+                                                    <span
+                                                        *ngFor="let player of franchise.players; let last = last"
+                                                        [class.player-of-match]="player.playerOfTheMatch">
+                                                        {{player.seasonsFranchisePlayerFirstName}}
+                                                        {{player.seasonsFranchisePlayerLastName}}{{last?
+                                                        ' ' : ', '}}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-3 border">
-                                        <b>Umpire(s):</b>
-                                    </div>
-                                    <div class="col-sm-9 border">
-                                        <span *ngFor="let umpire of match.umpires let last = last" >
-                                                {{umpire.firstName}} {{umpire.lastName}}{{last? ' ' : ', '}}
-                                        </span>
-                                    </div>
-                               </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 border">
+                                    <b>Umpire(s):</b>
+                                </div>
+                                <div class="col-sm-9 border">
+                                    <span
+                                        *ngFor="let umpire of match.umpires let last = last">
+                                        {{umpire.firstName}}
+                                        {{umpire.lastName}}{{last? ' ' :
+                                        ', '}} </span>
+                                </div>
+                            </div>
                             </div>
                         </td>
                     </tr>
