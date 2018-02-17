@@ -80,7 +80,7 @@
             <label class="form-control-label" jhiTranslate="fafiApp.match.tournament" for="field_tournament">Tournament</label>
             <select class="form-control" id="field_tournament" name="tournament" [(ngModel)]="match.tournamentId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="tournamentOption.id" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.id}}</option>
+                <option [ngValue]="tournamentOption.id" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.type}}</option>
             </select>
         </div>
         <div class="form-group">
@@ -94,28 +94,28 @@
             <label class="form-control-label" jhiTranslate="fafiApp.match.team1" for="field_team1">Team 1</label>
             <select class="form-control" id="field_team1" name="team1" [(ngModel)]="match.team1Id" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchise}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.match.team2" for="field_team2">Team 2</label>
             <select class="form-control" id="field_team2" name="team2" [(ngModel)]="match.team2Id" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchise}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.match.team3" for="field_team3">Team 3</label>
             <select class="form-control" id="field_team3" name="team3" [(ngModel)]="match.team3Id" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchise}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="fafiApp.match.team4" for="field_team4">Team 4</label>
             <select class="form-control" id="field_team4" name="team4" [(ngModel)]="match.team4Id" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchise}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
             </select>
         </div>
     </div>

@@ -130,4 +130,20 @@ public class MatchResource {
         matchService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    @GetMapping("/matches/upcoming-matches")
+    @Timed
+    public ResponseEntity<List<MatchDTO>> getAllUpcomingMatches() {
+        log.debug("REST request to get Matches by criteria: {}");
+        List<MatchDTO> list = matchQueryService.getAllUpcomingMatches();
+        return new ResponseEntity<>(list, null, HttpStatus.OK);
+    }
+
+    @GetMapping("/matches/fixtures")
+    @Timed
+    public ResponseEntity<List<MatchDTO>> getAllFixtures() {
+        log.debug("REST request to get Matches by criteria: {}");
+        List<MatchDTO> list = matchQueryService.getFixtures();
+        return new ResponseEntity<>(list, null, HttpStatus.OK);
+    }
 }

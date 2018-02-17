@@ -7,12 +7,6 @@
         Added the constraints for entity TieMatchSets.
     -->
     <changeSet id="20180127124126-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="team1_id"
-                                 baseTableName="tie_match_sets"
-                                 constraintName="fk_tie_match_sets_team1_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="seasons_franchise"/>
 
     </changeSet>
 </databaseChangeLog>

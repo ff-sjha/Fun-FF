@@ -41,7 +41,7 @@
                                 <div
                                     *ngFor="let franchise of match.teamPlayers">
                                     <div class="row">
-                                        <div class="col-sm-4 border">
+                                        <div class="col-sm-4 border" [class.player-of-match] ="franchise.franchiseId == match.winningFranchiseId">
                                             {{franchise.franchiseName}}</div>
                                         <div class="col-sm-8 border">
                                             <span

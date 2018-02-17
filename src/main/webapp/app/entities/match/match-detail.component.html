@@ -35,7 +35,7 @@
         <dt><span jhiTranslate="fafiApp.match.tournament">Tournament</span></dt>
         <dd>
             <div *ngIf="match.tournamentId">
-                <a [routerLink]="['/tournament', match.tournamentId]">{{match.tournamentId}}</a>
+                <a [routerLink]="['/tournament', match.tournamentId]">{{match.tournamentType}}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="fafiApp.match.winningFranchise">Winning Franchise</span></dt>

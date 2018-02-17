@@ -128,20 +128,38 @@ public class MatchQueryService extends QueryService<Match> {
         result.forEach(m -> {
             MatchDTO matchDto = matchMapper.toDto(m);
             List<MatchPlayers> matchPlayers = matchPlayerRepository.findByMatch(m);
-            Map<String, List<MatchPlayersDTO>> teamPlayers = new HashMap<>();
-            Map<String, Long> franchaiseId = new HashMap<>();
+            Map<Long, List<MatchPlayersDTO>> teamPlayers = new HashMap<>();
             matchPlayers.forEach(mp -> {
                 Franchise fr = mp.getSeasonsFranchisePlayer().getSeasonsFranchise().getFranchise();
-                if (!teamPlayers.containsKey(fr.getName())) {
-                    teamPlayers.put(fr.getName(), new ArrayList<>());
+                if (!teamPlayers.containsKey(fr.getId())) {
+                    teamPlayers.put(fr.getId(), new ArrayList<>());
                 }
-                franchaiseId.put(fr.getName(), fr.getId());
-                teamPlayers.get(fr.getName()).add(matchPlayerMapper.toDto(mp));
+                teamPlayers.get(fr.getId()).add(matchPlayerMapper.toDto(mp));
             });
             List<FranchisePlayersDTO> fplayers = new ArrayList<>(teamPlayers.size());
             teamPlayers.forEach((k, v) -> {
-                fplayers.add(new FranchisePlayersDTO(franchaiseId.get(k), k, teamPlayers.get(k)));
+
             });
+            if (m.getTeam1() != null) {
+                Franchise franchise = m.getTeam1().getFranchise();
+                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(),
+                        teamPlayers.get(franchise.getId())));
+            }
+            if (m.getTeam2() != null) {
+                Franchise franchise = m.getTeam2().getFranchise();
+                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(),
+                        teamPlayers.get(franchise.getId())));
+            }
+            if (m.getTeam3() != null) {
+                Franchise franchise = m.getTeam3().getFranchise();
+                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(),
+                        teamPlayers.get(franchise.getId())));
+            }
+            if (m.getTeam4() != null) {
+                Franchise franchise = m.getTeam4().getFranchise();
+                fplayers.add(new FranchisePlayersDTO(franchise.getId(), franchise.getName(),
+                        teamPlayers.get(franchise.getId())));
+            }
             matchDto.setTeamPlayers(fplayers);
             MatchUmpireCriteria criteria = new MatchUmpireCriteria();
             LongFilter matchId = new LongFilter();
