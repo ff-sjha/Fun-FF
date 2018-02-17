@@ -39,8 +39,6 @@ public class MatchCriteria implements Serializable {
 
     private ZonedDateTimeFilter endDateTime;
 
-    private IntegerFilter pointsEarnedByFranchise;
-
     private StringFilter matchName;
 
     private StageFilter stage;
@@ -78,14 +76,6 @@ public class MatchCriteria implements Serializable {
 
     public void setEndDateTime(ZonedDateTimeFilter endDateTime) {
         this.endDateTime = endDateTime;
-    }
-
-    public IntegerFilter getPointsEarnedByFranchise() {
-        return pointsEarnedByFranchise;
-    }
-
-    public void setPointsEarnedByFranchise(IntegerFilter pointsEarnedByFranchise) {
-        this.pointsEarnedByFranchise = pointsEarnedByFranchise;
     }
 
     public StringFilter getMatchName() {
@@ -143,7 +133,6 @@ public class MatchCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (startDateTime != null ? "startDateTime=" + startDateTime + ", " : "") +
                 (endDateTime != null ? "endDateTime=" + endDateTime + ", " : "") +
-                (pointsEarnedByFranchise != null ? "pointsEarnedByFranchise=" + pointsEarnedByFranchise + ", " : "") +
                 (matchName != null ? "matchName=" + matchName + ", " : "") +
                 (stage != null ? "stage=" + stage + ", " : "") +
                 (venue != null ? "venue=" + venue + ", " : "") +

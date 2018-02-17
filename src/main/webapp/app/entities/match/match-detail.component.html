@@ -1,86 +1,141 @@
 
 <div *ngIf="match">
-    <h2><span jhiTranslate="fafiApp.match.detail.title">Match</span> {{match.id}}</h2>
+    <h2>
+        <span jhiTranslate="fafiApp.match.detail.title">Match</span>
+        {{match.id}}
+    </h2>
     <hr>
     <fafi-alert-error></fafi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="fafiApp.match.startDateTime">Start Date Time</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.startDateTime">Start
+                Date Time</span>
+        </dt>
         <dd>
             <span>{{match.startDateTime | date:'medium'}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.endDateTime">End Date Time</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.endDateTime">End
+                Date Time</span>
+        </dt>
         <dd>
             <span>{{match.endDateTime | date:'medium'}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.pointsEarnedByFranchise">Points Earned By Franchise</span></dt>
-        <dd>
-            <span>{{match.pointsEarnedByFranchise}}</span>
-        </dd>
-        <dt><span jhiTranslate="fafiApp.match.matchName">Match Name</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.matchName">Match
+                Name</span>
+        </dt>
         <dd>
             <span>{{match.matchName}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.stage">Stage</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.stage">Stage</span>
+        </dt>
         <dd>
             <span jhiTranslate="{{'fafiApp.Stage.' + match.stage}}">{{match.stage}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.venue">Venue</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.venue">Venue</span>
+        </dt>
         <dd>
             <span>{{match.venue}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.completed">Completed</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.completed">Completed</span>
+        </dt>
         <dd>
             <span>{{match.completed}}</span>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.tournament">Tournament</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.tournament">Tournament</span>
+        </dt>
         <dd>
             <div *ngIf="match.tournamentId">
                 <a [routerLink]="['/tournament', match.tournamentId]">{{match.tournamentType}}</a>
             </div>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.winningFranchise">Winning Franchise</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.winningFranchise">Winning
+                Franchise</span>
+        </dt>
         <dd>
             <div *ngIf="match.winningFranchiseId">
-                <a [routerLink]="['/seasons-franchise', match.winningFranchiseId]">{{match.winningFranchiseFranchiseName}}</a>
+                <a
+                    [routerLink]="['/seasons-franchise', match.winningFranchiseId]">{{match.winningFranchiseFranchiseName}}</a>
             </div>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.team1">Team 1</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.team1">Team 1</span>
+        </dt>
         <dd>
             <div *ngIf="match.team1Id">
                 <a [routerLink]="['/seasons-franchise', match.team1Id]">{{match.team1Franchise}}</a>
             </div>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.team2">Team 2</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.team2">Team 2</span>
+        </dt>
         <dd>
             <div *ngIf="match.team2Id">
                 <a [routerLink]="['/seasons-franchise', match.team2Id]">{{match.team2Franchise}}</a>
             </div>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.team3">Team 3</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.team3">Team 3</span>
+        </dt>
         <dd>
             <div *ngIf="match.team3Id">
                 <a [routerLink]="['/seasons-franchise', match.team3Id]">{{match.team3Franchise}}</a>
             </div>
         </dd>
-        <dt><span jhiTranslate="fafiApp.match.team4">Team 4</span></dt>
+        <dt>
+            <span jhiTranslate="fafiApp.match.team4">Team 4</span>
+        </dt>
         <dd>
             <div *ngIf="match.team4Id">
                 <a [routerLink]="['/seasons-franchise', match.team4Id]">{{match.team4Franchise}}</a>
             </div>
         </dd>
+        <dt>
+            <span jhiTranslate="fafiApp.match.team1Points">Team 1
+                Points</span>
+        </dt>
+        <dd>
+            <span>{{match.team1Points}}</span>
+        </dd>
+        <dt>
+            <span jhiTranslate="fafiApp.match.team2Points">Team 2
+                Points</span>
+        </dt>
+        <dd>
+            <span>{{match.team2Points}}</span>
+        </dd>
+        <dt>
+            <span jhiTranslate="fafiApp.match.team3Points">Team 3
+                Points</span>
+        </dt>
+        <dd>
+            <span>{{match.team3Points}}</span>
+        </dd>
+        <dt>
+            <span jhiTranslate="fafiApp.match.team4Points">Team 4
+                Points</span>
+        </dt>
+        <dd>
+            <span>{{match.team4Points}}</span>
+        </dd>
     </dl>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    <button type="submit" (click)="previousState()" class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span
+            jhiTranslate="entity.action.back"> Back</span>
     </button>
 
     <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'match/'+ match.id + '/edit'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+        [routerLink]="['/', { outlets: { popup: 'match/'+ match.id + '/edit'} }]"
+        replaceUrl="true" queryParamsHandling="merge"
+        class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span
+            jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

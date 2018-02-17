@@ -125,7 +125,6 @@ public class MatchResourceIntTest {
         Match match = new Match()
             .startDateTime(DEFAULT_START_DATE_TIME)
             .endDateTime(DEFAULT_END_DATE_TIME)
-            .pointsEarnedByFranchise(DEFAULT_POINTS_EARNED_BY_FRANCHISE)
             .matchName(DEFAULT_MATCH_NAME)
             .stage(DEFAULT_STAGE)
             .venue(DEFAULT_VENUE)
@@ -253,7 +252,6 @@ public class MatchResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(match.getId().intValue())))
             .andExpect(jsonPath("$.[*].startDateTime").value(hasItem(sameInstant(DEFAULT_START_DATE_TIME))))
             .andExpect(jsonPath("$.[*].endDateTime").value(hasItem(sameInstant(DEFAULT_END_DATE_TIME))))
-            .andExpect(jsonPath("$.[*].pointsEarnedByFranchise").value(hasItem(DEFAULT_POINTS_EARNED_BY_FRANCHISE)))
             .andExpect(jsonPath("$.[*].matchName").value(hasItem(DEFAULT_MATCH_NAME.toString())))
             .andExpect(jsonPath("$.[*].stage").value(hasItem(DEFAULT_STAGE.toString())))
             .andExpect(jsonPath("$.[*].venue").value(hasItem(DEFAULT_VENUE.toString())))
@@ -798,7 +796,6 @@ public class MatchResourceIntTest {
         updatedMatch
             .startDateTime(UPDATED_START_DATE_TIME)
             .endDateTime(UPDATED_END_DATE_TIME)
-            .pointsEarnedByFranchise(UPDATED_POINTS_EARNED_BY_FRANCHISE)
             .matchName(UPDATED_MATCH_NAME)
             .stage(UPDATED_STAGE)
             .venue(UPDATED_VENUE)

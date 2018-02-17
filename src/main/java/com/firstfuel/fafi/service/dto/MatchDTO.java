@@ -6,6 +6,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 import com.firstfuel.fafi.domain.enumeration.Games;
@@ -21,8 +22,6 @@ public class MatchDTO implements Serializable {
     private ZonedDateTime startDateTime;
 
     private ZonedDateTime endDateTime;
-
-    private Integer pointsEarnedByFranchise;
 
     @NotNull
     private String matchName;
@@ -59,6 +58,15 @@ public class MatchDTO implements Serializable {
 
     private Games tournamentType;
     
+    private Integer team1Points;
+
+    private Integer team2Points;
+
+    private Integer team3Points;
+
+    private Integer team4Points;
+    
+    
     private List<FranchisePlayersDTO> teamPlayers;
     
     private List<MatchUmpireDTO> umpires;
@@ -85,14 +93,6 @@ public class MatchDTO implements Serializable {
 
     public void setEndDateTime(ZonedDateTime endDateTime) {
         this.endDateTime = endDateTime;
-    }
-
-    public Integer getPointsEarnedByFranchise() {
-        return pointsEarnedByFranchise;
-    }
-
-    public void setPointsEarnedByFranchise(Integer pointsEarnedByFranchise) {
-        this.pointsEarnedByFranchise = pointsEarnedByFranchise;
     }
 
     public String getMatchName() {
@@ -239,6 +239,38 @@ public class MatchDTO implements Serializable {
         this.umpires = umpires;
     }
 
+    public Integer getTeam1Points() {
+        return team1Points;
+    }
+
+    public void setTeam1Points(Integer team1Points) {
+        this.team1Points = team1Points;
+    }
+
+    public Integer getTeam2Points() {
+        return team2Points;
+    }
+
+    public void setTeam2Points(Integer team2Points) {
+        this.team2Points = team2Points;
+    }
+
+    public Integer getTeam3Points() {
+        return team3Points;
+    }
+
+    public void setTeam3Points(Integer team3Points) {
+        this.team3Points = team3Points;
+    }
+
+    public Integer getTeam4Points() {
+        return team4Points;
+    }
+
+    public void setTeam4Points(Integer team4Points) {
+        this.team4Points = team4Points;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -266,7 +298,6 @@ public class MatchDTO implements Serializable {
             "id=" + getId() +
             ", startDateTime='" + getStartDateTime() + "'" +
             ", endDateTime='" + getEndDateTime() + "'" +
-            ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() +
             ", matchName='" + getMatchName() + "'" +
             ", stage='" + getStage() + "'" +
             ", venue='" + getVenue() + "'" +

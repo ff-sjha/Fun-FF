@@ -1,114 +1,167 @@
 <div>
     <h2>
         <span jhiTranslate="fafiApp.match.home.title">Matches</span>
-        <button class="btn btn-primary float-right jh-create-entity create-match" [routerLink]="['/', { outlets: { popup: ['match-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="fafiApp.match.home.createLabel">
-            Create new Match
-            </span>
+        <button
+            class="btn btn-primary float-right jh-create-entity create-match"
+            [routerLink]="['/', { outlets: { popup: ['match-new'] } }]">
+            <span class="fa fa-plus"></span> <span
+                jhiTranslate="fafiApp.match.home.createLabel">
+                Create new Match </span>
         </button>
     </h2>
     <fafi-alert></fafi-alert>
-    <div class="row">
-    </div>
-    <br/>
+    <div class="row"></div>
+    <br />
     <div class="table-responsive" *ngIf="matches">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="startDateTime"><span jhiTranslate="fafiApp.match.startDateTime">Start Date Time</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="endDateTime"><span jhiTranslate="fafiApp.match.endDateTime">End Date Time</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="pointsEarnedByFranchise"><span jhiTranslate="fafiApp.match.pointsEarnedByFranchise">Points Earned By Franchise</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="matchName"><span jhiTranslate="fafiApp.match.matchName">Match Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="stage"><span jhiTranslate="fafiApp.match.stage">Stage</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="venue"><span jhiTranslate="fafiApp.match.venue">Venue</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="completed"><span jhiTranslate="fafiApp.match.completed">Completed</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="tournamentId"><span jhiTranslate="fafiApp.match.tournament">Tournament</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="winningFranchiseFranchiseName"><span jhiTranslate="fafiApp.match.winningFranchise">Winning Franchise</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="team1Franchise"><span jhiTranslate="fafiApp.match.team1">Team 1</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="team2Franchise"><span jhiTranslate="fafiApp.match.team2">Team 2</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="team3Franchise"><span jhiTranslate="fafiApp.match.team3">Team 3</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="team4Franchise"><span jhiTranslate="fafiApp.match.team4">Team 4</span> <span class="fa fa-sort"></span></th>
-            <th></th>
-            </tr>
+                <tr jhiSort [(predicate)]="predicate"
+                    [(ascending)]="reverse"
+                    [callback]="transition.bind(this)">
+                    <th jhiSortBy="id"><span
+                        jhiTranslate="global.field.id">ID</span> <span
+                        class="fa fa-sort"></span></th>
+                    <th jhiSortBy="startDateTime"><span
+                        jhiTranslate="fafiApp.match.startDateTime">Start
+                            Date Time</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="endDateTime"><span
+                        jhiTranslate="fafiApp.match.endDateTime">End
+                            Date Time</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="matchName"><span
+                        jhiTranslate="fafiApp.match.matchName">Match
+                            Name</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="stage"><span
+                        jhiTranslate="fafiApp.match.stage">Stage</span>
+                        <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="venue"><span
+                        jhiTranslate="fafiApp.match.venue">Venue</span>
+                        <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="completed"><span
+                        jhiTranslate="fafiApp.match.completed">Completed</span>
+                        <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="tournamentId"><span
+                        jhiTranslate="fafiApp.match.tournament">Tournament</span>
+                        <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="winningFranchiseFranchiseName"><span
+                        jhiTranslate="fafiApp.match.winningFranchise">Winning
+                            Franchise</span> <span class="fa fa-sort"></span></th>
+                    <th><span jhiTranslate="fafiApp.match.team1">Team
+                            1</span></th>
+                    <th><span jhiTranslate="fafiApp.match.team2">Team
+                            2</span></th>
+                    <th><span jhiTranslate="fafiApp.match.team3">Team
+                            3</span></th>
+                    <th><span jhiTranslate="fafiApp.match.team4">Team
+                            4</span></th>
+                    <th><span
+                        jhiTranslate="fafiApp.match.team1Points">Team
+                            1 Points</span></th>
+                    <th><span
+                        jhiTranslate="fafiApp.match.team2Points">Team
+                            2 Points</span></th>
+                    <th><span
+                        jhiTranslate="fafiApp.match.team3Points">Team
+                            3 Points</span></th>
+                    <th><span
+                        jhiTranslate="fafiApp.match.team4Points">Team
+                            4 Points</span></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let match of matches ;trackBy: trackId">
-                <td><a [routerLink]="['../match', match.id ]">{{match.id}}</a></td>
-                <td>{{match.startDateTime | date:'medium'}}</td>
-                <td>{{match.endDateTime | date:'medium'}}</td>
-                <td>{{match.pointsEarnedByFranchise}}</td>
-                <td>{{match.matchName}}</td>
-                <td jhiTranslate="{{'fafiApp.Stage.' + match.stage}}">{{match.stage}}</td>
-                <td>{{match.venue}}</td>
-                <td>{{match.completed}}</td>
-                <td>
-                    <div *ngIf="match.tournamentId">
-                        <a [routerLink]="['../tournament', match.tournamentId  ]" >{{match.tournamentType}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="match.winningFranchiseId">
-                        <a [routerLink]="['../seasons-franchise', match.winningFranchiseId  ]" >{{match.winningFranchiseFranchiseName}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="match.team1Id">
-                        <a [routerLink]="['../seasons-franchise', match.team1Id  ]" >{{match.team1Franchise}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="match.team2Id">
-                        <a [routerLink]="['../seasons-franchise', match.team2Id  ]" >{{match.team2Franchise}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="match.team3Id">
-                        <a [routerLink]="['../seasons-franchise', match.team3Id  ]" >{{match.team3Franchise}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="match.team4Id">
-                        <a [routerLink]="['../seasons-franchise', match.team4Id  ]" >{{match.team4Franchise}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
+                <tr *ngFor="let match of matches ;trackBy: trackId">
+                    <td><a [routerLink]="['../match', match.id ]">{{match.id}}</a></td>
+                    <td>{{match.startDateTime | date:'medium'}}</td>
+                    <td>{{match.endDateTime | date:'medium'}}</td>
+                    <td>{{match.matchName}}</td>
+                    <td
+                        jhiTranslate="{{'fafiApp.Stage.' + match.stage}}">{{match.stage}}</td>
+                    <td>{{match.venue}}</td>
+                    <td>{{match.completed}}</td>
+                    <td>
+                        <div *ngIf="match.tournamentId">
+                            <a
+                                [routerLink]="['../tournament', match.tournamentId  ]">{{match.tournamentType}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="match.winningFranchiseId">
+                            <a
+                                [routerLink]="['../seasons-franchise', match.winningFranchiseId  ]">{{match.winningFranchiseFranchiseName}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="match.team1Id">
+                            <a
+                                [routerLink]="['../seasons-franchise', match.team1Id  ]">{{match.team1Franchise}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="match.team2Id">
+                            <a
+                                [routerLink]="['../seasons-franchise', match.team2Id  ]">{{match.team2Franchise}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="match.team3Id">
+                            <a
+                                [routerLink]="['../seasons-franchise', match.team3Id  ]">{{match.team3Franchise}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="match.team4Id">
+                            <a
+                                [routerLink]="['../seasons-franchise', match.team4Id  ]">{{match.team4Franchise}}</a>
+                        </div>
+                    </td>
+                    <td>{{match.team1Points}}</td>
+                    <td>{{match.team2Points}}</td>
+                    <td>{{match.team3Points}}</td>
+                    <td>{{match.team4Points}}</td>
+
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
                                 [routerLink]="['../match', match.id ]"
                                 class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
+                                <span class="fa fa-eye"></span> <span
+                                    class="d-none d-md-inline"
+                                    jhiTranslate="entity.action.view">View</span>
+                            </button>
+                            <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'match/'+ match.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
+                                <span class="fa fa-pencil"></span> <span
+                                    class="d-none d-md-inline"
+                                    jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'match/'+ match.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                                <span class="fa fa-remove"></span> <span
+                                    class="d-none d-md-inline"
+                                    jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
-        <div *ngIf="matches && matches.length">
-            <div class="row justify-content-center">
-                <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-            </div>
-            <div class="row justify-content-center">
-                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-            </div>
+    <div *ngIf="matches && matches.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount"
+                [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems"
+                [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                [rotate]="true" [boundaryLinks]="true"
+                (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
 </div>

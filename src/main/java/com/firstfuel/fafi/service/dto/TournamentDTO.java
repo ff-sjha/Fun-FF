@@ -1,18 +1,23 @@
 package com.firstfuel.fafi.service.dto;
 
 
-import java.time.LocalDate;
-import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
 import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
+
 import com.firstfuel.fafi.domain.enumeration.Games;
 
 /**
  * A DTO for the Tournament entity.
  */
 public class TournamentDTO implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6471812481112641878L;
 
     private Long id;
 

@@ -38,20 +38,22 @@
                                         date:'medium'}}
                                     </div>
                                 </div>
-                                <div
-                                    *ngFor="let franchise of match.teamPlayers">
-                                    <div class="row">
-                                        <div class="col-sm-4 border" [class.player-of-match] ="franchise.franchiseId == match.winningFranchiseId">
-                                            {{franchise.franchiseName}}</div>
-                                        <div class="col-sm-8 border">
-                                            <span
-                                                *ngFor="let player of franchise.players; let last = last" [class.player-of-match] ="player.playerOfTheMatch">
-                                                {{player.seasonsFranchisePlayerFirstName}}
-                                                {{player.seasonsFranchisePlayerLastName}}{{last? ' ' : ', '}}</span>
+                                <div ng-if="match.teamPlayers.length > 0">
+                                    <div class="row" >Teams</div>
+                                    <div
+                                        *ngFor="let franchise of match.teamPlayers">
+                                        <div class="row">
+                                            <div class="col-sm-4 border" [class.player-of-match] ="franchise.franchiseId == match.winningFranchiseId">
+                                                {{franchise.franchiseName}}</div>
+                                            <div class="col-sm-8 border">
+                                                <span
+                                                    *ngFor="let player of franchise.players; let last = last" [class.player-of-match] ="player.playerOfTheMatch">
+                                                    {{player.seasonsFranchisePlayerFirstName}}
+                                                    {{player.seasonsFranchisePlayerLastName}}{{last? ' ' : ', '}}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-sm-3 border">
                                         <b>Umpire(s):</b>

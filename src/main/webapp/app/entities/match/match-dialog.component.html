@@ -1,130 +1,205 @@
-<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+<form name="editForm" role="form" novalidate (ngSubmit)="save()"
+    #editForm="ngForm">
 
     <div class="modal-header">
-        <h4 class="modal-title" id="myMatchLabel" jhiTranslate="fafiApp.match.home.createOrEditLabel">Create or edit a Match</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                (click)="clear()">&times;</button>
+        <h4 class="modal-title" id="myMatchLabel"
+            jhiTranslate="fafiApp.match.home.createOrEditLabel">Create
+            or edit a Match</h4>
+        <button type="button" class="close" data-dismiss="modal"
+            aria-hidden="true" (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
         <fafi-alert-error></fafi-alert-error>
         <div class="form-group" [hidden]="!match.id">
-            <label for="id" jhiTranslate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="match.id" readonly />
+            <label for="id" jhiTranslate="global.field.id">ID</label> <input
+                type="text" class="form-control" id="id" name="id"
+                [(ngModel)]="match.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.startDateTime" for="field_startDateTime">Start Date Time</label>
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.startDateTime"
+                for="field_startDateTime">Start Date Time</label>
             <div class="d-flex">
-                <input id="field_startDateTime" type="datetime-local" class="form-control" name="startDateTime" [(ngModel)]="match.startDateTime"
-                />
+                <input id="field_startDateTime" type="datetime-local"
+                    class="form-control" name="startDateTime"
+                    [(ngModel)]="match.startDateTime" />
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.endDateTime" for="field_endDateTime">End Date Time</label>
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.endDateTime"
+                for="field_endDateTime">End Date Time</label>
             <div class="d-flex">
-                <input id="field_endDateTime" type="datetime-local" class="form-control" name="endDateTime" [(ngModel)]="match.endDateTime"
-                />
+                <input id="field_endDateTime" type="datetime-local"
+                    class="form-control" name="endDateTime"
+                    [(ngModel)]="match.endDateTime" />
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.pointsEarnedByFranchise" for="field_pointsEarnedByFranchise">Points Earned By Franchise</label>
-            <input type="number" class="form-control" name="pointsEarnedByFranchise" id="field_pointsEarnedByFranchise"
-                [(ngModel)]="match.pointsEarnedByFranchise" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.matchName" for="field_matchName">Match Name</label>
-            <input type="text" class="form-control" name="matchName" id="field_matchName"
-                [(ngModel)]="match.matchName" required/>
-            <div [hidden]="!(editForm.controls.matchName?.dirty && editForm.controls.matchName?.invalid)">
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.matchName"
+                for="field_matchName">Match Name</label> <input
+                type="text" class="form-control" name="matchName"
+                id="field_matchName" [(ngModel)]="match.matchName"
+                required />
+            <div
+                [hidden]="!(editForm.controls.matchName?.dirty && editForm.controls.matchName?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.matchName?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
+                    [hidden]="!editForm.controls.matchName?.errors?.required"
+                    jhiTranslate="entity.validation.required">
+                    This field is required. </small>
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.stage" for="field_stage">Stage</label>
-            <select class="form-control" name="stage" [(ngModel)]="match.stage" id="field_stage"  required>
-                <option value="LEAGUE">{{'fafiApp.Stage.LEAGUE' | translate}}</option>
-                <option value="QUARTER_FINAL">{{'fafiApp.Stage.QUARTER_FINAL' | translate}}</option>
-                <option value="SEMI_FINAL">{{'fafiApp.Stage.SEMI_FINAL' | translate}}</option>
-                <option value="FINAL">{{'fafiApp.Stage.FINAL' | translate}}</option>
-                <option value="PLAYOFF">{{'fafiApp.Stage.PLAYOFF' | translate}}</option>
-                <option value="KNOCK_OUT">{{'fafiApp.Stage.KNOCK_OUT' | translate}}</option>
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.stage" for="field_stage">Stage</label>
+            <select class="form-control" name="stage"
+                [(ngModel)]="match.stage" id="field_stage" required>
+                <option value="LEAGUE">{{'fafiApp.Stage.LEAGUE'
+                    | translate}}</option>
+                <option value="QUARTER_FINAL">{{'fafiApp.Stage.QUARTER_FINAL'
+                    | translate}}</option>
+                <option value="SEMI_FINAL">{{'fafiApp.Stage.SEMI_FINAL'
+                    | translate}}</option>
+                <option value="FINAL">{{'fafiApp.Stage.FINAL' |
+                    translate}}</option>
+                <option value="PLAYOFF">{{'fafiApp.Stage.PLAYOFF'
+                    | translate}}</option>
+                <option value="KNOCK_OUT">{{'fafiApp.Stage.KNOCK_OUT'
+                    | translate}}</option>
             </select>
-            <div [hidden]="!(editForm.controls.stage?.dirty && editForm.controls.stage?.invalid)">
+            <div
+                [hidden]="!(editForm.controls.stage?.dirty && editForm.controls.stage?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.stage?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
+                    [hidden]="!editForm.controls.stage?.errors?.required"
+                    jhiTranslate="entity.validation.required">
+                    This field is required. </small>
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.venue" for="field_venue">Venue</label>
-            <input type="text" class="form-control" name="venue" id="field_venue"
-                [(ngModel)]="match.venue" />
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.venue" for="field_venue">Venue</label>
+            <input type="text" class="form-control" name="venue"
+                id="field_venue" [(ngModel)]="match.venue" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.completed" for="field_completed">Completed</label>
-            <input type="checkbox" class="form-control" name="completed" id="field_completed"
-                [(ngModel)]="match.completed" />
-            <div [hidden]="!(editForm.controls.completed?.dirty && editForm.controls.completed?.invalid)">
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.completed"
+                for="field_completed">Completed</label> <input
+                type="checkbox" class="form-control" name="completed"
+                id="field_completed" [(ngModel)]="match.completed" />
+            <div
+                [hidden]="!(editForm.controls.completed?.dirty && editForm.controls.completed?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.completed?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
+                    [hidden]="!editForm.controls.completed?.errors?.required"
+                    jhiTranslate="entity.validation.required">
+                    This field is required. </small>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.tournament" for="field_tournament">Tournament</label>
-            <select class="form-control" id="field_tournament" name="tournament" [(ngModel)]="match.tournamentId" >
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.tournament"
+                for="field_tournament">Tournament</label> <select
+                class="form-control" id="field_tournament"
+                name="tournament" [(ngModel)]="match.tournamentId">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="tournamentOption.id" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.type}}</option>
+                <option [ngValue]="tournamentOption.id"
+                    *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.type}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.winningFranchise" for="field_winningFranchise">Winning Franchise</label>
-            <select class="form-control" id="field_winningFranchise" name="winningFranchise" [(ngModel)]="match.winningFranchiseId" >
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.winningFranchise"
+                for="field_winningFranchise">Winning Franchise</label> <select
+                class="form-control" id="field_winningFranchise"
+                name="winningFranchise"
+                [(ngModel)]="match.winningFranchiseId">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id"
+                    *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.team1" for="field_team1">Team 1</label>
-            <select class="form-control" id="field_team1" name="team1" [(ngModel)]="match.team1Id" >
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.team1" for="field_team1">Team
+                1</label> <select class="form-control" id="field_team1"
+                name="team1" [(ngModel)]="match.team1Id">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id"
+                    *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.team2" for="field_team2">Team 2</label>
-            <select class="form-control" id="field_team2" name="team2" [(ngModel)]="match.team2Id" >
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.team2" for="field_team2">Team
+                2</label> <select class="form-control" id="field_team2"
+                name="team2" [(ngModel)]="match.team2Id">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id"
+                    *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.team3" for="field_team3">Team 3</label>
-            <select class="form-control" id="field_team3" name="team3" [(ngModel)]="match.team3Id" >
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.team3" for="field_team3">Team
+                3</label> <select class="form-control" id="field_team3"
+                name="team3" [(ngModel)]="match.team3Id">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id"
+                    *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="fafiApp.match.team4" for="field_team4">Team 4</label>
-            <select class="form-control" id="field_team4" name="team4" [(ngModel)]="match.team4Id" >
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.team4" for="field_team4">Team
+                4</label> <select class="form-control" id="field_team4"
+                name="team4" [(ngModel)]="match.team4Id">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="seasonsFranchiseOption.id" *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
+                <option [ngValue]="seasonsFranchiseOption.id"
+                    *ngFor="let seasonsFranchiseOption of seasonsfranchises; trackBy: trackSeasonsFranchiseById">{{seasonsFranchiseOption.franchiseName}}</option>
             </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.team1Points"
+                for="field_team1Points">Team 1 Points</label> <input
+                type="number" class="form-control" name="team1Points"
+                id="field_team1Points" [(ngModel)]="match.team1Points" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.team2Points"
+                for="field_team2Points">Team 2 Points</label> <input
+                type="number" class="form-control" name="team2Points"
+                id="field_team2Points" [(ngModel)]="match.team2Points" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.team3Points"
+                for="field_team3Points">Team 3 Points</label> <input
+                type="number" class="form-control" name="team3Points"
+                id="field_team3Points" [(ngModel)]="match.team3Points" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label"
+                jhiTranslate="fafiApp.match.team4Points"
+                for="field_team4Points">Team 4 Points</label> <input
+                type="number" class="form-control" name="team4Points"
+                id="field_team4Points" [(ngModel)]="match.team4Points" />
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
-            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        <button type="button" class="btn btn-secondary"
+            data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span
+                jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        <button type="submit"
+            [disabled]="editForm.form.invalid || isSaving"
+            class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span
+                jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>
 </form>

@@ -87,4 +87,23 @@
             constraintName="fk_match_team4_id" referencedColumnNames="id"
             referencedTableName="seasons_franchise" />
     </changeSet>
+    <changeSet id="201802172102-1" author="Ameeth Paatil">
+        <dropColumn tableName="fafi_match" columnName="points_earned_by_franchise"></dropColumn>
+    </changeSet>
+     <changeSet id="201802172102-2" author="Ameeth Paatil">
+        <addColumn tableName="fafi_match">
+            <column name="team1_points" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="team2_points" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="team3_points" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="team4_points" type="integer">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

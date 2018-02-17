@@ -1,14 +1,22 @@
 package com.firstfuel.fafi.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.firstfuel.fafi.domain.enumeration.Stage;
 
@@ -31,9 +39,6 @@ public class Match implements Serializable {
 
     @Column(name = "end_date_time")
     private ZonedDateTime endDateTime;
-
-    @Column(name = "points_earned_by_franchise")
-    private Integer pointsEarnedByFranchise;
 
     @NotNull
     @Column(name = "match_name", nullable = false)
@@ -69,7 +74,20 @@ public class Match implements Serializable {
     @ManyToOne
     private SeasonsFranchise team4;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    @Column(name = "team1_points")
+    private Integer team1Points;
+
+    @Column(name = "team2_points")
+    private Integer team2Points;
+
+    @Column(name = "team3_points")
+    private Integer team3Points;
+
+    @Column(name = "team4_points")
+    private Integer team4Points;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not
+    // remove
     public Long getId() {
         return id;
     }
@@ -104,17 +122,56 @@ public class Match implements Serializable {
         this.endDateTime = endDateTime;
     }
 
-    public Integer getPointsEarnedByFranchise() {
-        return pointsEarnedByFranchise;
+    public Integer getTeam1Points() {
+        return team1Points;
     }
 
-    public Match pointsEarnedByFranchise(Integer pointsEarnedByFranchise) {
-        this.pointsEarnedByFranchise = pointsEarnedByFranchise;
+    public Match team1Points(Integer team1Points) {
+        this.team1Points = team1Points;
         return this;
     }
 
-    public void setPointsEarnedByFranchise(Integer pointsEarnedByFranchise) {
-        this.pointsEarnedByFranchise = pointsEarnedByFranchise;
+    public void setTeam1Points(Integer team1Points) {
+        this.team1Points = team1Points;
+    }
+
+    public Integer getTeam2Points() {
+        return team2Points;
+    }
+
+    public Match team2Points(Integer team2Points) {
+        this.team2Points = team2Points;
+        return this;
+    }
+
+    public void setTeam2Points(Integer team2Points) {
+        this.team2Points = team2Points;
+    }
+
+    public Integer getTeam3Points() {
+        return team3Points;
+    }
+
+    public Match team3Points(Integer team3Points) {
+        this.team3Points = team3Points;
+        return this;
+    }
+
+    public void setTeam3Points(Integer team3Points) {
+        this.team3Points = team3Points;
+    }
+
+    public Integer getTeam4Points() {
+        return team4Points;
+    }
+
+    public Match team4Points(Integer team4Points) {
+        this.team4Points = team4Points;
+        return this;
+    }
+
+    public void setTeam4Points(Integer team4Points) {
+        this.team4Points = team4Points;
     }
 
     public String getMatchName() {
@@ -246,7 +303,8 @@ public class Match implements Serializable {
     public void setTeam4(SeasonsFranchise seasonsFranchise) {
         this.team4 = seasonsFranchise;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -270,15 +328,10 @@ public class Match implements Serializable {
 
     @Override
     public String toString() {
-        return "Match{" +
-            "id=" + getId() +
-            ", startDateTime='" + getStartDateTime() + "'" +
-            ", endDateTime='" + getEndDateTime() + "'" +
-            ", pointsEarnedByFranchise=" + getPointsEarnedByFranchise() +
-            ", matchName='" + getMatchName() + "'" +
-            ", stage='" + getStage() + "'" +
-            ", venue='" + getVenue() + "'" +
-            ", completed='" + isCompleted() + "'" +
-            "}";
+        return "Match{" + "id=" + getId() + ", startDateTime='" + getStartDateTime() + "'" + ", endDateTime='"
+                + getEndDateTime() + "'" + ", getTeam1Points=" + getTeam1Points() + ", getTeam2Points="
+                + getTeam2Points() + ", getTeam3Points=" + getTeam3Points() + ", getTeam4Points=" + getTeam4Points()
+                + ", matchName='" + getMatchName() + "'" + ", stage='" + getStage() + "'" + ", venue='" + getVenue()
+                + "'" + ", completed='" + isCompleted() + "'" + "}";
     }
 }
