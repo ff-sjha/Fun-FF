@@ -16,7 +16,11 @@
                 "title": "Tie Match"
             },
             "tieType": "Tie Type",
-            "match": "Match"
+            "match": "Match",
+            "team1Player1": "Team 1 Player 1",
+            "team1Player2": "Team 1 Player 2",
+            "team2Player1": "Team 2 Player 1",
+            "team2Player2": "Team 2 Player 2"
         }
     }
 }

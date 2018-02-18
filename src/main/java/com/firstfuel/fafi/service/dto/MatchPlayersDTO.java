@@ -1,16 +1,22 @@
 package com.firstfuel.fafi.service.dto;
 
 
-import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
+
+import com.firstfuel.fafi.domain.enumeration.Games;
 
 /**
  * A DTO for the MatchPlayers entity.
  */
 public class MatchPlayersDTO implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1774492836887750990L;
 
     private Long id;
 
@@ -22,6 +28,8 @@ public class MatchPlayersDTO implements Serializable {
     private Long matchId;
 
     private String matchName;
+
+    private Games matchType;
 
     private Long seasonsFranchisePlayerId;
 
@@ -99,7 +107,15 @@ public class MatchPlayersDTO implements Serializable {
 		this.seasonsFranchisePlayerLastName = seasonsFranchisePlayerLastName;
 	}
 
-	@Override
+	public Games getMatchType() {
+        return matchType;
+    }
+
+    public void setMatchType(Games matchType) {
+        this.matchType = matchType;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

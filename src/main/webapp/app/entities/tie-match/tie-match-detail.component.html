@@ -14,6 +14,30 @@
                 <a [routerLink]="['/match', tieMatch.match?.id]">{{tieMatch.match?.matchName}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="fafiApp.tieMatch.team1Player1">Team 1 Player 1</span></dt>
+        <dd>
+            <div *ngIf="tieMatch.team1Player1">
+                <a [routerLink]="['/seasons-franchise-player', tieMatch.team1Player1?.id]">{{tieMatch.team1Player1?.player.firstName}} {{tieMatch.team1Player1?.player.lastName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.tieMatch.team1Player2">Team 1 Player 2</span></dt>
+        <dd>
+            <div *ngIf="tieMatch.team1Player2">
+                <a [routerLink]="['/seasons-franchise-player', tieMatch.team1Player2?.id]">{{tieMatch.team1Player2?.player.firstName}} {{tieMatch.team1Player2?.player.lastName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.tieMatch.team2Player1">Team 2 Player 1</span></dt>
+        <dd>
+            <div *ngIf="tieMatch.team2Player1">
+                <a [routerLink]="['/seasons-franchise-player', tieMatch.team2Player1?.id]">{{tieMatch.team2Player1?.player.firstName}} {{tieMatch.team2Player1?.player.lastName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.tieMatch.team2Player2">Team 2 Player 2</span></dt>
+        <dd>
+            <div *ngIf="tieMatch.team2Player2">
+                <a [routerLink]="['/seasons-franchise-player', tieMatch.team2Player2?.id]">{{tieMatch.team2Player2?.player.firstName}} {{tieMatch.team2Player2?.player.lastName}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

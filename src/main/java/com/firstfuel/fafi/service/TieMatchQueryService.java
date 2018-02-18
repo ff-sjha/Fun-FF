@@ -79,6 +79,18 @@ public class TieMatchQueryService extends QueryService<TieMatch> {
             if (criteria.getMatchId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getMatchId(), TieMatch_.match, Match_.id));
             }
+            if (criteria.getTeam1Player1Id() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getTeam1Player1Id(), TieMatch_.team1Player1, SeasonsFranchisePlayer_.id));
+            }
+            if (criteria.getTeam1Player2Id() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getTeam1Player2Id(), TieMatch_.team1Player2, SeasonsFranchisePlayer_.id));
+            }
+            if (criteria.getTeam2Player1Id() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getTeam2Player1Id(), TieMatch_.team2Player1, SeasonsFranchisePlayer_.id));
+            }
+            if (criteria.getTeam2Player2Id() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getTeam2Player2Id(), TieMatch_.team2Player2, SeasonsFranchisePlayer_.id));
+            }
         }
         return specification;
     }

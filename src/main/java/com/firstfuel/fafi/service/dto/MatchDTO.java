@@ -71,6 +71,8 @@ public class MatchDTO implements Serializable {
     
     private List<MatchUmpireDTO> umpires;
 
+    private List<TieMatchDTO> tieMatchDTOs;
+
     public Long getId() {
         return id;
     }
@@ -227,6 +229,14 @@ public class MatchDTO implements Serializable {
         return teamPlayers;
     }
 
+    public List<TieMatchDTO> getTieMatchDTOs() {
+        return tieMatchDTOs;
+    }
+
+    public void setTieMatchDTOs(List<TieMatchDTO> tieMatchDTOs) {
+        this.tieMatchDTOs = tieMatchDTOs;
+    }
+
     public void setTeamPlayers(List<FranchisePlayersDTO> teamPlayers) {
         this.teamPlayers = teamPlayers;
     }
@@ -270,6 +280,7 @@ public class MatchDTO implements Serializable {
     public void setTeam4Points(Integer team4Points) {
         this.team4Points = team4Points;
     }
+    
 
     @Override
     public boolean equals(Object o) {

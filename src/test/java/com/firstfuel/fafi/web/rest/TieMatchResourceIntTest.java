@@ -4,6 +4,10 @@ import com.firstfuel.fafi.FafiApp;
 
 import com.firstfuel.fafi.domain.TieMatch;
 import com.firstfuel.fafi.domain.Match;
+import com.firstfuel.fafi.domain.SeasonsFranchisePlayer;
+import com.firstfuel.fafi.domain.SeasonsFranchisePlayer;
+import com.firstfuel.fafi.domain.SeasonsFranchisePlayer;
+import com.firstfuel.fafi.domain.SeasonsFranchisePlayer;
 import com.firstfuel.fafi.repository.TieMatchRepository;
 import com.firstfuel.fafi.service.TieMatchService;
 import com.firstfuel.fafi.web.rest.errors.ExceptionTranslator;
@@ -242,6 +246,82 @@ public class TieMatchResourceIntTest {
 
         // Get all the tieMatchList where match equals to matchId + 1
         defaultTieMatchShouldNotBeFound("matchId.equals=" + (matchId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTieMatchesByTeam1Player1IsEqualToSomething() throws Exception {
+        // Initialize the database
+        SeasonsFranchisePlayer team1Player1 = SeasonsFranchisePlayerResourceIntTest.createEntity(em);
+        em.persist(team1Player1);
+        em.flush();
+        tieMatch.setTeam1Player1(team1Player1);
+        tieMatchRepository.saveAndFlush(tieMatch);
+        Long team1Player1Id = team1Player1.getId();
+
+        // Get all the tieMatchList where team1Player1 equals to team1Player1Id
+        defaultTieMatchShouldBeFound("team1Player1Id.equals=" + team1Player1Id);
+
+        // Get all the tieMatchList where team1Player1 equals to team1Player1Id + 1
+        defaultTieMatchShouldNotBeFound("team1Player1Id.equals=" + (team1Player1Id + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTieMatchesByTeam1Player2IsEqualToSomething() throws Exception {
+        // Initialize the database
+        SeasonsFranchisePlayer team1Player2 = SeasonsFranchisePlayerResourceIntTest.createEntity(em);
+        em.persist(team1Player2);
+        em.flush();
+        tieMatch.setTeam1Player2(team1Player2);
+        tieMatchRepository.saveAndFlush(tieMatch);
+        Long team1Player2Id = team1Player2.getId();
+
+        // Get all the tieMatchList where team1Player2 equals to team1Player2Id
+        defaultTieMatchShouldBeFound("team1Player2Id.equals=" + team1Player2Id);
+
+        // Get all the tieMatchList where team1Player2 equals to team1Player2Id + 1
+        defaultTieMatchShouldNotBeFound("team1Player2Id.equals=" + (team1Player2Id + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTieMatchesByTeam2Player1IsEqualToSomething() throws Exception {
+        // Initialize the database
+        SeasonsFranchisePlayer team2Player1 = SeasonsFranchisePlayerResourceIntTest.createEntity(em);
+        em.persist(team2Player1);
+        em.flush();
+        tieMatch.setTeam2Player1(team2Player1);
+        tieMatchRepository.saveAndFlush(tieMatch);
+        Long team2Player1Id = team2Player1.getId();
+
+        // Get all the tieMatchList where team2Player1 equals to team2Player1Id
+        defaultTieMatchShouldBeFound("team2Player1Id.equals=" + team2Player1Id);
+
+        // Get all the tieMatchList where team2Player1 equals to team2Player1Id + 1
+        defaultTieMatchShouldNotBeFound("team2Player1Id.equals=" + (team2Player1Id + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTieMatchesByTeam2Player2IsEqualToSomething() throws Exception {
+        // Initialize the database
+        SeasonsFranchisePlayer team2Player2 = SeasonsFranchisePlayerResourceIntTest.createEntity(em);
+        em.persist(team2Player2);
+        em.flush();
+        tieMatch.setTeam2Player2(team2Player2);
+        tieMatchRepository.saveAndFlush(tieMatch);
+        Long team2Player2Id = team2Player2.getId();
+
+        // Get all the tieMatchList where team2Player2 equals to team2Player2Id
+        defaultTieMatchShouldBeFound("team2Player2Id.equals=" + team2Player2Id);
+
+        // Get all the tieMatchList where team2Player2 equals to team2Player2Id + 1
+        defaultTieMatchShouldNotBeFound("team2Player2Id.equals=" + (team2Player2Id + 1));
     }
 
     /**

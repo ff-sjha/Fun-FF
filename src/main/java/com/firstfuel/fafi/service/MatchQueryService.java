@@ -26,6 +26,9 @@ import com.firstfuel.fafi.domain.MatchPlayers;
 import com.firstfuel.fafi.domain.MatchUmpire;
 import com.firstfuel.fafi.domain.Match_;
 import com.firstfuel.fafi.domain.SeasonsFranchise_;
+import com.firstfuel.fafi.domain.TieMatch;
+import com.firstfuel.fafi.domain.TieMatchPlayers;
+import com.firstfuel.fafi.domain.TieMatchSets;
 import com.firstfuel.fafi.domain.Tournament_;
 import com.firstfuel.fafi.repository.MatchPlayersRepository;
 import com.firstfuel.fafi.repository.MatchRepository;
@@ -35,6 +38,10 @@ import com.firstfuel.fafi.service.dto.MatchDTO;
 import com.firstfuel.fafi.service.dto.MatchPlayersDTO;
 import com.firstfuel.fafi.service.dto.MatchUmpireCriteria;
 import com.firstfuel.fafi.service.dto.MatchUmpireDTO;
+import com.firstfuel.fafi.service.dto.TieMatchCriteria;
+import com.firstfuel.fafi.service.dto.TieMatchDTO;
+import com.firstfuel.fafi.service.dto.TieMatchPlayersCriteria;
+import com.firstfuel.fafi.service.dto.TieMatchSetsCriteria;
 import com.firstfuel.fafi.service.mapper.MatchMapper;
 import com.firstfuel.fafi.service.mapper.MatchPlayersMapper;
 
@@ -67,6 +74,15 @@ public class MatchQueryService extends QueryService<Match> {
 
     @Autowired
     private MatchUmpireQueryService matchUmpireQueryService;
+
+    @Autowired
+    private TieMatchQueryService tieMatchQueryService;
+
+    @Autowired
+    private TieMatchPlayersQueryService tieMatchQueryPlayerService;
+
+    @Autowired
+    private TieMatchSetsQueryService tieMatchSetQueryService;
 
     public MatchQueryService(MatchRepository matchRepository, MatchMapper matchMapper) {
         this.matchRepository = matchRepository;
@@ -161,6 +177,7 @@ public class MatchQueryService extends QueryService<Match> {
                         teamPlayers.get(franchise.getId())));
             }
             matchDto.setTeamPlayers(fplayers);
+            setTieMatches(m.getId(), matchDto);
             MatchUmpireCriteria criteria = new MatchUmpireCriteria();
             LongFilter matchId = new LongFilter();
             matchId.setEquals(m.getId());
@@ -180,6 +197,27 @@ public class MatchQueryService extends QueryService<Match> {
             response.add(matchDto);
         });
         return response;
+    }
+
+    private void setTieMatches(Long matchId, MatchDTO matchDto) {
+        TieMatchCriteria tieMatchCriteria = new TieMatchCriteria();
+        LongFilter matchFilter = new LongFilter();
+        matchFilter.setEquals(matchId);
+        tieMatchCriteria.setMatchId(matchFilter);
+        List<TieMatch> tieMatches = tieMatchQueryService.findByCriteria(tieMatchCriteria);
+        List<TieMatchDTO> tieMatchDTOs = new ArrayList<>();
+        tieMatches.forEach(t -> {
+            LongFilter tIdFilter = new LongFilter();
+            tIdFilter.setEquals(t.getId());
+            TieMatchPlayersCriteria playerCriteria = new TieMatchPlayersCriteria();
+            playerCriteria.setTieMatchId(tIdFilter);
+            List<TieMatchPlayers> players = tieMatchQueryPlayerService.findByCriteria(playerCriteria);
+            TieMatchSetsCriteria setCriteria = new TieMatchSetsCriteria();
+            setCriteria.setTieMatchId(tIdFilter);
+            List<TieMatchSets> sets = tieMatchSetQueryService.findByCriteria(setCriteria);
+            tieMatchDTOs.add(new TieMatchDTO(t, sets, players));
+        });
+        matchDto.setTieMatchDTOs(tieMatchDTOs);
     }
 
     /**

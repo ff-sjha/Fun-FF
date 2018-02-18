@@ -30,6 +30,22 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="team1player1_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="team1player2_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="team2player1_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="team2player2_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

@@ -39,6 +39,14 @@ public class TieMatchCriteria implements Serializable {
 
     private LongFilter matchId;
 
+    private LongFilter team1Player1Id;
+
+    private LongFilter team1Player2Id;
+
+    private LongFilter team2Player1Id;
+
+    private LongFilter team2Player2Id;
+
     public TieMatchCriteria() {
     }
 
@@ -66,12 +74,48 @@ public class TieMatchCriteria implements Serializable {
         this.matchId = matchId;
     }
 
+    public LongFilter getTeam1Player1Id() {
+        return team1Player1Id;
+    }
+
+    public void setTeam1Player1Id(LongFilter team1Player1Id) {
+        this.team1Player1Id = team1Player1Id;
+    }
+
+    public LongFilter getTeam1Player2Id() {
+        return team1Player2Id;
+    }
+
+    public void setTeam1Player2Id(LongFilter team1Player2Id) {
+        this.team1Player2Id = team1Player2Id;
+    }
+
+    public LongFilter getTeam2Player1Id() {
+        return team2Player1Id;
+    }
+
+    public void setTeam2Player1Id(LongFilter team2Player1Id) {
+        this.team2Player1Id = team2Player1Id;
+    }
+
+    public LongFilter getTeam2Player2Id() {
+        return team2Player2Id;
+    }
+
+    public void setTeam2Player2Id(LongFilter team2Player2Id) {
+        this.team2Player2Id = team2Player2Id;
+    }
+
     @Override
     public String toString() {
         return "TieMatchCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (tieType != null ? "tieType=" + tieType + ", " : "") +
                 (matchId != null ? "matchId=" + matchId + ", " : "") +
+                (team1Player1Id != null ? "team1Player1Id=" + team1Player1Id + ", " : "") +
+                (team1Player2Id != null ? "team1Player2Id=" + team1Player2Id + ", " : "") +
+                (team2Player1Id != null ? "team2Player1Id=" + team2Player1Id + ", " : "") +
+                (team2Player2Id != null ? "team2Player2Id=" + team2Player2Id + ", " : "") +
             "}";
     }
 

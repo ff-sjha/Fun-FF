@@ -13,6 +13,7 @@ public interface MatchPlayersMapper extends EntityMapper<MatchPlayersDTO, MatchP
 
     @Mapping(source = "match.id", target = "matchId")
     @Mapping(source = "match.matchName", target = "matchName")
+    @Mapping(source = "match.tournament.type", target = "matchType")
     @Mapping(source = "seasonsFranchisePlayer.id", target = "seasonsFranchisePlayerId")
     @Mapping(source = "seasonsFranchisePlayer.player.firstName", target = "seasonsFranchisePlayerFirstName")
     @Mapping(source = "seasonsFranchisePlayer.player.lastName", target = "seasonsFranchisePlayerLastName")

@@ -10,6 +10,7 @@ import { TieMatch } from './tie-match.model';
 import { TieMatchPopupService } from './tie-match-popup.service';
 import { TieMatchService } from './tie-match.service';
 import { Match, MatchService } from '../match';
+import { SeasonsFranchisePlayer, SeasonsFranchisePlayerService } from '../seasons-franchise-player';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -23,11 +24,14 @@ export class TieMatchDialogComponent implements OnInit {
 
     matches: Match[];
 
+    seasonsfranchiseplayers: SeasonsFranchisePlayer[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private tieMatchService: TieMatchService,
         private matchService: MatchService,
+        private seasonsFranchisePlayerService: SeasonsFranchisePlayerService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -36,6 +40,8 @@ export class TieMatchDialogComponent implements OnInit {
         this.isSaving = false;
         this.matchService.query()
             .subscribe((res: ResponseWrapper) => { this.matches = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.seasonsFranchisePlayerService.query( { 'size' : '1000' } )
+            .subscribe((res: ResponseWrapper) => { this.seasonsfranchiseplayers = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -73,6 +79,10 @@ export class TieMatchDialogComponent implements OnInit {
     }
 
     trackMatchById(index: number, item: Match) {
+        return item.id;
+    }
+
+    trackSeasonsFranchisePlayerById(index: number, item: SeasonsFranchisePlayer) {
         return item.id;
     }
 }

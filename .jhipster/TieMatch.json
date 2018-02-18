@@ -9,6 +9,30 @@
                 "required"
             ],
             "otherEntityField": "matchName"
+        },
+        {
+            "relationshipName": "team1Player1",
+            "otherEntityName": "seasonsFranchisePlayer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "team1Player2",
+            "otherEntityName": "seasonsFranchisePlayer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "team2Player1",
+            "otherEntityName": "seasonsFranchisePlayer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "team2Player2",
+            "otherEntityName": "seasonsFranchisePlayer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

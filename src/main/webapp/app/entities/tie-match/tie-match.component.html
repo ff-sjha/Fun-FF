@@ -19,6 +19,10 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="tieType"><span jhiTranslate="fafiApp.tieMatch.tieType">Tie Type</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="match.matchName"><span jhiTranslate="fafiApp.tieMatch.match">Match</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="team1Player1.id"><span jhiTranslate="fafiApp.tieMatch.team1Player1">Team 1 Player 1</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="team1Player2.id"><span jhiTranslate="fafiApp.tieMatch.team1Player2">Team 1 Player 2</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="team2Player1.id"><span jhiTranslate="fafiApp.tieMatch.team2Player1">Team 2 Player 1</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="team2Player2.id"><span jhiTranslate="fafiApp.tieMatch.team2Player2">Team 2 Player 2</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -29,6 +33,26 @@
                 <td>
                     <div *ngIf="tieMatch.match">
                         <a [routerLink]="['../match', tieMatch.match?.id ]" >{{tieMatch.match?.matchName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tieMatch.team1Player1">
+                        <a [routerLink]="['../seasons-franchise-player', tieMatch.team1Player1?.id ]" >{{tieMatch.team1Player1?.player.firstName}} {{tieMatch.team1Player1?.player.lastName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tieMatch.team1Player2">
+                        <a [routerLink]="['../seasons-franchise-player', tieMatch.team1Player2?.id ]" >{{tieMatch.team1Player2?.player.firstName}} {{tieMatch.team1Player2?.player.lastName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tieMatch.team2Player1">
+                        <a [routerLink]="['../seasons-franchise-player', tieMatch.team2Player1?.id ]" >{{tieMatch.team2Player1?.player.firstName}} {{tieMatch.team2Player1?.player.lastName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tieMatch.team2Player2">
+                        <a [routerLink]="['../seasons-franchise-player', tieMatch.team2Player2?.id ]" >{{tieMatch.team2Player2?.player.firstName}} {{tieMatch.team2Player2?.player.lastName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

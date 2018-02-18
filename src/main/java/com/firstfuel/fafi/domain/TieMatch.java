@@ -34,6 +34,18 @@ public class TieMatch implements Serializable {
     @NotNull
     private Match match;
 
+    @ManyToOne
+    private SeasonsFranchisePlayer team1Player1;
+
+    @ManyToOne
+    private SeasonsFranchisePlayer team1Player2;
+
+    @ManyToOne
+    private SeasonsFranchisePlayer team2Player1;
+
+    @ManyToOne
+    private SeasonsFranchisePlayer team2Player2;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -67,6 +79,58 @@ public class TieMatch implements Serializable {
 
     public void setMatch(Match match) {
         this.match = match;
+    }
+
+    public SeasonsFranchisePlayer getTeam1Player1() {
+        return team1Player1;
+    }
+
+    public TieMatch team1Player1(SeasonsFranchisePlayer seasonsFranchisePlayer) {
+        this.team1Player1 = seasonsFranchisePlayer;
+        return this;
+    }
+
+    public void setTeam1Player1(SeasonsFranchisePlayer seasonsFranchisePlayer) {
+        this.team1Player1 = seasonsFranchisePlayer;
+    }
+
+    public SeasonsFranchisePlayer getTeam1Player2() {
+        return team1Player2;
+    }
+
+    public TieMatch team1Player2(SeasonsFranchisePlayer seasonsFranchisePlayer) {
+        this.team1Player2 = seasonsFranchisePlayer;
+        return this;
+    }
+
+    public void setTeam1Player2(SeasonsFranchisePlayer seasonsFranchisePlayer) {
+        this.team1Player2 = seasonsFranchisePlayer;
+    }
+
+    public SeasonsFranchisePlayer getTeam2Player1() {
+        return team2Player1;
+    }
+
+    public TieMatch team2Player1(SeasonsFranchisePlayer seasonsFranchisePlayer) {
+        this.team2Player1 = seasonsFranchisePlayer;
+        return this;
+    }
+
+    public void setTeam2Player1(SeasonsFranchisePlayer seasonsFranchisePlayer) {
+        this.team2Player1 = seasonsFranchisePlayer;
+    }
+
+    public SeasonsFranchisePlayer getTeam2Player2() {
+        return team2Player2;
+    }
+
+    public TieMatch team2Player2(SeasonsFranchisePlayer seasonsFranchisePlayer) {
+        this.team2Player2 = seasonsFranchisePlayer;
+        return this;
+    }
+
+    public void setTeam2Player2(SeasonsFranchisePlayer seasonsFranchisePlayer) {
+        this.team2Player2 = seasonsFranchisePlayer;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

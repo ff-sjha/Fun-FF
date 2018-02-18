@@ -33,7 +33,7 @@
             <label class="form-control-label" jhiTranslate="fafiApp.matchPlayers.match" for="field_match">Match</label>
             <select class="form-control" id="field_match" name="match" [(ngModel)]="matchPlayers.matchId"  required>
                 <option *ngIf="!editForm.value.match" [ngValue]="null" selected></option>
-                <option [ngValue]="matchOption.id" *ngFor="let matchOption of matches; trackBy: trackMatchById">{{matchOption.matchName}}</option>
+                <option [ngValue]="matchOption.id" *ngFor="let matchOption of matches; trackBy: trackMatchById">{{matchOption.matchName}}-{{matchOption.tournamentType}}</option>
             </select>
         </div>
         <div [hidden]="!(editForm.controls.match?.dirty && editForm.controls.match?.invalid)">

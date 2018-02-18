@@ -15,6 +15,10 @@ export class TieMatch implements BaseEntity {
         public id?: number,
         public tieType?: TieType,
         public match?: BaseEntity,
+        public team1Player1?: BaseEntity,
+        public team1Player2?: BaseEntity,
+        public team2Player1?: BaseEntity,
+        public team2Player2?: BaseEntity,
     ) {
     }
 }

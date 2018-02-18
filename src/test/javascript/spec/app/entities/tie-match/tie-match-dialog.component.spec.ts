@@ -9,6 +9,7 @@ import { TieMatchDialogComponent } from '../../../../../../main/webapp/app/entit
 import { TieMatchService } from '../../../../../../main/webapp/app/entities/tie-match/tie-match.service';
 import { TieMatch } from '../../../../../../main/webapp/app/entities/tie-match/tie-match.model';
 import { MatchService } from '../../../../../../main/webapp/app/entities/match';
+import { SeasonsFranchisePlayerService } from '../../../../../../main/webapp/app/entities/seasons-franchise-player';
 
 describe('Component Tests', () => {
 
@@ -25,6 +26,7 @@ describe('Component Tests', () => {
                 declarations: [TieMatchDialogComponent],
                 providers: [
                     MatchService,
+                    SeasonsFranchisePlayerService,
                     TieMatchService
                 ]
             })

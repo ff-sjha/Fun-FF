@@ -29,7 +29,7 @@
                 <td><a [routerLink]="['../match-players', matchPlayers.id ]">{{matchPlayers.id}}</a></td>
                 <td>
                     <div *ngIf="matchPlayers.matchId">
-                        <a [routerLink]="['../match', matchPlayers.matchId  ]" >{{matchPlayers.matchName}}</a>
+                        <a [routerLink]="['../match', matchPlayers.matchId  ]" >{{matchPlayers.matchName}}-{{matchPlayers.matchType}} </a>
                     </div>
                 </td>
                 <td>

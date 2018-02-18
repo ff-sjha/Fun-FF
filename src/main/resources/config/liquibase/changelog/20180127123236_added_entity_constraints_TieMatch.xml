@@ -14,5 +14,29 @@
                                  referencedColumnNames="id"
                                  referencedTableName="fafi_match"/>
 
+        <addForeignKeyConstraint baseColumnNames="team1player1_id"
+                                 baseTableName="tie_match"
+                                 constraintName="fk_tie_match_team1player1_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seasons_franchise_player"/>
+
+        <addForeignKeyConstraint baseColumnNames="team1player2_id"
+                                 baseTableName="tie_match"
+                                 constraintName="fk_tie_match_team1player2_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seasons_franchise_player"/>
+
+        <addForeignKeyConstraint baseColumnNames="team2player1_id"
+                                 baseTableName="tie_match"
+                                 constraintName="fk_tie_match_team2player1_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seasons_franchise_player"/>
+
+        <addForeignKeyConstraint baseColumnNames="team2player2_id"
+                                 baseTableName="tie_match"
+                                 constraintName="fk_tie_match_team2player2_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seasons_franchise_player"/>
+
     </changeSet>
 </databaseChangeLog>
