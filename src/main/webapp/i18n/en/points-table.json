@@ -1,6 +1,8 @@
 {
 	"points-table": {
 		"title": "Statistics",
+		"season": "Season",
+		"tournament": "Tournament",
 		"playerRanking": "Player Ranking",
 		"teamRanking": "Team Ranking",
 		"player": {

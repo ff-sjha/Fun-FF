@@ -13,7 +13,7 @@
         <dt><span jhiTranslate="fafiApp.tieMatchPlayers.seasonsFranchisePlayer">Seasons Franchise Player</span></dt>
         <dd>
             <div *ngIf="tieMatchPlayers.seasonsFranchisePlayer">
-                <a [routerLink]="['/seasons-franchise-player', tieMatchPlayers.seasonsFranchisePlayer?.id]">{{tieMatchPlayers.seasonsFranchisePlayer?.id}}</a>
+                <a [routerLink]="['/seasons-franchise-player', tieMatchPlayers.seasonsFranchisePlayer?.id]">{{tieMatchPlayers.seasonsFranchisePlayer.player?.firstName +' ' +tieMatchPlayers.seasonsFranchisePlayer.player?.lastName}}</a>
             </div>
         </dd>
     </dl>

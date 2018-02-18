@@ -32,7 +32,7 @@
                 </td>
                 <td>
                     <div *ngIf="tieMatchPlayers.seasonsFranchisePlayer">
-                        <a [routerLink]="['../seasons-franchise-player', tieMatchPlayers.seasonsFranchisePlayer?.id ]" >{{tieMatchPlayers.seasonsFranchisePlayer?.id}}</a>
+                        <a [routerLink]="['../seasons-franchise-player', tieMatchPlayers.seasonsFranchisePlayer?.id ]" >{{tieMatchPlayers.seasonsFranchisePlayer.player?.firstName +' ' +tieMatchPlayers.seasonsFranchisePlayer.player?.lastName}}</a>
                     </div>
                 </td>
                 <td class="text-right">
