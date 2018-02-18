@@ -53,7 +53,6 @@ public class CacheConfiguration {
             cm.createCache(com.firstfuel.fafi.domain.Season.class.getName() + ".franchises", jcacheConfiguration);
             cm.createCache(com.firstfuel.fafi.domain.SeasonsFranchise.class.getName(), jcacheConfiguration);
             cm.createCache(com.firstfuel.fafi.domain.SeasonsFranchisePlayer.class.getName(), jcacheConfiguration);
-            cm.createCache(com.firstfuel.fafi.domain.MatchFranchise.class.getName(), jcacheConfiguration);
             cm.createCache(com.firstfuel.fafi.domain.MatchPlayers.class.getName(), jcacheConfiguration);
             cm.createCache(com.firstfuel.fafi.domain.News.class.getName(), jcacheConfiguration);
             cm.createCache(com.firstfuel.fafi.domain.TournamentFranchisePoints.class.getName(), jcacheConfiguration);

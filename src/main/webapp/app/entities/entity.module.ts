@@ -7,7 +7,6 @@ import { FafiTournamentModule } from './tournament/tournament.module';
 import { FafiMatchModule } from './match/match.module';
 import { FafiSeasonsFranchiseModule } from './seasons-franchise/seasons-franchise.module';
 import { FafiSeasonsFranchisePlayerModule } from './seasons-franchise-player/seasons-franchise-player.module';
-import { FafiMatchFranchiseModule } from './match-franchise/match-franchise.module';
 import { FafiMatchPlayersModule } from './match-players/match-players.module';
 import { FafiNewsModule } from './news/news.module';
 import { FafiTournamentFranchisePointsModule } from './tournament-franchise-points/tournament-franchise-points.module';
@@ -27,7 +26,6 @@ import { FafiTieMatchSetsModule } from './tie-match-sets/tie-match-sets.module';
         FafiMatchModule,
         FafiSeasonsFranchiseModule,
         FafiSeasonsFranchisePlayerModule,
-        FafiMatchFranchiseModule,
         FafiMatchPlayersModule,
         FafiNewsModule,
         FafiTournamentFranchisePointsModule,
