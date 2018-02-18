@@ -34,6 +34,10 @@ public class TieMatchSets implements Serializable {
     @Column(name = "team_2_points")
     private Integer team2Points;
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private TieMatch tieMatch;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -80,6 +84,19 @@ public class TieMatchSets implements Serializable {
 
     public void setTeam2Points(Integer team2Points) {
         this.team2Points = team2Points;
+    }
+
+    public TieMatch getTieMatch() {
+        return tieMatch;
+    }
+
+    public TieMatchSets tieMatch(TieMatch tieMatch) {
+        this.tieMatch = tieMatch;
+        return this;
+    }
+
+    public void setTieMatch(TieMatch tieMatch) {
+        this.tieMatch = tieMatch;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

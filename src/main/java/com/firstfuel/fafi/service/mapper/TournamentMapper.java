@@ -17,6 +17,7 @@ public interface TournamentMapper extends EntityMapper<TournamentDTO, Tournament
     @Mapping(source = "winningFranchise.franchise.name", target = "winningFranchiseFranchiseName")
     @Mapping(source = "playerOfTournament.id", target = "playerOfTournamentId")
     @Mapping(source = "playerOfTournament.player.firstName", target = "playerOfTournamentPlayerFirstName")
+    @Mapping(source = "playerOfTournament.player.lastName", target = "playerOfTournamentPlayerLastName")
     TournamentDTO toDto(Tournament tournament); 
 
     @Mapping(source = "seasonId", target = "season")

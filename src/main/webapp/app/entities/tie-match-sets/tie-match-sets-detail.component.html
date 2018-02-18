@@ -16,6 +16,12 @@
         <dd>
             <span>{{tieMatchSets.team2Points}}</span>
         </dd>
+        <dt><span jhiTranslate="fafiApp.tieMatchSets.tieMatch">Tie Match</span></dt>
+        <dd>
+            <div *ngIf="tieMatchSets.tieMatch">
+                <a [routerLink]="['/tie-match', tieMatchSets.tieMatch?.id]">{{tieMatchSets.tieMatch?.tieType}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

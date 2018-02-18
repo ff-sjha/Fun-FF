@@ -4,11 +4,13 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { TieMatchSets } from './tie-match-sets.model';
 import { TieMatchSetsPopupService } from './tie-match-sets-popup.service';
 import { TieMatchSetsService } from './tie-match-sets.service';
+import { TieMatch, TieMatchService } from '../tie-match';
+import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'fafi-tie-match-sets-dialog',
@@ -19,15 +21,21 @@ export class TieMatchSetsDialogComponent implements OnInit {
     tieMatchSets: TieMatchSets;
     isSaving: boolean;
 
+    tiematches: TieMatch[];
+
     constructor(
         public activeModal: NgbActiveModal,
+        private jhiAlertService: JhiAlertService,
         private tieMatchSetsService: TieMatchSetsService,
+        private tieMatchService: TieMatchService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.tieMatchService.query()
+            .subscribe((res: ResponseWrapper) => { this.tiematches = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -58,6 +66,14 @@ export class TieMatchSetsDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackTieMatchById(index: number, item: TieMatch) {
+        return item.id;
     }
 }
 

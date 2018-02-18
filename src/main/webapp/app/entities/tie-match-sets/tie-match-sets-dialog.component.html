@@ -42,6 +42,19 @@
                 [(ngModel)]="tieMatchSets.team2Points" />
         </div>
 
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.tieMatchSets.tieMatch" for="field_tieMatch">Tie Match</label>
+            <select class="form-control" id="field_tieMatch" name="tieMatch" [(ngModel)]="tieMatchSets.tieMatch"  required>
+                <option *ngIf="!editForm.value.tieMatch" [ngValue]="null" selected></option>
+                <option [ngValue]="tieMatchOption.id === tieMatchSets.tieMatch?.id ? tieMatchSets.tieMatch : tieMatchOption" *ngFor="let tieMatchOption of tiematches; trackBy: trackTieMatchById">{{tieMatchOption.tieType}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.tieMatch?.dirty && editForm.controls.tieMatch?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.tieMatch?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

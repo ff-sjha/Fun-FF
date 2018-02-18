@@ -48,7 +48,7 @@ export class TournamentDialogComponent implements OnInit {
             .subscribe((res: ResponseWrapper) => { this.seasons = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.seasonsFranchiseService.query()
             .subscribe((res: ResponseWrapper) => { this.seasonsfranchises = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.seasonsFranchisePlayerService.query()
+        this.seasonsFranchisePlayerService.query( { 'size' : '1000' } )
             .subscribe((res: ResponseWrapper) => { this.seasonsfranchiseplayers = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 

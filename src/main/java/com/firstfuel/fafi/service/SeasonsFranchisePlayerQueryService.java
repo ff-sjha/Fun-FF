@@ -87,6 +87,9 @@ public class SeasonsFranchisePlayerQueryService extends QueryService<SeasonsFran
             if (criteria.getPlayerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getPlayerId(), SeasonsFranchisePlayer_.player, Player_.id));
             }
+            if (criteria.getActive() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getActive(), SeasonsFranchisePlayer_.player, Player_.active));
+            }
         }
         return specification;
     }

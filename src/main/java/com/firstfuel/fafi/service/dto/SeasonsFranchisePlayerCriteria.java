@@ -33,6 +33,8 @@ public class SeasonsFranchisePlayerCriteria implements Serializable {
     private LongFilter seasonsFranchiseId;
 
     private LongFilter playerId;
+    
+    private BooleanFilter active;
 
     public SeasonsFranchisePlayerCriteria() {
     }
@@ -69,6 +71,14 @@ public class SeasonsFranchisePlayerCriteria implements Serializable {
         this.playerId = playerId;
     }
 
+    public BooleanFilter getActive() {
+        return active;
+    }
+
+    public void setActive(BooleanFilter active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "SeasonsFranchisePlayerCriteria{" +
@@ -76,6 +86,7 @@ public class SeasonsFranchisePlayerCriteria implements Serializable {
                 (bidPrice != null ? "bidPrice=" + bidPrice + ", " : "") +
                 (seasonsFranchiseId != null ? "seasonsFranchiseId=" + seasonsFranchiseId + ", " : "") +
                 (playerId != null ? "playerId=" + playerId + ", " : "") +
+                (active != null ? "active=" + active + ", " : "") +
             "}";
     }
 

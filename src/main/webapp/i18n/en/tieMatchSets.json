@@ -17,7 +17,8 @@
             },
             "setNumber": "Set Number",
             "team1Points": "Team 1 Points",
-            "team2Points": "Team 2 Points"
+            "team2Points": "Team 2 Points",
+            "tieMatch": "Tie Match"
         }
     }
 }

@@ -40,7 +40,7 @@ export class TieMatchPlayersDialogComponent implements OnInit {
         this.isSaving = false;
         this.tieMatchService.query()
             .subscribe((res: ResponseWrapper) => { this.tiematches = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.seasonsFranchisePlayerService.query( { 'size' : '1000' } )
+        this.seasonsFranchisePlayerService.query( { 'size' : '1000' })
             .subscribe((res: ResponseWrapper) => { this.seasonsfranchiseplayers = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 

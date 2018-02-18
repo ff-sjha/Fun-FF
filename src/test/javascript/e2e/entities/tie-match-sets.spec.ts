@@ -29,7 +29,7 @@ describe('TieMatchSets e2e test', () => {
         tieMatchSetsDialogPage.close();
     });
 
-    it('should create and save TieMatchSets', () => {
+   /* it('should create and save TieMatchSets', () => {
         tieMatchSetsComponentsPage.clickOnCreateButton();
         tieMatchSetsDialogPage.setSetNumberInput('5');
         expect(tieMatchSetsDialogPage.getSetNumberInput()).toMatch('5');
@@ -37,9 +37,10 @@ describe('TieMatchSets e2e test', () => {
         expect(tieMatchSetsDialogPage.getTeam1PointsInput()).toMatch('5');
         tieMatchSetsDialogPage.setTeam2PointsInput('5');
         expect(tieMatchSetsDialogPage.getTeam2PointsInput()).toMatch('5');
+        tieMatchSetsDialogPage.tieMatchSelectLastOption();
         tieMatchSetsDialogPage.save();
         expect(tieMatchSetsDialogPage.getSaveButton().isPresent()).toBeFalsy();
-    });
+    });*/
 
     afterAll(() => {
         navBarPage.autoSignOut();
@@ -66,6 +67,7 @@ export class TieMatchSetsDialogPage {
     setNumberInput = element(by.css('input#field_setNumber'));
     team1PointsInput = element(by.css('input#field_team1Points'));
     team2PointsInput = element(by.css('input#field_team2Points'));
+    tieMatchSelect = element(by.css('select#field_tieMatch'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -93,6 +95,22 @@ export class TieMatchSetsDialogPage {
 
     getTeam2PointsInput = function() {
         return this.team2PointsInput.getAttribute('value');
+    }
+
+    tieMatchSelectLastOption = function() {
+        this.tieMatchSelect.all(by.tagName('option')).last().click();
+    }
+
+    tieMatchSelectOption = function(option) {
+        this.tieMatchSelect.sendKeys(option);
+    }
+
+    getTieMatchSelect = function() {
+        return this.tieMatchSelect;
+    }
+
+    getTieMatchSelectedOption = function() {
+        return this.tieMatchSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

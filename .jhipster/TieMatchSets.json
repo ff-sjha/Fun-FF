@@ -1,6 +1,16 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "tieMatch",
+            "otherEntityName": "tieMatch",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "tieType"
+        }
+    ],
     "fields": [
         {
             "fieldName": "setNumber",

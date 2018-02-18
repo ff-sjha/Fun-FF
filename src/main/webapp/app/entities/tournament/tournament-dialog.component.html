@@ -68,7 +68,7 @@
             <label class="form-control-label" jhiTranslate="fafiApp.tournament.playerOfTournament" for="field_playerOfTournament">Player Of Tournament</label>
             <select class="form-control" id="field_playerOfTournament" name="playerOfTournament" [(ngModel)]="tournament.playerOfTournamentId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="seasonsFranchisePlayerOption.id" *ngFor="let seasonsFranchisePlayerOption of seasonsfranchiseplayers; trackBy: trackSeasonsFranchisePlayerById">{{seasonsFranchisePlayerOption.playerFirstName}}</option>
+                <option [ngValue]="seasonsFranchisePlayerOption.id" *ngFor="let seasonsFranchisePlayerOption of seasonsfranchiseplayers; trackBy: trackSeasonsFranchisePlayerById">{{seasonsFranchisePlayerOption.playerFirstName + ' ' + seasonsFranchisePlayerOption.playerLastName}}</option>
             </select>
         </div>
     </div>

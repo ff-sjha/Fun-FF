@@ -3,6 +3,7 @@ package com.firstfuel.fafi.web.rest;
 import com.firstfuel.fafi.FafiApp;
 
 import com.firstfuel.fafi.domain.TieMatchSets;
+import com.firstfuel.fafi.domain.TieMatch;
 import com.firstfuel.fafi.repository.TieMatchSetsRepository;
 import com.firstfuel.fafi.service.TieMatchSetsService;
 import com.firstfuel.fafi.web.rest.errors.ExceptionTranslator;
@@ -97,6 +98,11 @@ public class TieMatchSetsResourceIntTest {
             .setNumber(DEFAULT_SET_NUMBER)
             .team1Points(DEFAULT_TEAM_1_POINTS)
             .team2Points(DEFAULT_TEAM_2_POINTS);
+        // Add required entity
+        TieMatch tieMatch = TieMatchResourceIntTest.createEntity(em);
+        em.persist(tieMatch);
+        em.flush();
+        tieMatchSets.setTieMatch(tieMatch);
         return tieMatchSets;
     }
 
@@ -389,6 +395,25 @@ public class TieMatchSetsResourceIntTest {
 
         // Get all the tieMatchSetsList where team2Points less than or equals to UPDATED_TEAM_2_POINTS
         defaultTieMatchSetsShouldBeFound("team2Points.lessThan=" + UPDATED_TEAM_2_POINTS);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTieMatchSetsByTieMatchIsEqualToSomething() throws Exception {
+        // Initialize the database
+        TieMatch tieMatch = TieMatchResourceIntTest.createEntity(em);
+        em.persist(tieMatch);
+        em.flush();
+        tieMatchSets.setTieMatch(tieMatch);
+        tieMatchSetsRepository.saveAndFlush(tieMatchSets);
+        Long tieMatchId = tieMatch.getId();
+
+        // Get all the tieMatchSetsList where tieMatch equals to tieMatchId
+        defaultTieMatchSetsShouldBeFound("tieMatchId.equals=" + tieMatchId);
+
+        // Get all the tieMatchSetsList where tieMatch equals to tieMatchId + 1
+        defaultTieMatchSetsShouldNotBeFound("tieMatchId.equals=" + (tieMatchId + 1));
     }
 
     /**

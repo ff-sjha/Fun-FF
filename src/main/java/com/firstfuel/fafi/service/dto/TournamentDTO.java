@@ -40,6 +40,8 @@ public class TournamentDTO implements Serializable {
 
     private String playerOfTournamentPlayerFirstName;
 
+    private String playerOfTournamentPlayerLastName;
+
     public Long getId() {
         return id;
     }
@@ -118,6 +120,16 @@ public class TournamentDTO implements Serializable {
 
     public void setPlayerOfTournamentPlayerFirstName(String seasonsFranchisePlayerPlayerFirstName) {
         this.playerOfTournamentPlayerFirstName = seasonsFranchisePlayerPlayerFirstName;
+    }
+    
+    
+
+    public String getPlayerOfTournamentPlayerLastName() {
+        return playerOfTournamentPlayerLastName;
+    }
+
+    public void setPlayerOfTournamentPlayerLastName(String playerOfTournamentPlayerLastName) {
+        this.playerOfTournamentPlayerLastName = playerOfTournamentPlayerLastName;
     }
 
     @Override

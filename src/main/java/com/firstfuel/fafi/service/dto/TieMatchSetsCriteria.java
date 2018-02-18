@@ -34,6 +34,8 @@ public class TieMatchSetsCriteria implements Serializable {
 
     private IntegerFilter team2Points;
 
+    private LongFilter tieMatchId;
+
     public TieMatchSetsCriteria() {
     }
 
@@ -69,6 +71,14 @@ public class TieMatchSetsCriteria implements Serializable {
         this.team2Points = team2Points;
     }
 
+    public LongFilter getTieMatchId() {
+        return tieMatchId;
+    }
+
+    public void setTieMatchId(LongFilter tieMatchId) {
+        this.tieMatchId = tieMatchId;
+    }
+
     @Override
     public String toString() {
         return "TieMatchSetsCriteria{" +
@@ -76,6 +86,7 @@ public class TieMatchSetsCriteria implements Serializable {
                 (setNumber != null ? "setNumber=" + setNumber + ", " : "") +
                 (team1Points != null ? "team1Points=" + team1Points + ", " : "") +
                 (team2Points != null ? "team2Points=" + team2Points + ", " : "") +
+                (tieMatchId != null ? "tieMatchId=" + tieMatchId + ", " : "") +
             "}";
     }
 

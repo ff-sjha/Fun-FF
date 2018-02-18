@@ -19,13 +19,13 @@
         <dt><span jhiTranslate="fafiApp.seasonsFranchise.owner">Owner</span></dt>
         <dd>
             <div *ngIf="seasonsFranchise.ownerId">
-                <a [routerLink]="['/player', seasonsFranchise.ownerId]">{{seasonsFranchise.ownerFirstName}}</a>
+                <a [routerLink]="['/player', seasonsFranchise.ownerId]">{{seasonsFranchise.ownerFirstName + ' ' + seasonsFranchise.ownerLastName }}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="fafiApp.seasonsFranchise.iconPlayer">Icon Player</span></dt>
         <dd>
             <div *ngIf="seasonsFranchise.iconPlayerId">
-                <a [routerLink]="['/player', seasonsFranchise.iconPlayerId]">{{seasonsFranchise.iconPlayerFirstName}}</a>
+                <a [routerLink]="['/player', seasonsFranchise.iconPlayerId]">{{seasonsFranchise.iconPlayerFirstName + ' ' + seasonsFranchise.iconPlayerLastName}}</a>
             </div>
         </dd>
     </dl>

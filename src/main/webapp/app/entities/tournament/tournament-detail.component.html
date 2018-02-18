@@ -31,7 +31,7 @@
         <dt><span jhiTranslate="fafiApp.tournament.playerOfTournament">Player Of Tournament</span></dt>
         <dd>
             <div *ngIf="tournament.playerOfTournamentId">
-                <a [routerLink]="['/seasons-franchise-player', tournament.playerOfTournamentId]">{{tournament.playerOfTournamentPlayerFirstName}}</a>
+                <a [routerLink]="['/seasons-franchise-player', tournament.playerOfTournamentId]">{{tournament.playerOfTournamentPlayerFirstName + ' ' + tournament.playerOfTournamentPlayerLastName}}</a>
             </div>
         </dd>
     </dl>

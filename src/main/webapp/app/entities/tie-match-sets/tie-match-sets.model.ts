@@ -6,6 +6,7 @@ export class TieMatchSets implements BaseEntity {
         public setNumber?: number,
         public team1Points?: number,
         public team2Points?: number,
+        public tieMatch?: BaseEntity,
     ) {
     }
 }

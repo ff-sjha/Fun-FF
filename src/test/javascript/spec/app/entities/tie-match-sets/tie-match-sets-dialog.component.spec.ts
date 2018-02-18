@@ -8,6 +8,7 @@ import { FafiTestModule } from '../../../test.module';
 import { TieMatchSetsDialogComponent } from '../../../../../../main/webapp/app/entities/tie-match-sets/tie-match-sets-dialog.component';
 import { TieMatchSetsService } from '../../../../../../main/webapp/app/entities/tie-match-sets/tie-match-sets.service';
 import { TieMatchSets } from '../../../../../../main/webapp/app/entities/tie-match-sets/tie-match-sets.model';
+import { TieMatchService } from '../../../../../../main/webapp/app/entities/tie-match';
 
 describe('Component Tests', () => {
 
@@ -23,6 +24,7 @@ describe('Component Tests', () => {
                 imports: [FafiTestModule],
                 declarations: [TieMatchSetsDialogComponent],
                 providers: [
+                    TieMatchService,
                     TieMatchSetsService
                 ]
             })
