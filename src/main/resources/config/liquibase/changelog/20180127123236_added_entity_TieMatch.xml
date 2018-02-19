@@ -14,9 +14,16 @@
     <property name="floatType" value="float4" dbms="postgresql, h2"/>
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
+    <changeSet id="20180127123236-0" author="Ameeth Paatil">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tie_match"/>
+        </preConditions>
+        <dropTable tableName="tie_match"/>
+    </changeSet>
     <!--
         Added the entity TieMatch.
     -->
+    
     <changeSet id="20180127123236-1" author="jhipster">
         <createTable tableName="tie_match">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">

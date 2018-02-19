@@ -25,6 +25,10 @@ export class Match implements BaseEntity {
         public team2Id?: number,
         public team3Id?: number,
         public team4Id?: number,
+        public team1Points?: number,
+        public team2Points?: number,
+        public team3Points?: number,
+        public team4Points?: number,
     ) {
         this.completed = false;
     }
