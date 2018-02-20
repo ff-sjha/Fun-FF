@@ -27,6 +27,8 @@ public class SeasonsFranchisePlayerDTO implements Serializable {
 
 	private String playerLastName;
 
+	private Boolean active;
+	
 	public Long getId() {
 		return id;
 	}
@@ -92,7 +94,15 @@ public class SeasonsFranchisePlayerDTO implements Serializable {
 		this.playerLastName = playerLastName;
 	}
 
-	@Override
+	public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    @Override
 	public boolean equals(Object o) {
 		if (this == o) {
 			return true;

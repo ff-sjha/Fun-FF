@@ -37,8 +37,8 @@
                                 <tbody>
                                     <tr
                                         *ngFor="let pp of pointsTablePlayer">
-                                        <td>{{pp.firstName}}
-                                            {{pp.lastName}}</td>
+                                        <td><span [class.inactive-player]="!pp.active">{{pp.firstName}}
+                                            {{pp.lastName}}</span></td>
                                         <td>{{pp.totalPoints}}</td>
                                         <td>{{pp.totalMatches}}</td>
                                     </tr>

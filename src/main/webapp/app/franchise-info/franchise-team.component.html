@@ -12,7 +12,7 @@
         <tr *ngFor="let seasonsFranchisePlayer of seasonsFranchisePlayers ;trackBy: trackId">
             <td>
                 <div *ngIf="seasonsFranchisePlayer.playerId">
-                    <a [routerLink]="['../player', seasonsFranchisePlayer.playerId  ]" >{{seasonsFranchisePlayer.playerFirstName + ' ' + seasonsFranchisePlayer.playerLastName}}</a>
+                    <a [routerLink]="['../player', seasonsFranchisePlayer.playerId  ]" ><span [class.inactive-player]="!seasonsFranchisePlayer.active">{{seasonsFranchisePlayer.playerFirstName + ' ' + seasonsFranchisePlayer.playerLastName}}</span></a>
                 </div>
             </td>
             <td>{{seasonsFranchisePlayer.bidPrice}}</td>
