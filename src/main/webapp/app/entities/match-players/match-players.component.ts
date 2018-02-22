@@ -47,6 +47,8 @@ currentAccount: any;
     }
 
     loadAll() {
+        this.predicate = 'match.startDateTime';
+        this.reverse = false;
         this.matchPlayersService.query({
             page: this.page - 1,
             size: this.itemsPerPage,

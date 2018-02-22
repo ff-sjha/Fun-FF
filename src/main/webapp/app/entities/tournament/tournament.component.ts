@@ -47,6 +47,8 @@ currentAccount: any;
     }
 
     loadAll() {
+        this.predicate = 'startDate';
+        this.reverse = false;
         this.tournamentService.query({
             page: this.page - 1,
             size: this.itemsPerPage,

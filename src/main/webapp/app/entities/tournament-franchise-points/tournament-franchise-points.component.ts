@@ -47,6 +47,8 @@ currentAccount: any;
     }
 
     loadAll() {
+        this.predicate = 'tournament.startDate';
+        this.reverse = false;
         this.tournamentFranchisePointsService.query({
             page: this.page - 1,
             size: this.itemsPerPage,

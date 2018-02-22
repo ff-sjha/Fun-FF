@@ -47,6 +47,8 @@ currentAccount: any;
     }
 
     loadAll() {
+        this.predicate = 'startDateTime';
+        this.reverse = false;
         this.matchService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
