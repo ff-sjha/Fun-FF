@@ -3,12 +3,14 @@
 		"title": "Statistics",
 		"season": "Season",
 		"tournament": "Tournament",
+        "match": "Match",
 		"playerRanking": "Player Ranking",
-		"teamRanking": "Team Ranking",
+		"teamRanking": "Franchise Ranking",
 		"player": {
 			"name":"Name",
 			"points": "Total Points",
-			"matches": "Matches"
+			"matches": "Matches",
+			"franchise": "Franchise"
 		},
 		"franchise": {
 			"name":"Name",

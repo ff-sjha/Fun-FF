@@ -7,13 +7,31 @@
             </div>
             <div class="table-responsive">
                 <div class="row">
-                    <div class="col-sm-6 border" text-align: left>
-                        <h3 class="text-capitalize text-center"
-                            jhiTranslate="points-table.season">Season</h3>
-                    </div>
-                    <div class="col-sm-6 border" text-align: left>
+                    <div class="col-sm-3 border" text-align: left>
                         <h3 class="text-capitalize text-center"
                             jhiTranslate="points-table.tournament">Tournament</h3>
+                    </div>
+                    <div class="col-sm-3 border" text-align: left>        
+                        <select 
+                            id="field_tournament" name="tournament" (ngModelChange)="loadMatches($event)"
+                            [(ngModel)]="tournamentId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="tournamentOption.id"
+                                *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.type}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3 border" text-align: left>
+                        <h3 class="text-capitalize text-center"
+                            jhiTranslate="points-table.match">Match</h3>
+                    </div>
+                    <div class="col-sm-3 border" text-align: left>        
+                        <select 
+                            id="field_match" name="match" (ngModelChange)="loadPoints($event)"
+                            [(ngModel)]="matchId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="matchOption.id"
+                                *ngFor="let matchOption of matches; trackBy: trackMatchById">{{matchOption.matchName}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
@@ -30,6 +48,8 @@
                                             jhiTranslate="points-table.player.name">Name</span></th>
                                         <th><span
                                             jhiTranslate="points-table.player.points">Points</span></th>
+                                            <th><span
+                                            jhiTranslate="points-table.player.franchise">Franchise</span></th>
                                         <th><span
                                             jhiTranslate="points-table.player.matches">Matches</span></th>
                                     </tr>
@@ -37,9 +57,11 @@
                                 <tbody>
                                     <tr
                                         *ngFor="let pp of pointsTablePlayer">
-                                        <td><span [class.inactive-player]="!pp.active">{{pp.firstName}}
-                                            {{pp.lastName}}</span></td>
+                                        <td><span
+                                            [class.inactive-player]="!pp.active">{{pp.firstName}}
+                                                {{pp.lastName}}</span></td>
                                         <td>{{pp.totalPoints}}</td>
+                                        <td>{{pp.franchiseName}}</td>
                                         <td>{{pp.totalMatches}}</td>
                                     </tr>
                                 </tbody>

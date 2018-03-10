@@ -17,8 +17,10 @@ import com.codahale.metrics.annotation.Timed;
 import com.firstfuel.fafi.repository.PlayerRepository;
 import com.firstfuel.fafi.repository.TournamentFranchisePointsRepository;
 import com.firstfuel.fafi.service.dto.FranchisePointsDTO;
-import com.firstfuel.fafi.service.dto.PlayerCriteria;
 import com.firstfuel.fafi.service.dto.PlayerPointsDTO;
+import com.firstfuel.fafi.service.dto.PointsTableCriteria;
+
+import io.github.jhipster.service.filter.LongFilter;
 
 @RestController
 @RequestMapping("/api")
@@ -33,14 +35,25 @@ public class PointsTableResource {
 
     @GetMapping("/points-table/players")
     @Timed
-    public ResponseEntity<List<PlayerPointsDTO>> getAllPlayers(PlayerCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Players by criteria: {}", criteria);
+    public ResponseEntity<List<PlayerPointsDTO>> getAllPlayers(PointsTableCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get PlayerPointsDTO by TournamentCriteria: {}", criteria);
+        LongFilter tournamentId = criteria.getTournamentId();
+        if (null != tournamentId && null != tournamentId.getEquals()) {
+            LongFilter matchId = criteria.getMatchId();
+            if (null != matchId && null != matchId.getEquals()) {
+                return new ResponseEntity<>(playerRepo.getPlayerPoints(tournamentId.getEquals(), matchId.getEquals()),
+                        new HttpHeaders(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(playerRepo.getPlayerPoints(tournamentId.getEquals()), new HttpHeaders(),
+                        HttpStatus.OK);
+            }
+        }
         return new ResponseEntity<>(playerRepo.getPlayerPoints(), new HttpHeaders(), HttpStatus.OK);
     }
 
     @GetMapping("/points-table/franchise")
     @Timed
-    public ResponseEntity<List<FranchisePointsDTO>> getAllFranchise(PlayerCriteria criteria, Pageable pageable) {
+    public ResponseEntity<List<FranchisePointsDTO>> getAllFranchise(PointsTableCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Players by criteria: {}", criteria);
         return new ResponseEntity<>(frenchisePointRepo.getFranchisePoints(), new HttpHeaders(), HttpStatus.OK);
     }

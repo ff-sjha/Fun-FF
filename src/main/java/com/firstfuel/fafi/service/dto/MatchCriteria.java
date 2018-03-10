@@ -50,7 +50,9 @@ public class MatchCriteria implements Serializable {
     private LongFilter winningFranchiseId;
 
     private BooleanFilter upcomingMatches;
-    
+
+    private BooleanFilter completed;
+
     public MatchCriteria() {
     }
 
@@ -127,6 +129,14 @@ public class MatchCriteria implements Serializable {
     }
 
 
+    public BooleanFilter getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(BooleanFilter completed) {
+        this.completed = completed;
+    }
+
     @Override
     public String toString() {
         return "MatchCriteria{" +
@@ -136,6 +146,7 @@ public class MatchCriteria implements Serializable {
                 (matchName != null ? "matchName=" + matchName + ", " : "") +
                 (stage != null ? "stage=" + stage + ", " : "") +
                 (venue != null ? "venue=" + venue + ", " : "") +
+                (completed != null ? "completed=" + completed + ", " : "") +
                 (tournamentId != null ? "tournamentId=" + tournamentId + ", " : "") +
                 (winningFranchiseId != null ? "winningFranchiseId=" + winningFranchiseId + ", " : "") +
             "}";

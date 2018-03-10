@@ -243,6 +243,9 @@ public class MatchQueryService extends QueryService<Match> {
             if (criteria.getStage() != null) {
                 specification = specification.and(buildSpecification(criteria.getStage(), Match_.stage));
             }
+            if (criteria.getCompleted() != null) {
+                specification = specification.and(buildSpecification(criteria.getCompleted(), Match_.completed));
+            }
             if (criteria.getVenue() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getVenue(), Match_.venue));
             }

@@ -7,9 +7,10 @@ public class PlayerPointsDTO {
     private String lastName;
     private Long totalMatches;
     private Boolean active;
+    private String franchiseName;
 
     public PlayerPointsDTO(Long id, String firstName, String lastName, Boolean active, Long totalPoints,
-            Long totalMatches) {
+            Long totalMatches, String franchiseName) {
         super();
         this.id = id;
         this.firstName = firstName;
@@ -17,6 +18,7 @@ public class PlayerPointsDTO {
         this.totalPoints = totalPoints;
         this.totalMatches = totalMatches;
         this.active = active;
+        this.franchiseName = franchiseName;
     }
 
     public Long getId() {
@@ -65,6 +67,14 @@ public class PlayerPointsDTO {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getFranchiseName() {
+        return franchiseName;
+    }
+
+    public void setFranchiseName(String franchiseName) {
+        this.franchiseName = franchiseName;
     }
 
 }
