@@ -11,7 +11,9 @@
                 "badminton": "Badminton",
                 "table-tennis": "Table Tennis",
                 "ludo": "Ludo",
-                "box-cricket": "Box Cricket"
+                "box-cricket": "Box Cricket",
+                "carrom": "Carrom",
+                "uno": "Uno"
             },
             "franchises" :"Franchises",
             "about-us": "About Us",

@@ -89,6 +89,18 @@
                             <span jhiTranslate="global.menu.games.box-cricket">Box Cricket</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="carrom" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-trophy" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.games.carrom">Carrom</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="uno" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-trophy" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.games.uno">Uno</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
