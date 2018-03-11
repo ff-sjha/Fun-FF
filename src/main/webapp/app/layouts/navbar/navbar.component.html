@@ -32,6 +32,12 @@
                 </a>
             </li>
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="expense" (click)="collapseNavbar()">
+                    <i class="fa fa-dollar-sign" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.expense">Expense</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="franchise-info" (click)="collapseNavbar()">
                     <i class="fa fa-users" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.franchises">Franchises</span>

@@ -16,6 +16,7 @@ import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
 import { FafiAppAboutUsModule } from './about-us/about-us.module';
 import { FafiAppFixtureModule } from './fixture/fixture.module';
+import { FafiAppExpenseModule } from './expense/expense.module';
 import { FafiAppContactUsModule } from './contact-us/contact-us.module';
 import { FafiAppPointsTableModule } from './points-table/points-table.module';
 import { FafiAppFranchiseInfoModule } from './franchise-info/franchise-info.module';
@@ -43,6 +44,7 @@ import {
         FafiEntityModule,
         FafiAppAboutUsModule,
         FafiAppFixtureModule,
+        FafiAppExpenseModule,
         FafiAppContactUsModule,
         FafiAppPointsTableModule,
         FafiAppFranchiseInfoModule,
