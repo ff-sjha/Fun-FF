@@ -7,7 +7,9 @@
             "BADMINTON": "BADMINTON",
             "LUDO": "LUDO",
             "TABLE_TENNIS": "TABLE_TENNIS",
-            "BOX_CRICKET": "BOX_CRICKET"
+            "BOX_CRICKET": "BOX_CRICKET",
+            "CARROM": "CARROM",
+            "UNO": "UNO"
         }
     }
 }
