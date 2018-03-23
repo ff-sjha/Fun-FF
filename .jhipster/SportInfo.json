@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "game",
+            "fieldType": "Games",
+            "fieldValues": "FOOTBALL,  CHESS,  BADMINTON,  LUDO,  TABLE_TENNIS,  BOX_CRICKET, UNO, CARROM",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "rules",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "scoring_system",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "points_system",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "match_system",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "changelogDate": "20180323053424",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "sport_info",
+    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll"
+}

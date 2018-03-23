@@ -1,0 +1,25 @@
+{
+    "fafiApp": {
+        "sportInfo" : {
+            "home": {
+                "title": "Sport Infos",
+                "createLabel": "Create a new Sport Info",
+                "createOrEditLabel": "Create or edit a Sport Info"
+            },
+            "created": "A new Sport Info is created with identifier {{ param }}",
+            "updated": "A Sport Info is updated with identifier {{ param }}",
+            "deleted": "A Sport Info is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Sport Info {{ id }}?"
+            },
+            "detail": {
+                "title": "Sport Info"
+            },
+            "game": "Game",
+            "rules": "Rules",
+            "scoring_system": "Scoring System",
+            "points_system": "Points System",
+            "match_system": "Match System"
+        }
+    }
+}

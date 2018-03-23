@@ -1,0 +1,64 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySportInfoLabel" jhiTranslate="fafiApp.sportInfo.home.createOrEditLabel">Create or edit a Sport Info</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <fafi-alert-error></fafi-alert-error>
+        <div class="form-group" [hidden]="!sportInfo.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="sportInfo.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.sportInfo.game" for="field_game">Game</label>
+            <select class="form-control" name="game" [(ngModel)]="sportInfo.game" id="field_game"  required>
+                <option value="FOOTBALL">{{'fafiApp.Games.FOOTBALL' | translate}}</option>
+                <option value="CHESS">{{'fafiApp.Games.CHESS' | translate}}</option>
+                <option value="BADMINTON">{{'fafiApp.Games.BADMINTON' | translate}}</option>
+                <option value="LUDO">{{'fafiApp.Games.LUDO' | translate}}</option>
+                <option value="TABLE_TENNIS">{{'fafiApp.Games.TABLE_TENNIS' | translate}}</option>
+                <option value="BOX_CRICKET">{{'fafiApp.Games.BOX_CRICKET' | translate}}</option>
+                <option value="UNO">{{'fafiApp.Games.UNO' | translate}}</option>
+                <option value="CARROM">{{'fafiApp.Games.CARROM' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.game?.dirty && editForm.controls.game?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.game?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.sportInfo.rules" for="field_rules">Rules</label>
+            <textarea class="form-control" name="rules" id="field_rules"
+                [(ngModel)]="sportInfo.rules" ></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.sportInfo.scoring_system" for="field_scoring_system">Scoring System</label>
+            <textarea class="form-control" name="scoring_system" id="field_scoring_system"
+                [(ngModel)]="sportInfo.scoring_system" ></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.sportInfo.points_system" for="field_points_system">Points System</label>
+            <textarea class="form-control" name="points_system" id="field_points_system"
+                [(ngModel)]="sportInfo.points_system" ></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fafiApp.sportInfo.match_system" for="field_match_system">Match System</label>
+            <textarea class="form-control" name="match_system" id="field_match_system"
+                [(ngModel)]="sportInfo.match_system" ></textarea>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

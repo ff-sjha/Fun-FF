@@ -1,0 +1,42 @@
+
+<div *ngIf="sportInfo">
+    <h2><span jhiTranslate="fafiApp.sportInfo.detail.title">Sport Info</span> {{sportInfo.id}}</h2>
+    <hr>
+    <fafi-alert-error></fafi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="fafiApp.sportInfo.game">Game</span></dt>
+        <dd>
+            <span jhiTranslate="{{'fafiApp.Games.' + sportInfo.game}}">{{sportInfo.game}}</span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.sportInfo.rules">Rules</span></dt>
+        <dd>
+            <span><div [innerHTML]="[sportInfo.rules]"></div></span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.sportInfo.scoring_system">Scoring System</span></dt>
+        <dd>
+            <span><div [innerHTML]="[sportInfo.scoring_system]"></div></span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.sportInfo.points_system">Points System</span></dt>
+        <dd>
+            <span><div [innerHTML]="[sportInfo.points_system]"></div></span>
+        </dd>
+        <dt><span jhiTranslate="fafiApp.sportInfo.match_system">Match System</span></dt>
+        <dd>
+            <span><div [innerHTML]="[sportInfo.match_system]"></div></span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'sport-info/'+ sportInfo.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
