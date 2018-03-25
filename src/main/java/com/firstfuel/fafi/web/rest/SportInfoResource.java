@@ -2,7 +2,7 @@ package com.firstfuel.fafi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.firstfuel.fafi.domain.SportInfo;
-
+import com.firstfuel.fafi.domain.enumeration.Games;
 import com.firstfuel.fafi.repository.SportInfoRepository;
 import com.firstfuel.fafi.web.rest.errors.BadRequestAlertException;
 import com.firstfuel.fafi.web.rest.util.HeaderUtil;
@@ -112,6 +112,14 @@ public class SportInfoResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(sportInfo));
     }
 
+    @GetMapping("/sport-infos-bygame/{game}")
+    @Timed
+    public ResponseEntity<SportInfo> getSportInfoByName(@PathVariable Games game) {
+        log.debug("REST request to get SportInfo : {}", game);
+        SportInfo sportInfo = sportInfoRepository.findByGame(game); 
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(sportInfo));
+    }
+    
     /**
      * DELETE  /sport-infos/:id : delete the "id" sportInfo.
      *

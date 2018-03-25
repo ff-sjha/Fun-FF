@@ -18,10 +18,6 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="game"><span jhiTranslate="fafiApp.sportInfo.game">Game</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="rules"><span jhiTranslate="fafiApp.sportInfo.rules">Rules</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="scoring_system"><span jhiTranslate="fafiApp.sportInfo.scoring_system">Scoring System</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="points_system"><span jhiTranslate="fafiApp.sportInfo.points_system">Points System</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="match_system"><span jhiTranslate="fafiApp.sportInfo.match_system">Match System</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -29,10 +25,6 @@
             <tr *ngFor="let sportInfo of sportInfos ;trackBy: trackId">
                 <td><a [routerLink]="['../sport-info', sportInfo.id ]">{{sportInfo.id}}</a></td>
                 <td jhiTranslate="{{'fafiApp.Games.' + sportInfo.game}}">{{sportInfo.game}}</td>
-                <td>{{sportInfo.rules}}</td>
-                <td>{{sportInfo.scoring_system}}</td>
-                <td>{{sportInfo.points_system}}</td>
-                <td>{{sportInfo.match_system}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
