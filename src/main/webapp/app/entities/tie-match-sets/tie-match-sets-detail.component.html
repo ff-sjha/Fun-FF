@@ -19,7 +19,7 @@
         <dt><span jhiTranslate="fafiApp.tieMatchSets.tieMatch">Tie Match</span></dt>
         <dd>
             <div *ngIf="tieMatchSets.tieMatch">
-                <a [routerLink]="['/tie-match', tieMatchSets.tieMatch?.id]">{{tieMatchSets.tieMatch?.tieType}}</a>
+                <a [routerLink]="['/tie-match', tieMatchSets.tieMatch?.id]">{{ tieMatchSets.tieMatch?.match?.tournament?.type + '-' +  tieMatchSets.tieMatch?.match?.matchName + ' (' + tieMatchSets.tieMatch?.tieType + ')'}}</a>
             </div>
         </dd>
     </dl>

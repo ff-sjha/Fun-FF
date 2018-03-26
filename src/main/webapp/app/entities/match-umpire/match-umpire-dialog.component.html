@@ -17,7 +17,7 @@
             <label class="form-control-label" jhiTranslate="fafiApp.matchUmpire.match" for="field_match">Match</label>
             <select class="form-control" id="field_match" name="match" [(ngModel)]="matchUmpire.match"  required>
                 <option *ngIf="!editForm.value.match" [ngValue]="null" selected></option>
-                <option [ngValue]="matchOption.id === matchUmpire.match?.id ? matchUmpire.match : matchOption" *ngFor="let matchOption of matches; trackBy: trackMatchById">{{matchOption.matchName}}</option>
+                <option [ngValue]="matchOption.id === matchUmpire.match?.id ? matchUmpire.match : matchOption" *ngFor="let matchOption of matches; trackBy: trackMatchById">{{matchOption.matchName + ' (' + matchOption?.tournamentType + ')'}}</option>
             </select>
         </div>
         <div [hidden]="!(editForm.controls.match?.dirty && editForm.controls.match?.invalid)">

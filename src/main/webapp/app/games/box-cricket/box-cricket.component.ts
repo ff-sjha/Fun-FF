@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
+import { SportInfo, SportInfoService } from '../../entities/sport-info';
 
 @Component({
   selector: 'fafi-box-cricket',
@@ -9,10 +12,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class BoxCricketComponent implements OnInit {
 
-  constructor() {
-  }
+    sportInfo: SportInfo;
+    constructor( private sportInfoService: SportInfoService,
+          private jhiAlertService: JhiAlertService
+        ) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+      this.sportInfoService.findByGame('BOX_CRICKET').subscribe((sportInfo) => {
+          this.sportInfo =  sportInfo;
+      });
+    }
 
 }

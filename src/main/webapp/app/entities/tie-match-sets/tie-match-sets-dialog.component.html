@@ -46,7 +46,7 @@
             <label class="form-control-label" jhiTranslate="fafiApp.tieMatchSets.tieMatch" for="field_tieMatch">Tie Match</label>
             <select class="form-control" id="field_tieMatch" name="tieMatch" [(ngModel)]="tieMatchSets.tieMatch"  required>
                 <option *ngIf="!editForm.value.tieMatch" [ngValue]="null" selected></option>
-                <option [ngValue]="tieMatchOption.id === tieMatchSets.tieMatch?.id ? tieMatchSets.tieMatch : tieMatchOption" *ngFor="let tieMatchOption of tiematches; trackBy: trackTieMatchById">{{  tieMatchOption.match.matchName + ' (' + tieMatchOption.tieType + ')'}}</option>
+                <option [ngValue]="tieMatchOption.id === tieMatchSets.tieMatch?.id ? tieMatchSets.tieMatch : tieMatchOption" *ngFor="let tieMatchOption of tiematches; trackBy: trackTieMatchById">{{  tieMatchOption.match?.tournament?.type + '-' + tieMatchOption.match?.matchName + ' (' + tieMatchOption.tieType + ')'}}</option>
             </select>
         </div>
         <div [hidden]="!(editForm.controls.tieMatch?.dirty && editForm.controls.tieMatch?.invalid)">

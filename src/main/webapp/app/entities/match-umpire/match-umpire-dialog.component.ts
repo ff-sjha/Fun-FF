@@ -38,7 +38,9 @@ export class MatchUmpireDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.matchService.query()
+        this.matchService.query({
+            page: 0,
+            size: 1000 })
             .subscribe((res: ResponseWrapper) => { this.matches = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.playerService.query({
             page: 0,

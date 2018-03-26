@@ -7,7 +7,7 @@
         <dt><span jhiTranslate="fafiApp.matchUmpire.match">Match</span></dt>
         <dd>
             <div *ngIf="matchUmpire.match">
-                <a [routerLink]="['/match', matchUmpire.match?.id]">{{matchUmpire.match?.matchName}}</a>
+                <a [routerLink]="['/match', matchUmpire.match?.id]">{{matchUmpire.match?.matchName + ' (' + matchUmpire.match?.tournament?.type + ')'}}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="fafiApp.matchUmpire.umpire">Umpire</span></dt>

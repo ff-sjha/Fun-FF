@@ -18,9 +18,9 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="setNumber"><span jhiTranslate="fafiApp.tieMatchSets.setNumber">Set Number</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tieMatch.tieType"><span jhiTranslate="fafiApp.tieMatchSets.tieMatch">Tie Match</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="team1Points"><span jhiTranslate="fafiApp.tieMatchSets.team1Points">Team 1 Points</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="team2Points"><span jhiTranslate="fafiApp.tieMatchSets.team2Points">Team 2 Points</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="tieMatch.tieType"><span jhiTranslate="fafiApp.tieMatchSets.tieMatch">Tie Match</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -28,13 +28,13 @@
             <tr *ngFor="let tieMatchSets of tieMatchSets ;trackBy: trackId">
                 <td><a [routerLink]="['../tie-match-sets', tieMatchSets.id ]">{{tieMatchSets.id}}</a></td>
                 <td>{{tieMatchSets.setNumber}}</td>
-                <td>{{tieMatchSets.team1Points}}</td>
-                <td>{{tieMatchSets.team2Points}}</td>
                 <td>
                     <div *ngIf="tieMatchSets.tieMatch">
-                        <a [routerLink]="['../tie-match', tieMatchSets.tieMatch?.id ]" >{{tieMatchSets.tieMatch?.tieType}}</a>
+                        <a [routerLink]="['../tie-match', tieMatchSets.tieMatch?.id ]" >{{ tieMatchSets.tieMatch?.match?.tournament?.type + '-' + tieMatchSets.tieMatch?.match?.matchName + ' (' + tieMatchSets.tieMatch?.tieType + ')'}}</a>
                     </div>
                 </td>
+                <td>{{tieMatchSets.team1Points}}</td>
+                <td>{{tieMatchSets.team2Points}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
