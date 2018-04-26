@@ -2,13 +2,14 @@ import { BaseEntity } from './../../shared';
 
 export const enum Games {
     'FOOTBALL',
-    '  CHESS',
-    '  BADMINTON',
-    '  LUDO',
-    '  TABLE_TENNIS',
-    '  BOX_CRICKET',
-    ' UNO',
-    ' CARROM'
+    'CHESS',
+    'BADMINTON',
+    'LUDO',
+    'TABLE_TENNIS',
+    'BOX_CRICKET',
+    'UNO',
+    'CARROM',
+    'BOWLING'
 }
 
 export class SportInfo implements BaseEntity {

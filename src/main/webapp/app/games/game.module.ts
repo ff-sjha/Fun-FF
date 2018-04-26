@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { FafiFootballModule } from './football/football.module';
 import { FafiBadmintonModule } from './badminton/badminton.module';
+import { FafiBowlingModule } from './bowling/bowling.module';
 import { FafiChessModule } from './chess/chess.module';
 import { FafiLudoModule } from './ludo/ludo.module';
 import { FafiTableTennisModule } from './table-tennis/table-tennis.module';
@@ -14,6 +15,7 @@ import { FafiCarromModule } from './carrom/carrom.module';
     imports: [
         FafiFootballModule,
         FafiBadmintonModule,
+        FafiBowlingModule,
         FafiChessModule,
         FafiLudoModule,
         FafiTableTennisModule,

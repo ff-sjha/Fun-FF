@@ -13,7 +13,8 @@
                 "ludo": "Ludo",
                 "box-cricket": "Box Cricket",
                 "carrom": "Carrom",
-                "uno": "Uno"
+                "uno": "Uno",
+                "bowling":"Bowling"
             },
             "franchises" :"Franchises",
             "about-us": "About Us",

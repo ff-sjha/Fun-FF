@@ -9,7 +9,8 @@
             "TABLE_TENNIS": "TABLE_TENNIS",
             "BOX_CRICKET": "BOX_CRICKET",
             "UNO": "UNO",
-            "CARROM": "CARROM"
+            "CARROM": "CARROM",
+            "BOWLING": "BOWLING"
         }
     }
 }

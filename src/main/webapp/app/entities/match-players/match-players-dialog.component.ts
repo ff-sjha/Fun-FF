@@ -38,7 +38,10 @@ export class MatchPlayersDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.matchService.query()
+        this.matchService.query({
+            page: 0,
+            size: 1000,
+            sort: [ 'startDateTime,desc']})
             .subscribe((res: ResponseWrapper) => { this.matches = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.seasonsFranchisePlayerService.query({
             page: 0,
