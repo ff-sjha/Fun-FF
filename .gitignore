@@ -144,5 +144,4 @@ Desktop.ini
 .eslintcache
 yarn.lock
 package-lock.json
-backup/FAFI_dump_19_feb_2018.sql
-backup/FAFI_dump_19_feb_2018.sql.gz
+backup
