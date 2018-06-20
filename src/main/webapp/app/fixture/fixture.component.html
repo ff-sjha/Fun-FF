@@ -117,7 +117,7 @@
                                                 <div class="col-sm-4 border">
                                                     <b>Team Names</b>
                                                 </div>
-                                                <div class="col-sm-8 border">
+                                                <div class="col-sm-6 border">
                                                     <b> Players</b>
                                                 </div>
                                                 <div class="col-sm-2 border">
@@ -133,7 +133,7 @@
                                                         [class.player-of-match]="franchise.franchiseId == match.winningFranchiseId">
                                                         {{franchise.franchiseName}}</div>
                                                     <div
-                                                        class="col-sm-8 border">
+                                                        class="col-sm-6 border">
                                                         <span
                                                             *ngFor="let player of franchise.players; let last = last"
                                                             [class.player-of-match]="player.playerOfTheMatch">
