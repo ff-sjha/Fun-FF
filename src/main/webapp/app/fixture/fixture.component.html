@@ -150,51 +150,52 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div *ngIf="match.tieMatchDTOs.length > 0">
-                                <div
-                                    *ngFor="let t of match.tieMatchDTOs">
-                                    <div class="row">
-                                        <div class="col-sm-3 border">
-                                            {{t.tieMatch.tieType}}</div>
-                                        <div class="col-sm-9 border">
-                                            <table>
-                                                <thead>
-                                                    <th>SetNumber</th>
-                                                    <th>{{match.team1Franchise}}</th>
-                                                    <th>{{match.team2Franchise}}</th>
-                                                </thead>
-                                                <tr>
-                                                    <td>Players</td>
-                                                    <td>{{t.tieMatch.team1Player1?.player.firstName}} {{t.tieMatch.team1Player1?.player.lastName}} {{t.tieMatch.team1Player2?.player.firstName}} {{t.tieMatch.team1Player2?.player.lastName}}</td>
-                                                    <td>{{t.tieMatch.team2Player1?.player.firstName}} {{t.tieMatch.team2Player1?.player.lastName}} {{t.tieMatch.team2Player2?.player.firstName}} {{t.tieMatch.team2Player2?.player.lastName}}</td>
-                                                </tr>
-                                                <tr
-                                                    *ngFor="let s of t.tieMatchSet">
-                                                    <td>{{
-                                                        s.setNumber }}</td>
-                                                    <td>{{
-                                                        s.team1Points }}</td>
-                                                    <td>{{
-                                                        s.team2Points }}</td>
-                                                </tr>
-                                            </table>
+                                <div *ngIf="match.tieMatchDTOs.length > 0">
+                                    <div
+                                        *ngFor="let t of match.tieMatchDTOs">
+                                        <div class="row">
+                                            <div class="col-sm-3 border">
+                                                {{t.tieMatch.tieType}}</div>
+                                            <div class="col-sm-9 border">
+                                                <table>
+                                                    <thead>
+                                                        <th>SetNumber</th>
+                                                        <th>{{match.team1Franchise}}</th>
+                                                        <th>{{match.team2Franchise}}</th>
+                                                    </thead>
+                                                    <tr>
+                                                        <td>Players</td>
+                                                        <td>{{t.tieMatch.team1Player1?.player.firstName}} {{t.tieMatch.team1Player1?.player.lastName}} {{t.tieMatch.team1Player2?.player.firstName}} {{t.tieMatch.team1Player2?.player.lastName}}</td>
+                                                        <td>{{t.tieMatch.team2Player1?.player.firstName}} {{t.tieMatch.team2Player1?.player.lastName}} {{t.tieMatch.team2Player2?.player.firstName}} {{t.tieMatch.team2Player2?.player.lastName}}</td>
+                                                    </tr>
+                                                    <tr
+                                                        *ngFor="let s of t.tieMatchSet">
+                                                        <td>{{
+                                                            s.setNumber }}</td>
+                                                        <td>{{
+                                                            s.team1Points }}</td>
+                                                        <td>{{
+                                                            s.team2Points }}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 border">
-                                    <b>Umpire(s):</b>
+                                <div class="row">
+                                    <div class="col-sm-3 border">
+                                        <b>Umpire(s):</b>
+                                    </div>
+                                    <div class="col-sm-9 border">
+                                        <span
+                                            *ngFor="let umpire of match.umpires let last = last">
+                                            {{umpire.firstName}}
+                                            {{umpire.lastName}}{{last? ' ' :
+                                            ', '}} </span>
+                                    </div>
                                 </div>
-                                <div class="col-sm-9 border">
-                                    <span
-                                        *ngFor="let umpire of match.umpires let last = last">
-                                        {{umpire.firstName}}
-                                        {{umpire.lastName}}{{last? ' ' :
-                                        ', '}} </span>
-                                </div>
                             </div>
+                            
                         </td>
                     </tr>
                 </tbody>
