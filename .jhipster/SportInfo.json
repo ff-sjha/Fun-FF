@@ -5,7 +5,7 @@
         {
             "fieldName": "game",
             "fieldType": "Games",
-            "fieldValues": "FOOTBALL,  CHESS,  BADMINTON,  LUDO,  TABLE_TENNIS,  BOX_CRICKET, UNO, CARROM",
+            "fieldValues": "FOOTBALL,  CHESS,  BADMINTON,  LUDO,  TABLE_TENNIS,  BOX_CRICKET, UNO, CARROM, VOLLEY_BALL, TENNIS",
             "fieldValidateRules": [
                 "required"
             ]

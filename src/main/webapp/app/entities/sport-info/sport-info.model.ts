@@ -10,7 +10,7 @@ export const enum Games {
     'UNO',
     'CARROM',
     'BOWLING',
-    'VOLLEY_BALL', 
+    'VOLLEY_BALL',
     'TENNIS'
 }
 

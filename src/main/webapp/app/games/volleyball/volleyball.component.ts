@@ -10,7 +10,7 @@ import { SportInfo, SportInfoService } from '../../entities/sport-info';
     'volleyball.scss'
   ]
 })
-export class VolleyBallComponent implements OnInit {
+export class VolleyballComponent implements OnInit {
 
     sportInfo: SportInfo;
     constructor( private sportInfoService: SportInfoService,

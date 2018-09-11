@@ -38,7 +38,7 @@
         {
             "fieldName": "type",
             "fieldType": "Games",
-            "fieldValues": "FOOTBALL, CHESS, BADMINTON, LUDO, TABLE_TENNIS, BOX_CRICKET",
+            "fieldValues": "FOOTBALL, CHESS, BADMINTON, LUDO, TABLE_TENNIS, BOX_CRICKET, VOLLEY_BALL, TENNIS",
             "fieldValidateRules": [
                 "required"
             ]

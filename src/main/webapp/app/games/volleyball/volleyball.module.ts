@@ -3,15 +3,15 @@ import { RouterModule } from '@angular/router';
 
 import { FafiSharedModule } from '../../shared';
 
-import { BOLLEY_BALL_ROUTE, VolleyBallComponent } from '../volleyball';
+import { VOLLEY_BALL_ROUTE, VolleyballComponent } from '../volleyball';
 
 @NgModule({
     imports: [
       FafiSharedModule,
-      RouterModule.forRoot([ BOLLEY_BALL_ROUTE ], { useHash: true })
+      RouterModule.forRoot([ VOLLEY_BALL_ROUTE ], { useHash: true })
     ],
     declarations: [
-        VolleyBallComponent,
+        VolleyballComponent,
     ],
     entryComponents: [
     ],
@@ -19,4 +19,4 @@ import { BOLLEY_BALL_ROUTE, VolleyBallComponent } from '../volleyball';
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class FafiVolleyBallModule {}
+export class FafiVolleyballModule {}

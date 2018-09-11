@@ -9,8 +9,8 @@ export const enum Games {
     ' BOX_CRICKET',
     ' UNO',
     ' CARROM',
-    'VOLLEY_BALL', 
-    'TENNIS'
+    ' VOLLEY_BALL',
+    ' TENNIS'
 }
 
 export class Tournament implements BaseEntity {

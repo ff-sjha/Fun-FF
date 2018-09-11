@@ -9,6 +9,7 @@ import { FafiTableTennisModule } from './table-tennis/table-tennis.module';
 import { FafiBoxCricketModule } from './box-cricket/box-cricket.module';
 import { FafiUnoModule } from './uno/uno.module';
 import { FafiCarromModule } from './carrom/carrom.module';
+import { FafiVolleyballModule } from './volleyball/volleyball.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FafiCarromModule } from './carrom/carrom.module';
         FafiTableTennisModule,
         FafiBoxCricketModule,
         FafiUnoModule,
-        FafiCarromModule
+        FafiCarromModule,
+        FafiVolleyballModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
