@@ -10,7 +10,9 @@
             "BOX_CRICKET": "BOX_CRICKET",
             "UNO": "UNO",
             "CARROM": "CARROM",
-            "BOWLING": "BOWLING"
+            "BOWLING": "BOWLING",
+            "VOLLEY_BALL" : "VOLLEY_BALL", 
+            "TENNIS" : "TENNIS"
         }
     }
 }

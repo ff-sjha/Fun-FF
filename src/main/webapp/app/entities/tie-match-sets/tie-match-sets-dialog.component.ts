@@ -34,7 +34,7 @@ export class TieMatchSetsDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.tieMatchService.query()
+        this.tieMatchService.query( { 'size' : '1000' })
             .subscribe((res: ResponseWrapper) => { this.tiematches = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 

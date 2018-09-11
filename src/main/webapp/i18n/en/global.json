@@ -14,7 +14,8 @@
                 "box-cricket": "Box Cricket",
                 "carrom": "Carrom",
                 "uno": "Uno",
-                "bowling":"Bowling"
+                "bowling":"Bowling",
+                "volleyball" : "VolleyBall"
             },
             "franchises" :"Franchises",
             "about-us": "About Us",
