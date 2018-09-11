@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="container">
+        <div class="about-para">
+            <h1 class="text-capitalize text-center" jhiTranslate="volleyball.title">Title</h1>
+            <h5 class="text-center" jhiTranslate="volleyball.subtitle">Subtitle</h5>
+            <hr/>
+            <dl class="row-md jh-entity-details">
+                <div  *ngIf="sportInfo.rules">
+                    <dt><h2><span jhiTranslate="fafiApp.sportInfo.rules">Rules</span></h2></dt>
+                    <dd>
+                        <span><div [innerHTML]="[sportInfo.rules]"></div></span>
+                    </dd>
+                </div>
+                <div  *ngIf="sportInfo.match_system">
+                    <dt><h2><span jhiTranslate="fafiApp.sportInfo.match_system">Match System</span></h2></dt>
+                    <dd>
+                        <span><div [innerHTML]="[sportInfo.match_system]"></div></span>
+                    </dd>
+                </div>                
+                <div  *ngIf="sportInfo.scoring_system">
+                    <dt><h2><span jhiTranslate="fafiApp.sportInfo.scoring_system">Scoring System</span></h2></dt>
+                    <dd>
+                        <span><div [innerHTML]="[sportInfo.scoring_system]"></div></span>
+                    </dd>
+                </div>
+                <div  *ngIf="sportInfo.points_system">
+                    <dt><h2><span jhiTranslate="fafiApp.sportInfo.points_system">Points System</span></h2></dt>
+                    <dd>
+                        <span><div [innerHTML]="[sportInfo.points_system]"></div></span>
+                    </dd>
+                </div>
+            </dl>        
+        </div>
+    </div>
+</div>
