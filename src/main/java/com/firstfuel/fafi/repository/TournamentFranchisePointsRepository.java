@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.firstfuel.fafi.domain.TournamentFranchisePoints;
@@ -19,4 +20,7 @@ public interface TournamentFranchisePointsRepository
         extends JpaRepository<TournamentFranchisePoints, Long>, JpaSpecificationExecutor<TournamentFranchisePoints> {
     @Query("select new com.firstfuel.fafi.service.dto.FranchisePointsDTO(tf.franchise.id, tf.franchise.name, sum(tf.points) ) from TournamentFranchisePoints tf group by tf.franchise order by sum(tf.points) desc")
     List<FranchisePointsDTO> getFranchisePoints();
+    
+    @Query("select new com.firstfuel.fafi.service.dto.FranchisePointsDTO(tf.franchise.id, tf.franchise.name, sum(tf.points) ) from TournamentFranchisePoints tf Where tf.tournament.id = :tournamentId group by tf.franchise order by sum(tf.points) desc")
+    List<FranchisePointsDTO> getFranchisePoints(@Param("tournamentId") Long tournamentId);
 }

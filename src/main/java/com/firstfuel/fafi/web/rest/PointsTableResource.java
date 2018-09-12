@@ -55,6 +55,10 @@ public class PointsTableResource {
     @Timed
     public ResponseEntity<List<FranchisePointsDTO>> getAllFranchise(PointsTableCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Players by criteria: {}", criteria);
+        LongFilter tournamentId = criteria.getTournamentId();
+        if (null != tournamentId && null != tournamentId.getEquals()) {
+            return new ResponseEntity<>(frenchisePointRepo.getFranchisePoints( tournamentId.getEquals()), new HttpHeaders(), HttpStatus.OK);
+        }
         return new ResponseEntity<>(frenchisePointRepo.getFranchisePoints(), new HttpHeaders(), HttpStatus.OK);
     }
 }

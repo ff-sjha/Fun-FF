@@ -88,7 +88,8 @@ export class PointsTableComponent implements OnInit, OnDestroy {
         this.pointsTableService.queryFranchisePoints({
             page: this.page,
             size: this.itemsPerPage,
-            sort: this.sort()
+            sort: this.sort(),
+            filter: criteria
         }).subscribe(
             (res: ResponseWrapper) => this.onSuccessFanchise(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
