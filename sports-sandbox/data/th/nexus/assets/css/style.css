@@ -179,7 +179,7 @@ td{
 #primary table {
   margin: 0 0 1.5em;
   width: 100%;
-  border:1px solid #ddd;
+  border:1px solid #BBB;
   border-right:none;
   background:#fff;
 }
@@ -196,9 +196,9 @@ td{
 }
 
 #primary td{
-  padding:5px 10px;
-  border-top:1px solid #ddd;
-  border-right:1px solid #ddd;
+  padding:10px 15px;
+  border-top:1px solid #BBB;
+  border-right:1px solid #BBB;
 }
 
 /* Typography
@@ -383,6 +383,7 @@ h1#site-title a:link, h1#site-title a:visited{
   margin: 0px 0px 0px 0px;
   padding: 5px 5px;
   background:#efefef;
+  border: 1px solid #666;
 }
 
 #main-menu li ul a {
@@ -1313,3 +1314,67 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 .views-games .views-col a {
 	color: #FFF;
 }
+.views-exposed-form {
+	background-color: #2C680D;
+	padding: 10px;
+}
+.views-exposed-form .form-item {
+	float: left;
+	margin-left: 10px;
+}
+
+.views-exposed-form .form-item label {
+	color: #FFF;
+}
+.views-exposed-form .form-actions {
+	padding-top: 0;
+}
+.views-exposed-form .form-actions .form-submit {
+	margin-left: 10px;
+}
+
+.node--view-mode-full .field {
+	margin-bottom: 15px;
+}
+.views-no-record {
+	padding: 50px;
+	text-align: center;
+	font-weight: bold;
+}
+.views-franchise-members .paragraph {
+	clear:both; 
+	height: 40px;
+}
+.views-franchise-members .paragraph  .field {
+	float:left; 
+	width: 45%;
+	background-color: #F4F4F4;
+	padding: 5px;
+}
+.views-franchise-members .paragraph  .field__label {
+	display:none;
+}
+.views-franchise-members table .views-field {
+	vertical-align: top;
+}
+
+.views-match-list .paragraph {
+	clear:both; 
+	height: 40px;
+}
+.views-match-list .paragraph  .field {
+	float:left; 
+	width: 45%;
+	background-color: #F4F4F4;
+	padding: 5px;
+}
+.views-match-list .views-field-field-match-teams {
+	width: 25%;
+}
+.views-match-list .paragraph  .field__label {
+	display:none;
+}
+.views-match-list table .views-field {
+	vertical-align: top;
+}
+
