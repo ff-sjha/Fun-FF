@@ -1378,3 +1378,18 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 	vertical-align: top;
 }
 
+/* Add Node */
+.field--type-datetime h4 {
+    font-size: 13px;
+    font-weight: bold;
+	float: left;
+    margin-right: 7px;
+	min-width: 150px;
+}
+.form-wrapper .field-multiple-table th {
+	font-size: 18px;
+}
+.field--type-datetime fieldset .form-item.js-form-type-date {
+	float: left;
+}
+.node-form .form-item label {min-width: 150px;}
