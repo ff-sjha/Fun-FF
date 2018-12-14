@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Module file for site_manager.
+ */
+
+use Drupal\Core\Url;
+
+function site_manager_create_link($content_type, $label) {
+  $url = Url::fromRoute( 'node.add',array('node_type' => $content_type));
+  $internal_link = \Drupal::l(t($label), $url);
+  return $internal_link;
+}
