@@ -1282,114 +1282,163 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 }
 
 
+/* --- Common ------*/
 #site-title {
-	display: none;
+    display: none;
 }
 #main-menu li a {
-	color: #FFF;
+    color: #FFF;
 }
 .footer-block li a  {
-	color: #FFF;
+    color: #FFF;
 }
-.views-franchises .views-col {
-	padding: 40px;
-	background-color: #E6E6EA;
-	border: 15px solid #095105;
+.views-no-record {
+    padding: 50px;
     text-align: center;
-	font-size: 20px;
-	font-weight: bold;
-	text-transform: uppercase;
-	border-radius: 15px 80px;
-}
-.views-games .views-col {
-	padding: 50px;
-	background-color: #11772D;
-	border: 10px solid #E6E6EA;
-    text-align: center;
-	font-size: 20px;
-	font-weight: bold;
-	text-transform: uppercase;
-	border-radius: 50px 20px;
-}
-.views-games .views-col a {
-	color: #FFF;
+    font-weight: bold;
 }
 .views-exposed-form {
-	background-color: #2C680D;
-	padding: 10px;
+    background-color: #2C680D;
+    padding: 10px;
 }
 .views-exposed-form .form-item {
-	float: left;
-	margin-left: 10px;
+    float: left;
+    margin-left: 10px;
 }
-
 .views-exposed-form .form-item label {
-	color: #FFF;
+    color: #FFF;
 }
 .views-exposed-form .form-actions {
-	padding-top: 0;
+    padding-top: 0;
 }
 .views-exposed-form .form-actions .form-submit {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 .node--view-mode-full .field {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
-.views-no-record {
-	padding: 50px;
-	text-align: center;
-	font-weight: bold;
+.form-wrapper .field-multiple-table th {
+    font-size: 18px;
 }
-.views-franchise-members .paragraph {
-	clear:both; 
-	height: 40px;
+.node--view-mode-full .field__label {
+    font-weight: bold;
 }
-.views-franchise-members .paragraph  .field {
-	float:left; 
-	width: 45%;
-	background-color: #F4F4F4;
-	padding: 5px;
+.custom-view header {
+    height: 35px;
 }
-.views-franchise-members .paragraph  .field__label {
-	display:none;
+.add-link-wrapper {
+    float: right;
+    background-color: #CA5148;
+    margin-bottom: 10px;
+    padding: 5px 10px;
 }
-.views-franchise-members table .views-field {
-	vertical-align: top;
+.add-link-wrapper a {
+    color: #FFF;
 }
-
-.views-match-list .paragraph {
-	clear:both; 
-	height: 40px;
+.views-term-detail .views-row, .views-term-detail .js-pager__items {
+    display:none;
 }
-.views-match-list .paragraph  .field {
-	float:left; 
-	width: 45%;
-	background-color: #F4F4F4;
-	padding: 5px;
+.feed-icon {
+    display:none;
 }
-.views-match-list .views-field-field-match-teams {
-	width: 25%;
+.js-pager__items {
+    margin-left:0;
 }
-.views-match-list .paragraph  .field__label {
-	display:none;
-}
-.views-match-list table .views-field {
-	vertical-align: top;
+.js-pager__items li {
+  float: left;
+  margin-right: 15px;
+  list-style-type: none;   
 }
 
 /* Add Node */
 .field--type-datetime h4 {
     font-size: 13px;
     font-weight: bold;
-	float: left;
+    float: left;
     margin-right: 7px;
-	min-width: 150px;
-}
-.form-wrapper .field-multiple-table th {
-	font-size: 18px;
+    min-width: 150px;
 }
 .field--type-datetime fieldset .form-item.js-form-type-date {
-	float: left;
+    float: left;
 }
-.node-form .form-item label {min-width: 150px;}
+.node-form .form-item label {
+    min-width: 150px;
+}
+
+#user-register-form .form-item label {
+    min-width: 150px;
+}
+#user-register-form #edit-timezone, #user-register-form .js-form-item-notify {
+    display: none;
+}
+#user-register-form .description {
+    font-size: 10px;
+    font-style: italic;
+}
+
+
+/* --- Custom ------*/
+.views-franchises .views-col {
+    padding: 40px;
+    background-color: #E6E6EA;
+    border: 15px solid #095105;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 15px 80px;
+}
+.views-games .views-col {
+    padding: 50px;
+    background-color: #11772D;
+    border: 10px solid #E6E6EA;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 50px 20px;
+}
+.views-games .views-col a {
+    color: #FFF;
+}
+.views-franchise-members .paragraph {
+    clear:both;
+    height: 40px;
+}
+.views-franchise-members .paragraph  .field {
+    float:left;
+    width: 45%;
+    background-color: #F4F4F4;
+    padding: 5px;
+}
+.views-franchise-members .paragraph  .field__label {
+    display:none;
+}
+.views-franchise-members table .views-field {
+    vertical-align: top;
+}
+
+.views-match-list .paragraph {
+    clear:both;
+    height: 40px;
+}
+.views-match-list .paragraph  .field {
+    float:left;
+    width: 45%;
+    background-color: #F4F4F4;
+    padding: 5px;
+}
+.views-match-list .views-field-field-match-teams {
+    width: 25%;
+}
+.views-match-list .paragraph  .field__label {
+    display:none;
+}
+.views-match-list table .views-field {
+    vertical-align: top;
+}
+.node--type-matches.node--view-mode-full .paragraph .field--type-entity-reference {
+    float: left;
+    width: 180px;
+}

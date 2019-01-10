@@ -6,9 +6,28 @@
  */
 
 use Drupal\Core\Url;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
 
-function site_manager_create_link($content_type, $label) {
-  $url = Url::fromRoute( 'node.add',array('node_type' => $content_type));
-  $internal_link = \Drupal::l(t($label), $url);
-  return $internal_link;
+function site_manager_create_add_content_link($content_type, $label) {
+ $url = Url::fromRoute( 'node.add',array('node_type' => $content_type));
+ $add_content_link = '<div class="add-link-wrapper">';
+ $add_content_link .= \Drupal::l(t($label), $url);
+ $add_content_link .= '</div>';
+ return $add_content_link;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for node entities.
+ */
+function site_manager_node_presave(EntityInterface $node) {
+  
+  $type = $node->getType();
+  if ($type == 'match_players') {
+    $title = $node->getTitle();
+    $target_id = $node->field_mp_match->target_id;
+    $target_node = Node::load($target_id);
+    $target_title = $target_node->getTitle();
+    $node->setTitle($target_title);
+  }
 }
