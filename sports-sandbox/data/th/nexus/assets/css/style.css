@@ -506,8 +506,11 @@ a.frmore{
   font-weight: bold;
 }
 
-#header-block, #footer-block {
+#header-block {
   padding: 20px 0 0;
+}
+#footer-block {
+  padding: 20px;
 }
 
 
@@ -1365,18 +1368,34 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 .node-form .form-item label {
     min-width: 150px;
 }
-
-#user-register-form .form-item label {
+.node-form .vertical-tabs {
+	display: none;
+}
+#user-form .form-item label, #user-register-form .form-item label {
     min-width: 150px;
 }
-#user-register-form #edit-timezone, #user-register-form .js-form-item-notify {
+#user-form #edit-timezone, #user-register-form #edit-timezone {
     display: none;
 }
-#user-register-form .description {
+#user-form .js-form-item-notify,  #user-register-form .js-form-item-notify {
+    display: none;
+}
+#user-form .description,  #user-register-form .description {
     font-size: 10px;
     font-style: italic;
 }
-
+.taxonomy-term-form #edit-relations {
+	display: none;
+}
+.taxonomy-term-form label {
+	min-width: 150px;
+}
+#highlighted-block .container {
+	background-color: #F4F4F4;
+	padding:10px;
+	text-align: center;
+	font-weight: bold;
+}
 
 /* --- Custom ------*/
 .views-franchises .views-col {
@@ -1441,4 +1460,31 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 .node--type-matches.node--view-mode-full .paragraph .field--type-entity-reference {
     float: left;
     width: 180px;
+}
+#node-franchise-master-edit-form #edit-title-wrapper {
+	display: none;
+}
+#node-tournaments-form #edit-title-wrapper {
+	display: none;
+}
+
+#node-match-players-form #edit-title-wrapper {
+	display: none;
+}
+#node-match-players-form #edit-field-mp-player-of-match {
+	height: 150px;
+	width: 180px;
+}
+
+#block-views-block-tournaments-block-2 h2, #block-views-block-tournaments-block-1 h2 {
+	background-color: #ca5148;
+	color: #FFF;
+	padding: 0 10px;
+}
+#block-views-block-tournaments-block-2 th, #block-views-block-tournaments-block-1 th {
+	background-color: #F4F4F4;
+	border: 1px solid #888;
+}
+#block-views-block-tournaments-block-2 td, #block-views-block-tournaments-block-1 td {
+	border: 1px solid #888;
 }

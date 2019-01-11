@@ -7,6 +7,8 @@
 
 use Drupal\Core\Url;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\node\Entity\Node;
 
 function site_manager_create_add_content_link($content_type, $label) {
@@ -30,4 +32,31 @@ function site_manager_node_presave(EntityInterface $node) {
     $target_title = $target_node->getTitle();
     $node->setTitle($target_title);
   }
+  if ($type == 'tournaments') {
+    $term_id = $node->field_tour_type->target_id;
+    $term = Term::load($term_id);
+    $name = $term->getName();
+    $node->setTitle($name);
+  }  
+  if ($type == 'franchise_master') {
+    $term_id = $node->field_fm_franchise->target_id;
+    $term = Term::load($term_id);
+    $name = $term->getName();
+    $node->setTitle($name);
+  }  
 }
+
+function site_manager_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  //echo $form_id;
+
+  if ($form_id == 'node_match_players_form') {
+    $form['title']['widget'][0]['value']['#default_value'] = 'test';
+  } 	
+  if ($form_id == 'node_tournaments_form') {
+    $form['title']['widget'][0]['value']['#default_value'] = 'test';
+  }
+  if ($form_id == 'node_franchise_master_form') {
+    $form['title']['widget'][0]['value']['#default_value'] = 'test';
+  }  
+}
+
