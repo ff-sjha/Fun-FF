@@ -1390,8 +1390,14 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 .taxonomy-term-form label {
 	min-width: 150px;
 }
-#highlighted-block .container {
-	background-color: #F4F4F4;
+#highlighted-block .container div[aria-label="Error message"] {
+	background-color: #f7b4aa;
+	padding:10px;
+	text-align: center;
+	font-weight: bold;
+}
+#highlighted-block .container div[aria-label="Status message"] {
+	background-color: #c1f4a6;
 	padding:10px;
 	text-align: center;
 	font-weight: bold;
@@ -1437,7 +1443,7 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 .views-franchise-members table .views-field {
     vertical-align: top;
 }
-
+/* -- Match list view - paragraph -- */
 .views-match-list .paragraph {
     clear:both;
     height: 40px;
@@ -1457,18 +1463,54 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 .views-match-list table .views-field {
     vertical-align: top;
 }
+
+.views-matchandplayers-list .views-field-field-match-teams {
+    width: 25%;
+}
+.views-matchandplayers-list .views-field-field-mp-franchise-players-poin {
+    width: 20%;
+}
+.views-matchandplayers-list .paragraph  .field {
+    width: 50%;
+}
+
+/* -- Tournaments list view -- */
+.views-tournaments .paragraph {
+    clear:both;
+    height: 40px;
+}
+.views-tournaments .paragraph  .field {
+    float:left;
+    width: 45%;
+    background-color: #F4F4F4;
+    padding: 5px;
+}
+.views-tournaments .views-field-field-tour-franchise-points {
+    width: 25%;
+}
+.views-tournaments .paragraph  .field__label {
+    display:none;
+}
+.views-tournaments table .views-field {
+    vertical-align: top;
+}
+
 .node--type-matches.node--view-mode-full .paragraph .field--type-entity-reference {
     float: left;
     width: 180px;
 }
-#node-franchise-master-edit-form #edit-title-wrapper {
+.node--type-tournaments.node--view-mode-full .paragraph .field--type-entity-reference {
+    float: left;
+    width: 180px;
+}
+#node-franchise-master-form #edit-title-wrapper, #node-franchise-master-edit-form #edit-title-wrapper {
 	display: none;
 }
-#node-tournaments-form #edit-title-wrapper {
+#node-tournaments-form #edit-title-wrapper, #node-tournaments-edit-form #edit-title-wrapper {
 	display: none;
 }
 
-#node-match-players-form #edit-title-wrapper {
+#node-match-players-form #edit-title-wrapper, #node-match-players-edit-form #edit-title-wrapper {
 	display: none;
 }
 #node-match-players-form #edit-field-mp-player-of-match {
@@ -1487,4 +1529,7 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 }
 #block-views-block-tournaments-block-2 td, #block-views-block-tournaments-block-1 td {
 	border: 1px solid #888;
+}
+.custom-view .views-field-field-match-season {
+	width: 100px;
 }
