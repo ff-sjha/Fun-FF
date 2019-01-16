@@ -1533,3 +1533,15 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 .custom-view .views-field-field-match-season {
 	width: 100px;
 }
+.views-upcoming-matches .views-field-nid {
+	width: 50%;
+}
+.views-upcoming-matches .views-field-nid table th {
+	height: 65px;
+	background: #756885 !important;
+	color: #000;
+}
+.views-upcoming-matches .upcoming-matches-para-div {
+    width: 25%;
+    float: left;
+}

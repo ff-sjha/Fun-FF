@@ -77,83 +77,91 @@ function site_manager_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
 }
 
 function site_manager_preprocess_views_view_field(&$variables) {
-    $view = $variables['view'];
-    $row = $variables['row'];
-    if ($view->id() == 'upcoming_matches' && $variables['field']->realField == 'nid') {
-        // Prepare all franchise term array
-        $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree("franchise");
-        $field_array = array();
-        $term_data = array();
-        foreach ($terms as $term) {
-          $term_data[$term->tid] = $term->name;
-        }
-        // Prepare all user array
-        $all_users = user_load_multiple();
-        $user_array = array();
-        foreach($all_users as $user) {
-          $user_array[$user->get('uid')->value] = $user->get('name')->value;
-        }
-        //Get matchplayer node id
-        $query = \Drupal::database()->select('node__field_mp_match', 'n');
-        $query->addField('n', 'entity_id');
-        $query->condition('n.field_mp_match_target_id', $row->nid);
-        $mp_id = $query->execute()->fetchField();
-
-        //Get all node for franchise master
-        $franch_array = array();
-        $franch_nids = \Drupal::entityQuery('node')
-          ->condition('type', 'franchise_master')
-          ->execute();
-        $franch_nodes = Node::loadMultiple($franch_nids);
-        foreach ($franch_nodes as $franch_node) {
-           if ($franch_node->field_fm_season->target_id == 2) {
-               $franch_array[$franch_node->getTitle()] = array();
-             $franch_paragraph = $franch_node->field_fm_franchise_players->getValue();
-             foreach ( $franch_paragraph as $franch_element ) {
-               $franch_p = Paragraph::load($franch_element['target_id']);
-               $franch_user_id = $franch_p->field_sp_player->target_id;
-               $franch_array[$franch_node->getTitle()][] = $user_array[$franch_user_id];
-             }
-           }
-        }
-        // Load Match node
-        $node = Node::load($row->nid);
-        $paragraph = $node->field_match_teams->getValue();
-        $franchise = array();
-        foreach ( $paragraph as $element ) {
-            $p = Paragraph::load($element['target_id']);
-            $term_id = $p->field_tap_team->target_id;
-            $field_array[$term_data[$term_id]] = array();
-        }
-        $mp_node = Node::load($mp_id);
-        $mp_paragraph = $mp_node->field_mp_franchise_players_poin->getValue();
-        $mp_players = array();
-        foreach ( $mp_paragraph as $mp_element ) {
-           $mp_para = Paragraph::load($mp_element['target_id']);
-           $mp_user_id = $mp_para->field_pp_franchise_player->target_id;
-           $mp_players[] = $user_array[$mp_user_id];
-         }
-         foreach ($field_array as $franchise => $franchise_value) {
-           $field_array[$franchise] = array_intersect($franch_array[$franchise], $mp_players);
-         }
-       
-        $headers = array_keys($field_array);
-        foreach($headers as $header_name) {
-          //$output .= '<th>' . $header_name . '</th>';
-        }
-        $output .= '<div>';
-        foreach($field_array as $out_field => $out_value) {
-          $output .= '<div><table><tr>';
-          $output .= '<th>' . $header_name . '</th></tr>';
-          foreach ($out_value as $v) {
-            $output .= '<tr><td>' . $v . '</td></tr>';
-          }
-          $output .= '</table></div>';
-        }
-        $output .= '</div>';
-        $variables['output'] =  Drupal\Core\Render\Markup::create($output);      
+  $view = $variables['view'];
+  $row = $variables['row'];
+  if ($view->id() == 'upcoming_matches' && $variables['field']->realField == 'nid') {
+    // Prepare all franchise term array
+    $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree("franchise");
+    $field_array = array();
+    $term_data = array();
+    foreach ($terms as $term) {
+      $term_data[$term->tid] = $term->name;
     }
+	// Prepare all user array
+	$all_users = user_load_multiple();
+	$user_array = array();
+	foreach($all_users as $user) {
+	  $user_array[$user->get('uid')->value] = $user->get('name')->value;
+	}
+	//Get matchplayer node id
+	$query = \Drupal::database()->select('node__field_mp_match', 'n');
+	$query->addField('n', 'entity_id');
+	$query->condition('n.field_mp_match_target_id', $row->nid);
+	$mp_id = $query->execute()->fetchField();
+
+	//Get all node for franchise master
+	$franch_array = array();
+	$franch_nids = \Drupal::entityQuery('node')
+	  ->condition('type', 'franchise_master')
+	  ->execute();
+	$franch_nodes = Node::loadMultiple($franch_nids);
+	foreach ($franch_nodes as $franch_node) {
+	   if ($franch_node->field_fm_season->target_id == 2) {
+		$franch_array[$franch_node->getTitle()] = array();
+		 $franch_paragraph = $franch_node->field_fm_franchise_players->getValue();
+		 foreach ( $franch_paragraph as $franch_element ) {
+		   $franch_p = Paragraph::load($franch_element['target_id']);
+		   $franch_user_id = $franch_p->field_sp_player->target_id;
+		   $franch_array[$franch_node->getTitle()][] = $user_array[$franch_user_id];
+		 }
+	   }
+	}
+	// Load Match node
+    $node = Node::load($row->nid);
+    $paragraph = $node->field_match_teams->getValue();
+    $franchise = array();
+    foreach ( $paragraph as $element ) {
+      $p = Paragraph::load($element['target_id']);
+	  $term_id = $p->field_tap_team->target_id;
+	  $field_array[$term_data[$term_id]] = array();
+	}
+	$mp_node = Node::load($mp_id);
+	$mp_paragraph = $mp_node->field_mp_franchise_players_poin->getValue();
+	$mp_players = array();
+	$mp_points = array();
+	foreach ( $mp_paragraph as $mp_element ) {
+      $mp_para = Paragraph::load($mp_element['target_id']);
+	  $mp_user_id = $mp_para->field_pp_franchise_player->target_id;
+	  $mp_players[] = $user_array[$mp_user_id];
+	  $point = '--';
+	  if (isset($mp_para->field_pp_player_points_earned->value) && !empty($mp_para->field_pp_player_points_earned->value)) {
+	    $point = $mp_para->field_pp_player_points_earned->value;
+	  }
+	  $mp_points[$user_array[$mp_user_id]] = $point;
+    }
+    foreach ($field_array as $franchise => $franchise_value) {
+	  $field_array[$franchise] = array_intersect($franch_array[$franchise], $mp_players);
+    }
+   
+    /*
+	$headers = array_keys($field_array);
+	foreach($headers as $header_name) {
+	  //$output .= '<th>' . $header_name . '</th>';
+	}
+	*/
+	$output .= '<div class="upcoming-matches-para">';
+	if (count($field_array)) {
+	foreach($field_array as $out_field => $out_value) {
+	  $output .= '<div class="upcoming-matches-para-div"><table><tr>';
+	  $output .= '<th>' . $out_field . '</th><th>Points</th></tr>';
+	  foreach ($out_value as $v) {
+		$output .= '<tr><td>' . $v . '</td>';
+		$output .= '<td>' . $mp_points[$v] . '</td></tr>';
+	  }
+	  $output .= '</table></div>';
+	}
+	}
+	$output .= '</div>';
+    $variables['output'] =  Drupal\Core\Render\Markup::create($output);
+  }
 }
-
-	
-
