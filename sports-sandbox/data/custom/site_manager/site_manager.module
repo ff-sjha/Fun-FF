@@ -35,7 +35,6 @@ function site_manager_create_add_content_link($content_type, $label) {
  * Implements hook_ENTITY_TYPE_presave() for node entities.
  */
 function site_manager_node_presave(EntityInterface $node) {
-  
   $type = $node->getType();
   if ($type == 'match_players') {
     $title = $node->getTitle();
@@ -151,18 +150,12 @@ function site_manager_preprocess_views_view_field(&$variables) {
 	  $field_array[$franchise] = array_intersect($franch_array[$franchise], $mp_players);
     }
    
-    /*
-	$headers = array_keys($field_array);
-	foreach($headers as $header_name) {
-	  //$output .= '<th>' . $header_name . '</th>';
-	}
-	*/
 	$output .= '<div class="upcoming-matches-para">';
 	if (count($field_array)) {
 	foreach($field_array as $out_field => $out_value) {
 	  $output .= '<div class="upcoming-matches-para-div"><table><tr>';
 	  if (in_array($out_field, $winning_franch)) {
-        $output .= '<th class="highlight">' . $out_field . '*</th>';
+        $output .= '<th class="highlight">' . $out_field . '</th>';
 	  } else {
 	  	$output .= '<th>' . $out_field . '</th>';
 	  }

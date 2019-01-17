@@ -1545,3 +1545,7 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
     width: 25%;
     float: left;
 }
+.views-upcoming-matches .upcoming-matches-para-div th.highlight {
+	text-decoration: underline;
+	color: #fffd3e !important;
+}
