@@ -43,6 +43,7 @@ function site_manager_node_presave(EntityInterface $node) {
     $target_node = Node::load($target_id);
     $target_title = $target_node->getTitle();
     $node->setTitle($target_title);
+    drupal_flush_all_caches();
   }
   if ($type == 'tournaments') {
     $term_id = $node->field_tour_type->target_id;
@@ -118,6 +119,13 @@ function site_manager_preprocess_views_view_field(&$variables) {
 	}
 	// Load Match node
     $node = Node::load($row->nid);
+    $winning_franch = array();
+    $ref_franch = $node->get('field_match_winning_franchise')->getValue();
+    if (!empty($ref_franch)) {
+      foreach ($ref_franch as $ref) {
+        $winning_franch[] = $term_data[$ref['target_id']];
+      }
+    }
     $paragraph = $node->field_match_teams->getValue();
     $franchise = array();
     foreach ( $paragraph as $element ) {
@@ -153,7 +161,13 @@ function site_manager_preprocess_views_view_field(&$variables) {
 	if (count($field_array)) {
 	foreach($field_array as $out_field => $out_value) {
 	  $output .= '<div class="upcoming-matches-para-div"><table><tr>';
-	  $output .= '<th>' . $out_field . '</th><th>Points</th></tr>';
+	  if (in_array($out_field, $winning_franch)) {
+        $output .= '<th class="highlight">' . $out_field . '*</th>';
+	  } else {
+	  	$output .= '<th>' . $out_field . '</th>';
+	  }
+	  
+	  $output .= '<th>Points</th></tr>';
 	  foreach ($out_value as $v) {
 		$output .= '<tr><td>' . $v . '</td>';
 		$output .= '<td>' . $mp_points[$v] . '</td></tr>';
