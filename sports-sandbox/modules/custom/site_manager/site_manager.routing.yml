@@ -1,0 +1,9 @@
+site_manager.points_page:
+  path: 'points'
+  defaults:
+    _controller: '\Drupal\site_manager\Controller\SitemanagerController::pointsPage'
+    _title: 'Points'
+  requirements:
+    _permission: 'access content'
+    
+
