@@ -3,7 +3,7 @@
  * Implements hook_views_data_alter().
  */
 function site_manager_views_data_alter(&$data) {
-
+/*
   $data['node']['node_type_flagger'] = array(
     'title' => t('Node type flagger'),
     'field' => array(
@@ -12,7 +12,7 @@ function site_manager_views_data_alter(&$data) {
       'id' => 'node_type_flagger',
     ),
   );
-/*
+*/  
   $data['node']['custom_calculated_field'] = array(
     'title' => t('Custom Calculated Field'),
     'field' => array(
@@ -20,6 +20,5 @@ function site_manager_views_data_alter(&$data) {
       'help' => t('Custom Field to Show Calculated Data'),
       'id' => 'custom_calculated_field',
     ),
-  ); 
-*/  
+  );  
  }
