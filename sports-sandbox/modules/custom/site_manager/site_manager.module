@@ -22,6 +22,14 @@ function site_manager_create_add_content_link($content_type, $label) {
    }
    $url = Url::fromRoute( 'node.add',array('node_type' => $content_type), array('query' => ['nid' => $nid]));
  }
+ elseif ($content_type == 'match_types') {
+   $current_path = \Drupal::service('path.current')->getPath();
+   $path_args = explode('/', $current_path);
+   if (is_array($path_args) && !empty($path_args[3])) {
+     $nid = $path_args[3];
+   }
+   $url = Url::fromRoute( 'node.add',array('node_type' => $content_type), array('query' => ['nid' => $nid]));
+ } 
  else {
    $url = Url::fromRoute( 'node.add',array('node_type' => $content_type));
  }
@@ -44,6 +52,13 @@ function site_manager_node_presave(EntityInterface $node) {
     $node->setTitle($target_title);
     drupal_flush_all_caches();
   }
+  if ($type == 'match_types') {
+    $title = $node->getTitle();
+    $target_id = $node->field_mtype_match->target_id;
+    $target_node = Node::load($target_id);
+    $target_title = $target_node->getTitle();
+    $node->setTitle($target_title);
+  }  
   if ($type == 'tournaments') {
     $term_id = $node->field_tour_type->target_id;
     $term = Term::load($term_id);
@@ -68,6 +83,12 @@ function site_manager_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
 	//echo "<pre>"; print_r($form['field_mp_match']);die;
     $form['title']['widget'][0]['value']['#default_value'] = 'test';
   } 	
+  if ($form_id == 'node_match_types_form') {
+	if (isset($_GET['nid']) && !empty($_GET['nid'])) {
+	  $form['field_mtype_match']['widget']['#default_value'][0] = $_GET['nid'];
+	}
+    $form['title']['widget'][0]['value']['#default_value'] = 'test';
+  }   
   if ($form_id == 'node_tournaments_form') {
     $form['title']['widget'][0]['value']['#default_value'] = 'test';
   }

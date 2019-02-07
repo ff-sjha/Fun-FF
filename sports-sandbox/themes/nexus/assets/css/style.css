@@ -1474,6 +1474,27 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
     width: 50%;
 }
 
+
+
+.views-matchtypes-list .paragraph {
+    clear:both;
+    height: 40px;
+}
+.views-matchtypes-list .paragraph  .field {
+    float:left;
+    width: 35%;
+    background-color: #F4F4F4;
+    padding: 5px;
+}
+.views-matchtypes-list .paragraph .field--name-field-stp-set {
+    width: 20%;
+}
+
+.views-matchtypes-list table .views-field {
+    vertical-align: top;
+}
+
+
 /* -- Tournaments list view -- */
 .views-tournaments .paragraph {
     clear:both;
