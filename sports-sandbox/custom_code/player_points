@@ -8,6 +8,8 @@ dependencies:
     - node.type.franchise_master
     - taxonomy.vocabulary.games_type
     - taxonomy.vocabulary.sports_season
+  content:
+    - 'taxonomy_term:sports_season:b4a15064-a08d-48df-8490-559b6cebce56'
   module:
     - node
     - paragraphs
@@ -364,7 +366,8 @@ display:
           group_type: group
           admin_label: ''
           operator: or
-          value: {  }
+          value:
+            2: 2
           group: 1
           exposed: true
           expose:
