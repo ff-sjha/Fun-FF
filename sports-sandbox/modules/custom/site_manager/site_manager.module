@@ -12,6 +12,7 @@ use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\views\ViewExecutable;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
 
 function site_manager_create_add_content_link($content_type, $label) {
  $url = "";
