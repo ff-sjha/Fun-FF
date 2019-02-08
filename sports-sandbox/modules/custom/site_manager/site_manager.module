@@ -232,3 +232,80 @@ function site_manager_preprocess_views_view_field(&$variables) {
     $variables['output'] =  Drupal\Core\Render\Markup::create($output);
   }
 }
+
+function site_manager_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() == 'player_points') {
+  	if ($view->exposed_raw_input['tid'] != 'All' && $view->exposed_raw_input['field_fm_season_target_id'] == 'All') {
+      unset($query->where[0]);
+  	} elseif ($view->exposed_raw_input['tid'] != 'All' && $view->exposed_raw_input['field_fm_season_target_id'] != 'All') {
+      unset($query->where[0]['conditions'][1]);
+  	}
+  }
+}
+
+function site_manager_views_pre_render(ViewExecutable $view) {
+  if ($view->id() == 'player_points') {
+  	$exposed_data = $view->exposed_raw_input;
+  	if ($exposed_data['tid'] != 'All') {
+  	  $database = \Drupal::database();
+  	  $tournament_id = $exposed_data['tid'];
+  	  $season_id = 2;
+  	  if ($exposed_data['field_fm_season_target_id'] != 'All') {
+  	  	$season_id = $exposed_data['field_fm_season_target_id'];
+  	  } 
+
+  	  $tournament_players = array();
+  	  $mp_query = $database->select('node__field_match_tournament', 'mt');
+      $mp_query->leftjoin('node__field_match_season', 'ms', 'ms.entity_id = mt.entity_id');
+        
+      $mp_players_id = $mp_query
+      ->fields('mt', ['entity_id'])
+      ->condition('mt.field_match_tournament_target_id', $tournament_id)
+      ->condition('ms.field_match_season_target_id', $season_id)
+      ->execute()
+      ->fetchCol();	
+  	  if (!empty($mp_players_id)) {
+        $fran_query = $database->select('node__field_mp_franchise_players_poin', 'fr');
+        $fran_query->leftjoin('node__field_mp_match', 'mp', 'mp.entity_id = fr.entity_id');
+        
+        $target_ids = $fran_query
+        ->fields('fr', ['field_mp_franchise_players_poin_target_id'])
+        ->condition('mp.field_mp_match_target_id', $mp_players_id, 'IN')
+        ->execute()
+        ->fetchCol();
+
+        if (!empty($target_ids)) {
+          $players_query = $database->select('paragraph__field_pp_franchise_player', 'pp');
+          $players_query->leftjoin('paragraph__field_pp_player_points_earned', 'pe', 'pe.entity_id = pp.entity_id');
+        
+          $player_points = $players_query
+          ->fields('pp', ['field_pp_franchise_player_target_id'])
+          ->fields('pe', ['field_pp_player_points_earned_value'])
+          //->addExpression('sum(pe.field_pp_player_points_earned_value)', 'Total Points')
+          ->condition('pp.entity_id', $target_ids, 'IN')
+          //->groupBy("pp.field_pp_franchise_player_target_id")
+          ->execute()
+          ->fetchAll();	
+
+          if (!empty(!empty($player_points))) {
+          	foreach($player_points as $player_obj) {
+              if (array_key_exists($player_obj->field_pp_franchise_player_target_id, $tournament_players)) {
+                $tournament_players[$player_obj->field_pp_franchise_player_target_id] = $tournament_players[$player_obj->field_pp_franchise_player_target_id] + $player_obj->field_pp_player_points_earned_value;
+              } else {
+                $tournament_players[$player_obj->field_pp_franchise_player_target_id] = $player_obj->field_pp_player_points_earned_value;
+              }
+            }
+          }
+        }
+  	  }
+      foreach($view->result as $key => $value) {
+      	$player_id = $value->_relationship_entities['field_fm_franchise_players']->field_sp_player->target_id;
+        if (!array_key_exists($player_id, $tournament_players)) {
+          unset($view->result[$key]);
+        } else {
+        	$value->total_points = $tournament_players[$player_id];
+        }
+      }
+  	}
+  }
+}
