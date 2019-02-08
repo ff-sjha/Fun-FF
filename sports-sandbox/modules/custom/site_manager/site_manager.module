@@ -14,13 +14,24 @@ use Drupal\views\ViewExecutable;
 use Drupal\paragraphs\Entity\Paragraph;
 
 function site_manager_create_add_content_link($content_type, $label) {
+ $url = "";
+ $add_content_link = "";
  if ($content_type == 'match_players') {
    $current_path = \Drupal::service('path.current')->getPath();
    $path_args = explode('/', $current_path);
    if (is_array($path_args) && !empty($path_args[3])) {
      $nid = $path_args[3];
    }
-   $url = Url::fromRoute( 'node.add',array('node_type' => $content_type), array('query' => ['nid' => $nid]));
+   if (!empty($nid)) {
+    //Get matchplayer node id
+	$query = \Drupal::database()->select('node__field_mp_match', 'n');
+	$query->addField('n', 'entity_id');
+	$query->condition('n.field_mp_match_target_id', $nid);
+	$mp_id = $query->execute()->fetchField();	   
+   }
+   if (empty($mp_id)) {
+     $url = Url::fromRoute( 'node.add',array('node_type' => $content_type), array('query' => ['nid' => $nid]));
+   }
  }
  elseif ($content_type == 'match_types') {
    $current_path = \Drupal::service('path.current')->getPath();
@@ -33,9 +44,12 @@ function site_manager_create_add_content_link($content_type, $label) {
  else {
    $url = Url::fromRoute( 'node.add',array('node_type' => $content_type));
  }
- $add_content_link = '<div class="add-link-wrapper">';
- $add_content_link .= \Drupal::l(t($label), $url);
- $add_content_link .= '</div>';
+ 
+ if ($url != "") {
+   $add_content_link = '<div class="add-link-wrapper">';
+   $add_content_link .= \Drupal::l(t($label), $url);
+   $add_content_link .= '</div>';
+ }
  return $add_content_link;
 }
 
@@ -76,24 +90,45 @@ function site_manager_node_presave(EntityInterface $node) {
 function site_manager_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   //echo $form_id;
  
+  // ADD forms
   if ($form_id == 'node_match_players_form') {
 	if (isset($_GET['nid']) && !empty($_GET['nid'])) {
 	  $form['field_mp_match']['widget']['#default_value'][0] = $_GET['nid'];
 	}
 	//echo "<pre>"; print_r($form['field_mp_match']);die;
     $form['title']['widget'][0]['value']['#default_value'] = 'test';
+	$form['body']['#attributes']['class'][] = 'custom-hide-field';
   } 	
   if ($form_id == 'node_match_types_form') {
 	if (isset($_GET['nid']) && !empty($_GET['nid'])) {
 	  $form['field_mtype_match']['widget']['#default_value'][0] = $_GET['nid'];
 	}
     $form['title']['widget'][0]['value']['#default_value'] = 'test';
+	$form['body']['#attributes']['class'][] = 'custom-hide-field';
+	//echo "<pre>"; print_r($form['body']);die;
   }   
   if ($form_id == 'node_tournaments_form') {
     $form['title']['widget'][0]['value']['#default_value'] = 'test';
+	$form['body']['#attributes']['class'][] = 'custom-hide-field';
   }
   if ($form_id == 'node_franchise_master_form') {
     $form['title']['widget'][0]['value']['#default_value'] = 'test';
+	$form['body']['#attributes']['class'][] = 'custom-hide-field';
+  }  
+  
+  
+  //EDIT Forms
+  if ($form_id == 'node_match_players_edit_form') {
+	$form['body']['#attributes']['class'][] = 'custom-hide-field';
+  }
+  if ($form_id == 'node_match_types_edit_form') {
+	$form['body']['#attributes']['class'][] = 'custom-hide-field';
+  } 
+  if ($form_id == 'node_tournaments_edit_form') {
+	$form['body']['#attributes']['class'][] = 'custom-hide-field';
+  }
+  if ($form_id == 'node_franchise_master_edit_form') {
+	$form['body']['#attributes']['class'][] = 'custom-hide-field';
   }  
 }
 
@@ -119,77 +154,81 @@ function site_manager_preprocess_views_view_field(&$variables) {
 	$query->addField('n', 'entity_id');
 	$query->condition('n.field_mp_match_target_id', $row->nid);
 	$mp_id = $query->execute()->fetchField();
-
-	//Get all node for franchise master
-	$franch_array = array();
-	$franch_nids = \Drupal::entityQuery('node')
-	  ->condition('type', 'franchise_master')
-	  ->execute();
-	$franch_nodes = Node::loadMultiple($franch_nids);
-	foreach ($franch_nodes as $franch_node) {
-	   if ($franch_node->field_fm_season->target_id == 2) {
-		$franch_array[$franch_node->getTitle()] = array();
-		 $franch_paragraph = $franch_node->field_fm_franchise_players->getValue();
-		 foreach ( $franch_paragraph as $franch_element ) {
-		   $franch_p = Paragraph::load($franch_element['target_id']);
-		   $franch_user_id = $franch_p->field_sp_player->target_id;
-		   $franch_array[$franch_node->getTitle()][] = $user_array[$franch_user_id];
-		 }
-	   }
-	}
-	// Load Match node
-    $node = Node::load($row->nid);
-    $winning_franch = array();
-    $ref_franch = $node->get('field_match_winning_franchise')->getValue();
-    if (!empty($ref_franch)) {
-      foreach ($ref_franch as $ref) {
-        $winning_franch[] = $term_data[$ref['target_id']];
-      }
+	
+	
+    if (!empty($mp_id)) {
+		//Get all node for franchise master
+		$franch_array = array();
+		$franch_nids = \Drupal::entityQuery('node')
+		  ->condition('type', 'franchise_master')
+		  ->execute();
+		$franch_nodes = Node::loadMultiple($franch_nids);
+		foreach ($franch_nodes as $franch_node) {
+		   if ($franch_node->field_fm_season->target_id == 2) {
+			$franch_array[$franch_node->getTitle()] = array();
+			 $franch_paragraph = $franch_node->field_fm_franchise_players->getValue();
+			 foreach ( $franch_paragraph as $franch_element ) {
+			   $franch_p = Paragraph::load($franch_element['target_id']);
+			   $franch_user_id = $franch_p->field_sp_player->target_id;
+			   $franch_array[$franch_node->getTitle()][] = $user_array[$franch_user_id];
+			 }
+		   }
+		}
+		// Load Match node
+		$node = Node::load($row->nid);
+		$winning_franch = array();
+		$ref_franch = $node->get('field_match_winning_franchise')->getValue();
+		if (!empty($ref_franch)) {
+		  foreach ($ref_franch as $ref) {
+			$winning_franch[] = $term_data[$ref['target_id']];
+		  }
+		}
+		$paragraph = $node->field_match_teams->getValue();
+		$franchise = array();
+		foreach ( $paragraph as $element ) {
+		  $p = Paragraph::load($element['target_id']);
+		  $term_id = $p->field_tap_team->target_id;
+		  $field_array[$term_data[$term_id]] = array();
+		}
+		
+		$mp_node = Node::load($mp_id);
+		$mp_paragraph = $mp_node->field_mp_franchise_players_poin->getValue();
+		$mp_players = array();
+		$mp_points = array();
+		foreach ( $mp_paragraph as $mp_element ) {
+		  $mp_para = Paragraph::load($mp_element['target_id']);
+		  $mp_user_id = $mp_para->field_pp_franchise_player->target_id;
+		  $mp_players[] = $user_array[$mp_user_id];
+		  $point = '--';
+		  if (isset($mp_para->field_pp_player_points_earned->value) && !empty($mp_para->field_pp_player_points_earned->value)) {
+			$point = $mp_para->field_pp_player_points_earned->value;
+		  }
+		  $mp_points[$user_array[$mp_user_id]] = $point;
+		}
+		foreach ($field_array as $franchise => $franchise_value) {
+		  $field_array[$franchise] = array_intersect($franch_array[$franchise], $mp_players);
+		}
+	   
+		$output .= '<div class="upcoming-matches-para">';
+		if (count($field_array)) {
+		foreach($field_array as $out_field => $out_value) {
+		  $output .= '<div class="upcoming-matches-para-div"><table><tr>';
+		  if (in_array($out_field, $winning_franch)) {
+			$output .= '<th class="highlight">' . $out_field . '</th>';
+		  } else {
+			$output .= '<th>' . $out_field . '</th>';
+		  }
+		  
+		  $output .= '<th>Points</th></tr>';
+		  foreach ($out_value as $v) {
+			$output .= '<tr><td>' . $v . '</td>';
+			$output .= '<td>' . $mp_points[$v] . '</td></tr>';
+		  }
+		  $output .= '</table></div>';
+		}
+		}
+		$output .= '</div>';
     }
-    $paragraph = $node->field_match_teams->getValue();
-    $franchise = array();
-    foreach ( $paragraph as $element ) {
-      $p = Paragraph::load($element['target_id']);
-	  $term_id = $p->field_tap_team->target_id;
-	  $field_array[$term_data[$term_id]] = array();
-	}
-	$mp_node = Node::load($mp_id);
-	$mp_paragraph = $mp_node->field_mp_franchise_players_poin->getValue();
-	$mp_players = array();
-	$mp_points = array();
-	foreach ( $mp_paragraph as $mp_element ) {
-      $mp_para = Paragraph::load($mp_element['target_id']);
-	  $mp_user_id = $mp_para->field_pp_franchise_player->target_id;
-	  $mp_players[] = $user_array[$mp_user_id];
-	  $point = '--';
-	  if (isset($mp_para->field_pp_player_points_earned->value) && !empty($mp_para->field_pp_player_points_earned->value)) {
-	    $point = $mp_para->field_pp_player_points_earned->value;
-	  }
-	  $mp_points[$user_array[$mp_user_id]] = $point;
-    }
-    foreach ($field_array as $franchise => $franchise_value) {
-	  $field_array[$franchise] = array_intersect($franch_array[$franchise], $mp_players);
-    }
-   
-	$output .= '<div class="upcoming-matches-para">';
-	if (count($field_array)) {
-	foreach($field_array as $out_field => $out_value) {
-	  $output .= '<div class="upcoming-matches-para-div"><table><tr>';
-	  if (in_array($out_field, $winning_franch)) {
-        $output .= '<th class="highlight">' . $out_field . '</th>';
-	  } else {
-	  	$output .= '<th>' . $out_field . '</th>';
-	  }
-	  
-	  $output .= '<th>Points</th></tr>';
-	  foreach ($out_value as $v) {
-		$output .= '<tr><td>' . $v . '</td>';
-		$output .= '<td>' . $mp_points[$v] . '</td></tr>';
-	  }
-	  $output .= '</table></div>';
-	}
-	}
-	$output .= '</div>';
     $variables['output'] =  Drupal\Core\Render\Markup::create($output);
   }
 }

@@ -1534,11 +1534,17 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 #node-match-players-form #edit-title-wrapper, #node-match-players-edit-form #edit-title-wrapper {
 	display: none;
 }
+#node-match-types-form #edit-title-wrapper, #node-match-types-edit-form #edit-title-wrapper {
+	display: none;
+}
+
 #node-match-players-form #edit-field-mp-player-of-match {
 	height: 150px;
 	width: 180px;
 }
-
+.custom-hide-field {
+    display: none;
+}
 #block-views-block-tournaments-block-2 h2, #block-views-block-tournaments-block-1 h2 {
 	background-color: #ca5148;
 	color: #FFF;
