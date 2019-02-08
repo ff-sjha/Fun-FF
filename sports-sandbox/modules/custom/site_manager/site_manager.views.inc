@@ -30,4 +30,13 @@ function site_manager_views_data_alter(&$data) {
       'id' => 'custom_points_cal_field',
     ),
   );
+
+  $data['node']['custom_player_points_field'] = array(
+    'title' => t('Custom Player Points Calculated Field'),
+    'field' => array(
+      'title' => t('Custom Player Points Calculated Field'),
+      'help' => t('Custom Field to Show Calculated Points'),
+      'id' => 'custom_player_points_field',
+    ),
+  );
  }
