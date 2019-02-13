@@ -1463,6 +1463,13 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 .views-match-list table .views-field {
     vertical-align: top;
 }
+.views-match-list .views-field-title {
+	width: 12%;
+}
+.views-match-list .views-field-nid-2 {
+	width: 10%;
+}
+
 
 .views-matchandplayers-list .views-field-field-match-teams {
     width: 25%;
@@ -1472,6 +1479,15 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 }
 .views-matchandplayers-list .paragraph  .field {
     width: 50%;
+}
+.views-matchandplayers-list .views-field-title {
+	width: 12%;
+}
+.views-matchandplayers-list .views-field-field-match-stage {
+	width: 8%;
+}
+.views-matchandplayers-list .views-field-field-match-winning-franchise {
+	width: 11%;
 }
 
 
