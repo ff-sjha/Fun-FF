@@ -1,9 +1,23 @@
 site_manager.points_page:
-  path: 'points'
+  path: 'testpoints'
   defaults:
     _controller: '\Drupal\site_manager\Controller\SitemanagerController::pointsPage'
     _title: 'Points'
   requirements:
     _permission: 'access content'
     
-
+site_manager.mydata_form:
+  path: 'myform'
+  defaults:
+    _form: '\Drupal\site_manager\Form\MydataForm'
+    _title: 'MydataForm'
+  requirements:
+    _access: 'TRUE'
+    
+site_manager.totalpoints_form:
+  path: 'totalpoints'
+  defaults:
+    _form: '\Drupal\site_manager\Form\TotalPointsForm'
+    _title: 'Total Points'
+  requirements:
+    _access: 'TRUE'    
