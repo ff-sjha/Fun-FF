@@ -56,16 +56,42 @@ class TotalPointsForm extends FormBase {
 	   
 	$total_points_array = array();
 	foreach ($franc_and_season as $fmsn) {
+	  $total_points = '--';
+	  //Get all franchise points target ids from tournament for selected season.
+      $tp_query = $database->select('node__field_tour_franchise_points', 'fp');
+      $tp_query->leftjoin('node__field_tour_season', 'tour', 'tour.entity_id = fp.entity_id');
+      $team_points_ids = $tp_query
+      ->fields('fp', ['field_tour_franchise_points_target_id'])
+      ->condition('tour.field_tour_season_target_id', $fmsn->field_fm_season_target_id)
+      ->execute()
+      ->fetchCol();
+    
+      // Get all points for particular franchise from season specific target ids.
+      if (!empty($team_points_ids)) {
+        $query = $database->select('paragraph__field_tap_points', 'tp');
+        $query->leftjoin('paragraph__field_tap_team', 'ts', 'ts.entity_id = tp.entity_id');
+    
+        $points = $query
+        ->fields('tp', ['field_tap_points_value'])
+        ->condition('ts.field_tap_team_target_id', $fmsn->field_fm_franchise_target_id)
+        ->condition('ts.entity_id', $team_points_ids, 'IN')
+        ->execute()
+        ->fetchCol();
+        if (!empty($points)) {
+          $total_points = array_sum($points);
+        }  
+      }  	
 	  $total_points_array[] = array($season_array[$fmsn->field_fm_season_target_id],
-									$franchise_array[$fmsn->field_fm_franchise_target_id]);		
+									$franchise_array[$fmsn->field_fm_franchise_target_id],
+									$total_points);		
 	}
+	$sorted_points = array();
+    foreach($total_points_array as $point_array) {
+      $sorted_points[] = $point_array[2];
+    }
+    array_multisort($sorted_points, SORT_DESC, $total_points_array);
 	// Build Table - Ends
 	
-	/*
-	echo "<pre>";
-	print_r($total_points_array);
-	die;
-	);*/
 	
 	// Build Form
 	$season_terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree("sports_season"); 
@@ -85,7 +111,7 @@ class TotalPointsForm extends FormBase {
       '#value' => t('Submit'),
     );
 	
-	$header = array('Season', 'A2');		
+	$header = array('Season', 'Franchise', 'Points');		
 	$form['totalpoints_table'] = array(
 	  '#type' => 'table',
 	  '#header' => $header,
