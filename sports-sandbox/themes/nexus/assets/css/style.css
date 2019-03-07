@@ -1595,3 +1595,18 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 	text-decoration: underline;
 	color: #fffd3e !important;
 }
+
+#totalpoints-filter-wrapper {
+    background-color: #2C680D;
+    padding: 10px;
+}
+#totalpoints-filter-wrapper .form-item {
+    float: left;
+    margin-left: 10px;
+}
+#totalpoints-filter-wrapper .form-item label {
+    color: #FFF;
+}
+#totalpoints-filter-wrapper .form-submit {
+    margin-left: 10px;
+}

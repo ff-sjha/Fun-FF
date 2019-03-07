@@ -99,16 +99,22 @@ class TotalPointsForm extends FormBase {
 	foreach ($season_terms as $season_term) {
 		$season_type_terms[$season_term->tid] = $season_term->name;
 	}  
-	$form['season'] = array(
+	
+	$form['wrapper'] = [
+	  '#type' => 'container',
+	  '#attributes' => ['id' => 'totalpoints-filter-wrapper', 'class' => ['totalpoints-wrapper']],
+	];
+	
+	$form['wrapper']['season'] = array(
 	  '#title' => t('Season'),
 	  '#type' => 'select',
 	  '#options' => $season_type_terms,
 	  '#default_value' => 2,
 	);	  
 	  
-	$form['submit'] = array(
+	$form['wrapper']['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Submit'),
+      '#value' => t('Apply'),
     );
 	
 	$header = array('Season', 'Franchise', 'Points');		
