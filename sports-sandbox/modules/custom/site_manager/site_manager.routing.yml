@@ -21,3 +21,11 @@ site_manager.totalpoints_form:
     _title: 'Total Points'
   requirements:
     _access: 'TRUE'    
+    
+site_manager.playerpoints_form:
+  path: 'playerpoints'
+  defaults:
+    _form: '\Drupal\site_manager\Form\PlayerPointsForm'
+    _title: 'Player Points'
+  requirements:
+    _access: 'TRUE'        
