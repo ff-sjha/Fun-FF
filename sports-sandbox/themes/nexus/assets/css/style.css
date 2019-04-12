@@ -1610,3 +1610,6 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 #totalpoints-filter-wrapper .form-submit {
     margin-left: 10px;
 }
+.disabled-user-status {
+    color: red;
+}
