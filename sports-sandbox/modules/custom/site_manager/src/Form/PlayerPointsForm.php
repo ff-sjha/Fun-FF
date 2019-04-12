@@ -34,8 +34,12 @@ class PlayerPointsForm extends FormBase {
   }
   $all_users = user_load_multiple();
   $user_array = array();
+  $blocked_user = array();
   foreach($all_users as $user) {
     $user_array[$user->get('uid')->value] = $user->get('name')->value;
+    if (!$user->isActive()) {
+      $blocked_user[$user->get('uid')->value] = $user->get('name')->value;
+    } 
   }
 
   $franchise = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree("franchise");
@@ -108,7 +112,7 @@ class PlayerPointsForm extends FormBase {
         ->condition('pp.entity_id', $target_ids, 'IN')
         ->execute()
         ->fetchAll();	
-
+      $tournament_players = array();
       if (!empty(!empty($player_points))) {
       	foreach($player_points as $player_obj) {
           if (array_key_exists($player_obj->field_pp_franchise_player_target_id, $tournament_players)) {
@@ -122,8 +126,9 @@ class PlayerPointsForm extends FormBase {
   }
   $players_and_points = array();
   foreach($tournament_players as $p_id => $p_point) {
+    $username = $user_array[$p_id];
   	$players_and_points[] = array($season_array[$season_id],
-    		                      $user_array[$p_id],
+    		                      $username,
       		                      $players_array[$p_id],
       		                      $p_point);
   }
@@ -174,13 +179,19 @@ class PlayerPointsForm extends FormBase {
 	$form['totalpoints_table'] = array(
 	  '#type' => 'table',
 	  '#header' => $header,
-	  '#rows' => $players_and_points,
+	  //'#rows' => $players_and_points,
 	  '#empty' => t('No Data'),
 	  '#attributes' => array(
 		'class' => array('custom-table'),
 	  ),		  
 	);
-		
+	foreach ($players_and_points as $key => $values) {
+    $class = 'active-user-status';
+    if (in_array($values[1], $blocked_user)) {
+      $class = 'disabled-user-status';
+    }
+    $form['totalpoints_table']['#rows'][$key] = array('data' => $values, 'class' => array($class));;
+  }	
 	return $form;
  }
  
